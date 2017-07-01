@@ -5,5 +5,5 @@ authors = ["Fred Mitchell <fred.mitchell@gmx.de>"]
 
 [dependencies]
 gfx = "0.16"
-conrod = "0.53.0"
-gravity_set = "0.0.0"
+conrod = "0.53"
+#gravity_set = "0.0"
