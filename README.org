@@ -1,0 +1,20 @@
+* mitchell-gravity-set                                             :TOC_5_gh:
+  - [[#rant][Rant]]
+  - [[#introduction][Introduction]]
+  - [[#the-mitchell-gravity-set][The Mitchell Gravity Set]]
+    - [[#what-is-it][What is it?]]
+    - [[#history--origins][History & Origins]]
+    - [[#other-implementations][Other Implementations]]
+
+** Rant
+   I was going to do the GUI part in Ruby,
+   but decided not to. Since the main computation
+   will be in Rust anyway, why not do ALL of it
+   in Rust? Maybe I'll do a Ruby front-end later,
+   but the users will have to install Rust anyway.
+
+** Introduction
+** The Mitchell Gravity Set
+*** What is it?
+*** History & Origins
+*** Other Implementations
