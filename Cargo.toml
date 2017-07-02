@@ -2,8 +2,21 @@
 name = "mitchell-gravity-set"
 version = "0.1.0"
 authors = ["Fred Mitchell <fred.mitchell@gmx.de>"]
+license = "MIT"
+repository = "https://github.com/flajann2/mitchell-gravity-set.git"
+homepage   = "https://github.com/flajann2/mitchell-gravity-set"
+readme = "README.org"
+keywords = ["fractals", "mgs", "gui", "gravity", "3D"]
+
+[features]
+piston = ["piston2d-graphics"]
 
 [dependencies]
 gfx = "0.16"
 conrod = "0.53"
+servo-glutin = "0.11"
+pistoncore-input = "0.18"
+piston3d-gfx_voxel = "0.18"
+piston2d-graphics = { version = "0.21.1", optional = true }
+find_folder = "0.3"
 #gravity_set = "0.0"
