@@ -18,7 +18,6 @@ use std;
 
 #[cfg(feature="glium")] use conrod::backend::glium::glium;
 
-
 pub const WIN_W: u32 = 600;
 pub const WIN_H: u32 = 420;
 

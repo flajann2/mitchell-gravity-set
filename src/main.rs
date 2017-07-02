@@ -1,4 +1,4 @@
-extern crate conrod;
+#[macro_use] extern crate conrod;
 mod support;
 
 fn main() {
