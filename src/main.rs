@@ -39,5 +39,8 @@ mod feature {
         let font_path = assets.join("fonts/NotoSans/NotoSans-Regular.ttf");
         ui.fonts.insert_from_file(font_path).unwrap();
 
+        while let Some(event) = window.next(){
+        }
+
     }
 }
