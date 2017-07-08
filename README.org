@@ -5,6 +5,8 @@
     - [[#what-is-it][What is it?]]
     - [[#history--origins][History & Origins]]
     - [[#other-implementations][Other Implementations]]
+  - [[#gui-and-the-display][GUI and the Display]]
+  - [[#debugging][Debugging]]
 
 ** Rant
    I was going to do the GUI part in Ruby,
@@ -21,7 +23,7 @@
 ** GUI and the Display
 
    The GUI shall be superimposed on the
-   OpenGL 'canvas', and shall be activated 
+   OpenGL 'canvas', and shall be activated
    and deactived by keyboard keys, possibly
    the middle mouse button as well.
 
@@ -46,3 +48,4 @@
    be manipulated by the mouse. The pressing of the shift
    key will result in the dragging of a Star to a different
    location in the 2D plane it's in.
+** Debugging

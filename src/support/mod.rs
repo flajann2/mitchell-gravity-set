@@ -3,8 +3,8 @@
 //!
 //! The module contains:
 //!
-//! - `pub struct DemoApp` as a demonstration of some state we want to change.
-//! - `pub fn gui` as a demonstration of all widgets, some of which mutate our `DemoApp`.
+//! - `pub struct MGSApp` as a demonstration of some state we want to change.
+//! - `pub fn gui` as a demonstration of all widgets, some of which mutate our `MGSApp`.
 //! - `pub struct Ids` - a set of all `widget::Id`s used in the `gui` fn.
 //!
 //! By sharing these items between these examples, we can test and ensure that the different events
@@ -23,7 +23,7 @@ pub const WIN_H: u32 = 420;
 
 
 /// A demonstration of some application state we want to control with a conrod GUI.
-pub struct DemoApp {
+pub struct MGSApp {
     ball_xy: conrod::Point,
     ball_color: conrod::Color,
     sine_frequency: f32,
@@ -31,11 +31,11 @@ pub struct DemoApp {
 }
 
 
-impl DemoApp {
+impl MGSApp {
 
-    /// Simple constructor for the `DemoApp`.
+    /// Constructor for the `MGSApp`.
     pub fn new(rust_logo: conrod::image::Id) -> Self {
-        DemoApp {
+        MGSApp {
             ball_xy: [0.0, 0.0],
             ball_color: conrod::color::WHITE,
             sine_frequency: 1.0,
@@ -120,7 +120,7 @@ widget_ids! {
 
 
 /// Instantiate a GUI demonstrating every widget available in conrod.
-pub fn gui(ui: &mut conrod::UiCell, ids: &Ids, app: &mut DemoApp) {
+pub fn gui(ui: &mut conrod::UiCell, ids: &Ids, app: &mut MGSApp) {
     use conrod::{widget, Colorable, Labelable, Positionable, Sizeable, Widget};
     use std::iter::once;
 

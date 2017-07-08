@@ -41,6 +41,5 @@ mod feature {
 
         while let Some(event) = window.next(){
         }
-
     }
 }
