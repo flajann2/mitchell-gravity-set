@@ -18,3 +18,31 @@
 *** What is it?
 *** History & Origins
 *** Other Implementations
+** GUI and the Display
+
+   The GUI shall be superimposed on the
+   OpenGL 'canvas', and shall be activated 
+   and deactived by keyboard keys, possibly
+   the middle mouse button as well.
+
+   Basically, the GUI shall address look like:
+
+   |-------------------------+-----------------+--------|
+   | Star 3 (all)            | ............... |        |
+   | mass:______             | .             . | +      |
+   | ............            | . S1          . |        |
+   | Grav. Const __________  | .         S3  . | -      |
+   |                         | .             . |        |
+   | delta t ______________  | .    S2       . | tet    |
+   |                         | .             . | cube   |
+   | Resolution              | ............... | dodec  |
+   | 2^3 4^3 8^3 ... 2048^3  |                 | sphere |
+   |                         | # Stars _______ |        |
+   | Escape Radius _______ r |                 |        |
+   |                         |                 |        |
+   |-------------------------+-----------------+--------|
+
+   The Star box itself are OpenGL 3D-rendered "stars" that can
+   be manipulated by the mouse. The pressing of the shift
+   key will result in the dragging of a Star to a different
+   location in the 2D plane it's in.
