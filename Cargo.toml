@@ -9,14 +9,14 @@ readme = "README.org"
 keywords = ["fractals", "mgs", "gui", "gravity", "3D"]
 
 [dependencies]
-gfx = "0.16"
-conrod = "0.53"
-servo-glutin = "0.11"
-pistoncore-input = "0.18"
-piston3d-gfx_voxel = "0.18"
-piston2d-graphics = "0.21"
-piston_window = "0.65"
-find_folder = "0.3"
-rand = "0.3"
+gfx                = "0"
+conrod = { version = "^0", features = ["piston"] }
+servo-glutin       = "0"
+pistoncore-input   = "0"
+piston3d-gfx_voxel = "0"
+piston2d-graphics  = "0"
+piston_window      = "0"
+find_folder        = "0"
+rand               = "0"
 
-#gravity_set = "0.0"
+#gravity_set       = "0"
