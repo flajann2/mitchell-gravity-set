@@ -49,3 +49,6 @@
    key will result in the dragging of a Star to a different
    location in the 2D plane it's in.
 ** Debugging
+   #+begin_src bash
+   RUST_BACKTRACE=1 cargo run
+   #+end_src

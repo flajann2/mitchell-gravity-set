@@ -3,10 +3,10 @@ mod support;
 
 fn main() {
     println!("MGS -- launched");
-    feature::main();
+    mgs::main();
 }
 
-mod feature {
+mod mgs {
     extern crate find_folder;
     extern crate piston_window;
     use conrod;
@@ -17,19 +17,39 @@ mod feature {
     use self::piston_window::OpenGL;
     use self::piston_window::texture::UpdateTexture;
 
+    struct MGSMain{
+        window: mut PistonWinodw,
+        ui: conrod::UiBuilder,
+        assets: PathBuf,
+        font_path: PathBuf,
+        text_vertex_data: Vec,
+        mgs_logo: G2dTexture,
+        image_map: mut conrod::image::Map,
+        app: mut MGSApp
+    }
+
+    impl MGSMain {
+        fn construct_window() -> mut PistonWindow {
+            WindowSettings::new("All Widgets - Piston Backend", [WIDTH, HEIGHT])
+                .opengl(OpenGL::V3_2) // If not working, try `OpenGL::V2_1`.
+                .samples(4)
+                .exit_on_esc(true)
+                .vsync(true)
+                .build()
+                .unwrap()
+        }
+
+        pub fn new() -> MGSMain {
+            MGSMain {
+                window: construct_window,
+            }
+        }
+    }
+
     pub fn main() {
         const WIDTH: u32 = support::WIN_W;
         const HEIGHT: u32 = support::WIN_H;
 
-        // Construct the window.
-        let mut window: PistonWindow =
-            WindowSettings::new("All Widgets - Piston Backend", [WIDTH, HEIGHT])
-            .opengl(OpenGL::V3_2) // If not working, try `OpenGL::V2_1`.
-            .samples(4)
-            .exit_on_esc(true)
-            .vsync(true)
-            .build()
-            .unwrap();
 
         let mut ui = conrod::UiBuilder::new([WIDTH as f64, HEIGHT as f64])
             .theme(support::theme())
@@ -57,7 +77,7 @@ mod feature {
 
         let mgs_logo: G2dTexture = {
             let assets = find_folder::Search::ParentsThenKids(3, 3).for_folder("assets").unwrap();
-            let path = assets.join("images/mgs3.png");
+            let path = assets.join("images/mgs3_logo.png");
             let factory = &mut window.factory;
             let settings = TextureSettings::new();
             Texture::from_path(factory, &path, Flip::None, &settings).unwrap()
@@ -117,5 +137,12 @@ mod feature {
                 }
             });
         }
+    }
+}
+
+#[cfg(test)]
+mod test {
+    #[test]
+    fn test_eq() {
     }
 }
