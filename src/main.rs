@@ -57,7 +57,7 @@ mod feature {
 
         let mgs_logo: G2dTexture = {
             let assets = find_folder::Search::ParentsThenKids(3, 3).for_folder("assets").unwrap();
-            let path = assets.join("images/mgs3.png");
+            let path = assets.join("images/mgs3_logo.png");
             let factory = &mut window.factory;
             let settings = TextureSettings::new();
             Texture::from_path(factory, &path, Flip::None, &settings).unwrap()
