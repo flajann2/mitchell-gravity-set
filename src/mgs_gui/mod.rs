@@ -18,8 +18,8 @@ use std;
 
 #[cfg(feature="glium")] use conrod::backend::glium::glium;
 
-pub const WIN_W: u32 = 600;
-pub const WIN_H: u32 = 420;
+pub const WIN_W: u32 = 800;
+pub const WIN_H: u32 = 520;
 
 
 /// A demonstration of some application state we want to control with a conrod GUI.
@@ -50,7 +50,7 @@ impl MGSApp {
 pub fn theme() -> conrod::Theme {
     use conrod::position::{Align, Direction, Padding, Position, Relative};
     conrod::Theme {
-        name: "Demo Theme".to_string(),
+        name: "MGS Theme".to_string(),
         padding: Padding::none(),
         x_position: Position::Relative(Relative::Align(Align::Start), None),
         y_position: Position::Relative(Relative::Direction(Direction::Backwards, 20.0), None),
@@ -80,6 +80,18 @@ widget_ids! {
         // The title and introduction widgets.
         title,
         introduction,
+
+        // MGS Widgets
+        cur_star_name,
+        cur_star_mass,
+        grav_const_label,
+        grav_const,
+        delta_t_label,
+        delta_t,
+        resolution,
+        escape_radius,
+        canvas_stars,
+        quickie_star_arrangement,
 
         // Shapes.
         shapes_canvas,
@@ -114,7 +126,6 @@ widget_ids! {
 
         // Scrollbar
         canvas_scrollbar,
-
     }
 }
 
@@ -128,11 +139,15 @@ pub fn gui(ui: &mut conrod::UiCell, ids: &Ids, app: &mut MGSApp) {
     const SHAPE_GAP: conrod::Scalar = 50.0;
     const TITLE_SIZE: conrod::FontSize = 42;
     const SUBTITLE_SIZE: conrod::FontSize = 32;
+    const WIDGET_SIZE: conrod::FontSize = 20;
+    const DOWN: conrod::Scalar = 30.0;
+    const RIGHT: conrod::Scalar = 30.0;
+    const LEFT: conrod::Scalar = 30.0;
 
     // `Canvas` is a widget that provides some basic functionality for laying out children widgets.
     // By default, its size is the size of the window. We'll use this as a background for the
     // following widgets, as well as a scrollable container for the children widgets.
-    const TITLE: &'static str = "All Widgets";
+    const TITLE: &'static str = "Mitchell Gravity Set^3";
     widget::Canvas::new().pad(MARGIN).scroll_kids_vertically().set(ids.canvas, ui);
 
 
@@ -140,26 +155,41 @@ pub fn gui(ui: &mut conrod::UiCell, ids: &Ids, app: &mut MGSApp) {
     ///// TEXT /////
     ////////////////
 
-
     // We'll demonstrate the `Text` primitive widget by using it to draw a title and an
     // introduction to the example.
     widget::Text::new(TITLE).font_size(TITLE_SIZE).mid_top_of(ids.canvas).set(ids.title, ui);
 
-    const INTRODUCTION: &'static str =
-        "This example aims to demonstrate all widgets that are provided by conrod.\
-        \n\nThe widget that you are currently looking at is the Text widget. The Text widget \
-        is one of several special \"primitive\" widget types which are used to construct \
-        all other widget types. These types are \"special\" in the sense that conrod knows \
-        how to render them via `conrod::render::Primitive`s.\
-        \n\nScroll down to see more widgets!";
-    widget::Text::new(INTRODUCTION)
-        .padded_w_of(ids.canvas, MARGIN)
-        .down(60.0)
-        .align_middle_x_of(ids.canvas)
-        .center_justify()
-        .line_spacing(5.0)
-        .set(ids.introduction, ui);
+    ///////////////////
+    ///// MGS GUI /////
+    ///////////////////
 
+    widget::Text::new("Star: 1")
+        .down(DOWN)
+        .font_size(WIDGET_SIZE)
+        .set(ids.cur_star_name, ui);
+
+    // Gravitational Constant
+    widget::Text::new("Grav Const:")
+        .down(DOWN)
+        .font_size(WIDGET_SIZE)
+        .set(ids.grav_const_label, ui);
+
+    widget::TextBox::new("0.1110")
+        .right(RIGHT)
+        .font_size(WIDGET_SIZE)
+        .set(ids.grav_const, ui);
+
+    // Delta Time
+    widget::Text::new("Δt :")
+        .left(LEFT)
+        .down(DOWN)
+        .font_size(WIDGET_SIZE)
+        .set(ids.delta_t_label, ui);
+
+    widget::TextBox::new("0.001")
+        .right(RIGHT)
+        .font_size(WIDGET_SIZE)
+        .set(ids.delta_t, ui);
 
     ////////////////////////////
     ///// Lines and Shapes /////
@@ -167,7 +197,7 @@ pub fn gui(ui: &mut conrod::UiCell, ids: &Ids, app: &mut MGSApp) {
 
 
     widget::Text::new("Lines and Shapes")
-        .down(70.0)
+        .down(DOWN)
         .align_middle_x_of(ids.canvas)
         .font_size(SUBTITLE_SIZE)
         .set(ids.shapes_title, ui);
@@ -237,10 +267,10 @@ pub fn gui(ui: &mut conrod::UiCell, ids: &Ids, app: &mut MGSApp) {
         .font_size(SUBTITLE_SIZE)
         .set(ids.image_title, ui);
 
-    const LOGO_SIDE: conrod::Scalar = 144.0;
+    const LOGO_SIDE: conrod::Scalar = 200.0;
     widget::Image::new(app.rust_logo)
         .w_h(LOGO_SIDE, LOGO_SIDE)
-        .down(60.0)
+        .down(DOWN)
         .align_middle_x_of(ids.canvas)
         .set(ids.rust_logo, ui);
 
@@ -324,7 +354,7 @@ pub fn gui(ui: &mut conrod::UiCell, ids: &Ids, app: &mut MGSApp) {
     let max = 200.0;
     let decimal_precision = 1;
     for new_freq in widget::NumberDialer::new(app.sine_frequency, min, max, decimal_precision)
-        .down(60.0)
+        .down(DOWN)
         .align_middle_x_of(ids.canvas)
         .w_h(160.0, 40.0)
         .label("F R E Q")
@@ -341,7 +371,7 @@ pub fn gui(ui: &mut conrod::UiCell, ids: &Ids, app: &mut MGSApp) {
     widget::PlotPath::new(min_x, max_x, min_y, max_y, f32::sin)
         .kid_area_w_of(ids.canvas)
         .h(240.0)
-        .down(60.0)
+        .down(DOWN)
         .align_middle_x_of(ids.canvas)
         .set(ids.plot_path, ui);
 

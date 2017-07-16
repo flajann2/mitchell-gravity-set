@@ -50,5 +50,5 @@
    location in the 2D plane it's in.
 ** Debugging
    #+begin_src bash
-   RUST_BACKTRACE=1 cargo run
+   RUST_BACKTRACE=1 /home/alveric/.cargo/bin/cargo run
    #+end_src
