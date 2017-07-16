@@ -1,5 +1,5 @@
 #[macro_use] extern crate conrod;
-mod support;
+mod mgs_gui;
 
 fn main() {
     println!("MGS -- launched");
@@ -10,7 +10,7 @@ mod feature {
     extern crate find_folder;
     extern crate piston_window;
     use conrod;
-    use support;
+    use mgs_gui;
 
     use self::piston_window::{PistonWindow, UpdateEvent, Window, WindowSettings};
     use self::piston_window::{Flip, G2d, G2dTexture, Texture, TextureSettings};
@@ -18,8 +18,8 @@ mod feature {
     use self::piston_window::texture::UpdateTexture;
 
     pub fn main() {
-        const WIDTH: u32 = support::WIN_W;
-        const HEIGHT: u32 = support::WIN_H;
+        const WIDTH: u32 = mgs_gui::WIN_W;
+        const HEIGHT: u32 = mgs_gui::WIN_H;
 
         // Construct the window.
         let mut window: PistonWindow =
@@ -32,7 +32,7 @@ mod feature {
             .unwrap();
 
         let mut ui = conrod::UiBuilder::new([WIDTH as f64, HEIGHT as f64])
-            .theme(support::theme())
+            .theme(mgs_gui::theme())
             .build();
 
         let assets = find_folder::Search::KidsThenParents(3, 5).for_folder("assets").unwrap();
@@ -53,7 +53,7 @@ mod feature {
             (cache, texture)
         };
 
-        let ids = support::Ids::new(ui.widget_id_generator());
+        let ids = mgs_gui::Ids::new(ui.widget_id_generator());
 
         let mgs_logo: G2dTexture = {
             let assets = find_folder::Search::ParentsThenKids(3, 3).for_folder("assets").unwrap();
@@ -66,7 +66,7 @@ mod feature {
         let mut image_map = conrod::image::Map::new();
         let mgs_logo = image_map.insert(mgs_logo);
 
-        let mut app = support::MGSApp::new(mgs_logo);
+        let mut app = mgs_gui::MGSApp::new(mgs_logo);
 
         while let Some(event) = window.next(){
             // Convert the piston event to a conrod event.
@@ -78,7 +78,7 @@ mod feature {
 
             event.update(|_| {
                 let mut ui = ui.set_widgets();
-                support::gui(&mut ui, &ids, &mut app);
+                mgs_gui::gui(&mut ui, &ids, &mut app);
             });
 
 
