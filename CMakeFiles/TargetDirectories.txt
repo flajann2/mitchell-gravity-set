@@ -1,0 +1,11 @@
+/development/cpp_proj/gravity-set-compute/CMakeFiles/rebuild_cache.dir
+/development/cpp_proj/gravity-set-compute/CMakeFiles/edit_cache.dir
+/development/cpp_proj/gravity-set-compute/compute/CMakeFiles/rebuild_cache.dir
+/development/cpp_proj/gravity-set-compute/compute/CMakeFiles/compute.dir
+/development/cpp_proj/gravity-set-compute/compute/CMakeFiles/edit_cache.dir
+/development/cpp_proj/gravity-set-compute/gui/CMakeFiles/rebuild_cache.dir
+/development/cpp_proj/gravity-set-compute/gui/CMakeFiles/mgs.dir
+/development/cpp_proj/gravity-set-compute/gui/CMakeFiles/edit_cache.dir
+/development/cpp_proj/gravity-set-compute/test/CMakeFiles/rebuild_cache.dir
+/development/cpp_proj/gravity-set-compute/test/CMakeFiles/mgstest.dir
+/development/cpp_proj/gravity-set-compute/test/CMakeFiles/edit_cache.dir

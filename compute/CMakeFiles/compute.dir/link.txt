@@ -1,0 +1,2 @@
+/usr/bin/ar qc libcompute.a  CMakeFiles/compute.dir/compute.cpp.o
+/usr/bin/ranlib libcompute.a

@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/mgs.dir/mgs.cpp.o  -o mgs 

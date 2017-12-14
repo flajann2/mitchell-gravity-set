@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/mgstest.dir/test.cpp.o  -o mgstest 
