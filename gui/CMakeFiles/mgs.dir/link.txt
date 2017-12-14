@@ -1,1 +1,0 @@
-/usr/bin/c++     CMakeFiles/mgs.dir/mgs.cpp.o  -o mgs -Wl,-rpath,/development/cpp_proj/gravity-set-compute/compute ../compute/libmgscompute.so.0.0.0 
