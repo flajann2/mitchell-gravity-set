@@ -1,7 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/compute.dir/compute.cpp.o"
   "libcompute.pdb"
-  "libcompute.a"
+  "libcompute.so.0.0.0"
+  "libcompute.so"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -130,7 +130,10 @@ CMAKE_OBJCOPY:FILEPATH=/usr/bin/objcopy
 CMAKE_OBJDUMP:FILEPATH=/usr/bin/objdump
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=MGS_COMPUTE
+CMAKE_PROJECT_DESCRIPTION:STATIC=Mitchell Gravity Set Compute
+
+//Value Computed by CMake
+CMAKE_PROJECT_NAME:STATIC=mgs_compute
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -189,6 +192,12 @@ MGS_COMPUTE_SOURCE_DIR:STATIC=/development/cpp_proj/gravity-set-compute
 
 //Dependencies for target
 compute_LIB_DEPENDS:STATIC=
+
+//Value Computed by CMake
+mgs_compute_BINARY_DIR:STATIC=/development/cpp_proj/gravity-set-compute
+
+//Value Computed by CMake
+mgs_compute_SOURCE_DIR:STATIC=/development/cpp_proj/gravity-set-compute
 
 
 ########################

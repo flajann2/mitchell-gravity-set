@@ -1,2 +1,1 @@
-/usr/bin/ar qc libcompute.a  CMakeFiles/compute.dir/compute.cpp.o
-/usr/bin/ranlib libcompute.a
+/usr/bin/c++ -fPIC   -shared -Wl,-soname,libcompute.so.0.0.0 -o libcompute.so.0.0.0 CMakeFiles/compute.dir/compute.cpp.o 
