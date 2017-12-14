@@ -6,5 +6,5 @@ CXX_FLAGS = -fPIC
 
 CXX_DEFINES = -Dcompute_EXPORTS
 
-CXX_INCLUDES = -I/development/cpp_proj/gravity-set-compute/compute 
+CXX_INCLUDES = -I/home/alveric/development/cpp_proj/gravity-set-compute/compute 
 

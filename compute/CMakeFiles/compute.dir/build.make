@@ -43,10 +43,10 @@ RM = /usr/local/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /development/cpp_proj/gravity-set-compute
+CMAKE_SOURCE_DIR = /home/alveric/development/cpp_proj/gravity-set-compute
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /development/cpp_proj/gravity-set-compute
+CMAKE_BINARY_DIR = /home/alveric/development/cpp_proj/gravity-set-compute
 
 # Include any dependencies generated for this target.
 include compute/CMakeFiles/compute.dir/depend.make
@@ -59,16 +59,16 @@ include compute/CMakeFiles/compute.dir/flags.make
 
 compute/CMakeFiles/compute.dir/compute.cpp.o: compute/CMakeFiles/compute.dir/flags.make
 compute/CMakeFiles/compute.dir/compute.cpp.o: compute/compute.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/development/cpp_proj/gravity-set-compute/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object compute/CMakeFiles/compute.dir/compute.cpp.o"
-	cd /development/cpp_proj/gravity-set-compute/compute && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/compute.dir/compute.cpp.o -c /development/cpp_proj/gravity-set-compute/compute/compute.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/alveric/development/cpp_proj/gravity-set-compute/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object compute/CMakeFiles/compute.dir/compute.cpp.o"
+	cd /home/alveric/development/cpp_proj/gravity-set-compute/compute && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/compute.dir/compute.cpp.o -c /home/alveric/development/cpp_proj/gravity-set-compute/compute/compute.cpp
 
 compute/CMakeFiles/compute.dir/compute.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/compute.dir/compute.cpp.i"
-	cd /development/cpp_proj/gravity-set-compute/compute && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /development/cpp_proj/gravity-set-compute/compute/compute.cpp > CMakeFiles/compute.dir/compute.cpp.i
+	cd /home/alveric/development/cpp_proj/gravity-set-compute/compute && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/alveric/development/cpp_proj/gravity-set-compute/compute/compute.cpp > CMakeFiles/compute.dir/compute.cpp.i
 
 compute/CMakeFiles/compute.dir/compute.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/compute.dir/compute.cpp.s"
-	cd /development/cpp_proj/gravity-set-compute/compute && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /development/cpp_proj/gravity-set-compute/compute/compute.cpp -o CMakeFiles/compute.dir/compute.cpp.s
+	cd /home/alveric/development/cpp_proj/gravity-set-compute/compute && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/alveric/development/cpp_proj/gravity-set-compute/compute/compute.cpp -o CMakeFiles/compute.dir/compute.cpp.s
 
 compute/CMakeFiles/compute.dir/compute.cpp.o.requires:
 
@@ -91,9 +91,9 @@ compute_EXTERNAL_OBJECTS =
 compute/libcompute.so.0.0.0: compute/CMakeFiles/compute.dir/compute.cpp.o
 compute/libcompute.so.0.0.0: compute/CMakeFiles/compute.dir/build.make
 compute/libcompute.so.0.0.0: compute/CMakeFiles/compute.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/development/cpp_proj/gravity-set-compute/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX shared library libcompute.so"
-	cd /development/cpp_proj/gravity-set-compute/compute && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/compute.dir/link.txt --verbose=$(VERBOSE)
-	cd /development/cpp_proj/gravity-set-compute/compute && $(CMAKE_COMMAND) -E cmake_symlink_library libcompute.so.0.0.0 libcompute.so.0.0.0 libcompute.so
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/alveric/development/cpp_proj/gravity-set-compute/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX shared library libcompute.so"
+	cd /home/alveric/development/cpp_proj/gravity-set-compute/compute && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/compute.dir/link.txt --verbose=$(VERBOSE)
+	cd /home/alveric/development/cpp_proj/gravity-set-compute/compute && $(CMAKE_COMMAND) -E cmake_symlink_library libcompute.so.0.0.0 libcompute.so.0.0.0 libcompute.so
 
 compute/libcompute.so: compute/libcompute.so.0.0.0
 	@$(CMAKE_COMMAND) -E touch_nocreate compute/libcompute.so
@@ -108,10 +108,10 @@ compute/CMakeFiles/compute.dir/requires: compute/CMakeFiles/compute.dir/compute.
 .PHONY : compute/CMakeFiles/compute.dir/requires
 
 compute/CMakeFiles/compute.dir/clean:
-	cd /development/cpp_proj/gravity-set-compute/compute && $(CMAKE_COMMAND) -P CMakeFiles/compute.dir/cmake_clean.cmake
+	cd /home/alveric/development/cpp_proj/gravity-set-compute/compute && $(CMAKE_COMMAND) -P CMakeFiles/compute.dir/cmake_clean.cmake
 .PHONY : compute/CMakeFiles/compute.dir/clean
 
 compute/CMakeFiles/compute.dir/depend:
-	cd /development/cpp_proj/gravity-set-compute && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /development/cpp_proj/gravity-set-compute /development/cpp_proj/gravity-set-compute/compute /development/cpp_proj/gravity-set-compute /development/cpp_proj/gravity-set-compute/compute /development/cpp_proj/gravity-set-compute/compute/CMakeFiles/compute.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/alveric/development/cpp_proj/gravity-set-compute /home/alveric/development/cpp_proj/gravity-set-compute/compute /home/alveric/development/cpp_proj/gravity-set-compute /home/alveric/development/cpp_proj/gravity-set-compute/compute /home/alveric/development/cpp_proj/gravity-set-compute/compute/CMakeFiles/compute.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : compute/CMakeFiles/compute.dir/depend
 

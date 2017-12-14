@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/development/cpp_proj/gravity-set-compute/gui/mgs.cpp" "/development/cpp_proj/gravity-set-compute/gui/CMakeFiles/mgs.dir/mgs.cpp.o"
+  "/home/alveric/development/cpp_proj/gravity-set-compute/gui/mgs.cpp" "/home/alveric/development/cpp_proj/gravity-set-compute/gui/CMakeFiles/mgs.dir/mgs.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

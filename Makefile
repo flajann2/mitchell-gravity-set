@@ -48,10 +48,10 @@ RM = /usr/local/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /development/cpp_proj/gravity-set-compute
+CMAKE_SOURCE_DIR = /home/alveric/development/cpp_proj/gravity-set-compute
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /development/cpp_proj/gravity-set-compute
+CMAKE_BINARY_DIR = /home/alveric/development/cpp_proj/gravity-set-compute
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /development/cpp_proj/gravity-set-compute/CMakeFiles /development/cpp_proj/gravity-set-compute/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alveric/development/cpp_proj/gravity-set-compute/CMakeFiles /home/alveric/development/cpp_proj/gravity-set-compute/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /development/cpp_proj/gravity-set-compute/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alveric/development/cpp_proj/gravity-set-compute/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named compute
+# Target rules for targets named mgscompute
 
 # Build rule for target.
-compute: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 compute
-.PHONY : compute
+mgscompute: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 mgscompute
+.PHONY : mgscompute
 
 # fast build rule for target.
-compute/fast:
-	$(MAKE) -f compute/CMakeFiles/compute.dir/build.make compute/CMakeFiles/compute.dir/build
-.PHONY : compute/fast
+mgscompute/fast:
+	$(MAKE) -f compute/CMakeFiles/mgscompute.dir/build.make compute/CMakeFiles/mgscompute.dir/build
+.PHONY : mgscompute/fast
 
 #=============================================================================
 # Target rules for targets named mgs
@@ -157,7 +157,7 @@ help:
 	@echo "... depend"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
-	@echo "... compute"
+	@echo "... mgscompute"
 	@echo "... mgs"
 	@echo "... mgstest"
 .PHONY : help

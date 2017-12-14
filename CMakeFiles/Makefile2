@@ -54,21 +54,21 @@ RM = /usr/local/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /development/cpp_proj/gravity-set-compute
+CMAKE_SOURCE_DIR = /home/alveric/development/cpp_proj/gravity-set-compute
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /development/cpp_proj/gravity-set-compute
+CMAKE_BINARY_DIR = /home/alveric/development/cpp_proj/gravity-set-compute
 
 #=============================================================================
 # Directory level rules for directory compute
 
 # Convenience name for "all" pass in the directory.
-compute/all: compute/CMakeFiles/compute.dir/all
+compute/all: compute/CMakeFiles/mgscompute.dir/all
 
 .PHONY : compute/all
 
 # Convenience name for "clean" pass in the directory.
-compute/clean: compute/CMakeFiles/compute.dir/clean
+compute/clean: compute/CMakeFiles/mgscompute.dir/clean
 
 .PHONY : compute/clean
 
@@ -78,39 +78,39 @@ compute/preinstall:
 .PHONY : compute/preinstall
 
 #=============================================================================
-# Target rules for target compute/CMakeFiles/compute.dir
+# Target rules for target compute/CMakeFiles/mgscompute.dir
 
 # All Build rule for target.
-compute/CMakeFiles/compute.dir/all:
-	$(MAKE) -f compute/CMakeFiles/compute.dir/build.make compute/CMakeFiles/compute.dir/depend
-	$(MAKE) -f compute/CMakeFiles/compute.dir/build.make compute/CMakeFiles/compute.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/development/cpp_proj/gravity-set-compute/CMakeFiles --progress-num=1,2 "Built target compute"
-.PHONY : compute/CMakeFiles/compute.dir/all
+compute/CMakeFiles/mgscompute.dir/all:
+	$(MAKE) -f compute/CMakeFiles/mgscompute.dir/build.make compute/CMakeFiles/mgscompute.dir/depend
+	$(MAKE) -f compute/CMakeFiles/mgscompute.dir/build.make compute/CMakeFiles/mgscompute.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/alveric/development/cpp_proj/gravity-set-compute/CMakeFiles --progress-num=3,4 "Built target mgscompute"
+.PHONY : compute/CMakeFiles/mgscompute.dir/all
 
 # Include target in all.
-all: compute/CMakeFiles/compute.dir/all
+all: compute/CMakeFiles/mgscompute.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-compute/CMakeFiles/compute.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /development/cpp_proj/gravity-set-compute/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 compute/CMakeFiles/compute.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /development/cpp_proj/gravity-set-compute/CMakeFiles 0
-.PHONY : compute/CMakeFiles/compute.dir/rule
+compute/CMakeFiles/mgscompute.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alveric/development/cpp_proj/gravity-set-compute/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 compute/CMakeFiles/mgscompute.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alveric/development/cpp_proj/gravity-set-compute/CMakeFiles 0
+.PHONY : compute/CMakeFiles/mgscompute.dir/rule
 
 # Convenience name for target.
-compute: compute/CMakeFiles/compute.dir/rule
+mgscompute: compute/CMakeFiles/mgscompute.dir/rule
 
-.PHONY : compute
-
-# clean rule for target.
-compute/CMakeFiles/compute.dir/clean:
-	$(MAKE) -f compute/CMakeFiles/compute.dir/build.make compute/CMakeFiles/compute.dir/clean
-.PHONY : compute/CMakeFiles/compute.dir/clean
+.PHONY : mgscompute
 
 # clean rule for target.
-clean: compute/CMakeFiles/compute.dir/clean
+compute/CMakeFiles/mgscompute.dir/clean:
+	$(MAKE) -f compute/CMakeFiles/mgscompute.dir/build.make compute/CMakeFiles/mgscompute.dir/clean
+.PHONY : compute/CMakeFiles/mgscompute.dir/clean
+
+# clean rule for target.
+clean: compute/CMakeFiles/mgscompute.dir/clean
 
 .PHONY : clean
 
@@ -139,7 +139,7 @@ gui/preinstall:
 gui/CMakeFiles/mgs.dir/all:
 	$(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/depend
 	$(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/development/cpp_proj/gravity-set-compute/CMakeFiles --progress-num=3,4 "Built target mgs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/alveric/development/cpp_proj/gravity-set-compute/CMakeFiles --progress-num=1,2 "Built target mgs"
 .PHONY : gui/CMakeFiles/mgs.dir/all
 
 # Include target in all.
@@ -149,9 +149,9 @@ all: gui/CMakeFiles/mgs.dir/all
 
 # Build rule for subdir invocation for target.
 gui/CMakeFiles/mgs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /development/cpp_proj/gravity-set-compute/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alveric/development/cpp_proj/gravity-set-compute/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 gui/CMakeFiles/mgs.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /development/cpp_proj/gravity-set-compute/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alveric/development/cpp_proj/gravity-set-compute/CMakeFiles 0
 .PHONY : gui/CMakeFiles/mgs.dir/rule
 
 # Convenience name for target.
@@ -194,7 +194,7 @@ test/preinstall:
 test/CMakeFiles/mgstest.dir/all:
 	$(MAKE) -f test/CMakeFiles/mgstest.dir/build.make test/CMakeFiles/mgstest.dir/depend
 	$(MAKE) -f test/CMakeFiles/mgstest.dir/build.make test/CMakeFiles/mgstest.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/development/cpp_proj/gravity-set-compute/CMakeFiles --progress-num=5,6 "Built target mgstest"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/alveric/development/cpp_proj/gravity-set-compute/CMakeFiles --progress-num=5,6 "Built target mgstest"
 .PHONY : test/CMakeFiles/mgstest.dir/all
 
 # Include target in all.
@@ -204,9 +204,9 @@ all: test/CMakeFiles/mgstest.dir/all
 
 # Build rule for subdir invocation for target.
 test/CMakeFiles/mgstest.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /development/cpp_proj/gravity-set-compute/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alveric/development/cpp_proj/gravity-set-compute/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/mgstest.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /development/cpp_proj/gravity-set-compute/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alveric/development/cpp_proj/gravity-set-compute/CMakeFiles 0
 .PHONY : test/CMakeFiles/mgstest.dir/rule
 
 # Convenience name for target.
