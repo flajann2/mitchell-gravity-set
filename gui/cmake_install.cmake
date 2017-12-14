@@ -1,4 +1,4 @@
-# Install script for directory: /home/alveric/development/cpp_proj/gravity-set-compute/gui
+# Install script for directory: /development/cpp_proj/gravity-set-compute/gui
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

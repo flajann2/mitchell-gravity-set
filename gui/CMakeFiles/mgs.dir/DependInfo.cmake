@@ -4,16 +4,19 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/alveric/development/cpp_proj/gravity-set-compute/gui/mgs.cpp" "/home/alveric/development/cpp_proj/gravity-set-compute/gui/CMakeFiles/mgs.dir/mgs.cpp.o"
+  "/development/cpp_proj/gravity-set-compute/gui/mgs.cpp" "/development/cpp_proj/gravity-set-compute/gui/CMakeFiles/mgs.dir/mgs.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "compute/include"
+  "compute"
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
+  "/development/cpp_proj/gravity-set-compute/compute/CMakeFiles/mgscompute.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

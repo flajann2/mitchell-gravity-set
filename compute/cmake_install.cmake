@@ -1,4 +1,4 @@
-# Install script for directory: /home/alveric/development/cpp_proj/gravity-set-compute/compute
+# Install script for directory: /development/cpp_proj/gravity-set-compute/compute
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -35,5 +35,42 @@ endif()
 # Is this installation the result of a crosscompile?
 if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "FALSE")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  foreach(file
+      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/mgscompute/libmgscompute.so.0.0.0"
+      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/mgscompute/libmgscompute.so"
+      )
+    if(EXISTS "${file}" AND
+       NOT IS_SYMLINK "${file}")
+      file(RPATH_CHECK
+           FILE "${file}"
+           RPATH "")
+    endif()
+  endforeach()
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/mgscompute" TYPE SHARED_LIBRARY FILES
+    "/development/cpp_proj/gravity-set-compute/compute/libmgscompute.so.0.0.0"
+    "/development/cpp_proj/gravity-set-compute/compute/libmgscompute.so"
+    )
+  foreach(file
+      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/mgscompute/libmgscompute.so.0.0.0"
+      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/mgscompute/libmgscompute.so"
+      )
+    if(EXISTS "${file}" AND
+       NOT IS_SYMLINK "${file}")
+      if(CMAKE_INSTALL_DO_STRIP)
+        execute_process(COMMAND "/usr/bin/strip" "${file}")
+      endif()
+    endif()
+  endforeach()
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/mgscompute" TYPE FILE FILES "/development/cpp_proj/gravity-set-compute/compute/include/mgscompute.h")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/mgscompute" TYPE FILE FILES "/development/cpp_proj/gravity-set-compute/compute/include/mgscompute.h")
 endif()
 
