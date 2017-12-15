@@ -97,11 +97,11 @@
    + Star
    + Index
      + This will provide the i,j,k... indexing, and
-     the flexibility to be dimension-agnostic.
+       the flexibility to be dimension-agnostic.
    + Space
      + This is the "mesh", internally implemented as a
-     vector, but addressable with either Index or Coord,
-     with an iterator too. 
+       vector, but addressable with either Index or Coord,
+       with an iterator too. 
    
 ** TODO Building and Installing
 ** TODO Using 
