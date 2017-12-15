@@ -1,3 +1,4 @@
+# Compute
 add_library (mgscompute SHARED compute.cpp)
 
 target_include_directories (mgscompute

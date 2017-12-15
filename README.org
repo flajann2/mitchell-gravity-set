@@ -7,6 +7,9 @@
   - [[#background][Background]]
     - [[#motivation][Motivation]]
   - [[#why-this-is-just-a-library][Why this is just a library]]
+  - [[#basic-design][Basic Design]]
+  - [[#building-and-installing][Building and Installing]]
+  - [[#using][Using]]
   - [[#contributing][Contributing]]
   - [[#debugging][Debugging]]
 
@@ -64,6 +67,44 @@
    a C interface to allow it to be called from any language that allows external
    calls to a C library.
 
+** Basic Design
+   We are going to leverage the awesome
+   power of C++17 to make this a reality.
+   In short, we want to define types
+   in a way that makes for strong typing, 
+   remenescent of Rust, without all the
+   overly strict protection against "data
+   races", which for this, we don't really
+   care too much. We need to be able to run
+   multiple cores to increase the speed of rendering
+   the MGS, especially in 3 dimensions, as well as 
+   dealing with pipeline issues with the GPU (for display).
+
+   Basic structures:
+   + Scalar
+     This could be int, float, double. It will overload
+     basic operations to allow us to be a bit agnostic
+     on the "primitive" numerical types.
+   + Coords
+     This can be either float or double, x,y,z... coordinates.
+   + Basic computing elements
+     + Position
+       derived from Coords
+     + Velocity
+       derivied from Coords
+     + Acceleration
+       derivied from Coords
+   + Star
+   + Index
+     This will provide the i,j,k... indexing, and
+     the flexibility to be dimension-agnostic.
+   + Space
+     This is the "mesh", internally implemented as a
+     vector, but addressable with either Index or Coord,
+     with an iterator too. 
+   
+** TODO Building and Installing
+** TODO Using 
 ** TODO Contributing
 ** TODO Debugging
-   
+
