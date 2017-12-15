@@ -82,24 +82,24 @@
 
    Basic structures:
    + Scalar
-     This could be int, float, double. It will overload
-     basic operations to allow us to be a bit agnostic
-     on the "primitive" numerical types.
+     + This could be int, float, double. It will overload
+       basic operations to allow us to be a bit agnostic
+       on the "primitive" numerical types.
    + Coords
-     This can be either float or double, x,y,z... coordinates.
+     + This can be either float or double, x,y,z... coordinates.
    + Basic computing elements
      + Position
-       derived from Coords
+       + derived from Coords
      + Velocity
-       derivied from Coords
+       + derivied from Coords
      + Acceleration
-       derivied from Coords
+       + derivied from Coords
    + Star
    + Index
-     This will provide the i,j,k... indexing, and
+     + This will provide the i,j,k... indexing, and
      the flexibility to be dimension-agnostic.
    + Space
-     This is the "mesh", internally implemented as a
+     + This is the "mesh", internally implemented as a
      vector, but addressable with either Index or Coord,
      with an iterator too. 
    
