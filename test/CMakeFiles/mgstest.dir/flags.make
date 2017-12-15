@@ -6,5 +6,5 @@ CXX_FLAGS =
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = 
+CXX_INCLUDES = -I/development/cpp_proj/gravity-set-compute/compute/include -I/development/cpp_proj/gravity-set-compute/compute 
 

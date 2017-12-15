@@ -6,7 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/home/alveric/development/cpp_proj/gravity-set-compute/test/test.cpp
+/development/cpp_proj/gravity-set-compute/test/test.cpp
 iostream
+-
+compute.h
+-
+string
+-
+sstream
+-
+
+compute/compute.h
+vector
 -
 

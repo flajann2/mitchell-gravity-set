@@ -3,7 +3,7 @@ add_executable (mgs mgs.cpp)
 
 set_property(
   TARGET mgs
-  PROPERTY IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/compute
+  PROPERTY IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/compute/header
   )
 
 include_directories(

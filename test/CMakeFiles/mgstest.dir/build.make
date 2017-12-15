@@ -90,6 +90,7 @@ mgstest_EXTERNAL_OBJECTS =
 
 test/mgstest: test/CMakeFiles/mgstest.dir/test.cpp.o
 test/mgstest: test/CMakeFiles/mgstest.dir/build.make
+test/mgstest: compute/libmgscompute.so.0.0.0
 test/mgstest: test/CMakeFiles/mgstest.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/development/cpp_proj/gravity-set-compute/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable mgstest"
 	cd /development/cpp_proj/gravity-set-compute/test && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/mgstest.dir/link.txt --verbose=$(VERBOSE)

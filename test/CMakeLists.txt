@@ -3,7 +3,9 @@ add_executable (mgstest test.cpp)
 
 set_property(
   TARGET mgstest
-  PROPERTY IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/compute
+  PROPERTY IMPORTED_LOCATION
+  ${CMAKE_SOURCE_DIR}/compute
+  ${CMAKE_SOURCE_DIR}/compute/header
   )
 
 include_directories(
