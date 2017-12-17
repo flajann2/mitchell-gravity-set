@@ -13,6 +13,7 @@ void pr_coord(auto prefix, auto c) {
 }
 
 void test_field() {
+  Coords<> c {0.44, -0.95, 1};
   Field<> f(32, 3, Coords<>{-1,-1,-1}, Coords<>{1,1,1});
   cout << "cube_size " << f.cube_size << endl;
   cout << "actual size " << f.grid.size() << endl;
@@ -27,6 +28,8 @@ void test_field() {
       }
     }
   }
+  
+  f.coords2index(c);
 }
 
 int main(int ac, char* av[]) {
