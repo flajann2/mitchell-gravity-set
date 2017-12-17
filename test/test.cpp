@@ -12,6 +12,23 @@ void pr_coord(auto prefix, auto c) {
  cout << endl;
 }
 
+void test_field() {
+  Field<> f(32, 3, Coords<>{-1,-1,-1}, Coords<>{1,1,1});
+  cout << "cube_size " << f.cube_size << endl;
+  cout << "actual size " << f.grid.size() << endl;
+  for (auto k = 0; k < f.cube_size; ++k) {
+    for (auto j = 0; j < f.cube_size; ++j) {
+      for (auto i = 0; i < f.cube_size; ++i) {
+        Index<> idx {i, j, k};
+        f[idx] = i * j * k;
+        if (f[idx] != i * j * k) {
+          cout << "*** ERR: " << f[idx] << " != " << (i * j * k) << endl;
+        }
+      }
+    }
+  }
+}
+
 int main(int ac, char* av[]) {
   Scalar<> s {32.2};
   Coords<> c {3, 2.3, 22};
@@ -21,12 +38,15 @@ int main(int ac, char* av[]) {
   ostringstream cstr;
   cstr << s.value;
   
-  std::cout << "Hello Test\n"
+  cout << "Hello Test\n"
             << cstr.str() << endl;
             
 
   pr_coord(" c", c);
   pr_coord("cc", cc);
   pr_coord(" p", p);
+
+  test_field();
+  cout << "DONE" << endl;
 }
 

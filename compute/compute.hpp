@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <initializer_list>
+#include <cmath>
 
 namespace mgs {
 
@@ -55,10 +56,30 @@ template <class F = double, class I = int> struct Field {
   I dimension;
   I cube_size;
   
-  Field(I cs, I dim) : cube_size(cs), dimension(dim) {
+  Field(I cs,
+        I dim,
+        Coords<F> nbound,
+        Coords<F> pbound) : cube_size(cs),
+                            dimension(dim),
+                            c1(nbound),
+                            c2(pbound) {
+    grid.resize(std::pow(cs, dim));
   }
 
-  I& operator[](Index<I>& ijk) {
+  // WARN: no boundary checks are done here.
+  I& operator[](Index<I>& idx) {
+    I offset = 0;
+    I r = 1;
+    for (auto v : idx.ijk) {
+      offset += v * r;
+      r *= cube_size;
+    }
+    return grid[offset];
+  }
+
+  // Convert a coordinate into an index.
+  // WARN: No bounds checking is done here.
+  Index<I> coords2index(Coords<F>& c) {
   }
 };
 
