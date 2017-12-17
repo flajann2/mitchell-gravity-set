@@ -9,14 +9,14 @@
 /development/cpp_proj/gravity-set-compute/test/test.cpp
 iostream
 -
-compute.h
+compute.hpp
 -
 string
 -
 sstream
 -
 
-compute/compute.h
+compute/compute.hpp
 vector
 -
 initializer_list

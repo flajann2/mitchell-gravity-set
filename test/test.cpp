@@ -1,5 +1,5 @@
 #include <iostream>
-#include <compute.h>
+#include <compute.hpp>
 #include <string>
 #include <sstream>
 

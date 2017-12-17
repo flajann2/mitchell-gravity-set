@@ -1,5 +1,5 @@
 #include<memory>
 #include <iostream>
-#include <compute.h>
+#include <compute.hpp>
 
 using namespace std;
