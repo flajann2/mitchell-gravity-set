@@ -57,6 +57,16 @@ struct Acceleration : public Coords<F> {
   Acceleration(std::initializer_list<F> list) : Coords<F>(list) {}  
 };
 
+
+template <typename F = double, typename I = int>
+struct Star {
+  F mass;
+  Position<F> position;
+
+  Star(F m, Position<F> pos) : mass(m), position(pos) {}
+};
+
+
 // Field of points to be iterated
 // The field is always a cube or square, etc.,
 // same length on all "sides".
@@ -65,7 +75,8 @@ struct Field {
   Coords<F> c1; // negative-most bounding corner
   Coords<F> c2; // positive-most bounding corner
   std::vector<I> grid;
-
+  std::vector<Star<F,I>> stars;
+  
   I dimension;
   I cube_size;
   
@@ -89,8 +100,5 @@ struct Field {
   void render_with_callback(std::function<void(Index<I>, Coords<F>)> cb);
 };
 
-template <typename F = double, typename I = int>
-struct Star {
-};
 
 } // namespace mgs
