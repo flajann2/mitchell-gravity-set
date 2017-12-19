@@ -29,3 +29,7 @@ I& Field<F,I>::operator[](Index<I>& idx) {
   }
   return grid[offset];
 }
+
+template <typename F, typename I>
+void Field<F,I>::render_with_callback(std::function<void(Index<I>, Coords<F>)> cb) {
+}

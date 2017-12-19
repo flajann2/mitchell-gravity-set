@@ -12,10 +12,12 @@
 #include <vector>
 #include <initializer_list>
 #include <cmath>
+#include <functional>
 
 namespace mgs {
 
 const int default_dimension= 2;
+const int untouched = -1;
 
 template <typename F = double>
 struct Scalar {
@@ -74,7 +76,8 @@ struct Field {
                             dimension(dim),
                             c1(nbound),
                             c2(pbound) {
-    grid.resize(std::pow(cs, dim));
+    I backfill = untouched;
+    grid.resize(std::pow(cs, dim), backfill);
   }
 
   // WARN: no boundary checks are done here.
@@ -83,11 +86,11 @@ struct Field {
   // Convert a coordinate into an index.
   // WARN: No bounds checking is done here.
   Index<I> coords2index(Coords<F>& c);
+  void render_with_callback(std::function<void(Index<I>, Coords<F>)> cb);
 };
 
 template <typename F = double, typename I = int>
 struct Star {
 };
-
 
 } // namespace mgs
