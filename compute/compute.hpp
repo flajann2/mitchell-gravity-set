@@ -29,8 +29,10 @@ template <typename F = double>
 struct Coords {
   std::vector<F> vec;
   
-  Coords(int dim = default_dimension) { vec.resize(dim); }
+  Coords(int dim = default_dimension) { vec.resize(dim, 0.0); }
   Coords(std::initializer_list<F> list) : vec(list) {}
+
+  F norm();
 };
 
 template <typename I = int>
@@ -42,7 +44,7 @@ struct Index {
 template <typename F = double>
 struct Position : public Coords<F> {
   Position(int dim = default_dimension) : Coords<F>(dim)  {}
-  Position(std::initializer_list<F> list) : Coords<F>(list) {}  
+  Position(std::initializer_list<F> list) : Coords<F>(list) {} 
 };
 
 template <typename F = double>
@@ -79,6 +81,11 @@ struct Field {
   
   I dimension;
   I cube_size;
+  I iter_limit;
+  
+  F gravitational_constant;
+  F escape_radius;
+  F delta_t;
   
   Field(I cs,
         I dim,
@@ -98,6 +105,10 @@ struct Field {
   // WARN: No bounds checking is done here.
   Index<I> coords2index(Coords<F>& c);
   void render_with_callback(std::function<void(Index<I>, Coords<F>)> cb);
+
+ private:
+  I render_single_cell(Position<F> initial_p, Velocity<F> initial_v);
+  F compute_newton_g(const Star<F,I>& star, const Position<F>& fpm);
 };
 
 
