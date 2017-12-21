@@ -25,16 +25,6 @@ struct Scalar {
   explicit Scalar(F v) : value(v) {}
 };
 
-template <typename F = double>
-struct Coords {
-  std::vector<F> vec;
-  
-  Coords(int dim = default_dimension) { vec.resize(dim, 0.0); }
-  Coords(std::initializer_list<F> list) : vec(list) {}
-
-  F norm();
-};
-
 template <typename I = int>
 struct Index {
   std::vector<I> ijk;
@@ -42,23 +32,51 @@ struct Index {
 };
 
 template <typename F = double>
+struct Coords {
+  int dim;
+  std::vector<F> vec;
+  
+  Coords(int dimension = default_dimension) : dim(dimension) { vec.resize(dim, 0.0); }
+  Coords(std::initializer_list<F> list) : vec(list) {}
+ 
+  F norm();
+
+  template <typename T>
+  T add(const T& other) {
+    T result;
+    for (auto i = 0; i < dim; ++i) {
+      result.vec[i] = vec[i] + other.vec[i];
+    }
+    return result;
+  }
+
+ public:
+  virtual Coords<F> operator+(const Coords<F>& other) { return add<Coords<F>>(other); }
+};
+
+template <typename F = double>
 struct Position : public Coords<F> {
   Position(int dim = default_dimension) : Coords<F>(dim)  {}
   Position(std::initializer_list<F> list) : Coords<F>(list) {} 
+
+  virtual Position<F> operator+(const Position<F>& other) { return add< Position<F> >(other); }
 };
 
 template <typename F = double>
 struct Velocity : public Coords<F> {
   Velocity(int dim = default_dimension) : Coords<F>(dim)  {}
   Velocity(std::initializer_list<F> list) : Coords<F>(list) {}  
+
+  virtual Velocity<F> operator+(const Velocity<F>& other) { return add<Velocity<F>>(other); }
 };
 
 template <typename F = double>
 struct Acceleration : public Coords<F> {
   Acceleration(int dim = default_dimension) : Coords<F>(dim)  {}
   Acceleration(std::initializer_list<F> list) : Coords<F>(list) {}  
-};
 
+  virtual Acceleration<F> operator+(const Acceleration<F>& other) { return add<Acceleration<F>>(other); }
+};
 
 template <typename F = double, typename I = int>
 struct Star {
