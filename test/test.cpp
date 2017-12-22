@@ -28,6 +28,8 @@ void test_field() {
       }
     }
   }
+
+  cout << f << endl;
   
   f.coords2index(c);
 }

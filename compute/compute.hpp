@@ -25,11 +25,25 @@ struct Scalar {
   explicit Scalar(F v) : value(v) {}
 };
 
+template <typename F>
+std::ostream &operator<<(std::ostream &os, Scalar<F> const &s) {
+  os << "Scalar[ " << s.value << "]";
+  return os;
+}
+
 template <typename I = int>
 struct Index {
   std::vector<I> ijk;
   Index(std::initializer_list<I> list) : ijk(list) {}
 };
+
+template <typename I>
+std::ostream &operator<<(std::ostream &os, Index<I> const &idx) {
+  os << "Index[ ";
+  for (auto i : idx.vec) { os << i << " "; }
+  os << "]";
+  return os;
+}
 
 template <typename F = double>
 struct Coords {
@@ -66,10 +80,8 @@ struct Coords {
 
 template <typename F>
 std::ostream &operator<<(std::ostream &os, Coords<F> const &c) {
-  os << "[ ";
-  for (auto v : c.vec) {
-    os << v << " ";
-  }
+  os << "Coords[ ";
+  for (auto v : c.vec) { os << v << " ";  }
   os << "]";
   return os;
 }
@@ -109,6 +121,14 @@ struct Star {
   Star(F m, Position<F> pos) : mass(m), position(pos) {}
 };
 
+template <typename F, typename I>
+std::ostream &operator<<(std::ostream &os, Star<F,I> const &star) {
+  os << "Star[";
+  os << " mass:" << star.mass;
+  os << " position:" << star.position;
+  os << " ]";
+  return os;
+}
 
 // Field of points to be iterated
 // The field is always a cube or square, etc.,
@@ -162,5 +182,26 @@ struct Field {
   F compute_newton_g(const Star<F,I>& star, const Position<F>& fpm);
 };
 
+template <typename F, typename I>
+std::ostream &operator<<(std::ostream &os, Field<F,I> const &f) {
+  os << "Field[";
+  os << " c1:" << f.c1;
+  os << " c2:" << f.c2;
+  os << " cube_size:" << f.cube_size;
+  os << " dimension:" << f.dimension;
+  os << " iter_limit:" << f.iter_limit;
+  os << " gravitational_constant:" << f.gravitational_constant;
+  os << " escappe_radius:" << f.escape_radius;
+  os << " delta_t:" << f.delta_t;
+
+  os << "Stars[ ";
+  for (auto star : f.stars) {
+    os << star << " ";
+  }
+  os << "]";
+
+  os << "]"; 
+  return os;
+}
 
 } // namespace mgs
