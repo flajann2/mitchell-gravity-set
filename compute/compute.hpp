@@ -51,7 +51,7 @@ struct Coords {
   }
 
  public:
-  virtual Coords<F> operator+(const Coords<F>& other) { return add<Coords<F>>(other); }
+  virtual Coords<F> operator+(const Coords<F>& other) { return add(other); }
 };
 
 template <typename F = double>
@@ -59,7 +59,7 @@ struct Position : public Coords<F> {
   Position(int dim = default_dimension) : Coords<F>(dim)  {}
   Position(std::initializer_list<F> list) : Coords<F>(list) {} 
 
-  virtual Position<F> operator+(const Position<F>& other) { return add< Position<F> >(other); }
+  virtual Position<F> operator+(const Position<F>& other) { return Coords<F>::add(other); }
 };
 
 template <typename F = double>
@@ -67,7 +67,7 @@ struct Velocity : public Coords<F> {
   Velocity(int dim = default_dimension) : Coords<F>(dim)  {}
   Velocity(std::initializer_list<F> list) : Coords<F>(list) {}  
 
-  virtual Velocity<F> operator+(const Velocity<F>& other) { return add<Velocity<F>>(other); }
+  virtual Velocity<F> operator+(const Velocity<F>& other) { return Coords<F>::add(other); }
 };
 
 template <typename F = double>
@@ -75,7 +75,7 @@ struct Acceleration : public Coords<F> {
   Acceleration(int dim = default_dimension) : Coords<F>(dim)  {}
   Acceleration(std::initializer_list<F> list) : Coords<F>(list) {}  
 
-  virtual Acceleration<F> operator+(const Acceleration<F>& other) { return add<Acceleration<F>>(other); }
+  virtual Acceleration<F> operator+(const Acceleration<F>& other) { return Coords<F>::add(other); }
 };
 
 template <typename F = double, typename I = int>
