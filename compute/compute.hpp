@@ -16,7 +16,7 @@
 
 namespace mgs {
 
-const int default_dimension= 2;
+const int default_dimension = 2;
 const int untouched = -1;
 
 template <typename F = double>
@@ -33,10 +33,9 @@ struct Index {
 
 template <typename F = double>
 struct Coords {
-  int dim;
   std::vector<F> vec;
   
-  Coords(int dimension = default_dimension) : dim(dimension) { vec.resize(dim, 0.0); }
+  Coords(int dimension = default_dimension) { vec.resize(dimension, 0.0); }
   Coords(std::initializer_list<F> list) : vec(list) {}
  
   F norm();
@@ -44,8 +43,8 @@ struct Coords {
  protected:
   template <typename T>
   T add(const T& other) {
-    T result;
-    for (auto i = 0; i < dim; ++i) {
+    T result(vec.size());
+    for (unsigned i = 0; i < vec.size(); ++i) {
       result.vec[i] = vec[i] + other.vec[i];
     }
     return result;
@@ -53,8 +52,8 @@ struct Coords {
 
   template <typename T>
   T subtract(const T& other) {
-    T result;
-    for (auto i = 0; i < dim; ++i) {
+    T result(vec.size());
+    for (unsigned i = 0; i < vec.size(); ++i) {
       result.vec[i] = vec[i] - other.vec[i];
     }
     return result;
@@ -118,24 +117,34 @@ template <typename F = double, typename I = int>
 struct Field {
   Coords<F> c1; // negative-most bounding corner
   Coords<F> c2; // positive-most bounding corner
+
   std::vector<I> grid;
   std::vector<Star<F,I>> stars;
   
-  I dimension;
   I cube_size;
+  I dimension;
   I iter_limit;
   
   F gravitational_constant;
   F escape_radius;
   F delta_t;
   
-  Field(I cs,
-        I dim,
-        Coords<F> nbound,
-        Coords<F> pbound) : cube_size(cs),
-                            dimension(dim),
-                            c1(nbound),
-                            c2(pbound) {
+  Field(Coords<F> nbound,
+        Coords<F> pbound,
+
+        I cs = 1024,
+        I dim = 2,
+        I iteration_limit = 1024,
+        F grav_constant = 1.0,
+        F escape_r = 2.0,
+        F delta_time = 0.1) : c1(nbound),
+                              c2(pbound),
+                              cube_size(cs),
+                              dimension(dim),
+                              iter_limit(iteration_limit),
+                              gravitational_constant(grav_constant),
+                              escape_radius(escape_r),
+                              delta_t(delta_time) {
     I backfill = untouched;
     grid.resize(std::pow(cs, dim), backfill);
   }

@@ -14,7 +14,7 @@ void pr_coord(auto prefix, auto c) {
 
 void test_field() {
   Coords<> c {0.44, -0.95, 1};
-  Field<> f(32, 3, Coords<>{-1,-1,-1}, Coords<>{1,1,1});
+  Field<> f(Coords<>{-1,-1,-1}, Coords<>{1,1,1}, 32, 3);
   cout << "cube_size " << f.cube_size << endl;
   cout << "actual size " << f.grid.size() << endl;
   for (auto k = 0; k < f.cube_size; ++k) {
@@ -36,7 +36,7 @@ void test_math_on_Position() {
   Position<> p1 {-1, 1, 0};
   Position<> p2 {1, -1, 2};
 
-  cout << "math on Position:" << endl;
+  cout << "math on Position: " << p1 << " and " << p2 << endl;
   Position<> padded = p1 + p2;
   Position<> psubbed = p1 - p2;
   
