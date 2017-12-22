@@ -1,6 +1,9 @@
 # Testing the compute module
 add_executable (mgstest test.cpp)
 
+# Always set test suite in debug mode
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
+
 set_property(
   TARGET mgstest
   PROPERTY IMPORTED_LOCATION

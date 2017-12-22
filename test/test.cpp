@@ -32,6 +32,19 @@ void test_field() {
   f.coords2index(c);
 }
 
+void test_math_on_Position() {
+  Position<> p1 {-1, 1, 0};
+  Position<> p2 {1, -1, 2};
+
+  cout << "math on Position:" << endl;
+  Position<> padded = p1 + p2;
+  Position<> psubbed = p1 - p2;
+  
+  cout << "results:" << endl;
+  cout << "added: " << padded << endl;
+  cout << "subbed: " << psubbed << endl;
+}
+
 int main(int ac, char* av[]) {
   Scalar<> s {32.2};
   Coords<> c {3, 2.3, 22};
@@ -50,6 +63,8 @@ int main(int ac, char* av[]) {
   pr_coord(" p", p);
 
   test_field();
+  test_math_on_Position();
+  
   cout << "DONE" << endl;
 }
 

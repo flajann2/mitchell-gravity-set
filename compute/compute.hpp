@@ -41,6 +41,7 @@ struct Coords {
  
   F norm();
 
+ protected:
   template <typename T>
   T add(const T& other) {
     T result;
@@ -50,9 +51,29 @@ struct Coords {
     return result;
   }
 
+  template <typename T>
+  T subtract(const T& other) {
+    T result;
+    for (auto i = 0; i < dim; ++i) {
+      result.vec[i] = vec[i] - other.vec[i];
+    }
+    return result;
+  }
+
  public:
   virtual Coords<F> operator+(const Coords<F>& other) { return add(other); }
+  virtual Coords<F> operator-(const Coords<F>& other) { return subtract(other); }
 };
+
+template <typename F>
+std::ostream &operator<<(std::ostream &os, Coords<F> const &c) {
+  os << "[ ";
+  for (auto v : c.vec) {
+    os << v << " ";
+  }
+  os << "]";
+  return os;
+}
 
 template <typename F = double>
 struct Position : public Coords<F> {
@@ -60,6 +81,7 @@ struct Position : public Coords<F> {
   Position(std::initializer_list<F> list) : Coords<F>(list) {} 
 
   virtual Position<F> operator+(const Position<F>& other) { return Coords<F>::add(other); }
+  virtual Position<F> operator-(const Position<F>& other) { return Coords<F>::subtract(other); }
 };
 
 template <typename F = double>
@@ -68,6 +90,7 @@ struct Velocity : public Coords<F> {
   Velocity(std::initializer_list<F> list) : Coords<F>(list) {}  
 
   virtual Velocity<F> operator+(const Velocity<F>& other) { return Coords<F>::add(other); }
+  virtual Velocity<F> operator-(const Velocity<F>& other) { return Coords<F>::subtract(other); }
 };
 
 template <typename F = double>
@@ -76,6 +99,7 @@ struct Acceleration : public Coords<F> {
   Acceleration(std::initializer_list<F> list) : Coords<F>(list) {}  
 
   virtual Acceleration<F> operator+(const Acceleration<F>& other) { return Coords<F>::add(other); }
+  virtual Acceleration<F> operator-(const Acceleration<F>& other) { return Coords<F>::subtract(other); }
 };
 
 template <typename F = double, typename I = int>

@@ -11,7 +11,8 @@
   - [[#building-and-installing][Building and Installing]]
   - [[#using][Using]]
   - [[#contributing][Contributing]]
-  - [[#debugging][Debugging]]
+  - [[#notes][Notes]]
+    - [[#debugging][Debugging]]
 
 ** Synopsis
    This library computes the Mitchell Gravity Set. This is written in C++, with the API
@@ -106,5 +107,15 @@
 ** TODO Building and Installing
 ** TODO Using 
 ** TODO Contributing
-** TODO Debugging
+** Notes
+*** Debugging
+    To cmake for debugging:
+    #+begin_src bash
+    cmake -DCMAKE_BUILD_TYPE=Debug .
+    #+end_src
+
+    For release:
+    #+begin_src bash
+    cmake -DCMAKE_BUILD_TYPE=Release .
+    #+end_src
 

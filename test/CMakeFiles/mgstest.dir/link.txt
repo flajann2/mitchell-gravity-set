@@ -1,1 +1,1 @@
-/usr/bin/c++     CMakeFiles/mgstest.dir/test.cpp.o  -o mgstest -Wl,-rpath,/development/cpp_proj/gravity-set-compute/compute ../compute/libmgscompute.so.0.0.0 
+/usr/bin/c++  -g -Wall   CMakeFiles/mgstest.dir/test.cpp.o  -o mgstest -Wl,-rpath,/development/cpp_proj/gravity-set-compute/compute ../compute/libmgscompute.so.0.0.0 
