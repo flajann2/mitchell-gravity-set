@@ -1,35 +1,38 @@
 # GUI
+
+set (CMAKE_AUTOMOC ON)
+set (CMAKE_AUTOMOC_RELAXED_MODE ON)
+set (QT_VERSION_REQ "5.6")
+
 add_executable (mgs mgs.cpp configuration.cpp)
+
 
 set_property(
   TARGET mgs
   PROPERTY IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/compute/header
   )
 
-find_package (Qt REQUIRED COMPONENTS 
-  QtGui
-  QtOpenGL
-  QtQml
-  QtWidgets
-  )
+find_package (Qt5Core REQUIRED)
+find_package (Qt5Widgets REQUIRED)
+
+if ( NOT Qt5Core_FOUND )
+  message(FATAL_ERROR "Qt5 required but not found")
+endif ( NOT Qt5Core_FOUND )
 
 include_directories(
-  ${Qt_INCLUDES}
-  ${Qt_QtGui_INCLUDES}
-  ${Qt_QtOpenGL_INCLUDES}
-  ${Qt_QtQml_INCLUDES}
-  ${Qt_QtWidgets_INCLUDES}
+  ${Qt5Core_INCLUDE_DIRS}
+  ${Qt5Widgets_INCLUDE_DIRS}
   ${CMAKE_SOURCE_DIR}/compute/include
   )
-message(INFO ${Qt_INCLUDES})
+
+message(STATUS "Qt5 Included directories: "
+  "<" ${Qt5Core_INCLUDE_DIRS} ">"
+  "<" ${Qt5Widgets_INCLUDE_DIRS} ">") 
 
 target_link_libraries(mgs
-  ${Qt_LIBS}
-  ${Qt_QtGui_LIBS}
-  ${Qt_QtOpenGL_LIBS}
-  ${Qt_QtQml_LIBS}
-  ${Qt_QtWidgets_LIBS}
   mgscompute
+  Qt5
+  Qt5::Widgets
   )
 
 # target_link_libraries(mgs mgscompute)

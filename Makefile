@@ -183,6 +183,19 @@ mgs/fast:
 .PHONY : mgs/fast
 
 #=============================================================================
+# Target rules for targets named mgs_autogen
+
+# Build rule for target.
+mgs_autogen: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 mgs_autogen
+.PHONY : mgs_autogen
+
+# fast build rule for target.
+mgs_autogen/fast:
+	$(MAKE) -f gui/CMakeFiles/mgs_autogen.dir/build.make gui/CMakeFiles/mgs_autogen.dir/build
+.PHONY : mgs_autogen/fast
+
+#=============================================================================
 # Target rules for targets named mgstest
 
 # Build rule for target.
@@ -209,6 +222,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... mgscompute"
 	@echo "... mgs"
+	@echo "... mgs_autogen"
 	@echo "... mgstest"
 .PHONY : help
 

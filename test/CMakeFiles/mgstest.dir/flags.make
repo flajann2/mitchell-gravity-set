@@ -6,5 +6,5 @@ CXX_FLAGS = -g -Wall   -std=gnu++1z
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/development/cpp_proj/gravity-set-compute/compute/include -I/development/cpp_proj/gravity-set-compute/compute 
+CXX_INCLUDES = -I/development/cpp_proj/gravity-set-compute/test -I/development/cpp_proj/gravity-set-compute/compute/include -I/development/cpp_proj/gravity-set-compute/compute 
 

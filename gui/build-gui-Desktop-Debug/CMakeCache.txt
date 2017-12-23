@@ -215,17 +215,43 @@ QT3_QGLOBAL_H_FILE:FILEPATH=QT3_QGLOBAL_H_FILE-NOTFOUND
 //Path to a file.
 QT4_QGLOBAL_H_FILE:FILEPATH=QT4_QGLOBAL_H_FILE-NOTFOUND
 
-//No help, variable specified on the command line.
-QT_QMAKE_EXECUTABLE:STRING=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
+QT_QMAKE_EXECUTABLE:FILEPATH=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
 
 //Path to a program.
 QT_QMAKE_EXECUTABLE_FINDQT:FILEPATH=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
 
+//The directory containing a CMake configuration file for Qt5Core.
+Qt5Core_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Core
+
+//The directory containing a CMake configuration file for Qt5Gui.
+Qt5Gui_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Gui
+
+//The directory containing a CMake configuration file for Qt5Network.
+Qt5Network_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Network
+
+//The directory containing a CMake configuration file for Qt5Qml.
+Qt5Qml_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Qml
+
 //The directory containing a CMake configuration file for Qt5QtGui.
 Qt5QtGui_DIR:PATH=Qt5QtGui_DIR-NOTFOUND
 
+//The directory containing a CMake configuration file for Qt5Quick.
+Qt5Quick_DIR:PATH=Qt5Quick_DIR-NOTFOUND
+
+//The directory containing a CMake configuration file for Qt5Widgets.
+Qt5Widgets_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Widgets
+
 //The directory containing a CMake configuration file for Qt5.
 Qt5_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5
+
+//The directory containing a CMake configuration file for QtGui.
+QtGui_DIR:PATH=QtGui_DIR-NOTFOUND
+
+//The directory containing a CMake configuration file for QtOpenGL.
+QtOpenGL_DIR:PATH=QtOpenGL_DIR-NOTFOUND
+
+//The directory containing a CMake configuration file for QtQml.
+QtQml_DIR:PATH=QtQml_DIR-NOTFOUND
 
 //The directory containing a CMake configuration file for Qtxxx.
 Qtxxx_DIR:PATH=Qtxxx_DIR-NOTFOUND

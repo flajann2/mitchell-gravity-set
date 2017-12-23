@@ -171,6 +171,21 @@ mgs/fast:
 	cd /development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/build
 .PHONY : mgs/fast
 
+# Convenience name for target.
+gui/CMakeFiles/mgs_autogen.dir/rule:
+	cd /development/cpp_proj/gravity-set-compute && $(MAKE) -f CMakeFiles/Makefile2 gui/CMakeFiles/mgs_autogen.dir/rule
+.PHONY : gui/CMakeFiles/mgs_autogen.dir/rule
+
+# Convenience name for target.
+mgs_autogen: gui/CMakeFiles/mgs_autogen.dir/rule
+
+.PHONY : mgs_autogen
+
+# fast build rule for target.
+mgs_autogen/fast:
+	cd /development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs_autogen.dir/build.make gui/CMakeFiles/mgs_autogen.dir/build
+.PHONY : mgs_autogen/fast
+
 configuration.o: configuration.cpp.o
 
 .PHONY : configuration.o
@@ -225,6 +240,33 @@ mgs.cpp.s:
 	cd /development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/mgs.cpp.s
 .PHONY : mgs.cpp.s
 
+mgs_autogen/mocs_compilation.o: mgs_autogen/mocs_compilation.cpp.o
+
+.PHONY : mgs_autogen/mocs_compilation.o
+
+# target to build an object file
+mgs_autogen/mocs_compilation.cpp.o:
+	cd /development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/mgs_autogen/mocs_compilation.cpp.o
+.PHONY : mgs_autogen/mocs_compilation.cpp.o
+
+mgs_autogen/mocs_compilation.i: mgs_autogen/mocs_compilation.cpp.i
+
+.PHONY : mgs_autogen/mocs_compilation.i
+
+# target to preprocess a source file
+mgs_autogen/mocs_compilation.cpp.i:
+	cd /development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/mgs_autogen/mocs_compilation.cpp.i
+.PHONY : mgs_autogen/mocs_compilation.cpp.i
+
+mgs_autogen/mocs_compilation.s: mgs_autogen/mocs_compilation.cpp.s
+
+.PHONY : mgs_autogen/mocs_compilation.s
+
+# target to generate assembly for a file
+mgs_autogen/mocs_compilation.cpp.s:
+	cd /development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/mgs_autogen/mocs_compilation.cpp.s
+.PHONY : mgs_autogen/mocs_compilation.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -238,12 +280,16 @@ help:
 	@echo "... list_install_components"
 	@echo "... install/local"
 	@echo "... install"
+	@echo "... mgs_autogen"
 	@echo "... configuration.o"
 	@echo "... configuration.i"
 	@echo "... configuration.s"
 	@echo "... mgs.o"
 	@echo "... mgs.i"
 	@echo "... mgs.s"
+	@echo "... mgs_autogen/mocs_compilation.o"
+	@echo "... mgs_autogen/mocs_compilation.i"
+	@echo "... mgs_autogen/mocs_compilation.s"
 .PHONY : help
 
 

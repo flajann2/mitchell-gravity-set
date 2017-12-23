@@ -123,6 +123,19 @@ mgs/fast:
 	$(MAKE) -f CMakeFiles/mgs.dir/build.make CMakeFiles/mgs.dir/build
 .PHONY : mgs/fast
 
+#=============================================================================
+# Target rules for targets named mgs_autogen
+
+# Build rule for target.
+mgs_autogen: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 mgs_autogen
+.PHONY : mgs_autogen
+
+# fast build rule for target.
+mgs_autogen/fast:
+	$(MAKE) -f CMakeFiles/mgs_autogen.dir/build.make CMakeFiles/mgs_autogen.dir/build
+.PHONY : mgs_autogen/fast
+
 # target to build an object file
 configuration.o:
 	$(MAKE) -f CMakeFiles/mgs.dir/build.make CMakeFiles/mgs.dir/configuration.o
@@ -153,6 +166,21 @@ mgs.s:
 	$(MAKE) -f CMakeFiles/mgs.dir/build.make CMakeFiles/mgs.dir/mgs.s
 .PHONY : mgs.s
 
+# target to build an object file
+mgs_autogen/mocs_compilation.o:
+	$(MAKE) -f CMakeFiles/mgs.dir/build.make CMakeFiles/mgs.dir/mgs_autogen/mocs_compilation.o
+.PHONY : mgs_autogen/mocs_compilation.o
+
+# target to preprocess a source file
+mgs_autogen/mocs_compilation.i:
+	$(MAKE) -f CMakeFiles/mgs.dir/build.make CMakeFiles/mgs.dir/mgs_autogen/mocs_compilation.i
+.PHONY : mgs_autogen/mocs_compilation.i
+
+# target to generate assembly for a file
+mgs_autogen/mocs_compilation.s:
+	$(MAKE) -f CMakeFiles/mgs.dir/build.make CMakeFiles/mgs.dir/mgs_autogen/mocs_compilation.s
+.PHONY : mgs_autogen/mocs_compilation.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -162,12 +190,16 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... mgs"
 	@echo "... edit_cache"
+	@echo "... mgs_autogen"
 	@echo "... configuration.o"
 	@echo "... configuration.i"
 	@echo "... configuration.s"
 	@echo "... mgs.o"
 	@echo "... mgs.i"
 	@echo "... mgs.s"
+	@echo "... mgs_autogen/mocs_compilation.o"
+	@echo "... mgs_autogen/mocs_compilation.i"
+	@echo "... mgs_autogen/mocs_compilation.s"
 .PHONY : help
 
 
