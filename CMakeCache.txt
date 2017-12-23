@@ -190,6 +190,24 @@ MGS_COMPUTE_BINARY_DIR:STATIC=/development/cpp_proj/gravity-set-compute
 //Value Computed by CMake
 MGS_COMPUTE_SOURCE_DIR:STATIC=/development/cpp_proj/gravity-set-compute
 
+//Path to a file.
+QT3_QGLOBAL_H_FILE:FILEPATH=QT3_QGLOBAL_H_FILE-NOTFOUND
+
+//Path to a file.
+QT4_QGLOBAL_H_FILE:FILEPATH=QT4_QGLOBAL_H_FILE-NOTFOUND
+
+//Path to a program.
+QT_QMAKE_EXECUTABLE_FINDQT:FILEPATH=/usr/bin/qmake
+
+//The directory containing a CMake configuration file for Qt5QtGui.
+Qt5QtGui_DIR:PATH=Qt5QtGui_DIR-NOTFOUND
+
+//The directory containing a CMake configuration file for Qt5.
+Qt5_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5
+
+//The directory containing a CMake configuration file for Qtxxx.
+Qtxxx_DIR:PATH=Qtxxx_DIR-NOTFOUND
+
 //Dependencies for target
 compute_LIB_DEPENDS:STATIC=
 
@@ -353,4 +371,10 @@ CMAKE_STRIP-ADVANCED:INTERNAL=1
 CMAKE_UNAME:INTERNAL=/bin/uname
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: QT3_QGLOBAL_H_FILE
+QT3_QGLOBAL_H_FILE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: QT4_QGLOBAL_H_FILE
+QT4_QGLOBAL_H_FILE-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: QT_QMAKE_EXECUTABLE_FINDQT
+QT_QMAKE_EXECUTABLE_FINDQT-ADVANCED:INTERNAL=1
 

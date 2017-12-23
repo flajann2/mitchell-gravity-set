@@ -51,5 +51,7 @@ I Field<F,I>::render_single_cell(Position<F> initial_p, Velocity<F> initial_v) {
 }
 
 template <typename F, typename I>
-F Field<F,I>::compute_newton_g(const Star<F,I>& star, const Position<F>& fpm) {
+F Field<F,I>::compute_newton_g(const Star<F,I>& star,
+                               const Position<F>& fpm) {
+  
 }

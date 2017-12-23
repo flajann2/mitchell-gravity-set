@@ -171,6 +171,33 @@ mgs/fast:
 	cd /development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/build
 .PHONY : mgs/fast
 
+configuration.o: configuration.cpp.o
+
+.PHONY : configuration.o
+
+# target to build an object file
+configuration.cpp.o:
+	cd /development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/configuration.cpp.o
+.PHONY : configuration.cpp.o
+
+configuration.i: configuration.cpp.i
+
+.PHONY : configuration.i
+
+# target to preprocess a source file
+configuration.cpp.i:
+	cd /development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/configuration.cpp.i
+.PHONY : configuration.cpp.i
+
+configuration.s: configuration.cpp.s
+
+.PHONY : configuration.s
+
+# target to generate assembly for a file
+configuration.cpp.s:
+	cd /development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/configuration.cpp.s
+.PHONY : configuration.cpp.s
+
 mgs.o: mgs.cpp.o
 
 .PHONY : mgs.o
@@ -211,6 +238,9 @@ help:
 	@echo "... list_install_components"
 	@echo "... install/local"
 	@echo "... install"
+	@echo "... configuration.o"
+	@echo "... configuration.i"
+	@echo "... configuration.s"
 	@echo "... mgs.o"
 	@echo "... mgs.i"
 	@echo "... mgs.s"
