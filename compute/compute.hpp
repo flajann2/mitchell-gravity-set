@@ -71,7 +71,12 @@ struct Vector {
     for (unsigned i = 0; i < vec.size(); ++i) { result.vec[i] = vec[i] + other.vec[i]; }
     return result;
   }
-  
+
+  inline Vector operator+=(const Vector& other) {
+    for (unsigned i = 0; i < vec.size(); ++i) { vec[i] += other.vec[i]; }
+    return *this;
+  }
+
   inline Vector operator-(const Vector& other) const {
     Vector result(vec.size());
     for (unsigned i = 0; i < vec.size(); ++i) { result.vec[i] = vec[i] - other.vec[i]; }
@@ -122,6 +127,8 @@ struct Field {
 
   std::vector<std::int16_t> grid; // TODO: Can we get away with int8 here?
   std::vector<Star> stars;
+
+  Vector center_of_star_mass;
   
   std::int16_t cube_size;
   std::int16_t dimension;
@@ -158,7 +165,8 @@ struct Field {
   // WARN: No bounds checking is done here.
   Index coords2index(Vector& c);
   void render_with_callback(std::function<void(Index, Vector)> cb);
-
+  Vector compute_center_of_star_mass();
+  
  private:
   std::int16_t render_single_cell(const Vector& initial_p, const Vector& initial_v);
   inline Vector compute_acceleration(const Star& star, const Vector& fpm) const;

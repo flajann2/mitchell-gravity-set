@@ -36,15 +36,41 @@ int16_t& Field::operator[](Index& idx) {
   return grid[offset];
 }
 
+
+Vector Field::compute_center_of_star_mass() {
+  double total_star_mass = 0.0;
+  Vector center_accum;
+
+  for (auto star : stars) {
+    total_star_mass += star.mass;
+    center_accum += star.position * star.mass;
+  }
+  return center_accum / total_star_mass;
+}
+
 void Field::render_with_callback(std::function<void(Index, Vector)> cb) {
+  center_of_star_mass = compute_center_of_star_mass();
 }
 
 int16_t Field::render_single_cell(const Vector& initial_p, const Vector& initial_v) {
-  Vector a;
-  auto p = initial_p;
   auto v = initial_v;
+  auto p = initial_p;
+  int16_t iter = 0;
 
-  // acceleration
+  for (iter = 0; iter < iter_limit; ++iter) {
+    if ((p - center_of_star_mass).norm() > escape_radius) {
+      break;
+    }
+
+    Vector a;
+
+    // acceleration due to all the stars
+    for (auto star : stars) { a += compute_acceleration(star, p); }
+    v += a * delta_t;
+    p += v * delta_t;
+    
+  }
+  return iter;
 }
 
 /*
