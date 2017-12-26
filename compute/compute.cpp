@@ -20,10 +20,22 @@ Index<I> Field<F,I>::coords2index(Coords<F>& c) {
 }
 
 template <typename F>
-F Coords<F>::norm() {
+Scalar<F> Coords<F>::norm() {
   F nr = 0.0;
   for (auto v : vec) { nr += v * v; }
-  return sqrt(nr);
+  return Scalar<F>(sqrt(nr));
+}
+
+template <typename F>
+Scalar<F> Coords<F>::norm_squared() {
+  Scalar<F> nr {0.0};
+  for (auto v : vec) { nr.value += v * v; }
+  return nr;
+}
+
+template <typename F>
+Coords<F> Coords<F>::unit_vector() {
+  return *this / this->norm();
 }
 
 template <typename F, typename I>
@@ -50,8 +62,18 @@ I Field<F,I>::render_single_cell(Position<F> initial_p, Velocity<F> initial_v) {
   // acceleration
 }
 
+/*
+ * Do the Newton with the Floating Point Mass and a single
+ * Star.
+ * TODO: This should be inlined for greater performance.
+ * TODO: Also some consideration should be given for
+ * TODO: more optimizations so this can run completely
+ * TODO: in the L1 or L2 cache. Also, how can this be
+ * TODO: restructured so this can take advantage of SMID?
+ */
 template <typename F, typename I>
 F Field<F,I>::compute_newton_g(const Star<F,I>& star,
                                const Position<F>& fpm) {
-  
+  //auto r = (fpm - star.position).norm_squared();
 }
+

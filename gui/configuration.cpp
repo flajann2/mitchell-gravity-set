@@ -1,5 +1,4 @@
 #include "configuration.hpp"
-#include "ui_configuration.h"
 
 Configuration::Configuration(QWidget *parent) :
     QDialog(parent),

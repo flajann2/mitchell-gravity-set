@@ -41,10 +41,14 @@ void test_math_on_Position() {
   cout << "math on Position: " << p1 << " and " << p2 << endl;
   Position<> padded = p1 + p2;
   Position<> psubbed = p1 - p2;
+  Position<> doub = p1 * 2.0;
+  Position<> halved = p1 / 2.0;
   
   cout << "results:" << endl;
   cout << "added: " << padded << endl;
   cout << "subbed: " << psubbed << endl;
+  cout << "p1 * 2: " << doub << endl;
+  cout << "p1 / 2: " << halved << endl;
 }
 
 int main(int ac, char* av[]) {

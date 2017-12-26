@@ -52,30 +52,44 @@ struct Coords {
   Coords(int dimension = default_dimension) { vec.resize(dimension, 0.0); }
   Coords(std::initializer_list<F> list) : vec(list) {}
  
-  F norm();
+  Scalar<F> norm();
+  Scalar<F> norm_squared();
+  Coords<F> unit_vector();
 
  protected:
   template <typename T>
   T add(const T& other) {
     T result(vec.size());
-    for (unsigned i = 0; i < vec.size(); ++i) {
-      result.vec[i] = vec[i] + other.vec[i];
-    }
+    for (unsigned i = 0; i < vec.size(); ++i) { result.vec[i] = vec[i] + other.vec[i]; }
     return result;
   }
 
   template <typename T>
   T subtract(const T& other) {
     T result(vec.size());
-    for (unsigned i = 0; i < vec.size(); ++i) {
-      result.vec[i] = vec[i] - other.vec[i];
-    }
+    for (unsigned i = 0; i < vec.size(); ++i) { result.vec[i] = vec[i] - other.vec[i]; }
+    return result;
+  }
+
+  template <typename T, typename U>
+  T mul_scalar(U scalar) {
+    T result(vec.size());
+    for (unsigned i = 0; i < vec.size(); ++i) { result.vec[i] = vec[i] * scalar.value; }
+    return result;
+  }
+
+  template <typename T, typename U>
+  T div_scalar(U scalar) {
+    T result(vec.size());
+    for (unsigned i = 0; i < vec.size(); ++i) { result.vec[i] = vec[i] / scalar.value; }
     return result;
   }
 
  public:
   virtual Coords<F> operator+(const Coords<F>& other) { return add(other); }
   virtual Coords<F> operator-(const Coords<F>& other) { return subtract(other); }
+  virtual Coords<F> operator*(const Scalar<F>& scalar) { return mul_scalar< Coords<F> >(scalar); }
+  virtual Coords<F> operator/(const Scalar<F>& scalar) { return div_scalar< Coords<F> >(scalar); }
 };
 
 template <typename F>
@@ -93,6 +107,8 @@ struct Position : public Coords<F> {
 
   virtual Position<F> operator+(const Position<F>& other) { return Coords<F>::add(other); }
   virtual Position<F> operator-(const Position<F>& other) { return Coords<F>::subtract(other); }
+  virtual Coords<F> operator*(const Scalar<F>& scalar) { return Coords<F>::mul_scalar< Coords<F> >(scalar); }
+  virtual Coords<F> operator/(const Scalar<F>& scalar) { return Coords<F>::div_scalar< Coords<F> >(scalar); }
 };
 
 template <typename F = double>

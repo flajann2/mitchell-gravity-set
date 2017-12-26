@@ -215,7 +215,8 @@ QT3_QGLOBAL_H_FILE:FILEPATH=QT3_QGLOBAL_H_FILE-NOTFOUND
 //Path to a file.
 QT4_QGLOBAL_H_FILE:FILEPATH=QT4_QGLOBAL_H_FILE-NOTFOUND
 
-QT_QMAKE_EXECUTABLE:FILEPATH=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
+//No help, variable specified on the command line.
+QT_QMAKE_EXECUTABLE:STRING=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
 
 //Path to a program.
 QT_QMAKE_EXECUTABLE_FINDQT:FILEPATH=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
