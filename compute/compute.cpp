@@ -39,23 +39,32 @@ int16_t& Field::operator[](Index& idx) {
 void Field::render_with_callback(std::function<void(Index, Vector)> cb) {
 }
 
-int16_t Field::render_single_cell(Vector initial_p, Vector initial_v) {
+int16_t Field::render_single_cell(const Vector& initial_p, const Vector& initial_v) {
   Vector a;
-  auto &p = initial_p;
-  auto &v = initial_v;
+  auto p = initial_p;
+  auto v = initial_v;
 
   // acceleration
 }
 
 /*
  * Do the Newton with the Floating Point16_t Mass and a single
- * Star.
+ * Star. Note that r_squared is computed without squaring
+ * the final result, but the sum of the squared components, so
+ * we do that first, then take it's square root to save on the
+ * calculations.
+ *
  * TODO: This should be inlined for greater performance.
  * TODO: Also some consideration should be given for
  * TODO: more optimizations so this can run completely
  * TODO: in the L1 or L2 cache. Also, how can this be
  * TODO: restructured so this can take advantage of SMID?
  */
-double Field::compute_newton_g(const Star& star, const Vector& fpm) {
-  auto r = (fpm - star.position).norm_squared();
+Vector Field::compute_acceleration(const Star& star, const Vector& fpm) const {
+  auto r_vec = fpm - star.position;
+  auto r_squared = r_vec.norm_squared();
+  auto r = sqrt(r_squared);
+  auto unit_vec = r_vec / r;
+  auto force = (-gravitational_constant) * star.mass / r_squared;
+  return unit_vec * force;
 }

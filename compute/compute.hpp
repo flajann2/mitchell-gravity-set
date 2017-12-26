@@ -11,6 +11,7 @@
 #include <cmath>
 #include <cstdint>
 #include <functional>
+#include <utility>
 
 namespace mgs {
 
@@ -19,7 +20,20 @@ const std::int16_t untouched = -1;
 
 struct Index {
   std::vector<std::int32_t> ijk;
+  
   Index(std::initializer_list<std::int32_t> list) : ijk(list) {}
+  Index(const Index& other)  : ijk(other.ijk) {}
+  Index(const Index&& other) : ijk(std::move(other.ijk)) {}
+  
+  Index& operator=(const Index& other) {
+    ijk = other.ijk;
+    return *this;
+  }
+  
+  Index& operator=(Index&& other)  {
+    ijk = std::move(other.ijk);
+    return *this;
+  }
 };
 
 std::ostream &operator<<(std::ostream &os, Index const &idx) {
@@ -34,30 +48,43 @@ struct Vector {
   
   Vector(std::int16_t dimension = default_dimension) { vec.resize(dimension, 0.0); }
   Vector(std::initializer_list<double> list) : vec(list) {}
- 
-  double norm();
-  double norm_squared();
-  Vector unit_vector();
 
-  virtual Vector operator+(const Vector& other) const {
+  Vector(const Vector& other) : vec(other.vec) {}
+  Vector(const Vector&& other) : vec(std::move(other.vec)) {}
+
+  Vector& operator=(const Vector& other) {
+    vec = other.vec;
+    return *this;
+  }
+  
+  Vector& operator=(Vector&& other)  {
+    vec = std::move(other.vec);
+    return *this;
+  }
+  
+  inline double norm();
+  inline double norm_squared();
+  inline Vector unit_vector();
+
+  inline Vector operator+(const Vector& other) const {
     Vector result(vec.size());
     for (unsigned i = 0; i < vec.size(); ++i) { result.vec[i] = vec[i] + other.vec[i]; }
     return result;
   }
   
-  virtual Vector operator-(const Vector& other) const {
+  inline Vector operator-(const Vector& other) const {
     Vector result(vec.size());
     for (unsigned i = 0; i < vec.size(); ++i) { result.vec[i] = vec[i] - other.vec[i]; }
     return result;
   }
   
-  virtual Vector operator*(const double scalar) const {
+  inline Vector operator*(const double scalar) const {
     Vector result(vec.size());
     for (unsigned i = 0; i < vec.size(); ++i) { result.vec[i] = vec[i] * scalar; }
     return result;
   }
   
-  virtual Vector operator/(const double scalar) const {
+  inline Vector operator/(const double scalar) const {
     Vector result(vec.size());
     for (unsigned i = 0; i < vec.size(); ++i) { result.vec[i] = vec[i] / scalar; }
     return result;
@@ -93,7 +120,7 @@ struct Field {
   Vector c1; // negative-most bounding corner
   Vector c2; // positive-most bounding corner
 
-  std::vector<std::int16_t> grid;
+  std::vector<std::int16_t> grid; // TODO: Can we get away with int8 here?
   std::vector<Star> stars;
   
   std::int16_t cube_size;
@@ -133,8 +160,8 @@ struct Field {
   void render_with_callback(std::function<void(Index, Vector)> cb);
 
  private:
-  std::int16_t render_single_cell(Vector initial_p, Vector initial_v);
-  double compute_newton_g(const Star& star, const Vector& fpm);
+  std::int16_t render_single_cell(const Vector& initial_p, const Vector& initial_v);
+  inline Vector compute_acceleration(const Star& star, const Vector& fpm) const;
 };
 
 std::ostream &operator<<(std::ostream &os, Field const &f) {
