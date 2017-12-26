@@ -1,8 +1,5 @@
 /*
- * MGS internal classes
- *
- * F is a float-like type (float or double)
- * I is an int-like type (short, int, long, etc.)
+ * MGS std::int16_ternal classes
  *
  * The default typenames will be instantiated by
  * the cpp. Later, we can easily add support for
@@ -12,16 +9,17 @@
 #include <vector>
 #include <initializer_list>
 #include <cmath>
+#include <cstdint>
 #include <functional>
 
 namespace mgs {
 
-const int default_dimension = 2;
-const int untouched = -1;
+const std::int16_t default_dimension = 2;
+const std::int16_t untouched = -1;
 
 struct Index {
-  std::vector<int> ijk;
-  Index(std::initializer_list<int> list) : ijk(list) {}
+  std::vector<std::int32_t> ijk;
+  Index(std::initializer_list<std::int32_t> list) : ijk(list) {}
 };
 
 std::ostream &operator<<(std::ostream &os, Index const &idx) {
@@ -34,32 +32,32 @@ std::ostream &operator<<(std::ostream &os, Index const &idx) {
 struct Vector {
   std::vector<double> vec;
   
-  Vector(int dimension = default_dimension) { vec.resize(dimension, 0.0); }
+  Vector(std::int16_t dimension = default_dimension) { vec.resize(dimension, 0.0); }
   Vector(std::initializer_list<double> list) : vec(list) {}
  
   double norm();
   double norm_squared();
   Vector unit_vector();
 
-  virtual Vector operator+(const Vector& other) {
+  virtual Vector operator+(const Vector& other) const {
     Vector result(vec.size());
     for (unsigned i = 0; i < vec.size(); ++i) { result.vec[i] = vec[i] + other.vec[i]; }
     return result;
   }
   
-  virtual Vector operator-(const Vector& other) {
+  virtual Vector operator-(const Vector& other) const {
     Vector result(vec.size());
     for (unsigned i = 0; i < vec.size(); ++i) { result.vec[i] = vec[i] - other.vec[i]; }
     return result;
   }
   
-  virtual Vector operator*(const double scalar) {
+  virtual Vector operator*(const double scalar) const {
     Vector result(vec.size());
     for (unsigned i = 0; i < vec.size(); ++i) { result.vec[i] = vec[i] * scalar; }
     return result;
   }
   
-  virtual Vector operator/(const double scalar) {
+  virtual Vector operator/(const double scalar) const {
     Vector result(vec.size());
     for (unsigned i = 0; i < vec.size(); ++i) { result.vec[i] = vec[i] / scalar; }
     return result;
@@ -88,19 +86,19 @@ std::ostream &operator<<(std::ostream &os, Star const &star) {
   return os;
 }
 
-// Field of points to be iterated
+// Field of postd::int16_ts to be iterated
 // The field is always a cube or square, etc.,
 // same length on all "sides".
 struct Field {
   Vector c1; // negative-most bounding corner
   Vector c2; // positive-most bounding corner
 
-  std::vector<int> grid;
+  std::vector<std::int16_t> grid;
   std::vector<Star> stars;
   
-  int cube_size;
-  int dimension;
-  int iter_limit;
+  std::int16_t cube_size;
+  std::int16_t dimension;
+  std::int16_t iter_limit;
   
   double gravitational_constant;
   double escape_radius;
@@ -109,9 +107,9 @@ struct Field {
   Field(Vector nbound,
         Vector pbound,
 
-        int cs = 1024,
-        int dim = 2,
-        int iteration_limit = 1024,
+        std::int16_t cs = 1024,
+        std::int16_t dim = 2,
+        std::int16_t iteration_limit = 1024,
         double grav_constant = 1.0,
         double escape_r = 2.0,
         double delta_time = 0.1) : c1(nbound),
@@ -122,20 +120,20 @@ struct Field {
                                    gravitational_constant(grav_constant),
                                    escape_radius(escape_r),
                                    delta_t(delta_time) {
-    int backfill = untouched;
+    std::int16_t backfill = untouched;
     grid.resize(std::pow(cs, dim), backfill);
   }
 
   // WARN: no boundary checks are done here.
-  int& operator[](Index& idx); 
+  std::int16_t& operator[](Index& idx); 
 
-  // Convert a coordinate into an index.
+  // Convert a coordinate std::int16_to an index.
   // WARN: No bounds checking is done here.
   Index coords2index(Vector& c);
   void render_with_callback(std::function<void(Index, Vector)> cb);
 
  private:
-  int render_single_cell(Vector initial_p, Vector initial_v);
+  std::int16_t render_single_cell(Vector initial_p, Vector initial_v);
   double compute_newton_g(const Star& star, const Vector& fpm);
 };
 

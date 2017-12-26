@@ -26,9 +26,9 @@ Vector Vector::unit_vector() {
   return *this / this->norm();
 }
 
-int& Field::operator[](Index& idx) {
-  int offset = 0;
-  int r = 1;
+int16_t& Field::operator[](Index& idx) {
+  int16_t offset = 0;
+  int16_t r = 1;
   for (auto v : idx.ijk) {
     offset += v * r;
     r *= cube_size;
@@ -39,7 +39,7 @@ int& Field::operator[](Index& idx) {
 void Field::render_with_callback(std::function<void(Index, Vector)> cb) {
 }
 
-int Field::render_single_cell(Vector initial_p, Vector initial_v) {
+int16_t Field::render_single_cell(Vector initial_p, Vector initial_v) {
   Vector a;
   auto &p = initial_p;
   auto &v = initial_v;
@@ -48,7 +48,7 @@ int Field::render_single_cell(Vector initial_p, Vector initial_v) {
 }
 
 /*
- * Do the Newton with the Floating Point Mass and a single
+ * Do the Newton with the Floating Point16_t Mass and a single
  * Star.
  * TODO: This should be inlined for greater performance.
  * TODO: Also some consideration should be given for
@@ -57,5 +57,5 @@ int Field::render_single_cell(Vector initial_p, Vector initial_v) {
  * TODO: restructured so this can take advantage of SMID?
  */
 double Field::compute_newton_g(const Star& star, const Vector& fpm) {
-  //auto r = (fpm - star.position).norm_squared();
+  auto r = (fpm - star.position).norm_squared();
 }
