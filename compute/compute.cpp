@@ -5,43 +5,30 @@
 using namespace std;
 using namespace mgs;
 
-template struct Scalar<>;
-template struct Coords<>;
-template struct Index<>;
-template struct Position<>;
-template struct Velocity<>;
-template struct Acceleration<>;
-template struct Field<>;
-
-template <typename F, typename I>
-Index<I> Field<F,I>::coords2index(Coords<F>& c) {
+Index Field::coords2index(Vector& c) {
   cout << "**** You Rang??? ****" << endl;
-  return Index<I>{};
+  return Index{};
 }
 
-template <typename F>
-Scalar<F> Coords<F>::norm() {
-  F nr = 0.0;
+double Vector::norm() {
+  double nr = 0.0;
   for (auto v : vec) { nr += v * v; }
-  return Scalar<F>(sqrt(nr));
+  return double(sqrt(nr));
 }
 
-template <typename F>
-Scalar<F> Coords<F>::norm_squared() {
-  Scalar<F> nr {0.0};
-  for (auto v : vec) { nr.value += v * v; }
+double Vector::norm_squared() {
+  double nr = 0.0;
+  for (auto v : vec) { nr += v * v; }
   return nr;
 }
 
-template <typename F>
-Coords<F> Coords<F>::unit_vector() {
+Vector Vector::unit_vector() {
   return *this / this->norm();
 }
 
-template <typename F, typename I>
-I& Field<F,I>::operator[](Index<I>& idx) {
-  I offset = 0;
-  I r = 1;
+int& Field::operator[](Index& idx) {
+  int offset = 0;
+  int r = 1;
   for (auto v : idx.ijk) {
     offset += v * r;
     r *= cube_size;
@@ -49,13 +36,11 @@ I& Field<F,I>::operator[](Index<I>& idx) {
   return grid[offset];
 }
 
-template <typename F, typename I>
-void Field<F,I>::render_with_callback(std::function<void(Index<I>, Coords<F>)> cb) {
+void Field::render_with_callback(std::function<void(Index, Vector)> cb) {
 }
 
-template <typename F, typename I>
-I Field<F,I>::render_single_cell(Position<F> initial_p, Velocity<F> initial_v) {
-  Acceleration<F> a;
+int Field::render_single_cell(Vector initial_p, Vector initial_v) {
+  Vector a;
   auto &p = initial_p;
   auto &v = initial_v;
 
@@ -71,9 +56,6 @@ I Field<F,I>::render_single_cell(Position<F> initial_p, Velocity<F> initial_v) {
  * TODO: in the L1 or L2 cache. Also, how can this be
  * TODO: restructured so this can take advantage of SMID?
  */
-template <typename F, typename I>
-F Field<F,I>::compute_newton_g(const Star<F,I>& star,
-                               const Position<F>& fpm) {
+double Field::compute_newton_g(const Star& star, const Vector& fpm) {
   //auto r = (fpm - star.position).norm_squared();
 }
-

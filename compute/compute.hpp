@@ -19,126 +19,68 @@ namespace mgs {
 const int default_dimension = 2;
 const int untouched = -1;
 
-template <typename F = double>
-struct Scalar {
-  F value;
-  explicit Scalar(F v) : value(v) {}
-};
-
-template <typename F>
-std::ostream &operator<<(std::ostream &os, Scalar<F> const &s) {
-  os << "Scalar[ " << s.value << "]";
-  return os;
-}
-
-template <typename I = int>
 struct Index {
-  std::vector<I> ijk;
-  Index(std::initializer_list<I> list) : ijk(list) {}
+  std::vector<int> ijk;
+  Index(std::initializer_list<int> list) : ijk(list) {}
 };
 
-template <typename I>
-std::ostream &operator<<(std::ostream &os, Index<I> const &idx) {
+std::ostream &operator<<(std::ostream &os, Index const &idx) {
   os << "Index[ ";
-  for (auto i : idx.vec) { os << i << " "; }
+  for (auto i : idx.ijk) { os << i << " "; }
   os << "]";
   return os;
 }
 
-template <typename F = double>
-struct Coords {
-  std::vector<F> vec;
+struct Vector {
+  std::vector<double> vec;
   
-  Coords(int dimension = default_dimension) { vec.resize(dimension, 0.0); }
-  Coords(std::initializer_list<F> list) : vec(list) {}
+  Vector(int dimension = default_dimension) { vec.resize(dimension, 0.0); }
+  Vector(std::initializer_list<double> list) : vec(list) {}
  
-  Scalar<F> norm();
-  Scalar<F> norm_squared();
-  Coords<F> unit_vector();
+  double norm();
+  double norm_squared();
+  Vector unit_vector();
 
- protected:
-  template <typename T>
-  T add(const T& other) {
-    T result(vec.size());
+  virtual Vector operator+(const Vector& other) {
+    Vector result(vec.size());
     for (unsigned i = 0; i < vec.size(); ++i) { result.vec[i] = vec[i] + other.vec[i]; }
     return result;
   }
-
-  template <typename T>
-  T subtract(const T& other) {
-    T result(vec.size());
+  
+  virtual Vector operator-(const Vector& other) {
+    Vector result(vec.size());
     for (unsigned i = 0; i < vec.size(); ++i) { result.vec[i] = vec[i] - other.vec[i]; }
     return result;
   }
-
-  template <typename T, typename U>
-  T mul_scalar(U scalar) {
-    T result(vec.size());
-    for (unsigned i = 0; i < vec.size(); ++i) { result.vec[i] = vec[i] * scalar.value; }
+  
+  virtual Vector operator*(const double scalar) {
+    Vector result(vec.size());
+    for (unsigned i = 0; i < vec.size(); ++i) { result.vec[i] = vec[i] * scalar; }
     return result;
   }
-
-  template <typename T, typename U>
-  T div_scalar(U scalar) {
-    T result(vec.size());
-    for (unsigned i = 0; i < vec.size(); ++i) { result.vec[i] = vec[i] / scalar.value; }
+  
+  virtual Vector operator/(const double scalar) {
+    Vector result(vec.size());
+    for (unsigned i = 0; i < vec.size(); ++i) { result.vec[i] = vec[i] / scalar; }
     return result;
   }
-
- public:
-  virtual Coords<F> operator+(const Coords<F>& other) { return add(other); }
-  virtual Coords<F> operator-(const Coords<F>& other) { return subtract(other); }
-  virtual Coords<F> operator*(const Scalar<F>& scalar) { return mul_scalar< Coords<F> >(scalar); }
-  virtual Coords<F> operator/(const Scalar<F>& scalar) { return div_scalar< Coords<F> >(scalar); }
 };
 
-template <typename F>
-std::ostream &operator<<(std::ostream &os, Coords<F> const &c) {
-  os << "Coords[ ";
+std::ostream &operator<<(std::ostream &os, Vector const &c) {
+  os << "Vector[ ";
   for (auto v : c.vec) { os << v << " ";  }
   os << "]";
   return os;
 }
 
-template <typename F = double>
-struct Position : public Coords<F> {
-  Position(int dim = default_dimension) : Coords<F>(dim)  {}
-  Position(std::initializer_list<F> list) : Coords<F>(list) {} 
-
-  virtual Position<F> operator+(const Position<F>& other) { return Coords<F>::add(other); }
-  virtual Position<F> operator-(const Position<F>& other) { return Coords<F>::subtract(other); }
-  virtual Coords<F> operator*(const Scalar<F>& scalar) { return Coords<F>::mul_scalar< Coords<F> >(scalar); }
-  virtual Coords<F> operator/(const Scalar<F>& scalar) { return Coords<F>::div_scalar< Coords<F> >(scalar); }
-};
-
-template <typename F = double>
-struct Velocity : public Coords<F> {
-  Velocity(int dim = default_dimension) : Coords<F>(dim)  {}
-  Velocity(std::initializer_list<F> list) : Coords<F>(list) {}  
-
-  virtual Velocity<F> operator+(const Velocity<F>& other) { return Coords<F>::add(other); }
-  virtual Velocity<F> operator-(const Velocity<F>& other) { return Coords<F>::subtract(other); }
-};
-
-template <typename F = double>
-struct Acceleration : public Coords<F> {
-  Acceleration(int dim = default_dimension) : Coords<F>(dim)  {}
-  Acceleration(std::initializer_list<F> list) : Coords<F>(list) {}  
-
-  virtual Acceleration<F> operator+(const Acceleration<F>& other) { return Coords<F>::add(other); }
-  virtual Acceleration<F> operator-(const Acceleration<F>& other) { return Coords<F>::subtract(other); }
-};
-
-template <typename F = double, typename I = int>
 struct Star {
-  F mass;
-  Position<F> position;
+  double mass;
+  Vector position;
 
-  Star(F m, Position<F> pos) : mass(m), position(pos) {}
+  Star(double m, Vector pos) : mass(m), position(pos) {}
 };
 
-template <typename F, typename I>
-std::ostream &operator<<(std::ostream &os, Star<F,I> const &star) {
+std::ostream &operator<<(std::ostream &os, Star const &star) {
   os << "Star[";
   os << " mass:" << star.mass;
   os << " position:" << star.position;
@@ -149,57 +91,55 @@ std::ostream &operator<<(std::ostream &os, Star<F,I> const &star) {
 // Field of points to be iterated
 // The field is always a cube or square, etc.,
 // same length on all "sides".
-template <typename F = double, typename I = int>
 struct Field {
-  Coords<F> c1; // negative-most bounding corner
-  Coords<F> c2; // positive-most bounding corner
+  Vector c1; // negative-most bounding corner
+  Vector c2; // positive-most bounding corner
 
-  std::vector<I> grid;
-  std::vector<Star<F,I>> stars;
+  std::vector<int> grid;
+  std::vector<Star> stars;
   
-  I cube_size;
-  I dimension;
-  I iter_limit;
+  int cube_size;
+  int dimension;
+  int iter_limit;
   
-  F gravitational_constant;
-  F escape_radius;
-  F delta_t;
+  double gravitational_constant;
+  double escape_radius;
+  double delta_t;
   
-  Field(Coords<F> nbound,
-        Coords<F> pbound,
+  Field(Vector nbound,
+        Vector pbound,
 
-        I cs = 1024,
-        I dim = 2,
-        I iteration_limit = 1024,
-        F grav_constant = 1.0,
-        F escape_r = 2.0,
-        F delta_time = 0.1) : c1(nbound),
-                              c2(pbound),
-                              cube_size(cs),
-                              dimension(dim),
-                              iter_limit(iteration_limit),
-                              gravitational_constant(grav_constant),
-                              escape_radius(escape_r),
-                              delta_t(delta_time) {
-    I backfill = untouched;
+        int cs = 1024,
+        int dim = 2,
+        int iteration_limit = 1024,
+        double grav_constant = 1.0,
+        double escape_r = 2.0,
+        double delta_time = 0.1) : c1(nbound),
+                                   c2(pbound),
+                                   cube_size(cs),
+                                   dimension(dim),
+                                   iter_limit(iteration_limit),
+                                   gravitational_constant(grav_constant),
+                                   escape_radius(escape_r),
+                                   delta_t(delta_time) {
+    int backfill = untouched;
     grid.resize(std::pow(cs, dim), backfill);
   }
 
   // WARN: no boundary checks are done here.
-  I& operator[](Index<I>& idx); 
+  int& operator[](Index& idx); 
 
   // Convert a coordinate into an index.
   // WARN: No bounds checking is done here.
-  Index<I> coords2index(Coords<F>& c);
-  void render_with_callback(std::function<void(Index<I>, Coords<F>)> cb);
+  Index coords2index(Vector& c);
+  void render_with_callback(std::function<void(Index, Vector)> cb);
 
  private:
-  I render_single_cell(Position<F> initial_p, Velocity<F> initial_v);
-  F compute_newton_g(const Star<F,I>& star, const Position<F>& fpm);
+  int render_single_cell(Vector initial_p, Vector initial_v);
+  double compute_newton_g(const Star& star, const Vector& fpm);
 };
 
-template <typename F, typename I>
-std::ostream &operator<<(std::ostream &os, Field<F,I> const &f) {
+std::ostream &operator<<(std::ostream &os, Field const &f) {
   os << "Field[";
   os << " c1:" << f.c1;
   os << " c2:" << f.c2;

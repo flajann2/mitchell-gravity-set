@@ -13,14 +13,14 @@ void pr_coord(auto prefix, auto c) {
 }
 
 void test_field() {
-  Coords<> c {0.44, -0.95, 1};
-  Field<> f(Coords<>{-1,-1,-1}, Coords<>{1,1,1}, 32, 3);
+  Vector c {0.44, -0.95, 1};
+  Field f(Vector{-1,-1,-1}, Vector{1,1,1}, 32, 3);
   cout << "cube_size " << f.cube_size << endl;
   cout << "actual size " << f.grid.size() << endl;
   for (auto k = 0; k < f.cube_size; ++k) {
     for (auto j = 0; j < f.cube_size; ++j) {
       for (auto i = 0; i < f.cube_size; ++i) {
-        Index<> idx {i, j, k};
+        Index idx {i, j, k};
         f[idx] = i * j * k;
         if (f[idx] != i * j * k) {
           cout << "*** ERR: " << f[idx] << " != " << (i * j * k) << endl;
@@ -34,15 +34,15 @@ void test_field() {
   f.coords2index(c);
 }
 
-void test_math_on_Position() {
-  Position<> p1 {-1, 1, 0};
-  Position<> p2 {1, -1, 2};
+void test_math_on_Vector() {
+  Vector p1 {-1, 1, 0};
+  Vector p2 {1, -1, 2};
 
-  cout << "math on Position: " << p1 << " and " << p2 << endl;
-  Position<> padded = p1 + p2;
-  Position<> psubbed = p1 - p2;
-  Position<> doub = p1 * 2.0;
-  Position<> halved = p1 / 2.0;
+  cout << "math on Vector: " << p1 << " and " << p2 << endl;
+  Vector padded = p1 + p2;
+  Vector psubbed = p1 - p2;
+  Vector doub = p1 * 2.0;
+  Vector halved = p1 / 2.0;
   
   cout << "results:" << endl;
   cout << "added: " << padded << endl;
@@ -52,13 +52,13 @@ void test_math_on_Position() {
 }
 
 int main(int ac, char* av[]) {
-  Scalar<> s {32.2};
-  Coords<> c {3, 2.3, 22};
-  Coords<> cc;
-  Position<> p {0.01, 5.53, -34.1};
+  double s = 32.2;
+  Vector c {3, 2.3, 22};
+  Vector cc;
+  Vector p {0.01, 5.53, -34.1};
   
   ostringstream cstr;
-  cstr << s.value;
+  cstr << s;
   
   cout << "Hello Test\n"
             << cstr.str() << endl;
@@ -69,7 +69,7 @@ int main(int ac, char* av[]) {
   pr_coord(" p", p);
 
   test_field();
-  test_math_on_Position();
+  test_math_on_Vector();
   
   cout << "DONE" << endl;
 }
