@@ -202,7 +202,7 @@ QT_QMAKE_EXECUTABLE:FILEPATH=/usr/bin/qmake
 QT_QMAKE_EXECUTABLE_FINDQT:FILEPATH=/usr/bin/qmake
 
 //The directory containing a CMake configuration file for Qt5Core.
-Qt5Core_DIR:PATH=Qt5Core_DIR-NOTFOUND
+Qt5Core_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Core
 
 //The directory containing a CMake configuration file for Qt5Gui.
 Qt5Gui_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Gui
@@ -359,7 +359,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=3
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=4
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

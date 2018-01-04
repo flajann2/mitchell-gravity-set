@@ -4,7 +4,7 @@ set (CMAKE_AUTOMOC ON)
 set (CMAKE_AUTOMOC_RELAXED_MODE ON)
 set (QT_VERSION_REQ "5.6")
 
-add_executable (mgs mgs.cpp configuration.cpp)
+add_executable (mgs mgs.cpp)
 
 
 set_property(
