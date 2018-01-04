@@ -1,5 +1,7 @@
 import QtQuick 2.6
 import QtQuick.Window 2.2
+import QtQuick.Controls 2.0
+import QtQuick.Scene3D 2.0
 
 Window {
     visible: true
