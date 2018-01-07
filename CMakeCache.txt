@@ -96,6 +96,15 @@ CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 //Enable/Disable output of compile commands during generation.
 CMAKE_EXPORT_COMPILE_COMMANDS:BOOL=OFF
 
+//No help, variable specified on the command line.
+CMAKE_FIND_PACKAGE_NO_PACKAGE_REGISTRY:UNINITIALIZED=true
+
+//No help, variable specified on the command line.
+CMAKE_FIND_PACKAGE_NO_SYSTEM_PACKAGE_REGISTRY:UNINITIALIZED=true
+
+//No help, variable specified on the command line.
+CMAKE_FIND_ROOT_PATH:UNINITIALIZED=/opt/Qt5.10.0/5.10.0/gcc_64/lib/
+
 //Install path prefix, prepended onto install directories.
 CMAKE_INSTALL_PREFIX:PATH=/usr/local
 
@@ -178,6 +187,12 @@ CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 //Path to a program.
 CMAKE_STRIP:FILEPATH=/usr/bin/strip
 
+//No help, variable specified on the command line.
+CMAKE_SYSROOT_PATH:UNINITIALIZED=~/Qt5.9.3./5.9.3/gcc_64/lib/cmake
+
+//No help, variable specified on the command line.
+CMAKE_SYSTEM_PREFIX_PATH:UNINITIALIZED=/home/alveric/Qt5.9.3./5.9.3/gcc_64/lib/cmake
+
 //If this value is on, makefiles will be generated without the
 // .SILENT directive, and all commands will be echoed to the console
 // during the make.  This is useful for debugging only. With Visual
@@ -202,10 +217,16 @@ QT_QMAKE_EXECUTABLE:FILEPATH=/usr/bin/qmake
 QT_QMAKE_EXECUTABLE_FINDQT:FILEPATH=/usr/bin/qmake
 
 //The directory containing a CMake configuration file for Qt5Core.
-Qt5Core_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Core
+Qt5Core_DIR:PATH=/opt/Qt5.10.0/5.10.0/gcc_64/lib/cmake/Qt5Core
+
+//The directory containing a CMake configuration file for Qt5DataVisualization.
+Qt5DataVisualization_DIR:PATH=/opt/Qt5.10.0/5.10.0/gcc_64/lib/cmake/Qt5DataVisualization
+
+//The directory containing a CMake configuration file for Qt5Data.
+Qt5Data_DIR:PATH=Qt5Data_DIR-NOTFOUND
 
 //The directory containing a CMake configuration file for Qt5Gui.
-Qt5Gui_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Gui
+Qt5Gui_DIR:PATH=/opt/Qt5.10.0/5.10.0/gcc_64/lib/cmake/Qt5Gui
 
 //The directory containing a CMake configuration file for Qt5Network.
 Qt5Network_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Network
@@ -219,11 +240,14 @@ Qt5QtGui_DIR:PATH=Qt5QtGui_DIR-NOTFOUND
 //The directory containing a CMake configuration file for Qt5Quick.
 Qt5Quick_DIR:PATH=Qt5Quick_DIR-NOTFOUND
 
+//The directory containing a CMake configuration file for Qt5Visualization.
+Qt5Visualization_DIR:PATH=Qt5Visualization_DIR-NOTFOUND
+
 //The directory containing a CMake configuration file for Qt5Widgets.
-Qt5Widgets_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Widgets
+Qt5Widgets_DIR:PATH=/opt/Qt5.10.0/5.10.0/gcc_64/lib/cmake/Qt5Widgets
 
 //The directory containing a CMake configuration file for Qt5.
-Qt5_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5
+Qt5_DIR:PATH=/opt/Qt5.10.0/5.10.0/gcc_64/lib/cmake/Qt5
 
 //The directory containing a CMake configuration file for QtGui.
 QtGui_DIR:PATH=QtGui_DIR-NOTFOUND

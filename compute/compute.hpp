@@ -1,3 +1,5 @@
+#pragma once
+
 /*
  * MGS std::int16_ternal classes
  *
