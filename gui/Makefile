@@ -240,6 +240,33 @@ mgs_autogen/mocs_compilation.cpp.s:
 	cd /development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/mgs_autogen/mocs_compilation.cpp.s
 .PHONY : mgs_autogen/mocs_compilation.cpp.s
 
+starfield.o: starfield.cpp.o
+
+.PHONY : starfield.o
+
+# target to build an object file
+starfield.cpp.o:
+	cd /development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/starfield.cpp.o
+.PHONY : starfield.cpp.o
+
+starfield.i: starfield.cpp.i
+
+.PHONY : starfield.i
+
+# target to preprocess a source file
+starfield.cpp.i:
+	cd /development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/starfield.cpp.i
+.PHONY : starfield.cpp.i
+
+starfield.s: starfield.cpp.s
+
+.PHONY : starfield.s
+
+# target to generate assembly for a file
+starfield.cpp.s:
+	cd /development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/starfield.cpp.s
+.PHONY : starfield.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -260,6 +287,9 @@ help:
 	@echo "... mgs_autogen/mocs_compilation.o"
 	@echo "... mgs_autogen/mocs_compilation.i"
 	@echo "... mgs_autogen/mocs_compilation.s"
+	@echo "... starfield.o"
+	@echo "... starfield.i"
+	@echo "... starfield.s"
 .PHONY : help
 
 
