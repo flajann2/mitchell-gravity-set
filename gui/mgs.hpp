@@ -23,8 +23,8 @@ class SetupWindow : public QWidget
 {
   Q_OBJECT;
 
-  Q3DScatter  *q_graph = 0;
-  QWidget     *q_container = 0;
+  Q3DScatter  *q_graph        = 0;
+  QWidget     *q_container    = 0;
 
   QHBoxLayout *q_hLayout      = 0;
   QVBoxLayout *q_vLayout      = 0;
@@ -33,6 +33,14 @@ class SetupWindow : public QWidget
   QComboBox   *q_starSelector = 0;
   QLineEdit   *q_massEdit     = 0;
 
+  QLineEdit   *q_starPosXEdit = 0;
+  QLineEdit   *q_starPosYEdit = 0;
+  QLineEdit   *q_starPosZEdit = 0;
+
+  
+  QGroupBox   *q_sfGroup      = 0;
+  QGroupBox   *q_ssGroup      = 0;
+  
   QGroupBox *createStarFieldGroup();
   QGroupBox *createStarSelectorGroup();
 
