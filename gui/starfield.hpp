@@ -1,3 +1,4 @@
+#pragma once
 
 #include <QtDataVisualization/qscatterdataproxy.h>
 #include <QtDataVisualization/qvalue3daxis.h>

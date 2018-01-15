@@ -1,4 +1,4 @@
-* Mitchell Gravity Set Compute                                     :TOC_5_gh:
+* Mitchell Gravity Set, 4th Generation                             :TOC_5_gh:
   - [[#synopsis][Synopsis]]
   - [[#basic-goals][Basic goals]]
     - [[#multi-core-support][Multi Core support]]
@@ -15,27 +15,34 @@
     - [[#debugging][Debugging]]
 
 ** Synopsis
-   This library computes the Mitchell Gravity Set. This is written in C++, with the API
-   exposed as C calls.
+   This library computes the Mitchell Gravity Set. This
+   is written in C++, with the API exposed as C calls.
 
 ** Basic goals
 *** Multi Core support
-    We want this to support any number of cores available. Since the algorithm
-    is highly parallarizable, this should not be a problem. 
+    We want this to support any number of cores
+    available. Since the algorithm is highly
+    parallarizable, this should not be a problem.
 
 *** Interactive and Progressive callbacks
-    We wish to allow human interaction with MGS, and to provide a means to show
-    progressive buildup while the computation is happening. As such, we wish to
-    allow these callbacks to happen when the next level of detail is completed.
+    We wish to allow human interaction with MGS, and to
+    provide a means to show progressive buildup while
+    the computation is happening. As such, we wish to
+    allow these callbacks to happen when the next level
+    of detail is completed.
 
 *** Distributed Computation?
-    It should be a staightforward way to allow distributed computation of the
-    Gravity Set, in theory. This, for example, may simply be accomplished by
-    instance partitioning; different ranges being delegated to different instances
-    (machines), with all the results being sent to the rendering instance. 
+    It should be a staightforward way to allow
+    distributed computation of the Gravity Set, in
+    theory. This, for example, may simply be
+    accomplished by instance partitioning; different
+    ranges being delegated to different instances
+    (machines), with all the results being sent to the
+    rendering instance.
 
-    The main bottleneck will be with the potentially massive amounts of data
-    that would be generated and sent across the wire. 
+    The main bottleneck will be with the potentially
+    massive amounts of data that would be generated and
+    sent across the wire.
 
 ** Background
    Please see:
@@ -45,41 +52,45 @@
    for the mathematical background behind MGS.
 
 *** Motivation
-    The original MGS was implemented as a 2D gravity field.
-    As well, at the time, the computing power of the computers
-    at the time were limited, and generating a 3D field would've
-    required a lot more time.
+    The original MGS was implemented as a 2D gravity
+    field.  As well, at the time, the computing power
+    of the computers at the time were limited, and
+    generating a 3D field would've required a lot more
+    time.
 
-    Today, multicore CPUs are common, and so I've decided
-    to implement this solely as 3D. We are entering new
-    territory here, as I do not know what to expect. But
-    it makes more sense anyway, since real gravity operates
-    in 3D space, in the classical Newtonian sense.
+    Today, multicore CPUs are common, and so I've
+    decided to implement this solely as 3D. We are
+    entering new territory here, as I do not know what
+    to expect. But it makes more sense anyway, since
+    real gravity operates in 3D space, in the classical
+    Newtonian sense.
 
-    Besides, today we have very impressive 3D fractals rendered
-    by others, and I am not willing to be "left out" of the
-    fun! This will also be a serious chance to make use of the
-    OpenGL library for rendering the results.
+    Besides, today we have very impressive 3D fractals
+    rendered by others, and I am not willing to be
+    "left out" of the fun! This will also be a serious
+    chance to make use of the OpenGL library for
+    rendering the results.
 
 ** Why this is just a library
-   The earlier iterations of the Gravity Set had its compute code intertwined 
-   with the GUI support, which suffered greately from "bit rot", and therefore
-   became unmanagable. This time, it's a seperate library, written in C++, sporting
-   a C interface to allow it to be called from any language that allows external
-   calls to a C library.
+   The earlier iterations of the Gravity Set had its
+   compute code intertwined with the GUI support, which
+   suffered greately from "bit rot", and therefore
+   became unmanagable. This time, it's a seperate
+   library, written in C++, sporting a C interface to
+   allow it to be called from any language that allows
+   external calls to a C library.
 
 ** Basic Design
-   We are going to leverage the awesome
-   power of C++17 to make this a reality.
-   In short, we want to define types
-   in a way that makes for strong typing, 
-   remenescent of Rust, without all the
-   overly strict protection against "data
-   races", which for this, we don't really
-   care too much. We need to be able to run
-   multiple cores to increase the speed of rendering
-   the MGS, especially in 3 dimensions, as well as 
-   dealing with pipeline issues with the GPU (for display).
+   We are going to leverage the awesome power of C++17
+   to make this a reality.  In short, we want to define
+   types in a way that makes for strong typing,
+   remenescent of Rust, without all the overly strict
+   protection against "data races", which for this, we
+   don't really care too much. We need to be able to
+   run multiple cores to increase the speed of
+   rendering the MGS, especially in 3 dimensions, as
+   well as dealing with pipeline issues with the GPU
+   (for display).
 
    Basic structures:
    + Scalar

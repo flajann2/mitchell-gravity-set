@@ -48,10 +48,10 @@ RM = /usr/local/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /development/cpp_proj/gravity-set-compute
+CMAKE_SOURCE_DIR = /home/alveric/development/cpp_proj/gravity-set-compute
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /development/cpp_proj/gravity-set-compute
+CMAKE_BINARY_DIR = /home/alveric/development/cpp_proj/gravity-set-compute
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -126,14 +126,14 @@ install/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /development/cpp_proj/gravity-set-compute && $(CMAKE_COMMAND) -E cmake_progress_start /development/cpp_proj/gravity-set-compute/CMakeFiles /development/cpp_proj/gravity-set-compute/test/CMakeFiles/progress.marks
-	cd /development/cpp_proj/gravity-set-compute && $(MAKE) -f CMakeFiles/Makefile2 test/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /development/cpp_proj/gravity-set-compute/CMakeFiles 0
+	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(CMAKE_COMMAND) -E cmake_progress_start /home/alveric/development/cpp_proj/gravity-set-compute/CMakeFiles /home/alveric/development/cpp_proj/gravity-set-compute/test/CMakeFiles/progress.marks
+	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f CMakeFiles/Makefile2 test/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/alveric/development/cpp_proj/gravity-set-compute/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /development/cpp_proj/gravity-set-compute && $(MAKE) -f CMakeFiles/Makefile2 test/clean
+	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f CMakeFiles/Makefile2 test/clean
 .PHONY : clean
 
 # The main clean target
@@ -143,22 +143,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /development/cpp_proj/gravity-set-compute && $(MAKE) -f CMakeFiles/Makefile2 test/preinstall
+	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f CMakeFiles/Makefile2 test/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /development/cpp_proj/gravity-set-compute && $(MAKE) -f CMakeFiles/Makefile2 test/preinstall
+	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f CMakeFiles/Makefile2 test/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /development/cpp_proj/gravity-set-compute && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 test/CMakeFiles/mgstest.dir/rule:
-	cd /development/cpp_proj/gravity-set-compute && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/mgstest.dir/rule
+	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f CMakeFiles/Makefile2 test/CMakeFiles/mgstest.dir/rule
 .PHONY : test/CMakeFiles/mgstest.dir/rule
 
 # Convenience name for target.
@@ -168,7 +168,7 @@ mgstest: test/CMakeFiles/mgstest.dir/rule
 
 # fast build rule for target.
 mgstest/fast:
-	cd /development/cpp_proj/gravity-set-compute && $(MAKE) -f test/CMakeFiles/mgstest.dir/build.make test/CMakeFiles/mgstest.dir/build
+	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f test/CMakeFiles/mgstest.dir/build.make test/CMakeFiles/mgstest.dir/build
 .PHONY : mgstest/fast
 
 test.o: test.cpp.o
@@ -177,7 +177,7 @@ test.o: test.cpp.o
 
 # target to build an object file
 test.cpp.o:
-	cd /development/cpp_proj/gravity-set-compute && $(MAKE) -f test/CMakeFiles/mgstest.dir/build.make test/CMakeFiles/mgstest.dir/test.cpp.o
+	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f test/CMakeFiles/mgstest.dir/build.make test/CMakeFiles/mgstest.dir/test.cpp.o
 .PHONY : test.cpp.o
 
 test.i: test.cpp.i
@@ -186,7 +186,7 @@ test.i: test.cpp.i
 
 # target to preprocess a source file
 test.cpp.i:
-	cd /development/cpp_proj/gravity-set-compute && $(MAKE) -f test/CMakeFiles/mgstest.dir/build.make test/CMakeFiles/mgstest.dir/test.cpp.i
+	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f test/CMakeFiles/mgstest.dir/build.make test/CMakeFiles/mgstest.dir/test.cpp.i
 .PHONY : test.cpp.i
 
 test.s: test.cpp.s
@@ -195,7 +195,7 @@ test.s: test.cpp.s
 
 # target to generate assembly for a file
 test.cpp.s:
-	cd /development/cpp_proj/gravity-set-compute && $(MAKE) -f test/CMakeFiles/mgstest.dir/build.make test/CMakeFiles/mgstest.dir/test.cpp.s
+	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f test/CMakeFiles/mgstest.dir/build.make test/CMakeFiles/mgstest.dir/test.cpp.s
 .PHONY : test.cpp.s
 
 # Help Target
@@ -225,6 +225,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /development/cpp_proj/gravity-set-compute && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

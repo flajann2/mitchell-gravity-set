@@ -1,66 +1,76 @@
-
 #include <iostream>
 
 #include "mgs.hpp"
-#include "starfield.hpp"
 
 using namespace QtDataVisualization;
 
 int main(int ac, char* av[]) {
   
   QApplication app(ac, av);
-  Q3DScatter *graph = new Q3DScatter();
 
-  QWidget *container = QWidget::createWindowContainer(graph);
+  
+  auto window = new SetupWindow();
+  window->init(); 
+  return app.exec();
+}
+
+
+SetupWindow::SetupWindow()    
+    : q_graph(new Q3DScatter()),
+      q_container(QWidget::createWindowContainer(q_graph)),
+      QWidget(q_container),
+      q_hLayout(new QHBoxLayout(this)),
+      q_vLayout(new QVBoxLayout()) {
+  
+  if (!q_graph->hasContext()) {
+    QMessageBox msgBox;
+    msgBox.setText("Couldn't initialize the OpenGL context.");
+    msgBox.exec();
+    std::exit(-1);
+  }
+
+  q_hLayout->addWidget(q_container, 1);
+  q_hLayout->addLayout(q_vLayout);
+
+  auto sgGroup = createStarFieldGroup();
+  auto ssgGroup = createStarSelectorGroup();
+}
+
+void SetupWindow::init() {
+  setWindowTitle(QStringLiteral("Mitchell Gravity Set, 4th Generation"));
   {
-    if (!graph->hasContext()) {
-      QMessageBox msgBox;
-      msgBox.setText("Couldn't initialize the OpenGL context.");
-      msgBox.exec();
-      return -1;
+    {
+      QSize screenSize = q_graph->screen()->size();
+      q_container->setMinimumSize(QSize(screenSize.width() / 2, screenSize.height() / 1.5));
+      q_container->setMaximumSize(screenSize);
+      q_container->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+      q_container->setFocusPolicy(Qt::StrongFocus);
     }
-    
-    QSize screenSize = graph->screen()->size();
-    container->setMinimumSize(QSize(screenSize.width() / 2, screenSize.height() / 1.5));
-    container->setMaximumSize(screenSize);
-    container->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    container->setFocusPolicy(Qt::StrongFocus);
-  }
-  
-  auto window = new SetupWindow;
-  auto hLayout = new QHBoxLayout(window);
-  auto vLayout = new QVBoxLayout();
-  {
-    hLayout->addWidget(container, 1);
-    hLayout->addLayout(vLayout);
-  }
-  
-  window->setWindowTitle(QStringLiteral("Mitchell Gravity Set, 4th Generation"));
-  {
-    auto form = new QFormLayout;
-    auto massSlider = new QSlider(Qt::Horizontal, window);
-    auto starSelector = new QComboBox();
-    auto massEdit = new QLineEdit();
+
+    q_form = new QFormLayout;
+    q_massSlider = new QSlider(Qt::Horizontal, this);
+    q_starSelector = new QComboBox();
+    q_massEdit = new QLineEdit();
     {
       QStringList star_select;
       {
         star_select << "1" << "2" << "3";
       }
       
-      starSelector->addItems(star_select);
-      form->addRow(QLabel::tr("Star"), starSelector);
-      massSlider->setTickInterval(1);
-      massSlider->setMinimum(1);
-      massSlider->setValue(12);
-      massSlider->setMaximum(128);
+      q_starSelector->addItems(star_select);
+      q_form->addRow(QLabel::tr("Star"), q_starSelector);
+      q_massSlider->setTickInterval(1);
+      q_massSlider->setMinimum(1);
+      q_massSlider->setValue(12);
+      q_massSlider->setMaximum(128);
 
-      massEdit->setValidator(new QDoubleValidator);
-      form->addRow(new QLabel("Mass"), massEdit);
-      form->addRow(massSlider);
-      vLayout->addLayout(form);
+      q_massEdit->setValidator(new QDoubleValidator);
+      q_form->addRow(new QLabel("Mass"), q_massEdit);
+      q_form->addRow(q_massSlider);
+      q_vLayout->addLayout(q_form);
     }
 
-    QSlider *fieldLinesSlider = new QSlider(Qt::Horizontal, window);
+    QSlider *fieldLinesSlider = new QSlider(Qt::Horizontal, this);
     {
       fieldLinesSlider->setTickInterval(1);
       fieldLinesSlider->setMinimum(1);
@@ -68,7 +78,7 @@ int main(int ac, char* av[]) {
       fieldLinesSlider->setMaximum(128);
     }
     
-    auto arrowsSlider = new QSlider(Qt::Horizontal, window);
+    auto arrowsSlider = new QSlider(Qt::Horizontal, this);
     {
       arrowsSlider->setTickInterval(1);
       arrowsSlider->setMinimum(8);
@@ -76,29 +86,29 @@ int main(int ac, char* av[]) {
       arrowsSlider->setMaximum(32);
     }
     
-    QPushButton *toggleRotationButton = new QPushButton(window);
+    QPushButton *toggleRotationButton = new QPushButton(this);
     {
       toggleRotationButton->setText(QStringLiteral("Toggle animation"));
-      vLayout->addWidget(toggleRotationButton);
+      q_vLayout->addWidget(toggleRotationButton);
     }
 
-    QPushButton *toggleSunButton = new QPushButton(window);
+    QPushButton *toggleSunButton = new QPushButton(this);
     {
       toggleSunButton->setText(QStringLiteral("Toggle Sun"));
-      vLayout->addWidget(toggleSunButton);
+      q_vLayout->addWidget(toggleSunButton);
     }
 
     {
-      vLayout->addWidget(new QLabel(QStringLiteral("Field Lines (1 - 128):")));
-      vLayout->addWidget(fieldLinesSlider);
+      q_vLayout->addWidget(new QLabel(QStringLiteral("Field Lines (1 - 128):")));
+      q_vLayout->addWidget(fieldLinesSlider);
     }
 
     {
-      vLayout->addWidget(new QLabel(QStringLiteral("Arrows per line (8 - 32):")));
-      vLayout->addWidget(arrowsSlider, 1, Qt::AlignTop);
+      q_vLayout->addWidget(new QLabel(QStringLiteral("Arrows per line (8 - 32):")));
+      q_vLayout->addWidget(arrowsSlider, 1, Qt::AlignTop);
     }
     
-    StarField *modifier = new StarField(graph);
+    StarField *modifier = new StarField(q_graph);
     {
       QObject::connect(toggleRotationButton, &QPushButton::clicked, modifier, &StarField::toggleRotation);
       QObject::connect(toggleSunButton, &QPushButton::clicked, modifier,      &StarField::toggleSun);
@@ -106,16 +116,8 @@ int main(int ac, char* av[]) {
       QObject::connect(arrowsSlider, &QSlider::valueChanged, modifier,        &StarField::setArrowsPerLine);
     }
     
-    window->show();
+    show();
   }
-  return app.exec();
-}
-
-
-SetupWindow::SetupWindow(QWidget *parent)
-    : QWidget(parent) {
-  auto sgGroup = createStarFieldGroup();
-  auto ssgGroup = createStarSelectorGroup();
 }
 
 QGroupBox* SetupWindow::createStarFieldGroup() {

@@ -1,4 +1,4 @@
-# Install script for directory: /development/cpp_proj/gravity-set-compute/compute
+# Install script for directory: /home/alveric/development/cpp_proj/gravity-set-compute/compute
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,8 +50,8 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
     endif()
   endforeach()
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/mgscompute" TYPE SHARED_LIBRARY FILES
-    "/development/cpp_proj/gravity-set-compute/compute/libmgscompute.so.0.0.0"
-    "/development/cpp_proj/gravity-set-compute/compute/libmgscompute.so"
+    "/home/alveric/development/cpp_proj/gravity-set-compute/compute/libmgscompute.so.0.0.0"
+    "/home/alveric/development/cpp_proj/gravity-set-compute/compute/libmgscompute.so"
     )
   foreach(file
       "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/mgscompute/libmgscompute.so.0.0.0"
@@ -67,10 +67,10 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/mgscompute" TYPE FILE FILES "/development/cpp_proj/gravity-set-compute/compute/include/mgscompute.h")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/mgscompute" TYPE FILE FILES "/home/alveric/development/cpp_proj/gravity-set-compute/compute/include/mgscompute.h")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/mgscompute" TYPE FILE FILES "/development/cpp_proj/gravity-set-compute/compute/include/mgscompute.h")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/mgscompute" TYPE FILE FILES "/home/alveric/development/cpp_proj/gravity-set-compute/compute/include/mgscompute.h")
 endif()
 

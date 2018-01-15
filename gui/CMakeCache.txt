@@ -213,7 +213,19 @@ Project_SOURCE_DIR:STATIC=/home/alveric/development/cpp_proj/gravity-set-compute
 QT_QMAKE_EXECUTABLE:STRING=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
 
 //The directory containing a CMake configuration file for Qt5Core.
-Qt5Core_DIR:PATH=Qt5Core_DIR-NOTFOUND
+Qt5Core_DIR:PATH=/opt/Qt5.10.0/5.10.0/gcc_64/lib/cmake/Qt5Core
+
+//The directory containing a CMake configuration file for Qt5DataVisualization.
+Qt5DataVisualization_DIR:PATH=/opt/Qt5.10.0/5.10.0/gcc_64/lib/cmake/Qt5DataVisualization
+
+//The directory containing a CMake configuration file for Qt5Gui.
+Qt5Gui_DIR:PATH=/opt/Qt5.10.0/5.10.0/gcc_64/lib/cmake/Qt5Gui
+
+//The directory containing a CMake configuration file for Qt5Widgets.
+Qt5Widgets_DIR:PATH=/opt/Qt5.10.0/5.10.0/gcc_64/lib/cmake/Qt5Widgets
+
+//The directory containing a CMake configuration file for Qt5.
+Qt5_DIR:PATH=/opt/Qt5.10.0/5.10.0/gcc_64/lib/cmake/Qt5
 
 
 ########################

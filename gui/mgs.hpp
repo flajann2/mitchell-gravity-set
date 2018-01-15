@@ -17,14 +17,26 @@
 #include <QLineEdit>
 #include <QGroupBox>
 
+#include "starfield.hpp"
+
 class SetupWindow : public QWidget
 {
-  Q_OBJECT
+  Q_OBJECT;
 
- public:
-  SetupWindow(QWidget *parent = 0);
+  Q3DScatter  *q_graph = 0;
+  QWidget     *q_container = 0;
 
- private:
+  QHBoxLayout *q_hLayout      = 0;
+  QVBoxLayout *q_vLayout      = 0;
+  QFormLayout *q_form         = 0;
+  QSlider     *q_massSlider   = 0;
+  QComboBox   *q_starSelector = 0;
+  QLineEdit   *q_massEdit     = 0;
+
   QGroupBox *createStarFieldGroup();
   QGroupBox *createStarSelectorGroup();
+
+ public:
+  SetupWindow();
+  void init();
 };

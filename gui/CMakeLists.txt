@@ -1,4 +1,5 @@
 # GUI
+cmake_minimum_required (VERSION 3.10.0)
 
 set (CMAKE_AUTOMOC ON)
 set (CMAKE_AUTOMOC_RELAXED_MODE ON)
