@@ -6,44 +6,58 @@ using namespace QtDataVisualization;
 
 int main(int ac, char* av[]) {
   QApplication app(ac, av); 
-  auto window = new SetupWindow();
+  auto window = new StarConfig();
   
   window->init(); 
   return app.exec();
 }
 
 
-SetupWindow::SetupWindow()    
-    : q_graph(new Q3DScatter()),
-      q_container(QWidget::createWindowContainer(q_graph)),
-      QWidget(q_container),
-      q_hLayout(new QHBoxLayout(this)),
-      q_vLayout(new QVBoxLayout()) {
-  
+StarConfig::StarConfig()
+{
+  createGraph();
+  createContainer();
+  createWidget();
+}
+
+Q3DScatter *StarConfig::createGraph() {
+  q_graph = new Q3DScatter();
   if (!q_graph->hasContext()) {
     QMessageBox msgBox;
     msgBox.setText("Couldn't initialize the OpenGL context.");
     msgBox.exec();
     std::exit(-1);
   }
-
-  q_hLayout->addWidget(q_container, 1);
-  q_hLayout->addLayout(q_vLayout);
+  return q_graph;
 }
 
-void SetupWindow::init() {
-  setWindowTitle(QStringLiteral("Mitchell Gravity Set, 4th Generation"));
+QWidget *StarConfig::createContainer() {
+  q_container = QWidget::createWindowContainer(q_graph);
+  
+  QSize screenSize = q_graph->screen()->size();
+  q_container->setMinimumSize(QSize(screenSize.width() / 2, screenSize.height() / 1.5));
+  q_container->setMaximumSize(screenSize);
+  q_container->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+  q_container->setFocusPolicy(Qt::StrongFocus);
+  
+  return q_container;
+}
+
+QWidget *StarConfig::createWidget() {
+  q_widget = new QWidget();
+  q_hLayout = new QHBoxLayout(q_widget);
+  q_vLayout = new QVBoxLayout();
+  q_hLayout->addWidget(q_container, 1);
+  q_hLayout->addLayout(q_vLayout);
+  return q_widget;
+}
+
+void StarConfig::init() {
+  q_widget->setWindowTitle(QStringLiteral("Mitchell Gravity Set, 4th Generation"));
   {
     auto sgGroup = createStarFieldGroup();
     auto ssgGroup = createStarSelectorGroup();
 
-    {
-      QSize screenSize = q_graph->screen()->size();
-      q_container->setMinimumSize(QSize(screenSize.width() / 2, screenSize.height() / 1.5));
-      q_container->setMaximumSize(screenSize);
-      q_container->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-      q_container->setFocusPolicy(Qt::StrongFocus);
-    }
 
     q_sfGroup = createStarFieldGroup();
     {
@@ -52,7 +66,7 @@ void SetupWindow::init() {
     
     q_ssGroup = createStarSelectorGroup();
     
-    QSlider *fieldLinesSlider = new QSlider(Qt::Horizontal, this);
+    QSlider *fieldLinesSlider = new QSlider(Qt::Horizontal, q_widget);
     {
       fieldLinesSlider->setTickInterval(1);
       fieldLinesSlider->setMinimum(1);
@@ -60,7 +74,7 @@ void SetupWindow::init() {
       fieldLinesSlider->setMaximum(128);
     }
     
-    auto arrowsSlider = new QSlider(Qt::Horizontal, this);
+    auto arrowsSlider = new QSlider(Qt::Horizontal, q_widget);
     {
       arrowsSlider->setTickInterval(1);
       arrowsSlider->setMinimum(8);
@@ -68,13 +82,13 @@ void SetupWindow::init() {
       arrowsSlider->setMaximum(32);
     }
     
-    QPushButton *toggleRotationButton = new QPushButton(this);
+    QPushButton *toggleRotationButton = new QPushButton(q_widget);
     {
       toggleRotationButton->setText(QStringLiteral("Toggle animation"));
       q_vLayout->addWidget(toggleRotationButton);
     }
 
-    QPushButton *toggleSunButton = new QPushButton(this);
+    QPushButton *toggleSunButton = new QPushButton(q_widget);
     {
       toggleSunButton->setText(QStringLiteral("Toggle Sun"));
       q_vLayout->addWidget(toggleSunButton);
@@ -98,15 +112,15 @@ void SetupWindow::init() {
       QObject::connect(arrowsSlider, &QSlider::valueChanged, modifier,        &StarField::setArrowsPerLine);
     }
     
-    show();
+    q_widget->show();
   }
 }
 
-QGroupBox* SetupWindow::createStarFieldGroup() {
+QGroupBox* StarConfig::createStarFieldGroup() {
   auto groupBox = new QGroupBox(QStringLiteral("Stars"));
   {
     q_form = new QFormLayout;
-    q_massSlider = new QSlider(Qt::Horizontal, this);
+    q_massSlider = new QSlider(Qt::Horizontal, q_widget);
     q_starSelector = new QComboBox();
     q_massEdit = new QLineEdit();
     q_starPosXEdit = new QLineEdit();
@@ -149,5 +163,5 @@ QGroupBox* SetupWindow::createStarFieldGroup() {
   return groupBox;
 }
 
-QGroupBox* SetupWindow::createStarSelectorGroup() {
+QGroupBox* StarConfig::createStarSelectorGroup() {
 }

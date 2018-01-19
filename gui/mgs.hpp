@@ -19,12 +19,13 @@
 
 #include "starfield.hpp"
 
-class SetupWindow : public QWidget
+class StarConfig : public QObject
 {
   Q_OBJECT;
 
   Q3DScatter  *q_graph        = 0;
   QWidget     *q_container    = 0;
+  QWidget     *q_widget       = 0;
 
   QHBoxLayout *q_hLayout      = 0;
   QVBoxLayout *q_vLayout      = 0;
@@ -40,11 +41,14 @@ class SetupWindow : public QWidget
   
   QGroupBox   *q_sfGroup      = 0;
   QGroupBox   *q_ssGroup      = 0;
-  
+
+  Q3DScatter *createGraph();
+  QWidget *createContainer();
+  QWidget *createWidget();
   QGroupBox *createStarFieldGroup();
   QGroupBox *createStarSelectorGroup();
 
  public:
-  SetupWindow();
+  StarConfig();
   void init();
 };
