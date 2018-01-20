@@ -23,24 +23,29 @@ class StarConfig : public QObject
 {
   Q_OBJECT;
 
-  Q3DScatter  *q_graph        = 0;
-  QWidget     *q_container    = 0;
-  QWidget     *q_widget       = 0;
+  Q3DScatter  *q_graph            = 0;
+  QWidget     *q_container        = 0;
+  QWidget     *q_widget           = 0;
+    
+  QHBoxLayout *q_windowLayout     = 0;
+  QVBoxLayout *q_vLayout          = 0;
+  QVBoxLayout *q_starVisualsLayout = 0;
+  QHBoxLayout *q_starArrangementLayout = 0;
+  QFormLayout *q_form             = 0;
+  QHBoxLayout *q_starConfigLayout = 0;
 
-  QHBoxLayout *q_hLayout      = 0;
-  QVBoxLayout *q_vLayout      = 0;
-  QFormLayout *q_form         = 0;
-  QSlider     *q_massSlider   = 0;
-  QComboBox   *q_starSelector = 0;
-  QLineEdit   *q_massEdit     = 0;
+  QSlider     *q_massSlider       = 0;
+  QComboBox   *q_starSelector     = 0;
+  QLineEdit   *q_massEdit         = 0;
+    
+  QLineEdit   *q_starPosXEdit     = 0;
+  QLineEdit   *q_starPosYEdit     = 0;
+  QLineEdit   *q_starPosZEdit     = 0;
 
-  QLineEdit   *q_starPosXEdit = 0;
-  QLineEdit   *q_starPosYEdit = 0;
-  QLineEdit   *q_starPosZEdit = 0;
-
-  
-  QGroupBox   *q_sfGroup      = 0;
-  QGroupBox   *q_ssGroup      = 0;
+  std::list<QPushButton *> q_starSelectButtons;
+      
+  QGroupBox   *q_sfGroup          = 0;
+  QGroupBox   *q_ssGroup          = 0;
 
   Q3DScatter *createGraph();
   QWidget *createContainer();

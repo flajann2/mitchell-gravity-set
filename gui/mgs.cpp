@@ -45,10 +45,16 @@ QWidget *StarConfig::createContainer() {
 
 QWidget *StarConfig::createWidget() {
   q_widget = new QWidget();
-  q_hLayout = new QHBoxLayout(q_widget);
+  q_windowLayout = new QHBoxLayout(q_widget);
   q_vLayout = new QVBoxLayout();
-  q_hLayout->addWidget(q_container, 1);
-  q_hLayout->addLayout(q_vLayout);
+  q_starVisualsLayout = new QVBoxLayout();
+  q_starArrangementLayout = new QHBoxLayout();
+  q_starConfigLayout = new QHBoxLayout();
+
+  q_starVisualsLayout->addLayout(q_starArrangementLayout);
+  q_starVisualsLayout->addWidget(q_container, 1);
+  q_windowLayout->addLayout(q_starVisualsLayout);
+  q_windowLayout->addLayout(q_vLayout);
   return q_widget;
 }
 
@@ -164,4 +170,16 @@ QGroupBox* StarConfig::createStarFieldGroup() {
 }
 
 QGroupBox* StarConfig::createStarSelectorGroup() {
+  auto groupBox = new QGroupBox(QStringLiteral("Star Configs"));
+  {
+    q_starConfigLayout = new QHBoxLayout;
+    QPushButton *button = new QPushButton(q_widget);
+    {
+      button->setText(QStringLiteral("Tetra"));
+      q_starArrangementLayout->addWidget(button);
+      q_starSelectButtons.push_back(button);
+    }
+    
+  }
+  return groupBox;
 }
