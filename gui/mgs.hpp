@@ -25,10 +25,13 @@ class StarConfig : public QObject
 
   Q3DScatter  *q_graph        = 0;
   QWidget     *q_container    = 0;
-  QWidget     *q_widget       = 0;
+  QWidget     *q_window       = 0;
 
   QHBoxLayout *q_hLayout      = 0;
-  QVBoxLayout *q_vLayout      = 0;
+  QVBoxLayout *q_starLayout   = 0;
+  QHBoxLayout *q_starQuickLayout = 0;
+  QVBoxLayout *q_configLayout = 0;
+  
   QFormLayout *q_form         = 0;
   QSlider     *q_massSlider   = 0;
   QComboBox   *q_starSelector = 0;
@@ -44,9 +47,10 @@ class StarConfig : public QObject
 
   Q3DScatter *createGraph();
   QWidget *createContainer();
-  QWidget *createWidget();
+  QWidget *createWindow();
   QGroupBox *createStarFieldGroup();
   QGroupBox *createStarSelectorGroup();
+  std::list<Q
 
  public:
   StarConfig();

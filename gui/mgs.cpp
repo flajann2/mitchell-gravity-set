@@ -17,7 +17,7 @@ StarConfig::StarConfig()
 {
   createGraph();
   createContainer();
-  createWidget();
+  createWindow();
 }
 
 Q3DScatter *StarConfig::createGraph() {
@@ -43,30 +43,35 @@ QWidget *StarConfig::createContainer() {
   return q_container;
 }
 
-QWidget *StarConfig::createWidget() {
-  q_widget = new QWidget();
-  q_hLayout = new QHBoxLayout(q_widget);
-  q_vLayout = new QVBoxLayout();
-  q_hLayout->addWidget(q_container, 1);
-  q_hLayout->addLayout(q_vLayout);
-  return q_widget;
+QWidget *StarConfig::createWindow() {
+  q_window = new QWidget();
+
+  q_hLayout = new QHBoxLayout(q_window);
+  q_configLayout = new QVBoxLayout();
+  q_starLayout = new QVBoxLayout();
+  q_starQuickLayout = new QHBoxLayout();
+
+  q_starLayout->addLayout(q_starQuickLayout);
+  q_starLayout->addWidget(q_container, 1);
+  q_hLayout->addLayout(q_starLayout);
+  q_hLayout->addLayout(q_configLayout);
+  return q_window;
 }
 
 void StarConfig::init() {
-  q_widget->setWindowTitle(QStringLiteral("Mitchell Gravity Set, 4th Generation"));
+  q_window->setWindowTitle(QStringLiteral("Mitchell Gravity Set, 4th Generation"));
   {
     auto sgGroup = createStarFieldGroup();
     auto ssgGroup = createStarSelectorGroup();
 
-
     q_sfGroup = createStarFieldGroup();
     {
-      q_vLayout->addWidget(q_sfGroup);
+      q_configLayout->addWidget(q_sfGroup);
     }
     
     q_ssGroup = createStarSelectorGroup();
     
-    QSlider *fieldLinesSlider = new QSlider(Qt::Horizontal, q_widget);
+    QSlider *fieldLinesSlider = new QSlider(Qt::Horizontal, q_window);
     {
       fieldLinesSlider->setTickInterval(1);
       fieldLinesSlider->setMinimum(1);
@@ -74,7 +79,7 @@ void StarConfig::init() {
       fieldLinesSlider->setMaximum(128);
     }
     
-    auto arrowsSlider = new QSlider(Qt::Horizontal, q_widget);
+    auto arrowsSlider = new QSlider(Qt::Horizontal, q_window);
     {
       arrowsSlider->setTickInterval(1);
       arrowsSlider->setMinimum(8);
@@ -82,26 +87,26 @@ void StarConfig::init() {
       arrowsSlider->setMaximum(32);
     }
     
-    QPushButton *toggleRotationButton = new QPushButton(q_widget);
+    QPushButton *toggleRotationButton = new QPushButton(q_window);
     {
       toggleRotationButton->setText(QStringLiteral("Toggle animation"));
-      q_vLayout->addWidget(toggleRotationButton);
+      q_configLayout->addWidget(toggleRotationButton);
     }
 
-    QPushButton *toggleSunButton = new QPushButton(q_widget);
+    QPushButton *toggleSunButton = new QPushButton(q_window);
     {
       toggleSunButton->setText(QStringLiteral("Toggle Sun"));
-      q_vLayout->addWidget(toggleSunButton);
+      q_configLayout->addWidget(toggleSunButton);
     }
 
     {
-      q_vLayout->addWidget(new QLabel(QStringLiteral("Field Lines (1 - 128):")));
-      q_vLayout->addWidget(fieldLinesSlider);
+      q_configLayout->addWidget(new QLabel(QStringLiteral("Field Lines (1 - 128):")));
+      q_configLayout->addWidget(fieldLinesSlider);
     }
 
     {
-      q_vLayout->addWidget(new QLabel(QStringLiteral("Arrows per line (8 - 32):")));
-      q_vLayout->addWidget(arrowsSlider, 1, Qt::AlignTop);
+      q_configLayout->addWidget(new QLabel(QStringLiteral("Arrows per line (8 - 32):")));
+      q_configLayout->addWidget(arrowsSlider, 1, Qt::AlignTop);
     }
     
     StarField *modifier = new StarField(q_graph);
@@ -112,7 +117,7 @@ void StarConfig::init() {
       QObject::connect(arrowsSlider, &QSlider::valueChanged, modifier,        &StarField::setArrowsPerLine);
     }
     
-    q_widget->show();
+    q_window->show();
   }
 }
 
@@ -120,7 +125,7 @@ QGroupBox* StarConfig::createStarFieldGroup() {
   auto groupBox = new QGroupBox(QStringLiteral("Stars"));
   {
     q_form = new QFormLayout;
-    q_massSlider = new QSlider(Qt::Horizontal, q_widget);
+    q_massSlider = new QSlider(Qt::Horizontal, q_window);
     q_starSelector = new QComboBox();
     q_massEdit = new QLineEdit();
     q_starPosXEdit = new QLineEdit();
