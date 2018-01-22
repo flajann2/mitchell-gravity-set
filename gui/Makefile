@@ -240,6 +240,33 @@ mgs_autogen/mocs_compilation.cpp.s:
 	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/mgs_autogen/mocs_compilation.cpp.s
 .PHONY : mgs_autogen/mocs_compilation.cpp.s
 
+starconfig.o: starconfig.cpp.o
+
+.PHONY : starconfig.o
+
+# target to build an object file
+starconfig.cpp.o:
+	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/starconfig.cpp.o
+.PHONY : starconfig.cpp.o
+
+starconfig.i: starconfig.cpp.i
+
+.PHONY : starconfig.i
+
+# target to preprocess a source file
+starconfig.cpp.i:
+	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/starconfig.cpp.i
+.PHONY : starconfig.cpp.i
+
+starconfig.s: starconfig.cpp.s
+
+.PHONY : starconfig.s
+
+# target to generate assembly for a file
+starconfig.cpp.s:
+	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/starconfig.cpp.s
+.PHONY : starconfig.cpp.s
+
 starfield.o: starfield.cpp.o
 
 .PHONY : starfield.o
@@ -287,6 +314,9 @@ help:
 	@echo "... mgs_autogen/mocs_compilation.o"
 	@echo "... mgs_autogen/mocs_compilation.i"
 	@echo "... mgs_autogen/mocs_compilation.s"
+	@echo "... starconfig.o"
+	@echo "... starconfig.i"
+	@echo "... starconfig.s"
 	@echo "... starfield.o"
 	@echo "... starfield.i"
 	@echo "... starfield.s"
