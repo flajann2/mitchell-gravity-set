@@ -11,7 +11,7 @@ StarConfig::StarConfig()
 
 Q3DScatter *StarConfig::createGraph() {
   q_graph = new Q3DScatter();
-  if (!q_graph->hasContext()) {
+  if (auto foo = 0; !q_graph->hasContext()) {
     QMessageBox msgBox;
     msgBox.setText("Couldn't initialize the OpenGL context.");
     msgBox.exec();

@@ -1,6 +1,8 @@
 # GUI
 cmake_minimum_required (VERSION 3.10.0)
 
+set (CMAKE_CXX_STANDARD 17)
+
 set (CMAKE_AUTOMOC ON)
 set (CMAKE_AUTOMOC_RELAXED_MODE ON)
 set (QT_VERSION_REQ "5.10")

@@ -19,7 +19,7 @@ CMAKE_AR:FILEPATH=/usr/bin/ar
 
 //Choose the type of build, options are: None(CMAKE_CXX_FLAGS or
 // CMAKE_C_FLAGS used) Debug Release RelWithDebInfo MinSizeRel.
-CMAKE_BUILD_TYPE:STRING=Debug
+CMAKE_BUILD_TYPE:STRING=
 
 //Enable/Disable color output during build.
 CMAKE_COLOR_MAKEFILE:BOOL=ON
@@ -27,40 +27,38 @@ CMAKE_COLOR_MAKEFILE:BOOL=ON
 //CXX compiler
 CMAKE_CXX_COMPILER:FILEPATH=/usr/bin/c++
 
-//A wrapper around 'ar' adding the appropriate '--plugin' option
-// for the GCC compiler
-CMAKE_CXX_COMPILER_AR:FILEPATH=/usr/bin/gcc-ar-6
+//LLVM archiver
+CMAKE_CXX_COMPILER_AR:FILEPATH=/usr/bin/llvm-ar-4.0
 
-//A wrapper around 'ranlib' adding the appropriate '--plugin' option
-// for the GCC compiler
-CMAKE_CXX_COMPILER_RANLIB:FILEPATH=/usr/bin/gcc-ranlib-6
+//Generate index for LLVM archive
+CMAKE_CXX_COMPILER_RANLIB:FILEPATH=/usr/bin/llvm-ranlib-4.0
 
 //Flags used by the compiler during all build types.
 CMAKE_CXX_FLAGS:STRING=
 
 //Flags used by the compiler during debug builds.
-CMAKE_CXX_FLAGS_DEBUG:STRING=-g
+CMAKE_CXX_FLAGS_DEBUG:STRING=
 
 //Flags used by the compiler during release builds for minimum
 // size.
-CMAKE_CXX_FLAGS_MINSIZEREL:STRING=-Os -DNDEBUG
+CMAKE_CXX_FLAGS_MINSIZEREL:STRING=
 
 //Flags used by the compiler during release builds.
-CMAKE_CXX_FLAGS_RELEASE:STRING=-O3 -DNDEBUG
+CMAKE_CXX_FLAGS_RELEASE:STRING=
 
 //Flags used by the compiler during release builds with debug info.
-CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
+CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=
 
 //C compiler
 CMAKE_C_COMPILER:FILEPATH=/usr/bin/cc
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
-CMAKE_C_COMPILER_AR:FILEPATH=/usr/bin/gcc-ar-6
+CMAKE_C_COMPILER_AR:FILEPATH=/usr/bin/gcc-ar-7
 
 //A wrapper around 'ranlib' adding the appropriate '--plugin' option
 // for the GCC compiler
-CMAKE_C_COMPILER_RANLIB:FILEPATH=/usr/bin/gcc-ranlib-6
+CMAKE_C_COMPILER_RANLIB:FILEPATH=/usr/bin/gcc-ranlib-7
 
 //Flags used by the compiler during all build types.
 CMAKE_C_FLAGS:STRING=
@@ -95,15 +93,6 @@ CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 
 //Enable/Disable output of compile commands during generation.
 CMAKE_EXPORT_COMPILE_COMMANDS:BOOL=OFF
-
-//No help, variable specified on the command line.
-CMAKE_FIND_PACKAGE_NO_PACKAGE_REGISTRY:UNINITIALIZED=true
-
-//No help, variable specified on the command line.
-CMAKE_FIND_PACKAGE_NO_SYSTEM_PACKAGE_REGISTRY:UNINITIALIZED=true
-
-//No help, variable specified on the command line.
-CMAKE_FIND_ROOT_PATH:UNINITIALIZED=/opt/Qt5.10.0/5.10.0/gcc_64/lib/
 
 //Install path prefix, prepended onto install directories.
 CMAKE_INSTALL_PREFIX:PATH=/usr/local
@@ -187,34 +176,11 @@ CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 //Path to a program.
 CMAKE_STRIP:FILEPATH=/usr/bin/strip
 
-//No help, variable specified on the command line.
-CMAKE_SYSROOT_PATH:UNINITIALIZED=~/Qt5.9.3./5.9.3/gcc_64/lib/cmake
-
-//No help, variable specified on the command line.
-CMAKE_SYSTEM_PREFIX_PATH:UNINITIALIZED=/home/alveric/Qt5.9.3./5.9.3/gcc_64/lib/cmake
-
 //If this value is on, makefiles will be generated without the
 // .SILENT directive, and all commands will be echoed to the console
 // during the make.  This is useful for debugging only. With Visual
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
-
-//Value Computed by CMake
-MGS_COMPUTE_BINARY_DIR:STATIC=/development/cpp_proj/gravity-set-compute
-
-//Value Computed by CMake
-MGS_COMPUTE_SOURCE_DIR:STATIC=/development/cpp_proj/gravity-set-compute
-
-//Path to a file.
-QT3_QGLOBAL_H_FILE:FILEPATH=QT3_QGLOBAL_H_FILE-NOTFOUND
-
-//Path to a file.
-QT4_QGLOBAL_H_FILE:FILEPATH=QT4_QGLOBAL_H_FILE-NOTFOUND
-
-QT_QMAKE_EXECUTABLE:FILEPATH=/usr/bin/qmake
-
-//Path to a program.
-QT_QMAKE_EXECUTABLE_FINDQT:FILEPATH=/usr/bin/qmake
 
 //The directory containing a CMake configuration file for Qt5Core.
 Qt5Core_DIR:PATH=/opt/Qt5.10.0/5.10.0/gcc_64/lib/cmake/Qt5Core
@@ -222,26 +188,8 @@ Qt5Core_DIR:PATH=/opt/Qt5.10.0/5.10.0/gcc_64/lib/cmake/Qt5Core
 //The directory containing a CMake configuration file for Qt5DataVisualization.
 Qt5DataVisualization_DIR:PATH=/opt/Qt5.10.0/5.10.0/gcc_64/lib/cmake/Qt5DataVisualization
 
-//The directory containing a CMake configuration file for Qt5Data.
-Qt5Data_DIR:PATH=Qt5Data_DIR-NOTFOUND
-
 //The directory containing a CMake configuration file for Qt5Gui.
 Qt5Gui_DIR:PATH=/opt/Qt5.10.0/5.10.0/gcc_64/lib/cmake/Qt5Gui
-
-//The directory containing a CMake configuration file for Qt5Network.
-Qt5Network_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Network
-
-//The directory containing a CMake configuration file for Qt5Qml.
-Qt5Qml_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/Qt5Qml
-
-//The directory containing a CMake configuration file for Qt5QtGui.
-Qt5QtGui_DIR:PATH=Qt5QtGui_DIR-NOTFOUND
-
-//The directory containing a CMake configuration file for Qt5Quick.
-Qt5Quick_DIR:PATH=Qt5Quick_DIR-NOTFOUND
-
-//The directory containing a CMake configuration file for Qt5Visualization.
-Qt5Visualization_DIR:PATH=Qt5Visualization_DIR-NOTFOUND
 
 //The directory containing a CMake configuration file for Qt5Widgets.
 Qt5Widgets_DIR:PATH=/opt/Qt5.10.0/5.10.0/gcc_64/lib/cmake/Qt5Widgets
@@ -249,35 +197,11 @@ Qt5Widgets_DIR:PATH=/opt/Qt5.10.0/5.10.0/gcc_64/lib/cmake/Qt5Widgets
 //The directory containing a CMake configuration file for Qt5.
 Qt5_DIR:PATH=/opt/Qt5.10.0/5.10.0/gcc_64/lib/cmake/Qt5
 
-//The directory containing a CMake configuration file for QtGui.
-QtGui_DIR:PATH=QtGui_DIR-NOTFOUND
-
-//The directory containing a CMake configuration file for QtOpenGL.
-QtOpenGL_DIR:PATH=QtOpenGL_DIR-NOTFOUND
-
-//The directory containing a CMake configuration file for QtQml.
-QtQml_DIR:PATH=QtQml_DIR-NOTFOUND
-
-//The directory containing a CMake configuration file for Qtxxx.
-Qtxxx_DIR:PATH=Qtxxx_DIR-NOTFOUND
-
-//Dependencies for target
-compute_LIB_DEPENDS:STATIC=
-
-//Dependencies for target
-mgs-compute_LIB_DEPENDS:STATIC=
-
 //Value Computed by CMake
 mgs_BINARY_DIR:STATIC=/home/alveric/development/cpp_proj/gravity-set-compute
 
 //Value Computed by CMake
 mgs_SOURCE_DIR:STATIC=/home/alveric/development/cpp_proj/gravity-set-compute
-
-//Value Computed by CMake
-mgs_compute_BINARY_DIR:STATIC=/development/cpp_proj/gravity-set-compute
-
-//Value Computed by CMake
-mgs_compute_SOURCE_DIR:STATIC=/development/cpp_proj/gravity-set-compute
 
 //Dependencies for target
 mgscompute_LIB_DEPENDS:STATIC=
@@ -363,7 +287,7 @@ CMAKE_GENERATOR_PLATFORM:INTERNAL=
 CMAKE_GENERATOR_TOOLSET:INTERNAL=
 //Source directory with the top level CMakeLists.txt file for this
 // project
-CMAKE_HOME_DIRECTORY:INTERNAL=/development/cpp_proj/gravity-set-compute
+CMAKE_HOME_DIRECTORY:INTERNAL=/home/alveric/development/cpp_proj/gravity-set-compute
 //Install .so files without execute permission.
 CMAKE_INSTALL_SO_NO_EXE:INTERNAL=1
 //ADVANCED property for variable: CMAKE_LINKER
@@ -424,10 +348,4 @@ CMAKE_STRIP-ADVANCED:INTERNAL=1
 CMAKE_UNAME:INTERNAL=/bin/uname
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: QT3_QGLOBAL_H_FILE
-QT3_QGLOBAL_H_FILE-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: QT4_QGLOBAL_H_FILE
-QT4_QGLOBAL_H_FILE-ADVANCED:INTERNAL=1
-//ADVANCED property for variable: QT_QMAKE_EXECUTABLE_FINDQT
-QT_QMAKE_EXECUTABLE_FINDQT-ADVANCED:INTERNAL=1
 
