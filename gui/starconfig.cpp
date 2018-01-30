@@ -161,11 +161,11 @@ namespace mgs
   };
     
   static const std::list star_configs {
-    SCB {"Tetra", "tetra.svg"},
-    SCB {"Octa", "octa.svg"},
-    SCB {"Cube", "cube.svg"},
-    SCB {"Dodec", "dodec.svg"},
-    SCB {"Icosa", "icosa.svg"},
+    SCB {"Tetrahedron", "tetrahedron.svg"},
+    SCB {"Octahedron",  "octahedron.svg"},
+    SCB {"Cube",  "hexahedron.svg"},
+    SCB {"Dodecahedron", "dodecahedron.svg"},
+    SCB {"Icosahedron", "icosahedron.svg"},
   };
   
   QGroupBox* StarConfig::createStarSelectorGroup() {
@@ -173,12 +173,11 @@ namespace mgs
     {
       q_starConfigLayout = new QHBoxLayout;
       for (auto scb : star_configs) {
-        auto button = new QPushButton(QString::fromStdString(scb.name), q_widget);
-        {
-          //button->setText(scb.name);
-          q_starArrangementLayout->addWidget(button);
-          q_starSelectButtons.push_back(button);
-        }
+        auto button = new QPushButton(QIcon(QString::fromStdString(asset_dir + scb.icon_file)),
+                                      QString::fromStdString(scb.name), q_widget);
+        
+        q_starArrangementLayout->addWidget(button);
+        q_starSelectButtons.push_back(button);
       }
       
     }
