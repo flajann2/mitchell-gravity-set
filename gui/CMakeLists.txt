@@ -46,6 +46,4 @@ target_link_libraries(mgs
 
 add_custom_command(TARGET mgs PRE_BUILD
   COMMAND ${CMAKE_COMMAND} -E copy_directory
-  ${CMAKE_SOURCE_DIR}/gui/mesh $<TARGET_FILE_DIR:mgs>/mesh)
-
-# target_link_libraries(mgs mgscompute)
+  ${CMAKE_SOURCE_DIR}/gui/assets $<TARGET_FILE_DIR:mgs>/assets)
