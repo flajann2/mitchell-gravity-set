@@ -18,6 +18,7 @@ namespace mgs
       msgBox.exec();
       std::exit(-1);
     }
+    q_sfield = new StarField(q_graph);
     return q_graph;
   }
   
@@ -96,12 +97,12 @@ namespace mgs
         q_vLayout->addWidget(arrowsSlider, 1, Qt::AlignTop);
       }
       
-      StarField *modifier = new StarField(q_graph);
+
       {
-        QObject::connect(toggleRotationButton, &QPushButton::clicked, modifier, &StarField::toggleRotation);
-        QObject::connect(toggleSunButton, &QPushButton::clicked, modifier,      &StarField::toggleSun);
-        QObject::connect(fieldLinesSlider, &QSlider::valueChanged, modifier,    &StarField::setFieldLines);
-        QObject::connect(arrowsSlider, &QSlider::valueChanged, modifier,        &StarField::setArrowsPerLine);
+        QObject::connect(toggleRotationButton, &QPushButton::clicked, q_sfield, &StarField::toggleRotation);
+        QObject::connect(toggleSunButton, &QPushButton::clicked, q_sfield,      &StarField::toggleSun);
+        QObject::connect(fieldLinesSlider, &QSlider::valueChanged, q_sfield,    &StarField::setFieldLines);
+        QObject::connect(arrowsSlider, &QSlider::valueChanged, q_sfield,        &StarField::setArrowsPerLine);
       }
       
       q_widget->show();
@@ -155,17 +156,20 @@ namespace mgs
     return groupBox;
   }
 
+  typedef void (StarField::*SlotMF)();
+  
   struct SCB {
     std::string name;
     std::string icon_file;
+    SlotMF slot;
   };
     
   static const std::list star_configs {
-    SCB {"Tetrahedron", "tetrahedron.svg"},
-    SCB {"Octahedron",  "octahedron.svg"},
-    SCB {"Cube",  "hexahedron.svg"},
-    SCB {"Dodecahedron", "dodecahedron.svg"},
-    SCB {"Icosahedron", "icosahedron.svg"},
+    SCB {"Tetrahedron", "tetrahedron.svg",  &StarField::sl_make_tetrahedron},
+    SCB {"Octahedron",  "octahedron.svg",   &StarField::sl_make_octahedron},
+    SCB {"Cube",        "hexahedron.svg",   &StarField::sl_make_hexahedron},
+    SCB {"Dodecahedron","dodecahedron.svg", &StarField::sl_make_dodecahedron},
+    SCB {"Icosahedron", "icosahedron.svg",  &StarField::sl_make_icosahedron},
   };
   
   QGroupBox* StarConfig::createStarSelectorGroup() {
@@ -178,6 +182,8 @@ namespace mgs
         
         q_starArrangementLayout->addWidget(button);
         q_starSelectButtons.push_back(button);
+        QObject::connect(button, &QPushButton::clicked, q_sfield, scb.slot);
+
       }
       
     }

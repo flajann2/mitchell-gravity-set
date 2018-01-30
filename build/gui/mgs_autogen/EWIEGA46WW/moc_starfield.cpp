@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_mgs__StarField_t {
-    QByteArrayData data[9];
-    char stringdata0[101];
+    QByteArrayData data[16];
+    char stringdata0[222];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -39,12 +39,22 @@ QT_MOC_LITERAL(4, 36, 16), // "setArrowsPerLine"
 QT_MOC_LITERAL(5, 53, 6), // "arrows"
 QT_MOC_LITERAL(6, 60, 14), // "toggleRotation"
 QT_MOC_LITERAL(7, 75, 15), // "triggerRotation"
-QT_MOC_LITERAL(8, 91, 9) // "toggleSun"
+QT_MOC_LITERAL(8, 91, 9), // "toggleSun"
+QT_MOC_LITERAL(9, 101, 15), // "sl_make_polygon"
+QT_MOC_LITERAL(10, 117, 5), // "stars"
+QT_MOC_LITERAL(11, 123, 19), // "sl_make_tetrahedron"
+QT_MOC_LITERAL(12, 143, 18), // "sl_make_octahedron"
+QT_MOC_LITERAL(13, 162, 18), // "sl_make_hexahedron"
+QT_MOC_LITERAL(14, 181, 20), // "sl_make_dodecahedron"
+QT_MOC_LITERAL(15, 202, 19) // "sl_make_icosahedron"
 
     },
     "mgs::StarField\0setFieldLines\0\0lines\0"
     "setArrowsPerLine\0arrows\0toggleRotation\0"
-    "triggerRotation\0toggleSun"
+    "triggerRotation\0toggleSun\0sl_make_polygon\0"
+    "stars\0sl_make_tetrahedron\0sl_make_octahedron\0"
+    "sl_make_hexahedron\0sl_make_dodecahedron\0"
+    "sl_make_icosahedron"
 };
 #undef QT_MOC_LITERAL
 
@@ -54,7 +64,7 @@ static const uint qt_meta_data_mgs__StarField[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+      11,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -62,15 +72,27 @@ static const uint qt_meta_data_mgs__StarField[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,   39,    2, 0x0a /* Public */,
-       4,    1,   42,    2, 0x0a /* Public */,
-       6,    0,   45,    2, 0x0a /* Public */,
-       7,    0,   46,    2, 0x0a /* Public */,
-       8,    0,   47,    2, 0x0a /* Public */,
+       1,    1,   69,    2, 0x0a /* Public */,
+       4,    1,   72,    2, 0x0a /* Public */,
+       6,    0,   75,    2, 0x0a /* Public */,
+       7,    0,   76,    2, 0x0a /* Public */,
+       8,    0,   77,    2, 0x0a /* Public */,
+       9,    1,   78,    2, 0x0a /* Public */,
+      11,    0,   81,    2, 0x0a /* Public */,
+      12,    0,   82,    2, 0x0a /* Public */,
+      13,    0,   83,    2, 0x0a /* Public */,
+      14,    0,   84,    2, 0x0a /* Public */,
+      15,    0,   85,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::Int,    3,
     QMetaType::Void, QMetaType::Int,    5,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,   10,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -89,6 +111,12 @@ void mgs::StarField::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
         case 2: _t->toggleRotation(); break;
         case 3: _t->triggerRotation(); break;
         case 4: _t->toggleSun(); break;
+        case 5: _t->sl_make_polygon((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 6: _t->sl_make_tetrahedron(); break;
+        case 7: _t->sl_make_octahedron(); break;
+        case 8: _t->sl_make_hexahedron(); break;
+        case 9: _t->sl_make_dodecahedron(); break;
+        case 10: _t->sl_make_icosahedron(); break;
         default: ;
         }
     }
@@ -119,13 +147,13 @@ int mgs::StarField::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 11)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 11;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 11)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 5;
+        _id -= 11;
     }
     return _id;
 }

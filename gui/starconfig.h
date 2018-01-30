@@ -48,13 +48,15 @@ namespace mgs
     
     QGroupBox   *q_sfGroup          = 0;
     QGroupBox   *q_ssGroup          = 0;
+
+    StarField   *q_sfield           = 0;
     
     Q3DScatter *createGraph();
     QWidget *createContainer();
     QWidget *createWidget();
     QGroupBox *createStarFieldGroup();
     QGroupBox *createStarSelectorGroup();
-    
+   
   public:
     StarConfig();
     void init();

@@ -166,4 +166,19 @@ namespace mgs
     else
       m_rotationTimer.start(15);
   }
+
+  void StarField::sl_make_polygon(int stars){}
+
+  void StarField::sl_make_tetrahedron() {
+    cout << "tetra" << endl;
+  }
+  
+  void StarField::sl_make_octahedron() {
+    cout << "octa" << endl;
+  }
+  
+  void StarField::sl_make_hexahedron(){}
+  void StarField::sl_make_dodecahedron(){}
+  void StarField::sl_make_icosahedron(){}
+  
 } // namespace mgs

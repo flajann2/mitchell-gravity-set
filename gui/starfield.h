@@ -30,7 +30,15 @@ namespace mgs
     void toggleRotation();
     void triggerRotation();
     void toggleSun();
-    
+
+    void sl_make_polygon(int stars);
+
+    void sl_make_tetrahedron();
+    void sl_make_octahedron();
+    void sl_make_hexahedron();
+    void sl_make_dodecahedron();
+    void sl_make_icosahedron();
+
   private:
     Q3DScatter *m_graph;
     QTimer m_rotationTimer;
