@@ -1,6 +1,6 @@
 #include <memory>
 #include <iostream>
-#include <compute.hpp>
+#include <compute.h>
 
 using namespace std;
 using namespace mgs;

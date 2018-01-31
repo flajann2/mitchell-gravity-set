@@ -23,6 +23,9 @@ namespace mgs
     ~StarField();
     
     void generateData();
+    void clearField();
+    void generateField();
+                       
                        
   public Q_SLOTS:
     void setFieldLines(int lines);

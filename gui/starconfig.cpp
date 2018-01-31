@@ -183,7 +183,6 @@ namespace mgs
         q_starArrangementLayout->addWidget(button);
         q_starSelectButtons.push_back(button);
         QObject::connect(button, &QPushButton::clicked, q_sfield, scb.slot);
-
       }
       
     }

@@ -78,7 +78,7 @@ namespace mgs
     delete m_graph;
   }
   
-  void StarField::generateData()
+  void StarField::generateData() // TODO: Delete me
   {
     // Reusing existing array is computationally cheaper than always generating new array, even if
     // all data items change in the array, if the array size doesn't change.
@@ -98,7 +98,10 @@ namespace mgs
       
       // Rotate - arrow always tangential to origin
       //! [0]
-      QQuaternion yRotation = QQuaternion::fromAxisAndAngle(0.0f, 1.0f, 0.0f, horizontalAngle * radiansToDegrees);
+      QQuaternion yRotation = QQuaternion::fromAxisAndAngle(0.0f,
+                                                            1.0f,
+                                                            0.0f,
+                                                            horizontalAngle * radiansToDegrees);
       //! [0]
       
       for (float j = 0; j < m_arrowsPerLine; j++) {
@@ -116,7 +119,10 @@ namespace mgs
         float z = zCenter + zRotated;
         
         //! [1]
-        QQuaternion zRotation = QQuaternion::fromAxisAndAngle(0.0f, 0.0f, 1.0f, verticalAngle * radiansToDegrees);
+        QQuaternion zRotation = QQuaternion::fromAxisAndAngle(0.0f,
+                                                              0.0f,
+                                                              1.0f,
+                                                              verticalAngle * radiansToDegrees);
         QQuaternion totalRotation = yRotation * zRotation;
         //! [1]
         
