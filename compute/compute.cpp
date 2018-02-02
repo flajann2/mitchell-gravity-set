@@ -5,28 +5,33 @@
 using namespace std;
 using namespace mgs;
 
-Index Field::coords2index(Vector& c) {
+template <typename T, typename I, typename P>
+Index Field<T,I,P>::coords2index(Coordinate& c) {
   cout << "**** You Rang??? ****" << endl;
   return Index{};
 }
 
-double Vector::norm() {
-  double nr = 0.0;
+template <typename T, typename I, typename P>
+T Vector<T,I,P>::norm() {
+  T nr = 0.0;
   for (auto v : vec) { nr += v * v; }
-  return double(sqrt(nr));
+  return T (sqrt(nr));
 }
 
-double Vector::norm_squared() {
-  double nr = 0.0;
+template <typename T, typename I, typename P>
+T Vector<T,I,P>::norm_squared() {
+  T nr = 0.0;
   for (auto v : vec) { nr += v * v; }
   return nr;
 }
 
-Vector Vector::unit_vector() {
+template <typename T, typename I, typename P>
+Vector<T,I,P> Vector<T,I,P>::unit_vector() {
   return *this / this->norm();
 }
 
-int16_t& Field::operator[](Index& idx) {
+template <typename T, typename I, typename P>
+I& Field<T,I,P>::operator[](Index& idx) {
   int16_t offset = 0;
   int16_t r = 1;
   for (auto v : idx.ijk) {
@@ -36,10 +41,10 @@ int16_t& Field::operator[](Index& idx) {
   return grid[offset];
 }
 
-
-Vector Field::compute_center_of_star_mass() {
+template <typename T, typename I, typename P>
+Position Field<T,I,P>::compute_center_of_star_mass() {
   double total_star_mass = 0.0;
-  Vector center_accum;
+  Position center_accum;
 
   for (auto star : stars) {
     total_star_mass += star.mass;
@@ -48,21 +53,23 @@ Vector Field::compute_center_of_star_mass() {
   return center_accum / total_star_mass;
 }
 
-void Field::render_with_callback(std::function<void(Index, Vector)> cb) {
+template <typename T, typename I, typename P>
+void Field<T,I,P>::render_with_callback(std::function<void(Index, Position)> cb) {
   center_of_star_mass = compute_center_of_star_mass();
 }
 
-int16_t Field::render_single_cell(const Vector& initial_p, const Vector& initial_v) {
+template <typename T, typename I, typename P>
+I Field<T,I,P>::render_single_cell(const Position& initial_p, const Velocity& initial_v) {
   auto v = initial_v;
   auto p = initial_p;
-  int16_t iter = 0;
+  I iter = 0;
 
   for (iter = 0; iter < iter_limit; ++iter) {
     if ((p - center_of_star_mass).norm() > escape_radius) {
       break;
     }
 
-    Vector a;
+    Acceleration a;
 
     // acceleration due to all the stars
     for (auto star : stars) { a += compute_acceleration(star, p); }
@@ -86,7 +93,8 @@ int16_t Field::render_single_cell(const Vector& initial_p, const Vector& initial
  * TODO: in the L1 or L2 cache. Also, how can this be
  * TODO: restructured so this can take advantage of SMID?
  */
-Vector Field::compute_acceleration(const Star& star, const Vector& fpm) const {
+template <typename T, typename I, typename P>
+Acceleration Field<T,I,P>::compute_acceleration(const Star& star, const Position& fpm) const {
   auto r_vec = fpm - star.position;
   auto r_squared = r_vec.norm_squared();
   auto r = sqrt(r_squared);
@@ -94,3 +102,8 @@ Vector Field::compute_acceleration(const Star& star, const Vector& fpm) const {
   auto force = (-gravitational_constant) * star.mass / r_squared;
   return unit_vec * force;
 }
+
+//extern "C++" {
+template struct Field<double, std::int16_t, struct FieldParm>;
+//};
+

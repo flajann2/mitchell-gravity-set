@@ -1,5 +1,5 @@
 #include <iostream>
-#include <compute.hpp>
+#include <compute.h>
 #include <string>
 #include <sstream>
 
@@ -13,8 +13,8 @@ void pr_coord(auto prefix, auto c) {
 }
 
 void test_field() {
-  Vector c {0.44, -0.95, 1};
-  Field f(Vector{-1,-1,-1}, Vector{1,1,1}, 32, 3);
+  Coordinate c {0.44, -0.95, 1};
+  StarField f(Coordinate{-1,-1,-1}, Coordinate{1,1,1}, 32, 3);
   cout << "cube_size " << f.cube_size << endl;
   cout << "actual size " << f.grid.size() << endl;
   for (auto k = 0; k < f.cube_size; ++k) {
@@ -35,14 +35,14 @@ void test_field() {
 }
 
 void test_math_on_Vector() {
-  Vector p1 {-1, 1, 0};
-  Vector p2 {1, -1, 2};
+  Position p1 {-1, 1, 0};
+  Position p2 {1, -1, 2};
 
   cout << "math on Vector: " << p1 << " and " << p2 << endl;
-  Vector padded = p1 + p2;
-  Vector psubbed = p1 - p2;
-  Vector doub = p1 * 2.0;
-  Vector halved = p1 / 2.0;
+  Position padded = p1 + p2;
+  Position psubbed = p1 - p2;
+  Position doub = p1 * 2.0;
+  Position halved = p1 / 2.0;
   
   cout << "results:" << endl;
   cout << "added: " << padded << endl;
@@ -53,9 +53,9 @@ void test_math_on_Vector() {
 
 int main(int ac, char* av[]) {
   double s = 32.2;
-  Vector c {3, 2.3, 22};
-  Vector cc;
-  Vector p {0.01, 5.53, -34.1};
+  Position c {3, 2.3, 22};
+  Position cc;
+  Position p {0.01, 5.53, -34.1};
   
   ostringstream cstr;
   cstr << s;
