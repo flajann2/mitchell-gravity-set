@@ -74,8 +74,7 @@ I Field<T,I,P>::render_single_cell(const Position& initial_p, const Velocity& in
     // acceleration due to all the stars
     for (auto star : stars) { a += compute_acceleration(star, p); }
     v += a * delta_t;
-    p += v * delta_t;
-    
+    p += v * delta_t;    
   }
   return iter;
 }
@@ -103,7 +102,8 @@ Acceleration Field<T,I,P>::compute_acceleration(const Star& star, const Position
   return unit_vec * force;
 }
 
-//extern "C++" {
+// so that StarField is instantiated in this library.
+// FIXME: This is a duplication of StarField.
 template struct Field<double, std::int16_t, struct FieldParm>;
-//};
+
 

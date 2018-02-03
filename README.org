@@ -11,8 +11,12 @@
   - [[#building-and-installing][Building and Installing]]
   - [[#using][Using]]
   - [[#contributing][Contributing]]
-  - [[#notes][Notes]]
+  - [[#personal-notes][Personal Notes]]
     - [[#debugging][Debugging]]
+    - [[#hpx-and-boost][HPX and Boost]]
+      - [[#boost][Boost]]
+        - [[#own-environment][Own Environment]]
+      - [[#hpx][HPX]]
 
 ** Synopsis
    This library computes the Mitchell Gravity Set. This
@@ -118,7 +122,13 @@
 ** TODO Building and Installing
 ** TODO Using 
 ** TODO Contributing
-** Notes
+** Personal Notes
+   These notes are basically for myself, having to do
+   with building and installing and the like, so they
+   are not "official".  When this project is all said
+   and done, I will be writing formal documentation on
+   installation and running MGS.
+
 *** Debugging
     To cmake for debugging:
     #+begin_src bash
@@ -129,4 +139,54 @@
     #+begin_src bash
     cmake -DCMAKE_BUILD_TYPE=Release .
     #+end_src
+*** HPX and Boost
+    Using these two seem like massive overkill (they
+    are both large and all I need is parallel support!)
+    so I will experiment with them for a time, but try
+    to nuke them when it comes to distribution.
 
+**** Boost
+     Building Boost:
+
+     #+begin_src bash
+     cd $BOOST
+     bootstrap --prefix=<where to install boost>
+     ./b2 -j<N> --build-type=complete
+     ./b2 install
+     #+end_src
+
+***** Own Environment
+      This is just for my environment. Capturing the
+      suggestions of the successful build of Boost.
+      Since I've also installed this beast onto my
+      system, I will most likely not be using this unless
+      I run into a snag. But what snag I could possibly 
+      run into? Boost has been around forever!
+      
+      The following directory should be added to compiler include paths:
+      
+      /development/cpp_proj/third/boost
+      
+      The following directory should be added to linker library paths:
+
+     /development/cpp_proj/third/boost/stage/lib
+**** HPX
+     Some notes on the installation of HPX. From:
+     https://stellar-group.github.io/hpx/docs/html/hpx/manual/build_system/building_hpx/build_recipes.html#hpx.manual.build_system.building_hpx.build_recipes.unix_installation
+     
+     Create a build directory. HPX requires an
+     out-of-tree build.  This means you will be unable
+     to run CMake in the HPX source tree.
+
+     #+begin_src bash
+     cd hpx
+     mkdir my_hpx_build
+     cd my_hpx_build
+     #+end_src
+
+     Invoke CMake from your build directory, pointing
+     the CMake driver to the root of your HPX source
+     tree.
+
+     #+begin_src bash
+     #+end_src

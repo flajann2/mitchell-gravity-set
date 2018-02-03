@@ -32,7 +32,7 @@ namespace mgs
       m_angleOffset(0.0f),
       m_angleStep(doublePi / m_arrowsPerLine / animationFrames)
   {
-    m_graph->setShadowQuality(QAbstract3DGraph::ShadowQualityNone);
+    m_graph->setShadowQuality(QAbstract3DGraph::ShadowQualityHigh);
     m_graph->scene()->activeCamera()->setCameraPreset(Q3DCamera::CameraPresetFront);
     
     // Magnetic field lines use custom narrow arrow
@@ -46,7 +46,7 @@ namespace mgs
     fieldGradient.setColorAt(0.0, Qt::black);
     fieldGradient.setColorAt(1.0, Qt::white);
     m_magneticField->setBaseGradient(fieldGradient);
-    m_magneticField->setColorStyle(Q3DTheme::ColorStyleRangeGradient);
+    m_magneticField->setColorStyle(Q3DTheme::ColorStyleObjectGradient);
     //! [4]
 
     // For 'sun' we use a custom large sphere
