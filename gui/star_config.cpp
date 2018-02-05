@@ -1,7 +1,7 @@
 #include "mgs.h"
-#include "starconfig.h"
+#include "star_config.h"
 
-namespace mgs::gui
+namespace mgs
 {
   StarConfig::StarConfig()
   {
@@ -18,7 +18,7 @@ namespace mgs::gui
       msgBox.exec();
       std::exit(-1);
     }
-    q_sfield = new StarField(q_graph);
+    q_sfield = new StarFieldGUI(q_graph);
     return q_graph;
   }
   
@@ -52,7 +52,7 @@ namespace mgs::gui
   void StarConfig::init() {
     q_widget->setWindowTitle(QStringLiteral("Mitchell Gravity Set, 4th Generation"));
     {
-      q_sfGroup = createStarFieldGroup();
+      q_sfGroup = createStarFieldGUIGroup();
       {
         q_vLayout->addWidget(q_sfGroup);
       }
@@ -99,17 +99,17 @@ namespace mgs::gui
       
 
       {
-        QObject::connect(toggleRotationButton, &QPushButton::clicked, q_sfield, &StarField::toggleRotation);
-        QObject::connect(toggleSunButton, &QPushButton::clicked, q_sfield,      &StarField::toggleSun);
-        QObject::connect(fieldLinesSlider, &QSlider::valueChanged, q_sfield,    &StarField::setFieldLines);
-        QObject::connect(arrowsSlider, &QSlider::valueChanged, q_sfield,        &StarField::setArrowsPerLine);
+        QObject::connect(toggleRotationButton, &QPushButton::clicked, q_sfield, &StarFieldGUI::toggleRotation);
+        QObject::connect(toggleSunButton, &QPushButton::clicked, q_sfield,      &StarFieldGUI::toggleSun);
+        QObject::connect(fieldLinesSlider, &QSlider::valueChanged, q_sfield,    &StarFieldGUI::setFieldLines);
+        QObject::connect(arrowsSlider, &QSlider::valueChanged, q_sfield,        &StarFieldGUI::setArrowsPerLine);
       }
       
       q_widget->show();
     }
   }
   
-  QGroupBox* StarConfig::createStarFieldGroup() {
+  QGroupBox* StarConfig::createStarFieldGUIGroup() {
     auto groupBox = new QGroupBox(QStringLiteral("Stars"));
     {
       q_form = new QFormLayout;
@@ -156,7 +156,7 @@ namespace mgs::gui
     return groupBox;
   }
 
-  typedef void (StarField::*SlotMF)();
+  typedef void (StarFieldGUI::*SlotMF)();
   
   struct SCB {
     std::string name;
@@ -165,11 +165,11 @@ namespace mgs::gui
   };
     
   static const std::list star_configs {
-    SCB {"Tetrahedron", "tetrahedron.svg",  &StarField::sl_make_tetrahedron},
-    SCB {"Octahedron",  "octahedron.svg",   &StarField::sl_make_octahedron},
-    SCB {"Cube",        "hexahedron.svg",   &StarField::sl_make_hexahedron},
-    SCB {"Dodecahedron","dodecahedron.svg", &StarField::sl_make_dodecahedron},
-    SCB {"Icosahedron", "icosahedron.svg",  &StarField::sl_make_icosahedron},
+    SCB {"Tetrahedron", "tetrahedron.svg",  &StarFieldGUI::sl_make_tetrahedron},
+    SCB {"Octahedron",  "octahedron.svg",   &StarFieldGUI::sl_make_octahedron},
+    SCB {"Cube",        "hexahedron.svg",   &StarFieldGUI::sl_make_hexahedron},
+    SCB {"Dodecahedron","dodecahedron.svg", &StarFieldGUI::sl_make_dodecahedron},
+    SCB {"Icosahedron", "icosahedron.svg",  &StarFieldGUI::sl_make_icosahedron},
   };
   
   QGroupBox* StarConfig::createStarSelectorGroup() {

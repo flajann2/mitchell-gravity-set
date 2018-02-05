@@ -12,15 +12,15 @@
 #include <QTimer>
 
 using namespace QtDataVisualization;
-namespace mgs::gui
+namespace mgs
 {
-  class StarField : public QObject
+  class StarFieldGUI : public QObject
   {
     Q_OBJECT
     
   public:
-    explicit StarField(Q3DScatter *scatter);
-    ~StarField();
+    explicit StarFieldGUI(Q3DScatter *scatter);
+    ~StarFieldGUI();
     
     void updateFieldState();
     void clearField();

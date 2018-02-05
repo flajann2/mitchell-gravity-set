@@ -3,7 +3,7 @@
 #include <compute.h>
 
 using namespace std;
-using namespace mgs::compute;
+using namespace mgs;
 
 template <typename T, typename I, typename P>
 Index Field<T,I,P>::coords2index(Coordinate& c) {

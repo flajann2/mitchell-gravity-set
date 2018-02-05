@@ -1,5 +1,5 @@
 #include "mgs.h"
-#include "starfield.h"
+#include "star_field_gui.h"
 #include <compute>
 
 #include <QtDataVisualization/qscatterdataproxy.h>
@@ -11,22 +11,9 @@
 #include <QtDataVisualization/QCustom3DItem>
 #include <QtCore/qmath.h>
 
-namespace mgs::gui
+namespace mgs
 {
   using namespace QtDataVisualization;
-
-  static const float yRange = 20.0f;
-  static const float xRange = yRange;
-  static const float zRange = yRange;
-  static const float ellipse_a = xRange / 4.0f;
-  static const float ellipse_b = yRange;
-  static const float doublePi = float(M_PI) * 2.0f;
-  static const float radiansToDegrees = 360.0f / doublePi;
-  static const float animationFrames = 100.0f;
-
-  // the count of one side of the freePointMassCube. This value will be cubed,
-  // so keep this number low.
-  static const int freePointMassCube = 10; 
 
   static void init_series(QScatter3DSeries* series,
                           const std::string& obj_file,
@@ -51,7 +38,7 @@ namespace mgs::gui
     return result;
   }
   
-  StarField::StarField(Q3DScatter *scatter)
+  StarFieldGUI::StarFieldGUI(Q3DScatter *scatter)
     : m_graph(scatter),
       m_fieldLines(12),
       m_arrowsPerLine(16),
@@ -96,20 +83,20 @@ namespace mgs::gui
     m_graph->axisZ()->setSegmentCount(int(zRange));
 
     QObject::connect(&m_rotationTimer, &QTimer::timeout, this,
-                     &StarField::triggerRotation);
+                     &StarFieldGUI::triggerRotation);
 
     toggleRotation();
     updateFieldState();
   }
 
-  StarField::~StarField()
+  StarFieldGUI::~StarFieldGUI()
   {
     delete m_graph;
   }
   
   /* The main computation loop for the GUI, where updates shall take place.
    */
-  void StarField::updateFieldState()
+  void StarFieldGUI::updateFieldState()
   {
     // Reusing existing array is computationally cheaper than always generating new array, even if
     // all data items change in the array, if the array size doesn't change.
@@ -147,13 +134,13 @@ namespace mgs::gui
     m_stars->dataProxy()->resetArray(m_starArray);
   }
   
-  void StarField::setFieldLines(int lines)
+  void StarFieldGUI::setFieldLines(int lines)
   {
     m_fieldLines = lines;
     updateFieldState();
   }
   
-  void StarField::setArrowsPerLine(int arrows)
+  void StarFieldGUI::setArrowsPerLine(int arrows)
   {
     m_angleOffset = 0.0f;
     m_angleStep = doublePi / m_arrowsPerLine / animationFrames;
@@ -161,18 +148,18 @@ namespace mgs::gui
     updateFieldState();
   }
   
-  void StarField::triggerRotation()
+  void StarFieldGUI::triggerRotation()
   {
     m_angleOffset += m_angleStep;
     updateFieldState();
   }
   
-  void StarField::toggleSun()
+  void StarFieldGUI::toggleSun()
   {
     m_sun->setVisible(!m_sun->isVisible());
   }
   
-  void StarField::toggleRotation()
+  void StarFieldGUI::toggleRotation()
   {
     if (m_rotationTimer.isActive())
       m_rotationTimer.stop();
@@ -180,19 +167,19 @@ namespace mgs::gui
       m_rotationTimer.start(15);
   }
 
-  void StarField::sl_make_polygon(int stars){}
+  void StarFieldGUI::sl_make_polygon(int stars){}
 
-  void StarField::sl_make_tetrahedron() {
+  void StarFieldGUI::sl_make_tetrahedron() {
     cout << "tetra" << endl;
     m_starCount = 4;
   }
   
-  void StarField::sl_make_octahedron() {
+  void StarFieldGUI::sl_make_octahedron() {
     cout << "octa" << endl;
   }
   
-  void StarField::sl_make_hexahedron(){}
-  void StarField::sl_make_dodecahedron(){}
-  void StarField::sl_make_icosahedron(){}
+  void StarFieldGUI::sl_make_hexahedron(){}
+  void StarFieldGUI::sl_make_dodecahedron(){}
+  void StarFieldGUI::sl_make_icosahedron(){}
   
 } // namespace mgs

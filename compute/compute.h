@@ -15,7 +15,7 @@
 #include <functional>
 #include <utility>
 
-namespace mgs::compute {
+namespace mgs {
   const std::int16_t default_dimension = 2;
   const std::int16_t untouched = -1;
   

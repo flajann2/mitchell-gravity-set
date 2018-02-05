@@ -17,9 +17,9 @@
 #include <QLineEdit>
 #include <QGroupBox>
 
-#include "starfield.h"
+#include "star_field_gui.h"
 
-namespace mgs::gui
+namespace mgs
 {
   class StarConfig : public QObject
   {
@@ -49,12 +49,12 @@ namespace mgs::gui
     QGroupBox   *q_sfGroup          = 0;
     QGroupBox   *q_ssGroup          = 0;
 
-    StarField   *q_sfield           = 0;
+    StarFieldGUI *q_sfield           = 0;
     
     Q3DScatter *createGraph();
     QWidget *createContainer();
     QWidget *createWidget();
-    QGroupBox *createStarFieldGroup();
+    QGroupBox *createStarFieldGUIGroup();
     QGroupBox *createStarSelectorGroup();
    
   public:
