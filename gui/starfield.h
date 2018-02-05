@@ -44,12 +44,17 @@ namespace mgs
 
   private:
     Q3DScatter *m_graph;
+
     QTimer m_rotationTimer;
+
     int m_fieldLines;
     int m_arrowsPerLine;
-    QScatter3DSeries *m_magneticField;
+    
+    QScatter3DSeries *m_freePointMass;
+    QScatter3DSeries *m_stars;
     QCustom3DItem *m_sun;
-    QScatterDataArray *m_magneticFieldArray;
+    QScatterDataArray *m_freePointMassArray;
+
     float m_angleOffset;
     float m_angleStep;
   };

@@ -14,49 +14,57 @@ namespace mgs
 {
   using namespace QtDataVisualization;
 
-  static const float verticalRange = 8.0f;
+  static const float verticalRange = 20.0f;
   static const float horizontalRange = verticalRange;
-  static const float ellipse_a = horizontalRange / 3.0f;
+  static const float ellipse_a = horizontalRange / 4.0f;
   static const float ellipse_b = verticalRange;
   static const float doublePi = float(M_PI) * 2.0f;
   static const float radiansToDegrees = 360.0f / doublePi;
   static const float animationFrames = 100.0f;
+
+  static void init_series(QScatter3DSeries* series,
+                          const std::string& obj_file,
+                          const QLinearGradient fieldGradient)
+  {
+    series->setItemSize(0.2f);
+    series->setMesh(QAbstract3DSeries::MeshUserDefined);
+    series->setUserDefinedMesh(QString::fromStdString(asset_dir + obj_file));
+    series->setBaseGradient(fieldGradient);
+    series->setColorStyle(Q3DTheme::ColorStyleObjectGradient);
+  }
   
   StarField::StarField(Q3DScatter *scatter)
     : m_graph(scatter),
       m_fieldLines(12),
       m_arrowsPerLine(16),
-      m_magneticField(new QScatter3DSeries),
+      m_freePointMass(new QScatter3DSeries),
+      m_stars(new QScatter3DSeries),
       m_sun(new QCustom3DItem),
-      m_magneticFieldArray(0),
+      m_freePointMassArray(0),
       m_angleOffset(0.0f),
       m_angleStep(doublePi / m_arrowsPerLine / animationFrames)
   {
-    m_graph->setShadowQuality(QAbstract3DGraph::ShadowQualityHigh);
+    m_graph->setShadowQuality(QAbstract3DGraph::ShadowQualityNone);
     m_graph->scene()->activeCamera()->setCameraPreset(Q3DCamera::CameraPresetFront);
-    
-    // Magnetic field lines use custom narrow arrow
-    m_magneticField->setItemSize(0.2f);
-    //! [3]
-    m_magneticField->setMesh(QAbstract3DSeries::MeshUserDefined);
-    m_magneticField->setUserDefinedMesh(QString::fromStdString(asset_dir + "narrowarrow.obj"));
-    //! [3]
-    //! [4]
+         
     QLinearGradient fieldGradient(0, 0, 16, 1024);
     fieldGradient.setColorAt(0.0, Qt::black);
     fieldGradient.setColorAt(1.0, Qt::white);
-    m_magneticField->setBaseGradient(fieldGradient);
-    m_magneticField->setColorStyle(Q3DTheme::ColorStyleObjectGradient);
-    //! [4]
 
+    // Free Point Masses uses custom narrow arrow
+    init_series(m_freePointMass, "narrowarrow.obj", fieldGradient);
+    init_series(m_stars, "star.obj", fieldGradient);
+
+    
     // For 'sun' we use a custom large sphere
-    m_sun->setScaling(QVector3D(0.07f, 0.07f, 0.07f));
+    m_sun->setScaling(QVector3D(0.02f, 0.02f, 0.02f));
     m_sun->setMeshFile(QString::fromStdString(asset_dir + "largesphere.obj"));
     QImage sunColor = QImage(2, 2, QImage::Format_RGB32);
     sunColor.fill(QColor(0xff, 0xbb, 0x00));
     m_sun->setTextureImage(sunColor);
 
-    m_graph->addSeries(m_magneticField);
+    m_graph->addSeries(m_freePointMass);
+    m_graph->addSeries(m_stars);
     m_graph->addCustomItem(m_sun);
 
     // Configure the axes according to the data
@@ -78,18 +86,18 @@ namespace mgs
     delete m_graph;
   }
   
-  void StarField::generateData() // TODO: Delete me
+  void StarField::generateData()
   {
     // Reusing existing array is computationally cheaper than always generating new array, even if
     // all data items change in the array, if the array size doesn't change.
-    if (!m_magneticFieldArray)
-      m_magneticFieldArray = new QScatterDataArray;
+    if (!m_freePointMassArray)
+      m_freePointMassArray = new QScatterDataArray;
     
     int arraySize = m_fieldLines * m_arrowsPerLine;
-    if (arraySize != m_magneticFieldArray->size())
-      m_magneticFieldArray->resize(arraySize);
+    if (arraySize != m_freePointMassArray->size())
+      m_freePointMassArray->resize(arraySize);
     
-    QScatterDataItem *ptrToDataArray = &m_magneticFieldArray->first();
+    QScatterDataItem *ptrToDataArray = &m_freePointMassArray->first();
     
     for (float i = 0; i < m_fieldLines; i++) {
       float horizontalAngle = (doublePi * i) / m_fieldLines;
@@ -118,26 +126,22 @@ namespace mgs
         float x = xCenter + xRotated;
         float z = zCenter + zRotated;
         
-        //! [1]
         QQuaternion zRotation = QQuaternion::fromAxisAndAngle(0.0f,
                                                               0.0f,
                                                               1.0f,
                                                               verticalAngle * radiansToDegrees);
         QQuaternion totalRotation = yRotation * zRotation;
-        //! [1]
         
         ptrToDataArray->setPosition(QVector3D(x, y, z));
-        //! [2]
         ptrToDataArray->setRotation(totalRotation);
-        //! [2]
         ptrToDataArray++;
       }
     }
     
-    if (m_graph->selectedSeries() == m_magneticField)
+    if (m_graph->selectedSeries() == m_freePointMass)
       m_graph->clearSelection();
     
-    m_magneticField->dataProxy()->resetArray(m_magneticFieldArray);
+    m_freePointMass->dataProxy()->resetArray(m_freePointMassArray);
   }
   
   void StarField::setFieldLines(int lines)
