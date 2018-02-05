@@ -25,7 +25,7 @@ namespace mgs
 
   // the count of one side of the freePointMassCube. This value will be cubed,
   // so keep this number low.
-  static const int freePointMassCube = 11; 
+  static const int freePointMassCube = 10; 
 
   static void init_series(QScatter3DSeries* series,
                           const std::string& obj_file,
@@ -115,7 +115,7 @@ namespace mgs
     if (!m_freePointMassArray) m_freePointMassArray = new QScatterDataArray;
     if (!m_starArray)          m_starArray = new QScatterDataArray;
     
-    int fpmArraySize = ipow(m_freePointMassCube, 3);
+    int fpmArraySize = ipow(m_freePointMassCube + 1, 3);
     if (fpmArraySize != m_freePointMassArray->size())
       m_freePointMassArray->resize(fpmArraySize);
 
@@ -124,42 +124,18 @@ namespace mgs
     
     QScatterDataItem *ptrToFPMArray = &m_freePointMassArray->first();
     
-    for (float i = 0; i < m_fieldLines; i++) {
-      float horizontalAngle = (doublePi * i) / m_fieldLines;
-      float xCenter = ellipse_a * qCos(horizontalAngle);
-      float zCenter = ellipse_a * qSin(horizontalAngle);
-      
-      // Rotate - arrow always tangential to origin
-      //! [0]
-      QQuaternion yRotation = QQuaternion::fromAxisAndAngle(0.0f,
-                                                            1.0f,
-                                                            0.0f,
-                                                            horizontalAngle * radiansToDegrees);
-      //! [0]
-      
-      for (float j = 0; j < m_arrowsPerLine; j++) {
-        // Calculate point on ellipse centered on origin and parallel to x-axis
-        float verticalAngle = ((doublePi * j) / m_arrowsPerLine) + m_angleOffset;
-        float xUnrotated = ellipse_a * qCos(verticalAngle);
-        float y = ellipse_b * qSin(verticalAngle);
-        
-        // Rotate the ellipse around y-axis
-        float xRotated = xUnrotated * qCos(horizontalAngle);
-        float zRotated = xUnrotated * qSin(horizontalAngle);
-        
-        // Add offset
-        float x = xCenter + xRotated;
-        float z = zCenter + zRotated;
-        
-        QQuaternion zRotation = QQuaternion::fromAxisAndAngle(0.0f,
-                                                              0.0f,
-                                                              1.0f,
-                                                              verticalAngle * radiansToDegrees);
-        QQuaternion totalRotation = yRotation * zRotation;
-        
-        ptrToFPMArray->setPosition(QVector3D(x, y, z));
-        ptrToFPMArray->setRotation(totalRotation);
-        ptrToFPMArray++;
+    for (float i = 0; i <= m_freePointMassCube; i++) {
+      float x = -xRange + (i * 2.0 * xRange / m_freePointMassCube);      
+      for (float j = 0; j <= m_freePointMassCube; j++) {
+        float y = -yRange + (j * 2.0 * yRange / m_freePointMassCube);              
+        for (float k = 0; k <= m_freePointMassCube; k++) {
+          float z = -zRange + (k * 2.0 * yRange / m_freePointMassCube);
+          
+          // position this particle
+          ptrToFPMArray->setPosition(QVector3D(x, y, z));
+          //ptrToFPMArray->setRotation(totalRotation);
+          ptrToFPMArray++;
+        }
       }
     }
     
