@@ -22,7 +22,7 @@ namespace mgs
     explicit StarField(Q3DScatter *scatter);
     ~StarField();
     
-    void generateData();
+    void updateFieldState();
     void clearField();
     void generateField();
                        
@@ -49,11 +49,15 @@ namespace mgs
 
     int m_fieldLines;
     int m_arrowsPerLine;
+    int m_freePointMassCube;
+    int m_starCount;
     
     QScatter3DSeries *m_freePointMass;
     QScatter3DSeries *m_stars;
     QCustom3DItem *m_sun;
+    
     QScatterDataArray *m_freePointMassArray;
+    QScatterDataArray *m_starArray;
 
     float m_angleOffset;
     float m_angleStep;

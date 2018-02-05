@@ -14,13 +14,18 @@ namespace mgs
 {
   using namespace QtDataVisualization;
 
-  static const float verticalRange = 20.0f;
-  static const float horizontalRange = verticalRange;
-  static const float ellipse_a = horizontalRange / 4.0f;
-  static const float ellipse_b = verticalRange;
+  static const float yRange = 20.0f;
+  static const float xRange = yRange;
+  static const float zRange = yRange;
+  static const float ellipse_a = xRange / 4.0f;
+  static const float ellipse_b = yRange;
   static const float doublePi = float(M_PI) * 2.0f;
   static const float radiansToDegrees = 360.0f / doublePi;
   static const float animationFrames = 100.0f;
+
+  // the count of one side of the freePointMassCube. This value will be cubed,
+  // so keep this number low.
+  static const int freePointMassCube = 11; 
 
   static void init_series(QScatter3DSeries* series,
                           const std::string& obj_file,
@@ -32,6 +37,18 @@ namespace mgs
     series->setBaseGradient(fieldGradient);
     series->setColorStyle(Q3DTheme::ColorStyleObjectGradient);
   }
+
+  template <typename I>
+  inline I ipow(I base, I exp) {
+    assert(exp >= 0);
+    I result = 1;
+    while (exp) {
+      if (exp & 1) result *= base;
+      exp >>= 1;
+      base *= base;
+    }    
+    return result;
+  }
   
   StarField::StarField(Q3DScatter *scatter)
     : m_graph(scatter),
@@ -41,8 +58,11 @@ namespace mgs
       m_stars(new QScatter3DSeries),
       m_sun(new QCustom3DItem),
       m_freePointMassArray(0),
+      m_starArray(0),
+      m_starCount(4),
       m_angleOffset(0.0f),
-      m_angleStep(doublePi / m_arrowsPerLine / animationFrames)
+      m_angleStep(doublePi / m_arrowsPerLine / animationFrames),
+      m_freePointMassCube(freePointMassCube)
   {
     m_graph->setShadowQuality(QAbstract3DGraph::ShadowQualityNone);
     m_graph->scene()->activeCamera()->setCameraPreset(Q3DCamera::CameraPresetFront);
@@ -54,7 +74,6 @@ namespace mgs
     // Free Point Masses uses custom narrow arrow
     init_series(m_freePointMass, "narrowarrow.obj", fieldGradient);
     init_series(m_stars, "star.obj", fieldGradient);
-
     
     // For 'sun' we use a custom large sphere
     m_sun->setScaling(QVector3D(0.02f, 0.02f, 0.02f));
@@ -68,17 +87,18 @@ namespace mgs
     m_graph->addCustomItem(m_sun);
 
     // Configure the axes according to the data
-    m_graph->axisX()->setRange(-horizontalRange, horizontalRange);
-    m_graph->axisY()->setRange(-verticalRange, verticalRange);
-    m_graph->axisZ()->setRange(-horizontalRange, horizontalRange);
-    m_graph->axisX()->setSegmentCount(int(horizontalRange));
-    m_graph->axisZ()->setSegmentCount(int(horizontalRange));
+    m_graph->axisX()->setRange(-xRange, xRange);
+    m_graph->axisY()->setRange(-yRange, yRange);
+    m_graph->axisZ()->setRange(-zRange, zRange);
+    
+    m_graph->axisX()->setSegmentCount(int(xRange));
+    m_graph->axisZ()->setSegmentCount(int(zRange));
 
     QObject::connect(&m_rotationTimer, &QTimer::timeout, this,
                      &StarField::triggerRotation);
 
     toggleRotation();
-    generateData();
+    updateFieldState();
   }
 
   StarField::~StarField()
@@ -86,18 +106,23 @@ namespace mgs
     delete m_graph;
   }
   
-  void StarField::generateData()
+  /* The main computation loop for the GUI, where updates shall take place.
+   */
+  void StarField::updateFieldState()
   {
     // Reusing existing array is computationally cheaper than always generating new array, even if
     // all data items change in the array, if the array size doesn't change.
-    if (!m_freePointMassArray)
-      m_freePointMassArray = new QScatterDataArray;
+    if (!m_freePointMassArray) m_freePointMassArray = new QScatterDataArray;
+    if (!m_starArray)          m_starArray = new QScatterDataArray;
     
-    int arraySize = m_fieldLines * m_arrowsPerLine;
-    if (arraySize != m_freePointMassArray->size())
-      m_freePointMassArray->resize(arraySize);
+    int fpmArraySize = ipow(m_freePointMassCube, 3);
+    if (fpmArraySize != m_freePointMassArray->size())
+      m_freePointMassArray->resize(fpmArraySize);
+
+    if (m_starCount != m_freePointMassArray->size())
+      m_freePointMassArray->resize(fpmArraySize);
     
-    QScatterDataItem *ptrToDataArray = &m_freePointMassArray->first();
+    QScatterDataItem *ptrToFPMArray = &m_freePointMassArray->first();
     
     for (float i = 0; i < m_fieldLines; i++) {
       float horizontalAngle = (doublePi * i) / m_fieldLines;
@@ -132,9 +157,9 @@ namespace mgs
                                                               verticalAngle * radiansToDegrees);
         QQuaternion totalRotation = yRotation * zRotation;
         
-        ptrToDataArray->setPosition(QVector3D(x, y, z));
-        ptrToDataArray->setRotation(totalRotation);
-        ptrToDataArray++;
+        ptrToFPMArray->setPosition(QVector3D(x, y, z));
+        ptrToFPMArray->setRotation(totalRotation);
+        ptrToFPMArray++;
       }
     }
     
@@ -147,7 +172,7 @@ namespace mgs
   void StarField::setFieldLines(int lines)
   {
     m_fieldLines = lines;
-    generateData();
+    updateFieldState();
   }
   
   void StarField::setArrowsPerLine(int arrows)
@@ -155,13 +180,13 @@ namespace mgs
     m_angleOffset = 0.0f;
     m_angleStep = doublePi / m_arrowsPerLine / animationFrames;
     m_arrowsPerLine = arrows;
-    generateData();
+    updateFieldState();
   }
   
   void StarField::triggerRotation()
   {
     m_angleOffset += m_angleStep;
-    generateData();
+    updateFieldState();
   }
   
   void StarField::toggleSun()

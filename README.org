@@ -20,7 +20,14 @@
 
 ** Synopsis
    This library computes the Mitchell Gravity Set. This
-   is written in C++, with the API exposed as C calls.
+   is written in C++17, with the API exposed as C calls. 
+
+   This project also includes the "client" code which is
+   based on the Qt framework. Qt is indeed awsome, but its
+   API is still very much of the C++ of the 90s, so I have
+   to painfully defer to it in many palces. On the other hand,
+   it packs a whallop of power that I would otherwise have
+   to implement by hand, so I'll live. :)
 
 ** Basic goals
 *** Multi Core support
@@ -144,6 +151,9 @@
     are both large and all I need is parallel support!)
     so I will experiment with them for a time, but try
     to nuke them when it comes to distribution.
+
+    Or, I may not wait that long. I will attempt to
+    implement a multithreading approach without HPX.
 
 **** Boost
      Building Boost:
