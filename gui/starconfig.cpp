@@ -1,7 +1,7 @@
 #include "mgs.h"
 #include "starconfig.h"
 
-namespace mgs
+namespace mgs::gui
 {
   StarConfig::StarConfig()
   {

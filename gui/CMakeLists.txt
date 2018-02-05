@@ -26,16 +26,16 @@ if ( NOT Qt5Core_FOUND )
 endif ( NOT Qt5Core_FOUND )
 
 include_directories(
-
   ${Qt5Core_INCLUDE_DIRS}
   ${Qt5Widgets_INCLUDE_DIRS}
   ${CMAKE_SOURCE_DIR}/compute/include
+  ${CMAKE_SOURCE_DIR}/compute
   )
 
-message(STATUS "Qt5 Included directories: \n"
-  "\t" $ENV{QT_LOCAL_DIR} "\n"
-  "\t" ${Qt5Core_INCLUDE_DIRS} "\n"
-  "\t" ${Qt5Widgets_INCLUDE_DIRS} "\n") 
+# message(STATUS "Qt5 Included directories: \n"
+#   "\t" $ENV{QT_LOCAL_DIR} "\n"
+#   "\t" ${Qt5Core_INCLUDE_DIRS} "\n"
+#   "\t" ${Qt5Widgets_INCLUDE_DIRS} "\n") 
 
 target_link_libraries(mgs
   mgscompute

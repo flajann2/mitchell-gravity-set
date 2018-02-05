@@ -6,7 +6,7 @@
 
 using namespace std;
 
-namespace mgs
+namespace mgs::gui
 {
-  const std::string asset_dir = "assets/";
+  static const std::string asset_dir = "assets/";
 }

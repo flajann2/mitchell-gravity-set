@@ -4,7 +4,7 @@
 #include <sstream>
 
 using namespace std;
-using namespace mgs;
+using namespace mgs::compute;
 
 void pr_coord(auto prefix, auto c) {
  for (int v : c.vec)

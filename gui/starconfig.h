@@ -19,7 +19,7 @@
 
 #include "starfield.h"
 
-namespace mgs
+namespace mgs::gui
 {
   class StarConfig : public QObject
   {

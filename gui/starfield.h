@@ -12,7 +12,7 @@
 #include <QTimer>
 
 using namespace QtDataVisualization;
-namespace mgs
+namespace mgs::gui
 {
   class StarField : public QObject
   {

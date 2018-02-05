@@ -20,45 +20,45 @@
 QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
-struct qt_meta_stringdata_mgs__StarField_t {
+struct qt_meta_stringdata_mgs__gui__StarField_t {
     QByteArrayData data[16];
-    char stringdata0[222];
+    char stringdata0[227];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_mgs__StarField_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_mgs__gui__StarField_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_mgs__StarField_t qt_meta_stringdata_mgs__StarField = {
+static const qt_meta_stringdata_mgs__gui__StarField_t qt_meta_stringdata_mgs__gui__StarField = {
     {
-QT_MOC_LITERAL(0, 0, 14), // "mgs::StarField"
-QT_MOC_LITERAL(1, 15, 13), // "setFieldLines"
-QT_MOC_LITERAL(2, 29, 0), // ""
-QT_MOC_LITERAL(3, 30, 5), // "lines"
-QT_MOC_LITERAL(4, 36, 16), // "setArrowsPerLine"
-QT_MOC_LITERAL(5, 53, 6), // "arrows"
-QT_MOC_LITERAL(6, 60, 14), // "toggleRotation"
-QT_MOC_LITERAL(7, 75, 15), // "triggerRotation"
-QT_MOC_LITERAL(8, 91, 9), // "toggleSun"
-QT_MOC_LITERAL(9, 101, 15), // "sl_make_polygon"
-QT_MOC_LITERAL(10, 117, 5), // "stars"
-QT_MOC_LITERAL(11, 123, 19), // "sl_make_tetrahedron"
-QT_MOC_LITERAL(12, 143, 18), // "sl_make_octahedron"
-QT_MOC_LITERAL(13, 162, 18), // "sl_make_hexahedron"
-QT_MOC_LITERAL(14, 181, 20), // "sl_make_dodecahedron"
-QT_MOC_LITERAL(15, 202, 19) // "sl_make_icosahedron"
+QT_MOC_LITERAL(0, 0, 19), // "mgs::gui::StarField"
+QT_MOC_LITERAL(1, 20, 13), // "setFieldLines"
+QT_MOC_LITERAL(2, 34, 0), // ""
+QT_MOC_LITERAL(3, 35, 5), // "lines"
+QT_MOC_LITERAL(4, 41, 16), // "setArrowsPerLine"
+QT_MOC_LITERAL(5, 58, 6), // "arrows"
+QT_MOC_LITERAL(6, 65, 14), // "toggleRotation"
+QT_MOC_LITERAL(7, 80, 15), // "triggerRotation"
+QT_MOC_LITERAL(8, 96, 9), // "toggleSun"
+QT_MOC_LITERAL(9, 106, 15), // "sl_make_polygon"
+QT_MOC_LITERAL(10, 122, 5), // "stars"
+QT_MOC_LITERAL(11, 128, 19), // "sl_make_tetrahedron"
+QT_MOC_LITERAL(12, 148, 18), // "sl_make_octahedron"
+QT_MOC_LITERAL(13, 167, 18), // "sl_make_hexahedron"
+QT_MOC_LITERAL(14, 186, 20), // "sl_make_dodecahedron"
+QT_MOC_LITERAL(15, 207, 19) // "sl_make_icosahedron"
 
     },
-    "mgs::StarField\0setFieldLines\0\0lines\0"
-    "setArrowsPerLine\0arrows\0toggleRotation\0"
-    "triggerRotation\0toggleSun\0sl_make_polygon\0"
-    "stars\0sl_make_tetrahedron\0sl_make_octahedron\0"
-    "sl_make_hexahedron\0sl_make_dodecahedron\0"
-    "sl_make_icosahedron"
+    "mgs::gui::StarField\0setFieldLines\0\0"
+    "lines\0setArrowsPerLine\0arrows\0"
+    "toggleRotation\0triggerRotation\0toggleSun\0"
+    "sl_make_polygon\0stars\0sl_make_tetrahedron\0"
+    "sl_make_octahedron\0sl_make_hexahedron\0"
+    "sl_make_dodecahedron\0sl_make_icosahedron"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_mgs__StarField[] = {
+static const uint qt_meta_data_mgs__gui__StarField[] = {
 
  // content:
        7,       // revision
@@ -100,7 +100,7 @@ static const uint qt_meta_data_mgs__StarField[] = {
        0        // eod
 };
 
-void mgs::StarField::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void mgs::gui::StarField::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
         StarField *_t = static_cast<StarField *>(_o);
@@ -122,26 +122,26 @@ void mgs::StarField::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _
     }
 }
 
-const QMetaObject mgs::StarField::staticMetaObject = {
-    { &QObject::staticMetaObject, qt_meta_stringdata_mgs__StarField.data,
-      qt_meta_data_mgs__StarField,  qt_static_metacall, nullptr, nullptr}
+const QMetaObject mgs::gui::StarField::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_mgs__gui__StarField.data,
+      qt_meta_data_mgs__gui__StarField,  qt_static_metacall, nullptr, nullptr}
 };
 
 
-const QMetaObject *mgs::StarField::metaObject() const
+const QMetaObject *mgs::gui::StarField::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *mgs::StarField::qt_metacast(const char *_clname)
+void *mgs::gui::StarField::qt_metacast(const char *_clname)
 {
     if (!_clname) return nullptr;
-    if (!strcmp(_clname, qt_meta_stringdata_mgs__StarField.stringdata0))
+    if (!strcmp(_clname, qt_meta_stringdata_mgs__gui__StarField.stringdata0))
         return static_cast<void*>(this);
     return QObject::qt_metacast(_clname);
 }
 
-int mgs::StarField::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int mgs::gui::StarField::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)

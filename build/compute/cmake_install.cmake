@@ -70,7 +70,3 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/mgscompute" TYPE FILE FILES "/home/alveric/development/cpp_proj/gravity-set-compute/compute/include/mgscompute.h")
 endif()
 
-if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/mgscompute" TYPE FILE FILES "/home/alveric/development/cpp_proj/gravity-set-compute/compute/include/mgscompute.h")
-endif()
-

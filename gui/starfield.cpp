@@ -1,5 +1,6 @@
 #include "mgs.h"
 #include "starfield.h"
+#include <compute>
 
 #include <QtDataVisualization/qscatterdataproxy.h>
 #include <QtDataVisualization/qvalue3daxis.h>
@@ -10,7 +11,7 @@
 #include <QtDataVisualization/QCustom3DItem>
 #include <QtCore/qmath.h>
 
-namespace mgs
+namespace mgs::gui
 {
   using namespace QtDataVisualization;
 
@@ -143,6 +144,7 @@ namespace mgs
       m_graph->clearSelection();
     
     m_freePointMass->dataProxy()->resetArray(m_freePointMassArray);
+    m_stars->dataProxy()->resetArray(m_starArray);
   }
   
   void StarField::setFieldLines(int lines)
@@ -182,6 +184,7 @@ namespace mgs
 
   void StarField::sl_make_tetrahedron() {
     cout << "tetra" << endl;
+    m_starCount = 4;
   }
   
   void StarField::sl_make_octahedron() {
