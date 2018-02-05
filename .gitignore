@@ -3,5 +3,7 @@
 *.so
 *.so.*
 CMakeFiles
+CMakeCache.txt
 1
-
+build/
+cmake_install.cmake
