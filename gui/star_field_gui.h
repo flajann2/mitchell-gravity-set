@@ -11,6 +11,8 @@
 #include <QtCore/qmath.h>
 #include <QTimer>
 
+#include <compute>
+
 using namespace QtDataVisualization;
 namespace mgs
 {
@@ -50,11 +52,12 @@ namespace mgs
     int m_fieldLines;
     int m_arrowsPerLine;
     int m_freePointMassCube;
-    int m_starCount;
     
     QScatter3DSeries *m_freePointMass;
     QScatter3DSeries *m_stars;
     QCustom3DItem *m_sun;
+
+    std::vector<Star> c_stars;
     
     QScatterDataArray *m_freePointMassArray;
     QScatterDataArray *m_starArray;

@@ -16,7 +16,7 @@
 #include <utility>
 
 namespace mgs {
-  const std::int16_t default_dimension = 2;
+  const std::int16_t default_dimension = 3;
   const std::int16_t untouched = -1;
   
   struct Index {
@@ -37,7 +37,7 @@ namespace mgs {
     }
   };
   
-  std::ostream &operator<<(std::ostream &os, Index const &idx) {
+  inline std::ostream &operator<<(std::ostream &os, Index const &idx) {
     os << "Index[ ";
     for (auto i : idx.ijk) { os << i << " "; }
     os << "]";
@@ -60,8 +60,13 @@ namespace mgs {
       vec = other.vec;
       return *this;
     }
-    
-    Vector& operator=(Vector&& other)  {
+
+
+    inline T& operator[](I index)  {
+      return vec[index];
+    }
+
+    inline Vector& operator=(Vector&& other)  {
       vec = std::move(other.vec);
       return *this;
     }
@@ -107,7 +112,7 @@ namespace mgs {
   using Acceleration = Vector<double, std::int16_t, struct MathParm>;
 
   template <typename T, typename I, typename P>
-  std::ostream &operator<<(std::ostream &os, Vector<T, I, P>const &c) {
+  inline std::ostream &operator<<(std::ostream &os, Vector<T, I, P>const &c) {
     os << "Vector[ ";
     for (auto v : c.vec) { os << v << " ";  }
     os << "]";
@@ -121,7 +126,7 @@ namespace mgs {
     Star(double m, Position pos) : mass(m), position(pos) {}
   };
   
-  std::ostream &operator<<(std::ostream &os, Star const &star) {
+  inline std::ostream &operator<<(std::ostream &os, Star const &star) {
     os << "Star[";
     os << " mass:" << star.mass;
     os << " position:" << star.position;
@@ -190,7 +195,7 @@ namespace mgs {
   };
   using StarField = Field<double, std::int16_t, struct FieldParm>;
 
-  std::ostream &operator<<(std::ostream &os, StarField const &f) {
+  inline std::ostream &operator<<(std::ostream &os, StarField const &f) {
     os << "StarField[";
     os << " c1:" << f.c1;
     os << " c2:" << f.c2;
