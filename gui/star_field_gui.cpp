@@ -232,7 +232,54 @@ namespace mgs
     updateFieldState();
   }
   
-  void StarFieldGUI::sl_make_dodecahedron(){}
-  void StarFieldGUI::sl_make_icosahedron(){}
+  void StarFieldGUI::sl_make_dodecahedron(){
+    cout << "dodeca" << endl;
+    c_stars.clear();
+
+    auto r = xRange * defaultStarArrangementFactor * 2.0;
+    double phi = (std::sqrt(5.0) - 1.0) / 2.0; // The golden ratio
+
+    double a = 1.0 / std::sqrt(3.0);
+    double b = a / phi;
+    double c = a * phi;
+
+    const std::vector<double> pn {-1.0, 1.0};
+    
+    // Generate each vertex
+    for (auto i : pn) {
+      for (auto j : pn) {
+        c_stars.push_back(Star {defaultStarMass, {0, i*c*r, j*b*r}});
+        c_stars.push_back(Star {defaultStarMass, {i*c*r, j*b*r, 0}});
+        c_stars.push_back(Star {defaultStarMass, {i*b*r, 0, j*c*r}});        
+        for (auto k : pn) {
+          c_stars.push_back(Star {defaultStarMass, {i*a*r, j*a*r, k*a*r}});
+        }
+      }
+    }
+    updateFieldState();        
+  }
+  
+  void StarFieldGUI::sl_make_icosahedron(){
+    cout << "icosa" << endl;
+    c_stars.clear();
+
+    auto r = xRange * defaultStarArrangementFactor;
+    double phi = (std::sqrt(5.0) - 1.0) / 2.0; // The golden ratio
+    const std::vector<double> pn {-1.0, 1.0};
+
+    for (auto i : pn) {
+      for (auto j : pn) {
+        std::deque<double> cir {0, i*r, phi*j*r};
+        for (auto _cir = 0; _cir < 3; ++_cir) {
+          c_stars.push_back(Star {defaultStarMass, {cir[0], cir[1], cir[2]}});
+          cir.push_back(cir.front());
+          cir.pop_front();
+        }
+      }
+    }
+    updateFieldState();
+  }
+
+  
   
 } // namespace mgs

@@ -4,7 +4,8 @@
 #include <iostream>
 #include <cassert>
 #include <QtCore/qmath.h>
-
+#include <cmath>
+#include <deque>
 using namespace std;
 
 namespace mgs
