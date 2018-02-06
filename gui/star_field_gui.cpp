@@ -40,15 +40,11 @@ namespace mgs
   
   StarFieldGUI::StarFieldGUI(Q3DScatter *scatter)
     : m_graph(scatter),
-      m_fieldLines(12),
-      m_arrowsPerLine(16),
       m_freePointMass(new QScatter3DSeries),
       m_stars(new QScatter3DSeries),
       m_sun(new QCustom3DItem),
       m_freePointMassArray(0),
       m_starArray(0),
-      m_angleOffset(0.0f),
-      m_angleStep(doublePi / m_arrowsPerLine / animationFrames),
       m_freePointMassCube(freePointMassCube)
   {
     m_graph->setShadowQuality(QAbstract3DGraph::ShadowQualityNone);
@@ -62,7 +58,7 @@ namespace mgs
 
     QLinearGradient starGradient(0, 0, 16, 1024);
     starGradient.setColorAt(0.0, Qt::blue);
-    starGradient.setColorAt(1.0, Qt::white);
+    starGradient.setColorAt(1.0, Qt::yellow);
     init_series(m_stars, "star.obj", starGradient, 0.02);
     
     // For 'sun' we use a custom large sphere
@@ -85,10 +81,10 @@ namespace mgs
     m_graph->axisY()->setSegmentCount(int(yRange));
     m_graph->axisZ()->setSegmentCount(int(zRange));
 
-    QObject::connect(&m_rotationTimer, &QTimer::timeout, this,
-                     &StarFieldGUI::triggerRotation);
+    QObject::connect(&m_simulationTimer, &QTimer::timeout, this, &StarFieldGUI::sl_stepSimulation);
+    QObject::connect(m_stars, &QScatter3DSeries::selectedItemChanged, this, &StarFieldGUI::sl_star_selected);
 
-    toggleRotation();
+    sl_toggleSimulation();
     updateFieldState();
   }
 
@@ -146,39 +142,44 @@ namespace mgs
     m_stars->dataProxy()->resetArray(m_starArray);
   }
   
-  void StarFieldGUI::setFieldLines(int lines)
+  void StarFieldGUI::sl_setFreePointCube(int side)
   {
-    m_fieldLines = lines;
+    m_freePointMassCube = side;
+    updateFieldState();
+  }
+
+  // advances state of simulation
+  void StarFieldGUI::sl_stepSimulation()
+  {
+    //m_angleOffset += m_angleStep;
     updateFieldState();
   }
   
-  void StarFieldGUI::setArrowsPerLine(int arrows)
-  {
-    m_angleOffset = 0.0f;
-    m_angleStep = doublePi / m_arrowsPerLine / animationFrames;
-    m_arrowsPerLine = arrows;
-    updateFieldState();
-  }
-  
-  void StarFieldGUI::triggerRotation()
-  {
-    m_angleOffset += m_angleStep;
-    updateFieldState();
-  }
-  
-  void StarFieldGUI::toggleSun()
+  void StarFieldGUI::sl_toggleCenter()
   {
     m_sun->setVisible(!m_sun->isVisible());
   }
-  
-  void StarFieldGUI::toggleRotation()
+
+  void StarFieldGUI::sl_toggleArrows()
   {
-    if (m_rotationTimer.isActive())
-      m_rotationTimer.stop();
+    // TODO: This must work
+    // m_sun->setVisible(!m_sun->isVisible());
+  }
+  
+  void StarFieldGUI::sl_toggleSimulation()
+  {
+    if (m_simulationTimer.isActive())
+      m_simulationTimer.stop();
     else
-      m_rotationTimer.start(15);
+      m_simulationTimer.start(15);
   }
 
+
+  void StarFieldGUI::sl_star_selected(int index) {
+    cout << "star selected: " << index << endl;
+  }
+
+  
   void StarFieldGUI::sl_make_polygon(int stars){}
 
   // The tetrahedron can be easily derived from a cube.

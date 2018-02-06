@@ -59,12 +59,12 @@ namespace mgs
       
       q_ssGroup = createStarSelectorGroup();
       
-      QSlider *fieldLinesSlider = new QSlider(Qt::Horizontal, q_widget);
+      q_freePointSlider = new QSlider(Qt::Horizontal, q_widget);
       {
-        fieldLinesSlider->setTickInterval(1);
-        fieldLinesSlider->setMinimum(1);
-        fieldLinesSlider->setValue(12);
-        fieldLinesSlider->setMaximum(128);
+        q_freePointSlider->setTickInterval(1);
+        q_freePointSlider->setMinimum(4);
+        q_freePointSlider->setValue(10);
+        q_freePointSlider->setMaximum(16);
       }
       
       auto arrowsSlider = new QSlider(Qt::Horizontal, q_widget);
@@ -75,34 +75,34 @@ namespace mgs
         arrowsSlider->setMaximum(32);
       }
       
-      QPushButton *toggleRotationButton = new QPushButton(q_widget);
+      q_toggleSimulationButton = new QPushButton(q_widget);
       {
-        toggleRotationButton->setText(QStringLiteral("Toggle animation"));
-        q_vLayout->addWidget(toggleRotationButton);
+        q_toggleSimulationButton->setText(QStringLiteral("Toggle simulation"));
+        q_vLayout->addWidget(q_toggleSimulationButton);
       }
       
-      QPushButton *toggleSunButton = new QPushButton(q_widget);
+      q_toggleCenterButton = new QPushButton(q_widget);
       {
-        toggleSunButton->setText(QStringLiteral("Toggle Sun"));
-        q_vLayout->addWidget(toggleSunButton);
+        q_toggleCenterButton->setText(QStringLiteral("Toggle Center"));
+        q_vLayout->addWidget(q_toggleCenterButton);
+      }
+
+      q_toggleArrowsButton = new QPushButton(q_widget);
+      {
+        q_toggleArrowsButton->setText(QStringLiteral("Toggle Arrows"));
+        q_vLayout->addWidget(q_toggleArrowsButton);
       }
       
       {
-        q_vLayout->addWidget(new QLabel(QStringLiteral("Field Lines (1 - 128):")));
-        q_vLayout->addWidget(fieldLinesSlider);
+        q_vLayout->addWidget(new QLabel(QStringLiteral("Free Point Cube (4 - 16):")));
+        q_vLayout->addWidget(q_freePointSlider);
       }
-      
-      {
-        q_vLayout->addWidget(new QLabel(QStringLiteral("Arrows per line (8 - 32):")));
-        q_vLayout->addWidget(arrowsSlider, 1, Qt::AlignTop);
-      }
-      
 
       {
-        QObject::connect(toggleRotationButton, &QPushButton::clicked, q_sfield, &StarFieldGUI::toggleRotation);
-        QObject::connect(toggleSunButton, &QPushButton::clicked, q_sfield,      &StarFieldGUI::toggleSun);
-        QObject::connect(fieldLinesSlider, &QSlider::valueChanged, q_sfield,    &StarFieldGUI::setFieldLines);
-        QObject::connect(arrowsSlider, &QSlider::valueChanged, q_sfield,        &StarFieldGUI::setArrowsPerLine);
+        QObject::connect(q_toggleSimulationButton, &QPushButton::clicked, q_sfield, &StarFieldGUI::sl_toggleSimulation);
+        QObject::connect(q_toggleCenterButton, &QPushButton::clicked,     q_sfield, &StarFieldGUI::sl_toggleCenter);
+        QObject::connect(q_toggleArrowsButton, &QPushButton::clicked,     q_sfield, &StarFieldGUI::sl_toggleArrows);
+        QObject::connect(q_freePointSlider, &QSlider::valueChanged,       q_sfield, &StarFieldGUI::sl_setFreePointCube);
       }
       
       q_widget->show();
@@ -156,12 +156,14 @@ namespace mgs
     return groupBox;
   }
 
-  typedef void (StarFieldGUI::*SlotMF)();
+  typedef void (StarFieldGUI::*SlotGUI)();
+  typedef void (StarConfig::*SlotCF)();
   
   struct SCB {
     std::string name;
     std::string icon_file;
-    SlotMF slot;
+    SlotGUI gslot;
+    SlotCF cslot = 0;
   };
     
   static const std::list star_configs {
@@ -176,13 +178,13 @@ namespace mgs
     auto groupBox = new QGroupBox(QStringLiteral("Star Configs"));
     {
       q_starConfigLayout = new QHBoxLayout;
-      for (auto scb : star_configs) {
-        auto button = new QPushButton(QIcon(QString::fromStdString(asset_dir + scb.icon_file)),
-                                      QString::fromStdString(scb.name), q_widget);
+      for (auto [name, icon_file, gslot, cslot] : star_configs) {
+        auto button = new QPushButton(QIcon(QString::fromStdString(asset_dir + icon_file)),
+                                      QString::fromStdString(name), q_widget);
         
         q_starArrangementLayout->addWidget(button);
         q_starSelectButtons.push_back(button);
-        QObject::connect(button, &QPushButton::clicked, q_sfield, scb.slot);
+        QObject::connect(button, &QPushButton::clicked, q_sfield, gslot);
       }
       
     }

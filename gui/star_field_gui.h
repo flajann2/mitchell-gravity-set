@@ -30,11 +30,13 @@ namespace mgs
                        
                        
   public Q_SLOTS:
-    void setFieldLines(int lines);
-    void setArrowsPerLine(int arrows);
-    void toggleRotation();
-    void triggerRotation();
-    void toggleSun();
+    void sl_setFreePointCube(int side);
+
+    void sl_toggleSimulation();
+    void sl_stepSimulation();
+    
+    void sl_toggleCenter();
+    void sl_toggleArrows();
 
     void sl_make_polygon(int stars);
 
@@ -44,13 +46,13 @@ namespace mgs
     void sl_make_dodecahedron();
     void sl_make_icosahedron();
 
+    void sl_star_selected(int index);
+    
   private:
     Q3DScatter *m_graph;
 
-    QTimer m_rotationTimer;
+    QTimer m_simulationTimer;
 
-    int m_fieldLines;
-    int m_arrowsPerLine;
     int m_freePointMassCube;
     
     QScatter3DSeries *m_freePointMass;
@@ -61,8 +63,5 @@ namespace mgs
     
     QScatterDataArray *m_freePointMassArray;
     QScatterDataArray *m_starArray;
-
-    float m_angleOffset;
-    float m_angleStep;
   };
 }

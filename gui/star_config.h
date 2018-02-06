@@ -43,6 +43,11 @@ namespace mgs
     QLineEdit   *q_starPosXEdit     = 0;
     QLineEdit   *q_starPosYEdit     = 0;
     QLineEdit   *q_starPosZEdit     = 0;
+
+    QSlider     *q_freePointSlider  = 0;
+    QPushButton *q_toggleSimulationButton = 0;
+    QPushButton *q_toggleCenterButton = 0;
+    QPushButton *q_toggleArrowsButton = 0;
     
     std::list<QPushButton *> q_starSelectButtons;
     
@@ -60,5 +65,8 @@ namespace mgs
   public:
     StarConfig();
     void init();
+
+  public Q_SLOTS:
+    
   };
 } // namespace mgs
