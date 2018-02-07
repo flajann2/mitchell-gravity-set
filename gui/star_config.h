@@ -33,8 +33,8 @@ namespace mgs
     QVBoxLayout *q_vLayout          = 0;
     QVBoxLayout *q_starVisualsLayout = 0;
     QHBoxLayout *q_starArrangementLayout = 0;
-    QFormLayout *q_form             = 0;
     QHBoxLayout *q_starConfigLayout = 0;
+    QVBoxLayout *q_freePointMassConfigLayout = 0;
     
     QSlider     *q_massSlider       = 0;
     QComboBox   *q_starSelector     = 0;
@@ -44,6 +44,10 @@ namespace mgs
     QLineEdit   *q_starPosYEdit     = 0;
     QLineEdit   *q_starPosZEdit     = 0;
 
+    QLineEdit   *q_gravitationalConstantEdit = 0;
+    QLineEdit   *q_delta_t_Edit = 0;
+    QLineEdit   *q_escapeRadiusEdit = 0;
+    
     QSlider     *q_freePointSlider  = 0;
     QPushButton *q_toggleSimulationButton = 0;
     QPushButton *q_toggleCenterButton = 0;
@@ -53,14 +57,18 @@ namespace mgs
     
     QGroupBox   *q_sfGroup          = 0;
     QGroupBox   *q_ssGroup          = 0;
+    QGroupBox   *q_fpmGroup         = 0;
+    QGroupBox   *q_overallGroup     = 0;
 
-    StarFieldGUI *q_sfield           = 0;
+    StarFieldGUI *q_sfield          = 0;
     
     Q3DScatter *createGraph();
     QWidget *createContainer();
     QWidget *createWidget();
     QGroupBox *createStarFieldGUIGroup();
     QGroupBox *createStarSelectorGroup();
+    QGroupBox *createFreePointMassGroup();
+    QGroupBox *createOverallGroup();
    
   public:
     StarConfig();

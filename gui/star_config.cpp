@@ -53,27 +53,17 @@ namespace mgs
     q_widget->setWindowTitle(QStringLiteral("Mitchell Gravity Set, 4th Generation"));
     {
       q_sfGroup = createStarFieldGUIGroup();
+      q_fpmGroup = createFreePointMassGroup();
+      q_overallGroup = createOverallGroup();
       {
         q_vLayout->addWidget(q_sfGroup);
+        q_vLayout->addWidget(q_fpmGroup);
+        q_vLayout->addWidget(q_overallGroup);
       }
       
       q_ssGroup = createStarSelectorGroup();
       
-      q_freePointSlider = new QSlider(Qt::Horizontal, q_widget);
-      {
-        q_freePointSlider->setTickInterval(1);
-        q_freePointSlider->setMinimum(4);
-        q_freePointSlider->setValue(10);
-        q_freePointSlider->setMaximum(16);
-      }
       
-      auto arrowsSlider = new QSlider(Qt::Horizontal, q_widget);
-      {
-        arrowsSlider->setTickInterval(1);
-        arrowsSlider->setMinimum(8);
-        arrowsSlider->setValue(16);
-        arrowsSlider->setMaximum(32);
-      }
       
       q_toggleSimulationButton = new QPushButton(q_widget);
       {
@@ -92,11 +82,7 @@ namespace mgs
         q_toggleArrowsButton->setText(QStringLiteral("Toggle Arrows"));
         q_vLayout->addWidget(q_toggleArrowsButton);
       }
-      
-      {
-        q_vLayout->addWidget(new QLabel(QStringLiteral("Free Point Cube (4 - 16):")));
-        q_vLayout->addWidget(q_freePointSlider);
-      }
+     
 
       {
         QObject::connect(q_toggleSimulationButton, &QPushButton::clicked, q_sfield, &StarFieldGUI::sl_toggleSimulation);
@@ -112,7 +98,7 @@ namespace mgs
   QGroupBox* StarConfig::createStarFieldGUIGroup() {
     auto groupBox = new QGroupBox(QStringLiteral("Stars"));
     {
-      q_form = new QFormLayout;
+      auto form = new QFormLayout;
       q_massSlider = new QSlider(Qt::Horizontal, q_widget);
       q_starSelector = new QComboBox();
       q_massEdit = new QLineEdit();
@@ -126,7 +112,7 @@ namespace mgs
       }
       
       q_starSelector->addItems(star_select);
-      q_form->addRow(QLabel::tr("Star"), q_starSelector);
+      form->addRow(QLabel::tr("Star"), q_starSelector);
       q_massSlider->setTickInterval(1);
       q_massSlider->setMinimum(1);
       q_massSlider->setValue(12);
@@ -135,21 +121,21 @@ namespace mgs
       
       {
         q_massEdit->setValidator(new QDoubleValidator);
-        q_form->addRow(new QLabel("Mass"), q_massEdit);
-        q_form->addRow(q_massSlider);
+        form->addRow(new QLabel("Mass"), q_massEdit);
+        form->addRow(q_massSlider);
       }
       
       {
         q_starPosXEdit->setValidator(new QDoubleValidator);
-        q_form->addRow(new QLabel("X pos"), q_starPosXEdit);
+        form->addRow(new QLabel("X pos"), q_starPosXEdit);
         q_starPosYEdit->setValidator(new QDoubleValidator);
-        q_form->addRow(new QLabel("Y pos"), q_starPosYEdit);
+        form->addRow(new QLabel("Y pos"), q_starPosYEdit);
         q_starPosZEdit->setValidator(new QDoubleValidator);
-        q_form->addRow(new QLabel("Z pos"), q_starPosZEdit);
+        form->addRow(new QLabel("Z pos"), q_starPosZEdit);
       }
       
       auto vbox = new QVBoxLayout;
-      vbox->addLayout(q_form);
+      vbox->addLayout(form);
       groupBox->setLayout(vbox);
     }
     
@@ -190,5 +176,52 @@ namespace mgs
     }
     return groupBox;
   }
+
+  QGroupBox* StarConfig::createFreePointMassGroup() {
+    auto groupBox = new QGroupBox(QStringLiteral("Free Point Mass"));
+    {
+      auto form = new QFormLayout;
+
+      form->addRow(new QLabel(QStringLiteral("Free Point Cube (4 - 16):")));
+      q_vLayout->addWidget(q_freePointSlider);
+
+
+      q_freePointSlider = new QSlider(Qt::Horizontal, q_widget);
+      q_freePointSlider->setTickInterval(1);
+      q_freePointSlider->setMinimum(4);
+      q_freePointSlider->setValue(10);
+      q_freePointSlider->setMaximum(16);
+
+      form->addRow(q_freePointSlider);
+
+      auto vbox = new QVBoxLayout;
+      vbox->addLayout(form);
+      groupBox->setLayout(vbox);
+    }
+    
+    return groupBox;
+  }
+
+  QGroupBox* StarConfig::createOverallGroup() {
+    auto groupBox = new QGroupBox(QStringLiteral("Overall"));
+    {
+      auto form = new QFormLayout;
+
+      (q_gravitationalConstantEdit = new QLineEdit)->setValidator(new QDoubleValidator);
+      (q_delta_t_Edit = new QLineEdit)->setValidator(new QDoubleValidator);
+      (q_escapeRadiusEdit = new QLineEdit)->setValidator(new QDoubleValidator);
+
+      form->addRow(new QLabel("Grav Const"), q_gravitationalConstantEdit);
+      form->addRow(new QLabel("delta T"), q_delta_t_Edit);
+      form->addRow(new QLabel("Escape Radius"), q_escapeRadiusEdit);
+
+      auto vbox = new QVBoxLayout;
+      vbox->addLayout(form);
+      groupBox->setLayout(vbox);
+    }
+    
+    return groupBox;
+  }
+
 } // namespace mgs
 
