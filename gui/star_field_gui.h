@@ -29,7 +29,7 @@ namespace mgs
     void generateField();
                        
                        
-  public Q_SLOTS:
+  public slots:
     void sl_setFreePointCube(int side);
 
     void sl_toggleSimulation();
@@ -47,7 +47,12 @@ namespace mgs
     void sl_make_icosahedron();
 
     void sl_star_selected(int index);
-    
+    void sl_update_star(int index, const Star& star);
+
+  signals:
+    void sig_select_star(int index, const Star& star);
+    void sig_set_number_of_stars(int count);
+
   private:
     Q3DScatter *m_graph;
 

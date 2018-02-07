@@ -174,12 +174,28 @@ namespace mgs
       m_simulationTimer.start(15);
   }
 
-
   void StarFieldGUI::sl_star_selected(int index) {
-    cout << "star selected: " << index << endl;
+    cout << "gui star selected: " << index << endl;
+    if (index >= 0) {
+      sig_select_star(index, c_stars[index]);
+      m_stars->setSelectedItem(index);
+    } else { // all selected, deselect the star
+      m_stars->setSelectedItem( QScatter3DSeries::invalidSelectionIndex());
+    }
   }
 
-  
+  void StarFieldGUI::sl_update_star(int index, const Star& star) {
+    cout << "update star: " << index << " with: " << star << endl;
+    if (index >= 0) {
+      c_stars[index] = star;
+    } else { // update all stars with the same mass
+      for (auto st = c_stars.begin(); st != c_stars.end(); ++st)
+        st->mass = star.mass;
+    }
+    
+    updateFieldState();
+  }
+
   void StarFieldGUI::sl_make_polygon(int stars){}
 
   // The tetrahedron can be easily derived from a cube.
@@ -192,6 +208,8 @@ namespace mgs
     c_stars.push_back(Star {defaultStarMass, {c, -c, c}});
     c_stars.push_back(Star {defaultStarMass, {-c, c, c}});
     c_stars.push_back(Star {defaultStarMass, {c, c, -c}});
+
+    sig_set_number_of_stars(c_stars.size());
     updateFieldState();
   }
 
@@ -209,6 +227,8 @@ namespace mgs
     
     c_stars.push_back(Star {defaultStarMass, {0, 0, -c}});    
     c_stars.push_back(Star {defaultStarMass, {0, 0, c}});    
+
+    sig_set_number_of_stars(c_stars.size());
     updateFieldState();
   }
 
@@ -229,7 +249,8 @@ namespace mgs
 
     c_stars.push_back(Star {defaultStarMass, {-c, -c, c}});    
     c_stars.push_back(Star {defaultStarMass, {c, c, -c}});    
-    
+
+    sig_set_number_of_stars(c_stars.size());
     updateFieldState();
   }
   
@@ -257,6 +278,7 @@ namespace mgs
         }
       }
     }
+    sig_set_number_of_stars(c_stars.size());
     updateFieldState();        
   }
   
@@ -278,9 +300,7 @@ namespace mgs
         }
       }
     }
+    sig_set_number_of_stars(c_stars.size());
     updateFieldState();
-  }
-
-  
-  
+  } 
 } // namespace mgs

@@ -89,6 +89,19 @@ namespace mgs
         QObject::connect(q_toggleCenterButton, &QPushButton::clicked,     q_sfield, &StarFieldGUI::sl_toggleCenter);
         QObject::connect(q_toggleArrowsButton, &QPushButton::clicked,     q_sfield, &StarFieldGUI::sl_toggleArrows);
         QObject::connect(q_freePointSlider, &QSlider::valueChanged,       q_sfield, &StarFieldGUI::sl_setFreePointCube);
+
+        QObject::connect(q_starSelector, SIGNAL(activated(int)),  this, SLOT(sl_star_selected(int)));
+
+        QObject::connect(q_massEdit, &QLineEdit::textEdited,     this, &StarConfig::sl_star_config_changed);
+        QObject::connect(q_starPosXEdit, &QLineEdit::textEdited, this, &StarConfig::sl_star_config_changed);
+        QObject::connect(q_starPosYEdit, &QLineEdit::textEdited, this, &StarConfig::sl_star_config_changed);
+        QObject::connect(q_starPosZEdit, &QLineEdit::textEdited, this, &StarConfig::sl_star_config_changed);
+
+        QObject::connect(q_sfield, &StarFieldGUI::sig_select_star,         this, &StarConfig::sl_select_star);
+        QObject::connect(q_sfield, &StarFieldGUI::sig_set_number_of_stars, this, &StarConfig::sl_set_number_of_stars);
+        
+        QObject::connect(this, &StarConfig::sig_select_star, q_sfield, &StarFieldGUI::sl_star_selected);
+        QObject::connect(this, &StarConfig::sig_update_star, q_sfield, &StarFieldGUI::sl_update_star);
       }
       
       q_widget->show();
@@ -108,7 +121,7 @@ namespace mgs
       
       QStringList star_select;
       {
-        star_select << "1" << "2" << "3";
+        star_select << "all" << "1" << "2" << "3";
       }
       
       q_starSelector->addItems(star_select);
@@ -223,5 +236,50 @@ namespace mgs
     return groupBox;
   }
 
+  void StarConfig::sl_select_star(int index, const Star& star) {
+    cout << "star " << index << ": " << star << endl;
+    auto [mass, pos] = star;
+    q_starSelector->setCurrentIndex(index + 1);
+    q_massEdit->setText(QString::fromStdString(to_string(mass)));
+    q_starPosXEdit->setText(QString::fromStdString(to_string(pos.vec[0])));
+    q_starPosYEdit->setText(QString::fromStdString(to_string(pos.vec[1])));
+    q_starPosZEdit->setText(QString::fromStdString(to_string(pos.vec[2])));
+  }
+
+  void StarConfig::sl_set_number_of_stars(int count) {
+    cout << "#stars: " << count << endl;
+    q_starSelector->clear();
+    for (auto i = -1; i < count; ++i) {
+      auto label = (i == -1) ? QString("all") : QString::fromStdString(to_string(i + 1));
+      q_starSelector->addItem(label, QVariant(i));
+    }
+  }
+
+  // we gather everything to send with regards to the
+  // individual star configuration. A -1 on the index
+  // means change the masses on all stars, but not the
+  // Position.
+  void StarConfig::sl_star_config_changed(const QString& _text) {
+    auto index = q_starSelector->currentIndex() - 1;
+    try {
+      Star star {
+        std::stod(q_massEdit->text().toStdString()),
+          {std::stod(q_starPosXEdit->text().toStdString()),
+              std::stod(q_starPosYEdit->text().toStdString()),
+              std::stod(q_starPosZEdit->text().toStdString())}
+      };
+      cout << "config changed for star: " << index << " sending: " << star << endl;
+      sig_update_star(index, star);
+    } catch (std::invalid_argument) {
+      cout << "ignoring invalid strings" << endl;
+    }
+    
+  }
+
+  void StarConfig::sl_star_selected(int index) {
+    // adjust the index to be what's expected, where -1 means "all";
+    sig_select_star(--index);
+    cout << "cfg star selected: " << index << endl;
+  }
 } // namespace mgs
 

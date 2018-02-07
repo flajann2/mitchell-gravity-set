@@ -71,10 +71,20 @@ namespace mgs
     QGroupBox *createOverallGroup();
    
   public:
-    StarConfig();
+    explicit StarConfig();
     void init();
 
-  public Q_SLOTS:
-    
+  public slots:
+    // this is not really a slot as such,
+    // but we are kinda using it that way.
+    void sl_select_star(int index, const Star& star);
+    void sl_set_number_of_stars(int count);
+    void sl_star_selected(int index);
+
+    void sl_star_config_changed(const QString& _text);
+
+  signals:
+    void sig_update_star(int index, const Star& star);
+    void sig_select_star(int index); 
   };
 } // namespace mgs
