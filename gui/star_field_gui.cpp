@@ -92,24 +92,9 @@ namespace mgs
   {
     delete m_graph;
   }
-  
-  /* The main computation loop for the GUI, where updates shall take place.
-   */
-  void StarFieldGUI::updateFieldState()
-  {
-    // Reusing existing array is computationally cheaper than always generating new array, even if
-    // all data items change in the array, if the array size doesn't change.
-    if (!m_freePointMassArray) m_freePointMassArray = new QScatterDataArray;
-    if (!m_starArray)          m_starArray = new QScatterDataArray;
-    
-    int fpmArraySize = ipow(m_freePointMassCube + 1, 3);
-    if (fpmArraySize != m_freePointMassArray->size())
-      m_freePointMassArray->resize(fpmArraySize);
 
-    if (c_stars.size() != m_starArray->size())
-      m_starArray->resize(c_stars.size());
-    
-    QScatterDataItem *pfpm = &m_freePointMassArray->first();
+  void StarFieldGUI::generateFPMInitialStates() {
+    c_fpms.clear();
     
     for (float i = 0; i <= m_freePointMassCube; i++) {
       float x = -xRange + (i * 2.0 * xRange / m_freePointMassCube);      
@@ -117,11 +102,54 @@ namespace mgs
         float y = -yRange + (j * 2.0 * yRange / m_freePointMassCube);              
         for (float k = 0; k <= m_freePointMassCube; k++) {
           float z = -zRange + (k * 2.0 * yRange / m_freePointMassCube);
-          
-          // position this particle
-          pfpm->setPosition(QVector3D(x, y, z));
-          //pfpm->setRotation(totalRotation);
-          ++pfpm;
+          c_fpms.push_back(PosVel {{x,y,z},{0,0,0}});
+        }
+      }
+    }
+  }
+
+  void StarFieldGUI::eularianFPMAdvance() {
+  }
+
+  /* The main computation loop for the GUI, where updates shall take place.
+   */
+  void StarFieldGUI::updateFieldState()
+  {
+    // Reusing existing array is computationally cheaper than always generating new array, even if
+    // all data items change in the array, if the array size doesn't change.
+
+    if (!m_freePointMassArray) {
+      m_freePointMassArray = new QScatterDataArray;
+      generateFPMInitialStates();
+    }
+
+    if (!m_starArray) {
+      m_starArray = new QScatterDataArray;
+    }
+    
+    int fpmArraySize = ipow(m_freePointMassCube + 1, 3);
+    if (fpmArraySize != m_freePointMassArray->size()) {
+      m_freePointMassArray->resize(fpmArraySize);
+      generateFPMInitialStates();
+    }
+
+    if (c_stars.size() != m_starArray->size()) {
+      m_starArray->resize(c_stars.size());
+    }
+
+    { // we wish to limit the scope of fpm and sdi
+      QScatterDataItem *sdi = &m_freePointMassArray->first();
+      auto fpm = c_fpms.cbegin();
+      
+      for (float i = 0; i <= m_freePointMassCube; i++) {
+        for (float j = 0; j <= m_freePointMassCube; j++) {
+          for (float k = 0; k <= m_freePointMassCube; k++, ++sdi, ++fpm) {
+            // position this particle
+            sdi->setPosition(QVector3D(fpm->p.vec[0],
+                                       fpm->p.vec[1],
+                                       fpm->p.vec[2]));
+            //sdi->setRotation(totalRotation);
+          }
         }
       }
     }
@@ -148,20 +176,20 @@ namespace mgs
     updateFieldState();
   }
 
-  // advances state of simulation
-  void StarFieldGUI::sl_stepSimulation()
-  {
-    //m_angleOffset += m_angleStep;
+  void StarFieldGUI::sl_stepSimulation() {
+    eularianFPMAdvance();
     updateFieldState();
   }
+    
+  void StarFieldGUI::sl_reset_eularian() {
+    generateFPMInitialStates();
+  }
   
-  void StarFieldGUI::sl_toggleCenter()
-  {
+  void StarFieldGUI::sl_toggleCenter() {
     m_sun->setVisible(!m_sun->isVisible());
   }
 
-  void StarFieldGUI::sl_toggleArrows()
-  {
+  void StarFieldGUI::sl_toggleArrows() {
     // TODO: This must work
     // m_sun->setVisible(!m_sun->isVisible());
   }

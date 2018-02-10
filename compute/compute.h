@@ -111,6 +111,13 @@ namespace mgs {
   using Velocity     = Vector<double, std::int16_t, struct MathParm>;
   using Acceleration = Vector<double, std::int16_t, struct MathParm>;
 
+  // For some operations, it helps to have Position and Velocity
+  // combined.
+  struct PosVel {
+    Position p;
+    Velocity v;
+  };
+
   template <typename T, typename I, typename P>
   inline std::ostream &operator<<(std::ostream &os, Vector<T, I, P>const &c) {
     os << "Vector[ ";
@@ -133,6 +140,78 @@ namespace mgs {
     os << " ]";
     return os;
   }
+
+  /* Computes the acceleration of a single star on
+   * the fpm, the Free Point Mass.
+   */
+  template <typename T, typename I, typename P>
+  inline Acceleration compute_acceleration(const Star& star,
+                                           const Position& fpm,
+                                           const T gravitational_constant) {
+    auto r_vec = fpm - star.position;
+    auto r_squared = r_vec.norm_squared();
+    auto r = sqrt(r_squared);
+    auto unit_vec = r_vec / r;
+    auto force = (-gravitational_constant) * star.mass / r_squared;
+    return unit_vec * force;
+  }
+
+
+  template <typename T, typename I, typename P>
+  struct FieldParms {
+    T gravitational_constant;
+    T delta_t;
+    I iter_limit;
+    T escape_radius;
+  };
+
+  template <typename T, typename I, typename P>
+  Position compute_center_of_star_mass(const std::vector<Star>& stars) {
+    T total_star_mass = 0.0;
+    Position center_accum;
+    
+    for (auto star : stars) {
+      total_star_mass += star.mass;
+      center_accum += star.position * star.mass;
+    }
+    return center_accum / total_star_mass;
+  }
+  
+  /* Iterates a single Free Point Mass from initial position and velocity.
+   * This has been pulled out of Field to be callable independent of having
+   * to set up the entire Field object when we are not computing the MGS.
+   */
+  template <typename T, typename I, typename P>
+  inline I render_single_cell(const Position& initial_p,
+                              const Velocity& initial_v,
+                              const std::vector<Star>& stars,
+                              const Position& center_of_star_mass,
+                              const FieldParms<T,I,P>& parms,
+                              std::function<void(const Position&,
+                                                 const Velocity&)> cb = nullptr) {
+    auto [gravitational_constant, delta_t, iter_limit, escape_radius] = parms;
+    auto v = initial_v;
+    auto p = initial_p;
+    I iter = 0;
+    
+    for (iter = 0;
+         iter < iter_limit && (p - center_of_star_mass).norm() <= escape_radius;
+         ++iter) {
+      
+      Acceleration a;
+      
+      // acceleration due to all the stars
+      for (auto star : stars) {
+        a += compute_acceleration<T,I,P>(star, p, gravitational_constant);
+      }
+      
+      // Eulerian integration
+      v += a * delta_t;
+      p += v * delta_t;
+      if (cb) cb(p, v);
+    }
+    return iter;
+  }
   
   /* Field of poIs to be iterated
    * The field is always a cube or square, etc.,
@@ -154,27 +233,21 @@ namespace mgs {
     
     I cube_size;
     I dimension;
-    I iter_limit;
-    
-    double gravitational_constant;
-    double escape_radius;
-    double delta_t;
-    
+
+    FieldParms<T,I,P> parms;
+     
     Field(Coordinate nbound,
           Coordinate pbound,          
           I cs = 1024,
           I dim = 2,
           I iteration_limit = 1024,
-          double grav_constant = 1.0,
-          double escape_r = 2.0,
-          double delta_time = 0.1) : c1(nbound),
-                                     c2(pbound),
-                                     cube_size(cs),
-                                     dimension(dim),
-                                     iter_limit(iteration_limit),
-                                     gravitational_constant(grav_constant),
-                                     escape_radius(escape_r),
-                                     delta_t(delta_time) {
+          T grav_constant = 1.0,
+          T escape_r = 2.0,
+          T delta_time = 0.1) : c1(nbound),
+                                c2(pbound),
+                                cube_size(cs),
+                                dimension(dim),
+                                parms({grav_constant, delta_time, iteration_limit, escape_r}) {
       I backfill = untouched;
       grid.resize(std::pow(cs, dim), backfill);
     }
@@ -186,13 +259,23 @@ namespace mgs {
     // WARN: No bounds checking is done here.
     Index coords2index(Coordinate& c);
     void render_with_callback(std::function<void(Index, Position)> cb);
-    Position compute_center_of_star_mass();
     
   private:
-    I render_single_cell(const Position& initial_p,
-                         const Velocity& initial_v);
-    inline Acceleration compute_acceleration(const Star& star, const Position& fpm) const;
   };
+
+  /*
+   * Do the Newton with the Floating Point16_t Mass and a single
+   * Star. Note that r_squared is computed without squaring
+   * the final result, but the sum of the squared components, so
+   * we do that first, then take it's square root to save on the
+   * calculations.
+   *
+   * TODO: Some consideration should be given for
+   * TODO: more optimizations so this can run completely
+   * TODO: in the L1 or L2 cache. Also, how can this be
+   * TODO: restructured so this can take advantage of SMID?
+   */
+
   using StarField = Field<double, std::int16_t, struct FieldParm>;
 
   inline std::ostream &operator<<(std::ostream &os, StarField const &f) {
@@ -201,10 +284,10 @@ namespace mgs {
     os << " c2:" << f.c2;
     os << " cube_size:" << f.cube_size;
     os << " dimension:" << f.dimension;
-    os << " iter_limit:" << f.iter_limit;
-    os << " gravitational_constant:" << f.gravitational_constant;
-    os << " escappe_radius:" << f.escape_radius;
-    os << " delta_t:" << f.delta_t;
+    os << " iter_limit:" << f.parms.iter_limit;
+    os << " gravitational_constant:" << f.parms.gravitational_constant;
+    os << " escappe_radius:" << f.parms.escape_radius;
+    os << " delta_t:" << f.parms.delta_t;
     
     os << "Stars[ ";
     for (auto star : f.stars) {

@@ -27,7 +27,8 @@ namespace mgs
     void updateFieldState();
     void clearField();
     void generateField();
-                       
+    void generateFPMInitialStates();
+    void eularianFPMAdvance();
                        
   public slots:
     void sl_setFreePointCube(int side);
@@ -48,7 +49,8 @@ namespace mgs
 
     void sl_star_selected(int index);
     void sl_update_star(int index, const Star& star);
-
+    void sl_reset_eularian();
+    
   signals:
     void sig_select_star(int index, const Star& star);
     void sig_set_number_of_stars(int count);
@@ -65,6 +67,7 @@ namespace mgs
     QCustom3DItem *m_sun;
 
     std::vector<Star> c_stars;
+    std::vector<PosVel> c_fpms;
     
     QScatterDataArray *m_freePointMassArray;
     QScatterDataArray *m_starArray;

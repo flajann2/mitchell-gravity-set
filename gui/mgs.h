@@ -6,6 +6,8 @@
 #include <QtCore/qmath.h>
 #include <cmath>
 #include <deque>
+#include <compute>
+
 using namespace std;
 
 namespace mgs

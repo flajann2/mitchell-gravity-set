@@ -6,7 +6,6 @@
     - [[#distributed-computation][Distributed Computation?]]
   - [[#background][Background]]
     - [[#motivation][Motivation]]
-  - [[#why-this-is-just-a-library][Why this is just a library]]
   - [[#basic-design][Basic Design]]
   - [[#building-and-installing][Building and Installing]]
     - [[#building][Building]]
@@ -18,6 +17,8 @@
       - [[#boost][Boost]]
         - [[#own-environment][Own Environment]]
       - [[#hpx][HPX]]
+    - [[#clang-vs-gcc][clang vs. gcc]]
+    - [[#memory-locality][Memory locality]]
 
 ** Synopsis
    This library computes the Mitchell Gravity Set. This
@@ -100,15 +101,6 @@
     chance to make use of the OpenGL library for
     rendering the results.
 
-** Why this is just a library
-   The earlier iterations of the Gravity Set had its
-   compute code intertwined with the GUI support, which
-   suffered greately from "bit rot", and therefore
-   became unmanagable. This time, it's a seperate
-   library, written in C++, sporting a C interface to
-   allow it to be called from any language that allows
-   external calls to a C library.
-
 ** Basic Design
    We are going to leverage the awesome power of C++17
    to make this a reality.  In short, we want to define
@@ -187,7 +179,9 @@
    with building and installing and the like, so they
    are not "official".  When this project is all said
    and done, I will be writing formal documentation on
-   installation and running MGS.
+   installation and running MGS. I do not promise to 
+   keep Personal Notes up-to-date, and will most likely
+   be deleted once this project is complete.
 
 *** Debugging
     To cmake for debugging:
@@ -253,3 +247,21 @@
 
      #+begin_src bash
      #+end_src
+*** clang vs. gcc
+    Currently, I am using gcc, but will eventually
+    switch over to clang, especially for the direct
+    tie-in to the LLVM, which will make it easy to
+    leverage doing these computations on GPUs.
+
+    One exciting thing about clang is the ability to do
+    optimization at the link level, which combines all
+    the translation units at the IR level. For this
+    project, there will probably be no significant
+    gain, but for the upcoming ZuseNEAT project, that
+    will be a different story.
+
+*** Memory locality
+    Eventually I may want to alter the allocator to
+    take advantage of memory locality to squeeze more
+    performance from leveraging the CPU caches more
+    efficiently.
