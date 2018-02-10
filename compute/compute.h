@@ -163,6 +163,11 @@ namespace mgs {
     T delta_t;
     I iter_limit;
     T escape_radius;
+    FieldParms() = default;
+    FieldParms(T gc, T dt, I il, T er) : gravitational_constant(gc),
+                                         delta_t(dt),
+                                         iter_limit(il),
+                                         escape_radius(er) {}
   };
 
   template <typename T, typename I, typename P>

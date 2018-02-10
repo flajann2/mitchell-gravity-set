@@ -50,6 +50,7 @@ namespace mgs
     void sl_star_selected(int index);
     void sl_update_star(int index, const Star& star);
     void sl_reset_eularian();
+    void sl_update_overall(const Overall& overall);
     
   signals:
     void sig_select_star(int index, const Star& star);
@@ -68,6 +69,7 @@ namespace mgs
 
     std::vector<Star> c_stars;
     std::vector<PosVel> c_fpms;
+    Overall overall;
     
     QScatterDataArray *m_freePointMassArray;
     QScatterDataArray *m_starArray;

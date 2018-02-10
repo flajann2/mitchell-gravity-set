@@ -60,10 +60,9 @@ namespace mgs
         q_vLayout->addWidget(q_fpmGroup);
         q_vLayout->addWidget(q_overallGroup);
       }
+      updateOverallGroup();
       
       q_ssGroup = createStarSelectorGroup();
-      
-      
       
       q_toggleSimulationButton = new QPushButton(q_widget);
       {
@@ -82,7 +81,6 @@ namespace mgs
         q_toggleArrowsButton->setText(QStringLiteral("Toggle Arrows"));
         q_vLayout->addWidget(q_toggleArrowsButton);
       }
-     
 
       {
         QObject::connect(q_toggleSimulationButton, &QPushButton::clicked, q_sfield, &StarFieldGUI::sl_toggleSimulation);
@@ -97,11 +95,18 @@ namespace mgs
         QObject::connect(q_starPosYEdit, &QLineEdit::textEdited, this, &StarConfig::sl_star_config_changed);
         QObject::connect(q_starPosZEdit, &QLineEdit::textEdited, this, &StarConfig::sl_star_config_changed);
 
+        QObject::connect(q_gravitationalConstantEdit, &QLineEdit::textEdited, this, &StarConfig::sl_overall_config_changed);
+        QObject::connect(q_delta_t_Edit,              &QLineEdit::textEdited, this, &StarConfig::sl_overall_config_changed);
+        QObject::connect(q_iterationLimitEdit,        &QLineEdit::textEdited, this, &StarConfig::sl_overall_config_changed);
+        QObject::connect(q_escapeRadiusEdit,          &QLineEdit::textEdited, this, &StarConfig::sl_overall_config_changed);
+        QObject::connect(q_simulationSpeedEdit,       &QLineEdit::textEdited, this, &StarConfig::sl_overall_config_changed);
+        
         QObject::connect(q_sfield, &StarFieldGUI::sig_select_star,         this, &StarConfig::sl_select_star);
         QObject::connect(q_sfield, &StarFieldGUI::sig_set_number_of_stars, this, &StarConfig::sl_set_number_of_stars);
         
         QObject::connect(this, &StarConfig::sig_select_star, q_sfield, &StarFieldGUI::sl_star_selected);
         QObject::connect(this, &StarConfig::sig_update_star, q_sfield, &StarFieldGUI::sl_update_star);
+        QObject::connect(this, &StarConfig::sig_update_overall, q_sfield, &StarFieldGUI::sl_update_overall);
       }
       
       q_widget->show();
@@ -259,10 +264,11 @@ namespace mgs
     }
   }
 
-  // we gather everything to send with regards to the
-  // individual star configuration. A -1 on the index
-  // means change the masses on all stars, but not the
-  // Position.
+  /* we gather everything to send with regards to the
+   * individual star configuration. A -1 on the index
+   * means change the masses on all stars, but not the
+   * Position.
+   */
   void StarConfig::sl_star_config_changed(const QString& _text) {
     auto index = q_starSelector->currentIndex() - 1;
     try {
@@ -275,11 +281,36 @@ namespace mgs
       cout << "config changed for star: " << index << " sending: " << star << endl;
       sig_update_star(index, star);
     } catch (std::invalid_argument) {
-      cout << "ignoring invalid strings" << endl;
-    }
-    
+      cout << "ignoring invalid strings in star config group" << endl;
+    }   
   }
-
+  
+  /* The overall config group's changes are gathered here,
+   * and are fowarded to the sig_ovarall_changed() signal.
+   */
+  void StarConfig::sl_overall_config_changed(const QString& _text) {
+    try {
+      m_overall = Overall {
+        std::stod(q_gravitationalConstantEdit->text().toStdString()),
+        std::stod(q_delta_t_Edit->text().toStdString()),
+        std::stoi(q_iterationLimitEdit->text().toStdString()),
+        std::stod(q_escapeRadiusEdit->text().toStdString()),
+        std::stod(q_simulationSpeedEdit->text().toStdString())
+      };
+      sig_update_overall(m_overall);
+    } catch (std::invalid_argument) {
+      cout << "ignoring invalid strings in overall group" << '\n';
+    }
+  }
+  
+  void StarConfig::updateOverallGroup() {
+    q_gravitationalConstantEdit->setText(QString::fromStdString(to_string(m_overall.gravitational_constant)));
+    q_delta_t_Edit->setText(QString::fromStdString(to_string(m_overall.delta_t)));
+    q_iterationLimitEdit->setText(QString::fromStdString(to_string(m_overall.iter_limit)));
+    q_escapeRadiusEdit->setText(QString::fromStdString(to_string(m_overall.escape_radius)));
+    q_simulationSpeedEdit->setText(QString::fromStdString(to_string(m_overall.simulation_speed)));
+  }
+  
   void StarConfig::sl_star_selected(int index) {
     // adjust the index to be what's expected, where -1 means "all";
     sig_select_star(--index);

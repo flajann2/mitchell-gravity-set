@@ -224,6 +224,11 @@ namespace mgs
     updateFieldState();
   }
 
+  void StarFieldGUI::sl_update_overall(const Overall& ov) {
+    cout << "update oveall" << '\n';
+    overall = ov;
+  }
+
   void StarFieldGUI::sl_make_polygon(int stars){}
 
   // The tetrahedron can be easily derived from a cube.

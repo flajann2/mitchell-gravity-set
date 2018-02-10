@@ -1,5 +1,7 @@
 #pragma once
 
+#include "mgs.h"
+
 #include <QtDataVisualization/q3dscatter.h>
 #include <QtDataVisualization/qscatterdataproxy.h>
 #include <QtCore/QTimer>
@@ -63,6 +65,8 @@ namespace mgs
     QGroupBox   *q_overallGroup     = 0;
 
     StarFieldGUI *q_sfield          = 0;
+
+    Overall m_overall;
     
     Q3DScatter *createGraph();
     QWidget *createContainer();
@@ -71,6 +75,7 @@ namespace mgs
     QGroupBox *createStarSelectorGroup();
     QGroupBox *createFreePointMassGroup();
     QGroupBox *createOverallGroup();
+    void updateOverallGroup();
    
   public:
     explicit StarConfig();
@@ -84,9 +89,11 @@ namespace mgs
     void sl_star_selected(int index);
 
     void sl_star_config_changed(const QString& _text);
+    void sl_overall_config_changed(const QString& _text);
 
   signals:
     void sig_update_star(int index, const Star& star);
-    void sig_select_star(int index); 
+    void sig_select_star(int index);
+    void sig_update_overall(const Overall& overall);
   };
 } // namespace mgs
