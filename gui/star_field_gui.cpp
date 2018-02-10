@@ -196,6 +196,7 @@ namespace mgs
   
   void StarFieldGUI::sl_toggleSimulation()
   {
+    cout << "timer is being toggled" << '\n';
     if (m_simulationTimer.isActive())
       m_simulationTimer.stop();
     else
@@ -203,7 +204,7 @@ namespace mgs
   }
 
   void StarFieldGUI::sl_star_selected(int index) {
-    cout << "gui star selected: " << index << endl;
+    cout << "gui star selected: " << index << '\n';
     if (index >= 0) {
       sig_select_star(index, c_stars[index]);
       m_stars->setSelectedItem(index);
@@ -213,7 +214,7 @@ namespace mgs
   }
 
   void StarFieldGUI::sl_update_star(int index, const Star& star) {
-    cout << "update star: " << index << " with: " << star << endl;
+    cout << "update star: " << index << " with: " << star << '\n';
     if (index >= 0) {
       c_stars[index] = star;
     } else { // update all stars with the same mass
@@ -233,7 +234,7 @@ namespace mgs
 
   // The tetrahedron can be easily derived from a cube.
   void StarFieldGUI::sl_make_tetrahedron() {
-    cout << "tetra" << endl;
+    cout << "tetra" << '\n';
     c_stars.clear();
     auto c = xRange * defaultStarArrangementFactor;
     
@@ -248,7 +249,7 @@ namespace mgs
 
   // Octahedron is also easily derived from a cube.
   void StarFieldGUI::sl_make_octahedron() {
-    cout << "octa" << endl;
+    cout << "octa" << '\n';
     c_stars.clear();
     auto c = xRange * defaultStarArrangementFactor;
 
@@ -267,7 +268,7 @@ namespace mgs
 
   // Hexahedron is dirt easy. It's a cube, after all.
   void StarFieldGUI::sl_make_hexahedron() {
-    cout << "hexa" << endl;
+    cout << "hexa" << '\n';
     c_stars.clear();
     auto c = xRange * defaultStarArrangementFactor;
     
@@ -288,7 +289,7 @@ namespace mgs
   }
   
   void StarFieldGUI::sl_make_dodecahedron(){
-    cout << "dodeca" << endl;
+    cout << "dodeca" << '\n';
     c_stars.clear();
 
     auto r = xRange * defaultStarArrangementFactor * 2.0;
@@ -316,7 +317,7 @@ namespace mgs
   }
   
   void StarFieldGUI::sl_make_icosahedron(){
-    cout << "icosa" << endl;
+    cout << "icosa" << '\n';
     c_stars.clear();
 
     auto r = xRange * defaultStarArrangementFactor;

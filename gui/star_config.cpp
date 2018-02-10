@@ -126,7 +126,7 @@ namespace mgs
       
       QStringList star_select;
       {
-        star_select << "all" << "1" << "2" << "3";
+        star_select << "all";
       }
       
       q_starSelector->addItems(star_select);
