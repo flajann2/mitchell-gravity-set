@@ -9,7 +9,8 @@
   - [[#why-this-is-just-a-library][Why this is just a library]]
   - [[#basic-design][Basic Design]]
   - [[#building-and-installing][Building and Installing]]
-  - [[#using][Using]]
+    - [[#building][Building]]
+  - [[#using-mgs-4th-generation][Using MGS 4th Generation]]
   - [[#contributing][Contributing]]
   - [[#personal-notes][Personal Notes]]
     - [[#debugging][Debugging]]
@@ -61,6 +62,23 @@
    https://mitchell-gravity-set.quora.com/
 
    for the mathematical background behind MGS.
+
+   I keep coming back to MGS over the decades because
+   I find it intriguing. It creates fractals in its
+   own class like no other, and I am into fractals
+   from more of a mathematical curiosity. Alas many
+   of the so-called "fractals" seem to be more into
+   the art aspect and less into the math aspect.
+
+   MGS 4th Generation will represent the first time
+   I am doing this in 3D, and today's multicore
+   hardware makes this an intriguing possibilty, to
+   say nothing of the ultra powerful graphics we
+   take for granted today as well.
+
+   I am not lost on the "art" aspect here, but this 
+   is NOT "art for art's sake", with no intended 
+   disrespect to Sweet! :)
 
 *** Motivation
     The original MGS was implemented as a 2D gravity
@@ -127,7 +145,42 @@
        with an iterator too. 
    
 ** TODO Building and Installing
-** TODO Using 
+   There is a TODO here because
+   the build instructions are a "work in progress". For instance,
+   I do not yet mention all the many dependencies, especially 
+   with the Qt libraries. I am currently using the latest, which
+   may be ahead of what is available in the distro.
+
+   However, you can figure out the dependencies from the CMake files.
+   Just keep in mind that everything, incluing the build, is still
+   in flux until that TODO disapears.
+
+*** Building   
+    We use ninja instead of make:
+
+    #+begin_src bash
+    mkdir build
+    cd build
+    cmake -GNinja .. && ninja -k3 -j8
+    #+end_src
+
+    If you wish to use make instead:
+
+    #+begin_src bash
+    mkdir build
+    cd build
+    cmake .. && make -k -j8
+    #+end_src
+
+    You may leave off both the "-k" and the "-j8" parameter.
+    If you use "-j", adjust to the number to the number of cores
+    you have on your computer. For instance, if you have 4 cores:
+
+    #+begin_src bash
+    cmake .. && make -k -j4
+    #+end_src
+ 
+** TODO Using MGS 4th Generation
 ** TODO Contributing
 ** Personal Notes
    These notes are basically for myself, having to do
