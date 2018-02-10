@@ -30,4 +30,9 @@ namespace mgs
   // freePointMassCube. This value will be cubed, so
   // keep this number low.
   static const int freePointMassCube = 10;
+
+  template <typename T, typename I, typename P>
+  struct FieldParmsSimulation : public FieldParms<T,I,P> {
+    T simulation_speed;
+  };
 }

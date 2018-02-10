@@ -223,10 +223,14 @@ namespace mgs
       (q_gravitationalConstantEdit = new QLineEdit)->setValidator(new QDoubleValidator);
       (q_delta_t_Edit = new QLineEdit)->setValidator(new QDoubleValidator);
       (q_escapeRadiusEdit = new QLineEdit)->setValidator(new QDoubleValidator);
+      (q_iterationLimitEdit = new QLineEdit)->setValidator(new QIntValidator);
+      (q_simulationSpeedEdit = new QLineEdit)->setValidator(new QDoubleValidator);
 
       form->addRow(new QLabel("Grav Const"), q_gravitationalConstantEdit);
       form->addRow(new QLabel("delta T"), q_delta_t_Edit);
+      form->addRow(new QLabel("Iter Limit"), q_iterationLimitEdit);
       form->addRow(new QLabel("Escape Radius"), q_escapeRadiusEdit);
+      form->addRow(new QLabel("Simulation Speed"), q_simulationSpeedEdit);
 
       auto vbox = new QVBoxLayout;
       vbox->addLayout(form);

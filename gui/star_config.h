@@ -45,13 +45,15 @@ namespace mgs
     QLineEdit   *q_starPosZEdit     = 0;
 
     QLineEdit   *q_gravitationalConstantEdit = 0;
-    QLineEdit   *q_delta_t_Edit = 0;
-    QLineEdit   *q_escapeRadiusEdit = 0;
+    QLineEdit   *q_delta_t_Edit              = 0;
+    QLineEdit   *q_iterationLimitEdit        = 0;
+    QLineEdit   *q_escapeRadiusEdit          = 0;
+    QLineEdit   *q_simulationSpeedEdit       = 0;
     
-    QSlider     *q_freePointSlider  = 0;
+    QSlider     *q_freePointSlider        = 0;
     QPushButton *q_toggleSimulationButton = 0;
-    QPushButton *q_toggleCenterButton = 0;
-    QPushButton *q_toggleArrowsButton = 0;
+    QPushButton *q_toggleCenterButton     = 0;
+    QPushButton *q_toggleArrowsButton     = 0;
     
     std::list<QPushButton *> q_starSelectButtons;
     
