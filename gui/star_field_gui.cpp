@@ -141,7 +141,7 @@ namespace mgs
       m_starArray = new QScatterDataArray;
     }
     
-    int fpmArraySize = ipow(m_freePointMassCube + 1, 3);
+    int fpmArraySize = pow(m_freePointMassCube + 1, 3);
     if (fpmArraySize != m_freePointMassArray->size()) {
       m_freePointMassArray->resize(fpmArraySize);
       generateFPMInitialStates();

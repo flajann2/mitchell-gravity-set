@@ -31,6 +31,10 @@
    it packs a whallop of power that I would otherwise have
    to implement by hand, so I'll live. :)
 
+   This is a video snippet of the configuration screen
+   for MGS 4th Generation:
+   https://youtu.be/uXtlCHA7JB8
+
 ** Basic goals
 *** Multi Core support
     We want this to support any number of cores
@@ -61,7 +65,7 @@
    Please see:
 
    https://mitchell-gravity-set.quora.com/
-
+   
    for the mathematical background behind MGS.
 
    I keep coming back to MGS over the decades because
