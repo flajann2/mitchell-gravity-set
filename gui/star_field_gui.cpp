@@ -77,9 +77,9 @@ namespace mgs
     m_graph->axisY()->setRange(-yRange, yRange);
     m_graph->axisZ()->setRange(-zRange, zRange);
     
-    m_graph->axisX()->setSegmentCount(int(xRange));
-    m_graph->axisY()->setSegmentCount(int(yRange));
-    m_graph->axisZ()->setSegmentCount(int(zRange));
+    m_graph->axisX()->setSegmentCount(int(xRange/xyzDivision));
+    m_graph->axisY()->setSegmentCount(int(yRange/xyzDivision));
+    m_graph->axisZ()->setSegmentCount(int(zRange/xyzDivision));
 
     QObject::connect(&m_simulationTimer, &QTimer::timeout, this, &StarFieldGUI::sl_stepSimulation);
     QObject::connect(m_stars, &QScatter3DSeries::selectedItemChanged, this, &StarFieldGUI::sl_star_selected);
