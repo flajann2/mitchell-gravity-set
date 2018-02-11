@@ -88,8 +88,7 @@ namespace mgs
     updateFieldState();
   }
 
-  StarFieldGUI::~StarFieldGUI()
-  {
+  StarFieldGUI::~StarFieldGUI() {
     delete m_graph;
   }
 
@@ -109,6 +108,21 @@ namespace mgs
   }
 
   void StarFieldGUI::eularianFPMAdvance() {
+    auto center_of_mass = compute_center_of_star_mass<double, int>(c_stars);
+
+    // here we iterate once through all the Free Point Masses
+    for (auto& [p, v] : c_fpms) {
+      Acceleration a;
+
+      // compute the acceleration vector
+      for (auto star : c_stars) {
+        a += compute_acceleration<double, int>(star, p, overall.gravitational_constant);
+      }
+
+      // one step of the Eulerian Interation
+      v += a * overall.delta_t;
+      p += v * overall.delta_t;
+    }
   }
 
   /* The main computation loop for the GUI, where updates shall take place.

@@ -66,7 +66,7 @@ namespace mgs
       
       q_toggleSimulationButton = new QPushButton(q_widget);
       {
-        q_toggleSimulationButton->setText(QStringLiteral("Toggle simulation"));
+        q_toggleSimulationButton->setText(QStringLiteral("Toggle Simulation"));
         q_vLayout->addWidget(q_toggleSimulationButton);
       }
       

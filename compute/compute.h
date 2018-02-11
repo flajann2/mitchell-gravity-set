@@ -16,8 +16,8 @@
 #include <utility>
 
 namespace mgs {
-  const std::int16_t default_dimension = 3;
-  const std::int16_t untouched = -1;
+  const int default_dimension = 3;
+  const int untouched = -1;
   
   struct Index {
     std::vector<std::int32_t> ijk;
@@ -71,9 +71,22 @@ namespace mgs {
       return *this;
     }
     
-    inline T norm();
-    inline T norm_squared();
-    inline Vector unit_vector();
+
+    T norm() {
+      T nr = 0.0;
+      for (auto v : vec) { nr += v * v; }
+      return T (sqrt(nr));
+    }
+  
+    T norm_squared() {
+      T nr = 0.0;
+      for (auto v : vec) { nr += v * v; }
+      return nr;
+    }
+      
+    Vector unit_vector() {
+      return *this / this->norm();
+    }
     
     inline Vector operator+(const Vector& other) const {
       Vector result(vec.size());
@@ -106,10 +119,10 @@ namespace mgs {
   };
 
   // Specifically defined types for our model.
-  using Coordinate   = Vector<double, std::int16_t, struct CoordinateParm>;
-  using Position     = Vector<double, std::int16_t, struct MathParm>;
-  using Velocity     = Vector<double, std::int16_t, struct MathParm>;
-  using Acceleration = Vector<double, std::int16_t, struct MathParm>;
+  using Coordinate   = Vector<double, int, struct CoordinateParm>;
+  using Position     = Vector<double, int, struct MathParm>;
+  using Velocity     = Vector<double, int, struct MathParm>;
+  using Acceleration = Vector<double, int, struct MathParm>;
 
   // For some operations, it helps to have Position and Velocity
   // combined.
@@ -144,7 +157,7 @@ namespace mgs {
   /* Computes the acceleration of a single star on
    * the fpm, the Free Point Mass.
    */
-  template <typename T, typename I, typename P>
+  template <typename T, typename I>
   inline Acceleration compute_acceleration(const Star& star,
                                            const Position& fpm,
                                            const T gravitational_constant) {
@@ -157,7 +170,7 @@ namespace mgs {
   }
 
 
-  template <typename T, typename I, typename P>
+  template <typename T, typename I>
   struct FieldParms {
     T gravitational_constant;
     T delta_t;
@@ -170,7 +183,7 @@ namespace mgs {
                                          escape_radius(er) {}
   };
 
-  template <typename T, typename I, typename P>
+  template <typename T, typename I>
   Position compute_center_of_star_mass(const std::vector<Star>& stars) {
     T total_star_mass = 0.0;
     Position center_accum;
@@ -186,12 +199,12 @@ namespace mgs {
    * This has been pulled out of Field to be callable independent of having
    * to set up the entire Field object when we are not computing the MGS.
    */
-  template <typename T, typename I, typename P>
+  template <typename T, typename I>
   inline I render_single_cell(const Position& initial_p,
                               const Velocity& initial_v,
                               const std::vector<Star>& stars,
                               const Position& center_of_star_mass,
-                              const FieldParms<T,I,P>& parms,
+                              const FieldParms<T,I>& parms,
                               std::function<void(const Position&,
                                                  const Velocity&)> cb = nullptr) {
     auto [gravitational_constant, delta_t, iter_limit, escape_radius] = parms;
@@ -207,7 +220,7 @@ namespace mgs {
       
       // acceleration due to all the stars
       for (auto star : stars) {
-        a += compute_acceleration<T,I,P>(star, p, gravitational_constant);
+        a += compute_acceleration<T,I>(star, p, gravitational_constant);
       }
       
       // Eulerian integration
@@ -239,7 +252,7 @@ namespace mgs {
     I cube_size;
     I dimension;
 
-    FieldParms<T,I,P> parms;
+    FieldParms<T,I> parms;
      
     Field(Coordinate nbound,
           Coordinate pbound,          
@@ -258,11 +271,24 @@ namespace mgs {
     }
     
     // WARN: no boundary checks are done here.
-    I& operator[](Index& idx); 
+    I& operator[](Index& idx) {
+      int offset = 0;
+      int r = 1;
+      for (auto v : idx.ijk) {
+        offset += v * r;
+        r *= cube_size;
+      }
+      return grid[offset];
+    }
+
     
     // Convert a coordinate Io an index.
     // WARN: No bounds checking is done here.
-    Index coords2index(Coordinate& c);
+    Index coords2index(Coordinate& c) {
+      // TODO: Implement 
+      return Index{};
+    }
+
     void render_with_callback(std::function<void(Index, Position)> cb);
     
   private:
@@ -281,7 +307,7 @@ namespace mgs {
    * TODO: restructured so this can take advantage of SMID?
    */
 
-  using StarField = Field<double, std::int16_t, struct FieldParm>;
+  using StarField = Field<double, int, struct FieldParm>;
 
   inline std::ostream &operator<<(std::ostream &os, StarField const &f) {
     os << "StarField[";

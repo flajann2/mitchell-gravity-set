@@ -186,32 +186,32 @@ mgs_autogen/fast:
 	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs_autogen.dir/build.make gui/CMakeFiles/mgs_autogen.dir/build
 .PHONY : mgs_autogen/fast
 
-mgs.o: mgs.cpp.o
+main.o: main.cpp.o
 
-.PHONY : mgs.o
+.PHONY : main.o
 
 # target to build an object file
-mgs.cpp.o:
-	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/mgs.cpp.o
-.PHONY : mgs.cpp.o
+main.cpp.o:
+	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/main.cpp.o
+.PHONY : main.cpp.o
 
-mgs.i: mgs.cpp.i
+main.i: main.cpp.i
 
-.PHONY : mgs.i
+.PHONY : main.i
 
 # target to preprocess a source file
-mgs.cpp.i:
-	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/mgs.cpp.i
-.PHONY : mgs.cpp.i
+main.cpp.i:
+	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/main.cpp.i
+.PHONY : main.cpp.i
 
-mgs.s: mgs.cpp.s
+main.s: main.cpp.s
 
-.PHONY : mgs.s
+.PHONY : main.s
 
 # target to generate assembly for a file
-mgs.cpp.s:
-	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/mgs.cpp.s
-.PHONY : mgs.cpp.s
+main.cpp.s:
+	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/main.cpp.s
+.PHONY : main.cpp.s
 
 mgs_autogen/mocs_compilation.o: mgs_autogen/mocs_compilation.cpp.o
 
@@ -240,59 +240,59 @@ mgs_autogen/mocs_compilation.cpp.s:
 	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/mgs_autogen/mocs_compilation.cpp.s
 .PHONY : mgs_autogen/mocs_compilation.cpp.s
 
-starconfig.o: starconfig.cpp.o
+star_config.o: star_config.cpp.o
 
-.PHONY : starconfig.o
-
-# target to build an object file
-starconfig.cpp.o:
-	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/starconfig.cpp.o
-.PHONY : starconfig.cpp.o
-
-starconfig.i: starconfig.cpp.i
-
-.PHONY : starconfig.i
-
-# target to preprocess a source file
-starconfig.cpp.i:
-	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/starconfig.cpp.i
-.PHONY : starconfig.cpp.i
-
-starconfig.s: starconfig.cpp.s
-
-.PHONY : starconfig.s
-
-# target to generate assembly for a file
-starconfig.cpp.s:
-	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/starconfig.cpp.s
-.PHONY : starconfig.cpp.s
-
-starfield.o: starfield.cpp.o
-
-.PHONY : starfield.o
+.PHONY : star_config.o
 
 # target to build an object file
-starfield.cpp.o:
-	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/starfield.cpp.o
-.PHONY : starfield.cpp.o
+star_config.cpp.o:
+	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/star_config.cpp.o
+.PHONY : star_config.cpp.o
 
-starfield.i: starfield.cpp.i
+star_config.i: star_config.cpp.i
 
-.PHONY : starfield.i
+.PHONY : star_config.i
 
 # target to preprocess a source file
-starfield.cpp.i:
-	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/starfield.cpp.i
-.PHONY : starfield.cpp.i
+star_config.cpp.i:
+	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/star_config.cpp.i
+.PHONY : star_config.cpp.i
 
-starfield.s: starfield.cpp.s
+star_config.s: star_config.cpp.s
 
-.PHONY : starfield.s
+.PHONY : star_config.s
 
 # target to generate assembly for a file
-starfield.cpp.s:
-	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/starfield.cpp.s
-.PHONY : starfield.cpp.s
+star_config.cpp.s:
+	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/star_config.cpp.s
+.PHONY : star_config.cpp.s
+
+star_field_gui.o: star_field_gui.cpp.o
+
+.PHONY : star_field_gui.o
+
+# target to build an object file
+star_field_gui.cpp.o:
+	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/star_field_gui.cpp.o
+.PHONY : star_field_gui.cpp.o
+
+star_field_gui.i: star_field_gui.cpp.i
+
+.PHONY : star_field_gui.i
+
+# target to preprocess a source file
+star_field_gui.cpp.i:
+	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/star_field_gui.cpp.i
+.PHONY : star_field_gui.cpp.i
+
+star_field_gui.s: star_field_gui.cpp.s
+
+.PHONY : star_field_gui.s
+
+# target to generate assembly for a file
+star_field_gui.cpp.s:
+	cd /home/alveric/development/cpp_proj/gravity-set-compute && $(MAKE) -f gui/CMakeFiles/mgs.dir/build.make gui/CMakeFiles/mgs.dir/star_field_gui.cpp.s
+.PHONY : star_field_gui.cpp.s
 
 # Help Target
 help:
@@ -308,18 +308,18 @@ help:
 	@echo "... install/local"
 	@echo "... install"
 	@echo "... mgs_autogen"
-	@echo "... mgs.o"
-	@echo "... mgs.i"
-	@echo "... mgs.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 	@echo "... mgs_autogen/mocs_compilation.o"
 	@echo "... mgs_autogen/mocs_compilation.i"
 	@echo "... mgs_autogen/mocs_compilation.s"
-	@echo "... starconfig.o"
-	@echo "... starconfig.i"
-	@echo "... starconfig.s"
-	@echo "... starfield.o"
-	@echo "... starfield.i"
-	@echo "... starfield.s"
+	@echo "... star_config.o"
+	@echo "... star_config.i"
+	@echo "... star_config.s"
+	@echo "... star_field_gui.o"
+	@echo "... star_field_gui.i"
+	@echo "... star_field_gui.s"
 .PHONY : help
 
 

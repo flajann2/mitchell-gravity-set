@@ -32,15 +32,15 @@ namespace mgs
   static const int freePointMassCube = 10;
 
   // we spcify arbitrary defaults in the default constructor
-  template <typename T, typename I, typename P>
-  struct FieldParmsSimulation : public FieldParms<T,I,P> {
+  template <typename T, typename I>
+  struct FieldParmsSimulation : public FieldParms<T,I> {
     T simulation_speed;
     FieldParmsSimulation(T grav_const = 0.01,
                          T dt = 0.1,
                          I iter = 100,
                          T escape_r = 30,
-                         T sim_speed = 1.0) :  FieldParms<T,I,P>(grav_const, dt, iter, escape_r),
+                         T sim_speed = 1.0) :  FieldParms<T,I>(grav_const, dt, iter, escape_r),
                               simulation_speed(sim_speed) {}
   };
-  using Overall = FieldParmsSimulation<double, std::int16_t, struct FieldParm>;
+  using Overall = FieldParmsSimulation<double, int>;
 }
