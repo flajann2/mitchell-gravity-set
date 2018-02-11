@@ -17,7 +17,7 @@ namespace mgs
       msgBox.setText("Couldn't initialize the OpenGL context.");
       msgBox.exec();
       std::exit(-1);
-    }
+    }    
     q_sfield = new StarFieldGUI(q_graph);
     return q_graph;
   }

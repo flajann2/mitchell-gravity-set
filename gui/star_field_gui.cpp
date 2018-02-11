@@ -50,6 +50,13 @@ namespace mgs
     m_graph->setShadowQuality(QAbstract3DGraph::ShadowQualityNone);
     m_graph->scene()->activeCamera()->setCameraPreset(Q3DCamera::CameraPresetFront);
     m_graph->setAspectRatio(1.0);
+    m_graph->activeTheme()->setType(Q3DTheme::ThemeEbony);
+    m_graph->activeTheme()->setLabelBorderEnabled(true);
+    m_graph->activeTheme()->setLabelBackgroundColor(QColor(QRgb(0x151550)));
+    m_graph->activeTheme()->setLabelTextColor(Qt::lightGray);
+    m_graph->activeTheme()->setFont(QFont("Arial Black", 30));
+    m_graph->setShadowQuality(QAbstract3DGraph::ShadowQualityMedium);
+    m_graph->scene()->activeCamera()->setCameraPreset(Q3DCamera::CameraPresetIsometricRight);
     
     QLinearGradient fpmGradient(0, 0, 16, 1024);
     fpmGradient.setColorAt(0.0, Qt::black);
