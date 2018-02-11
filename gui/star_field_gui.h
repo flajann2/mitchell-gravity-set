@@ -16,6 +16,24 @@
 using namespace QtDataVisualization;
 namespace mgs
 {
+  /* Assumes unit vectors from and to.
+   * no checking is done.
+   * TODO: Why must x be flipped in sign???
+   */
+  inline QQuaternion rotateToVector(const Vec& from, const Vec& to) {
+    // first, we need to get both the vector of rotation and then
+    // angle as a prelude to computing the rotation quaternion.
+    auto axis_of_rotation = from.cross(to);
+    auto angle = std::acos(from.dot(to));
+    auto cos2 = std::cos(angle/2.0);
+    auto sin2 = std::sin(angle/2.0);
+    auto w = cos2;
+    auto x = axis_of_rotation.vec[0] * sin2;
+    auto y = axis_of_rotation.vec[1] * sin2;
+    auto z = axis_of_rotation.vec[2] * sin2;
+    return QQuaternion {(float) w, (float) -x, (float) y,  (float) z};
+  }
+  
   class StarFieldGUI : public QObject
   {
     Q_OBJECT

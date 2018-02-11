@@ -153,16 +153,21 @@ namespace mgs
 
     { // we wish to limit the scope of fpm and sdi
       QScatterDataItem *sdi = &m_freePointMassArray->first();
-      auto fpm = c_fpms.cbegin();
+      auto fpm = c_fpms.begin();
       
       for (float i = 0; i <= m_freePointMassCube; i++) {
         for (float j = 0; j <= m_freePointMassCube; j++) {
           for (float k = 0; k <= m_freePointMassCube; k++, ++sdi, ++fpm) {
-            // position this particle
+            // position this arrow
             sdi->setPosition(QVector3D(fpm->p.vec[0],
                                        fpm->p.vec[1],
                                        fpm->p.vec[2]));
-            //sdi->setRotation(totalRotation);
+            
+            // rotate this arrow to point in the direction of the vector
+            Vec basisArrow {0.0, 1.0, 0.0};
+            auto basisVelocity = fpm->v.unit_vector();
+            QQuaternion rt = rotateToVector(basisArrow, basisVelocity);
+            sdi->setRotation(rt);
           }
         }
       }

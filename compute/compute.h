@@ -71,21 +71,40 @@ namespace mgs {
       return *this;
     }
     
-
-    T norm() {
+    inline T norm() const {
       T nr = 0.0;
       for (auto v : vec) { nr += v * v; }
       return T (sqrt(nr));
     }
   
-    T norm_squared() {
+    inline T norm_squared() const {
       T nr = 0.0;
       for (auto v : vec) { nr += v * v; }
       return nr;
     }
       
-    Vector unit_vector() {
+    inline Vector unit_vector() const {
       return *this / this->norm();
+    }
+
+    // Danger: behavior of vectors of unequal lengths is undefined.
+    inline T dot(const Vector& vo) const {
+      auto a = this->vec.cbegin();
+      auto b = vo.vec.cbegin();
+      T sum = 0;
+      for (; a != this->vec.cend(); ++a, ++b)
+        sum += (*a) * (*b);
+      return sum;
+    }
+
+    // u x v, this being u, using Sarrus's Rule
+    // only valid for 3-vectors, no checks done.
+    // {u[2]v[3]-u[3]v[2], u[3]v[1]-u[1]v[3], u[1]v[2]-u[2]v[1]}
+    // indices adjusted for zero-based vectors in the code!!!!
+    inline Vector cross(const Vector& vo) const {
+      const auto& u = this->vec;
+      const auto& v = vo.vec;
+      return Vector {u[1]*v[2]-u[2]*v[1], u[2]*v[0]-u[0]*v[2], u[0]*v[1]-u[1]*v[0]};
     }
     
     inline Vector operator+(const Vector& other) const {
@@ -123,6 +142,7 @@ namespace mgs {
   using Position     = Vector<double, int, struct MathParm>;
   using Velocity     = Vector<double, int, struct MathParm>;
   using Acceleration = Vector<double, int, struct MathParm>;
+  using Vec          = Vector<double, int, struct MathParm>; // generalized vector
 
   // For some operations, it helps to have Position and Velocity
   // combined.
