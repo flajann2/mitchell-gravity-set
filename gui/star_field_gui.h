@@ -42,7 +42,7 @@ namespace mgs
     explicit StarFieldGUI(Q3DScatter *scatter);
     ~StarFieldGUI();
     
-    void updateFieldState();
+    void updateFieldState(bool reset = false);
     void clearField();
     void generateField();
     void generateFPMInitialStates();
@@ -69,6 +69,7 @@ namespace mgs
     void sl_update_star(int index, const Star& star);
     void sl_reset_eularian();
     void sl_update_overall(const Overall& overall);
+    void sl_reset_arrows();
     
   signals:
     void sig_select_star(int index, const Star& star);

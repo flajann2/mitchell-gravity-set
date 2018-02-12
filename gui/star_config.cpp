@@ -200,9 +200,9 @@ namespace mgs
     {
       auto form = new QFormLayout;
 
-      form->addRow(new QLabel(QStringLiteral("Free Point Cube (4 - 16):")));
+      q_fpm_countLabel = new QLabel();
+      form->addRow(new QLabel(QStringLiteral("FPM Cube (4 - 16):")), q_fpm_countLabel);
       q_vLayout->addWidget(q_freePointSlider);
-
 
       q_freePointSlider = new QSlider(Qt::Horizontal, q_widget);
       q_freePointSlider->setTickInterval(1);
@@ -211,7 +211,12 @@ namespace mgs
       q_freePointSlider->setMaximum(16);
 
       form->addRow(q_freePointSlider);
+      QObject::connect(q_freePointSlider, SIGNAL(valueChanged(int)), q_fpm_countLabel, SLOT(setNum(int)));
 
+      q_fpm_resetButton = new QPushButton(QStringLiteral("Reset FPM Arrows"));
+      form->addRow(q_fpm_resetButton);
+      QObject::connect(q_fpm_resetButton, &QPushButton::pressed, q_sfield, &StarFieldGUI::sl_reset_arrows);
+        
       auto vbox = new QVBoxLayout;
       vbox->addLayout(form);
       groupBox->setLayout(vbox);

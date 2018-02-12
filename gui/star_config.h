@@ -53,6 +53,9 @@ namespace mgs
     QLineEdit   *q_simulationSpeedEdit       = 0;
     
     QSlider     *q_freePointSlider        = 0;
+    QLabel      *q_fpm_countLabel         = 0;
+    QPushButton *q_fpm_resetButton        = 0;
+
     QPushButton *q_toggleSimulationButton = 0;
     QPushButton *q_toggleCenterButton     = 0;
     QPushButton *q_toggleArrowsButton     = 0;

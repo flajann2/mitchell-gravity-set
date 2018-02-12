@@ -134,7 +134,7 @@ namespace mgs
 
   /* The main computation loop for the GUI, where updates shall take place.
    */
-  void StarFieldGUI::updateFieldState()
+  void StarFieldGUI::updateFieldState(bool reset)
   {
     // Reusing existing array is computationally cheaper than always generating new array, even if
     // all data items change in the array, if the array size doesn't change.
@@ -149,7 +149,7 @@ namespace mgs
     }
     
     int fpmArraySize = pow(m_freePointMassCube + 1, 3);
-    if (fpmArraySize != m_freePointMassArray->size()) {
+    if (fpmArraySize != m_freePointMassArray->size() || reset) {
       m_freePointMassArray->resize(fpmArraySize);
       generateFPMInitialStates();
     }
@@ -215,6 +215,10 @@ namespace mgs
     m_sun->setVisible(!m_sun->isVisible());
   }
 
+  void StarFieldGUI::sl_reset_arrows() {
+    updateFieldState(true);
+  }
+  
   void StarFieldGUI::sl_toggleArrows() {
     // TODO: This must work
     // m_sun->setVisible(!m_sun->isVisible());
