@@ -6,7 +6,7 @@
 using namespace std;
 using namespace mgs;
 
-void pr_coord(auto prefix, auto c) {
+void pr_coord(const string& prefix, const Position& c) {
  for (int v : c.vec)
    cout << prefix << ": " << v << '\n';
  cout << '\n';
