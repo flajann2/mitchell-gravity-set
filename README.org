@@ -141,11 +141,12 @@
        with an iterator too. 
    
 ** TODO Building and Installing
-   There is a TODO here because
-   the build instructions are a "work in progress". For instance,
-   I do not yet mention all the many dependencies, especially 
-   with the Qt libraries. I am currently using the latest, which
-   may be ahead of what is available in the distro.
+   There is a TODO here because the build instructions
+   are a "work in progress". For instance, I do not yet
+   mention all the many dependencies, especially with
+   the Qt libraries. I am currently using the latest,
+   which may be ahead of what is available in the
+   distro.
 
    However, you can figure out the dependencies from the CMake files.
    Just keep in mind that everything, incluing the build, is still
