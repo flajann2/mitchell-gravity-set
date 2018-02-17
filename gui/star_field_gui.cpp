@@ -136,9 +136,6 @@ namespace mgs
    */
   void StarFieldGUI::updateFieldState(bool reset)
   {
-    // Reusing existing array is computationally cheaper than always generating new array, even if
-    // all data items change in the array, if the array size doesn't change.
-
     if (!m_freePointMassArray) {
       m_freePointMassArray = new QScatterDataArray;
       generateFPMInitialStates();

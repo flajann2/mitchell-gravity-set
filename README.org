@@ -33,7 +33,7 @@
 
    This is a video snippet of the configuration screen
    for MGS 4th Generation:
-   https://youtu.be/uXtlCHA7JB8
+   https://youtu.be/U-3g_VLK1kU
 
 ** Basic goals
 *** Multi Core support
