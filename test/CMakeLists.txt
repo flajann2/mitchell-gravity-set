@@ -8,7 +8,7 @@ set_property(
   TARGET mgstest
   PROPERTY IMPORTED_LOCATION
   ${CMAKE_SOURCE_DIR}/compute
-  ${CMAKE_SOURCE_DIR}/compute/header
+  ${CMAKE_SOURCE_DIR}/compute/include
   )
 
 include_directories(
