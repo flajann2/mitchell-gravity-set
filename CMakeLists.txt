@@ -19,4 +19,8 @@ include_directories("${PROJECT_INCLUDE_DIR}")
 
 add_subdirectory (compute)
 add_subdirectory (gui)
-add_subdirectory (test)
+
+if (ENABLE_TESTS)
+  enable_testing()
+  add_subdirectory(tests)
+endif()
