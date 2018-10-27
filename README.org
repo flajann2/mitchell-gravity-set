@@ -152,31 +152,33 @@
    Just keep in mind that everything, incluing the build, is still
    in flux until that TODO disapears.
 
-*** Building   
-    We use ninja instead of make:
+*** Building and Running
+**** Building   
+     We use ninja instead of make:
 
-    #+begin_src bash
-    mkdir build
-    cd build
-    cmake -GNinja .. && ninja -k3 -j8
-    #+end_src
+     #+begin_src bash
+     mkdir build
+     cd build
+     cmake -GNinja .. && ninja -k3 -j8
+     #+end_src
 
-    If you wish to use make instead:
+     If you wish to use make instead:
 
-    #+begin_src bash
-    mkdir build
-    cd build
-    cmake .. && make -k -j8
-    #+end_src
+     #+begin_src bash
+     mkdir build
+     cd build
+     cmake .. && make -k -j8
+     #+end_src
 
-    You may leave off both the "-k" and the "-j8" parameter.
-    If you use "-j", adjust to the number to the number of cores
-    you have on your computer. For instance, if you have 4 cores:
+     You may leave off both the "-k" and the "-j8" parameter.
+     If you use "-j", adjust to the number to the number of cores
+     you have on your computer. For instance, if you have 4 cores:
+     
+     #+begin_src bash
+     cmake .. && make -k -j4
+     #+end_src
+**** Running
 
-    #+begin_src bash
-    cmake .. && make -k -j4
-    #+end_src
- 
 ** TODO Using MGS 4th Generation
 ** TODO Contributing
 ** Personal Notes
