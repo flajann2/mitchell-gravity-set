@@ -1,3 +1,6 @@
 [submodule "submods/blaze"]
 	path = submods/blaze
 	url = git@bitbucket.org:blaze-lib/blaze.git
+[submodule "submods/qtdatavis3d"]
+	path = submods/qtdatavis3d
+	url = git@github.com:qt/qtdatavis3d.git
