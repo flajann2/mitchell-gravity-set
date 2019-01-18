@@ -3,8 +3,9 @@ cmake_minimum_required (VERSION 3.10.0)
 
 set (CMAKE_AUTOMOC ON)
 set (CMAKE_AUTOMOC_RELAXED_MODE ON)
-set (QT_VERSION_REQ "5.11")
-# set (CMAKE_PREFIX_PATH "/opt/Qt5.11.1/5.11.1/gcc_64/lib/cmake")
+set (QT_VERSION_REQ "5.10")
+#set (CMAKE_PREFIX_PATH "/home/fred/development/luxoft/hackathon/Qt5.10.0./5.10.1/gcc_64/lib/cmake/Qt5DataVisualization/")
+set (Qt5DataVisualization_DIR "/home/fred/development/luxoft/hackathon/Qt5.10.1/5.10.1/gcc_64/lib/cmake/Qt5DataVisualization")
 
 add_executable (mgs main.cpp star_field_gui.cpp star_config.cpp)
 
