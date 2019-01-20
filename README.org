@@ -8,7 +8,11 @@
     - [[#motivation][Motivation]]
   - [[#basic-design][Basic Design]]
   - [[#building-and-installing][Building and Installing]]
-    - [[#building][Building]]
+    - [[#installing-qt-5101][Installing Qt 5.10.1]]
+      - [[#ubuntu-installation][Ubuntu Installation]]
+    - [[#building-and-running][Building and Running]]
+      - [[#building][Building]]
+      - [[#running][Running]]
   - [[#using-mgs-4th-generation][Using MGS 4th Generation]]
   - [[#contributing][Contributing]]
   - [[#personal-notes][Personal Notes]]
@@ -34,7 +38,7 @@
    This is a video snippet of the configuration screen
    for MGS 4th Generation:
    https://youtu.be/U-3g_VLK1kU
-
+   
 ** Basic goals
 *** Multi Core support
     We want this to support any number of cores
@@ -151,6 +155,22 @@
    However, you can figure out the dependencies from the CMake files.
    Just keep in mind that everything, incluing the build, is still
    in flux until that TODO disapears.
+*** Installing Qt 5.10.1    
+    We rely on Qt 5.10 for its Data Visulization Module, which
+    was removed from opensource, sadly, in 5.11 and later.
+**** Ubuntu Installation
+    - Download qt
+      #+BEGIN_SRC bash
+      wget https://download.qt.io/archive/qt/5.10/5.10.1/qt-opensource-linux-x64-5.10.1.run
+      #+END_SRC
+    - Change the permissions of the .run file and run it.
+      #+BEGIN_SRC bash
+      chmod a+x qt-opensource-linux-x64-5.10.1.run
+      ./qt-opensource-linux-x64-5.10.1.run
+      #+END_SRC
+    - Install it to the /opt directory
+      You should now have a /opt/Qt5.10.1/ directory when
+      all is said and done.
 
 *** Building and Running
 **** Building   
