@@ -12,6 +12,7 @@
       - [[#ubuntu-installation][Ubuntu Installation]]
     - [[#building-and-running][Building and Running]]
       - [[#building][Building]]
+        - [[#special-note-for-ubuntu-1810][Special note for Ubuntu 18.10]]
       - [[#running][Running]]
   - [[#using-mgs-4th-generation][Using MGS 4th Generation]]
   - [[#contributing][Contributing]]
@@ -171,6 +172,8 @@
     - Install it to the /opt directory
       You should now have a /opt/Qt5.10.1/ directory when
       all is said and done.
+    - Install additonal packages
+      apt install libfontconfig1 mesa-common-dev libglu1-mesa-dev
 
 *** Building and Running
 **** Building   
@@ -197,6 +200,20 @@
      #+begin_src bash
      cmake .. && make -k -j4
      #+end_src
+***** Special note for Ubuntu 18.10
+      The location of the GL headers have shifted. On
+      18.04, they are located in /usr/include/libdrm. 
+      On 18.10, they are located in /usr/include. To remedy
+      this problem, as root:
+
+      #+begin_src bash
+      cd /usr/include/libdrm
+      ln -s ../GL .
+      #+end_src
+
+      Recompile and it should all work.
+
+
 **** Running
 
 ** TODO Using MGS 4th Generation
