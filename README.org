@@ -1,5 +1,7 @@
 * Mitchell Gravity Set, 4th Generation                             :TOC_5_gh:
   - [[#synopsis][Synopsis]]
+  - [[#news][News]]
+    - [[#chaos-and-order][Chaos and Order]]
   - [[#basic-goals][Basic goals]]
     - [[#multi-core-support][Multi Core support]]
     - [[#interactive-and-progressive-callbacks][Interactive and Progressive callbacks]]
@@ -24,6 +26,7 @@
       - [[#hpx][HPX]]
     - [[#clang-vs-gcc][clang vs. gcc]]
     - [[#memory-locality][Memory locality]]
+    - [[#marching-cubes-and-tetrahedra][Marching cubes and tetrahedra]]
 
 ** Synopsis
    This library computes the Mitchell Gravity Set. This
@@ -40,6 +43,11 @@
    for MGS 4th Generation:
    https://youtu.be/U-3g_VLK1kU
    
+** News
+*** Chaos and Order   
+    The planetaruim show
+    https://www.planetarium.berlin/veranstaltungen/chaos-and-order
+    Uses the Mitchell Gravity Set (2D, softology) as 
 ** Basic goals
 *** Multi Core support
     We want this to support any number of cores
@@ -309,3 +317,11 @@
     take advantage of memory locality to squeeze more
     performance from leveraging the CPU caches more
     efficiently.
+*** Marching cubes and tetrahedra
+    Due to the sheer size of the compute results, it does not
+    behoove me to keep all those results in memory at one time. I actually might need to anyway,
+    but really, they should be computed in a lazy fashion, using marching cubes or marching tetrahedra.
+    
+    So the compute module remains "pure", and another module would be for 
+    creating the millions of triangles geared to direct visualization.
+
