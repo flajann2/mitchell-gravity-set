@@ -6,7 +6,7 @@ set (CMAKE_AUTOMOC_RELAXED_MODE ON)
 set (QT_VERSION_REQ "5.10.1")
 set (CMAKE_PREFIX_PATH "/opt/Qt5.10.1/5.10.1/gcc_64/lib/cmake/")
 
-add_executable (mgs main.cpp star_field_gui.cpp star_config.cpp)
+add_executable (mgs main.cpp star_field_gui.cpp star_config.cpp viewport.cpp)
 
 set_property(
   TARGET mgs
@@ -18,6 +18,8 @@ find_package(Qt5
   Core
   Widgets
   DataVisualization
+  Gui
+  OpenGL
   REQUIRED)
 
 if ( NOT Qt5Core_FOUND )
