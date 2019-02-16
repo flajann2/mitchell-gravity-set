@@ -4,3 +4,9 @@
 [submodule "submods/qtdatavis3d"]
 	path = submods/qtdatavis3d
 	url = git@github.com:qt/qtdatavis3d.git
+[submodule "submods/oglplu2"]
+	path = submods/oglplu2
+	url = https://github.com/flajann2/oglplu2.git
+[submodule "submods/glfwm"]
+	path = submods/glfwm
+	url = https://github.com/flajann2/glfwm.git

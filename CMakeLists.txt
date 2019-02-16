@@ -1,6 +1,6 @@
 # Main project
 cmake_minimum_required (VERSION 3.10.0)
-project (mgs VERSION 0.0.0 DESCRIPTION "Mitchell Gravity Set Compute")
+project (mgs VERSION 0.0.0 DESCRIPTION "Mitchell Gravity Set 4th Generation")
 
 set (CMAKE_CXX_STANDARD 17)
 set (CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -19,6 +19,7 @@ include_directories("${PROJECT_INCLUDE_DIR}")
 
 add_subdirectory (compute)
 add_subdirectory (gui)
+add_subdirectory (submods)
 
 if (ENABLE_TESTS)
   enable_testing()
