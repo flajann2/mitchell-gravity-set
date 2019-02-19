@@ -1,14 +1,11 @@
 #include "viewport.h"
 
-namespace mgs::render
-{
+namespace mgs::render {
   ViewPort::ViewPort(QWidget *parent) {
     setSurfaceType(QWindow::OpenGLSurface);
-    
   }
 
-  ViewPort::~ViewPort() {
-  }
+  ViewPort::~ViewPort() {}
 
   void ViewPort::init(void) {
     setTitle("MGS ViewPort");
@@ -17,12 +14,12 @@ namespace mgs::render
   }
 
   void ViewPort::initializeGL() {}
-  
+
   void ViewPort::resizeGL(int w, int h) {}
-  
+
   void ViewPort::paintGL() {}
-  
+
   void ViewPort::ressizeEvent(QResizeEvent *event) {}
-  
+
   void ViewPort::paintEvent(QPaintEvent *event) {}
-}
+}  // namespace mgs::render

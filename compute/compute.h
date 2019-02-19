@@ -1,6 +1,6 @@
 #pragma once
 
-/*
+/**
  * MGS Iernal classes
  *
  * The default typenames will be instantiated by

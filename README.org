@@ -33,10 +33,10 @@
    is written in C++17, with the API exposed as C calls. 
 
    This project also includes the "client" code which is
-   based on the Qt framework. Qt is indeed awsome, but its
+   based on the Qt framework. Qt is indeed awesome, but its
    API is still very much of the C++ of the 90s, so I have
-   to painfully defer to it in many palces. On the other hand,
-   it packs a whallop of power that I would otherwise have
+   to painfully defer to it in many places. On the other hand,
+   it packs a wallop of power that I would otherwise have
    to implement by hand, so I'll live. :)
 
    This is a video snippet of the configuration screen
@@ -45,7 +45,7 @@
    
 ** News
 *** Chaos and Order   
-    The planetaruim show
+    The planetarium show
     https://www.planetarium.berlin/veranstaltungen/chaos-and-order
     Uses the Mitchell Gravity Set (2D, softology) as 
 ** Basic goals
@@ -62,7 +62,7 @@
     of detail is completed.
 
 *** Distributed Computation?
-    It should be a staightforward way to allow
+    It should be a StamgHTforward way to allow
     distributed computation of the Gravity Set, in
     theory. This, for example, may simply be
     accomplished by instance partitioning; different
@@ -90,7 +90,7 @@
 
    MGS 4th Generation will represent the first time
    I am doing this in 3D, and today's multicore
-   hardware makes this an intriguing possibilty, to
+   hardware makes this an intriguing possibility, to
    say nothing of the ultra powerful graphics we
    take for granted today as well.
 
