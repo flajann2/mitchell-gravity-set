@@ -328,6 +328,7 @@
     I have created a map for the marching tetrahedra to help in codifying
     how the cube will be disected.
 
-    [[./documentation/20190223_182428.jpg][Marching Tetrahedra Map]]
+    [[./documentation/20190223_182428.jpg]]
+
     https://www.youtube.com/watch?v=ffnVCEAcOns
 
