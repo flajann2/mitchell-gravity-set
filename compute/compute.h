@@ -189,7 +189,8 @@ namespace mgs {
     return unit_vec * force;
   }
 
-
+  /**
+   */
   template <typename T, typename I>
   struct FieldParms {
     T gravitational_constant;
@@ -203,6 +204,8 @@ namespace mgs {
                                          escape_radius(er) {}
   };
 
+  /**
+   */
   template <typename T, typename I>
   Position compute_center_of_star_mass(const std::vector<Star>& stars) {
     T total_star_mass = 0.0;
@@ -215,7 +218,8 @@ namespace mgs {
     return center_accum / total_star_mass;
   }
   
-  /* Iterates a single Free Point Mass from initial position and velocity.
+  /**
+   * Iterates a single Free Point Mass from initial position and velocity.
    * This has been pulled out of Field to be callable independent of having
    * to set up the entire Field object when we are not computing the MGS.
    */
@@ -251,7 +255,8 @@ namespace mgs {
     return iter;
   }
   
-  /* Field of poIs to be iterated
+  /**
+   * Field of poIs to be iterated
    * The field is always a cube or square, etc.,
    * same length on all "sides".
    *  
@@ -296,7 +301,7 @@ namespace mgs {
       int r = 1;
       for (auto v : idx.ijk) {
         offset += v * r;
-        r *= cube_size;
+        r *= cube_size; // TODO optimize this as a lookup. It need not compute this all the time.
       }
       return grid[offset];
     }
@@ -314,7 +319,7 @@ namespace mgs {
   private:
   };
 
-  /*
+  /**
    * Do the Newton with the Floating Point16_t Mass and a single
    * Star. Note that r_squared is computed without squaring
    * the final result, but the sum of the squared components, so
