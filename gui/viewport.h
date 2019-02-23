@@ -6,8 +6,9 @@
 #include <QFormLayout>
 #include <QGroupBox>
 #include <QLineEdit>
-#include <QOpenGLWindow>
+#include <QPainter>
 #include <QOpenGLPaintDevice>
+#include <QOpenGLWindow>
 #include <QtCore/QTimer>
 #include <QtGui/QScreen>
 #include <QtWidgets/QApplication>
@@ -25,6 +26,9 @@
 #include <iostream>
 #include <string>
 
+#include <GL/gl.h>
+#include <GL/glu.h>
+
 using namespace std;
 
 namespace mgs::render {
@@ -34,8 +38,14 @@ namespace mgs::render {
    public:
     ViewPort(QWidget *parent = nullptr);
     ~ViewPort();
+    
     void init(void);
-
+    
+    virtual void render(QPainter *painter);
+    virtual void render();
+    virtual void initialize();
+    void setAnimating(bool animating);
+    
    signals:
 
    public slots:
@@ -46,7 +56,7 @@ namespace mgs::render {
     virtual void initializeGL();
     virtual void resizeGL(int w, int h);
     virtual void paintGL();
-    //void ressizeEvent(QResizeEvent *event) override;
+    // void ressizeEvent(QResizeEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
     bool event(QEvent *event) override;
 

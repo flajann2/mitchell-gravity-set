@@ -43,6 +43,9 @@ target_link_libraries(mgs
   Qt5::Core
   Qt5::Widgets
   Qt5::DataVisualization
+  glut
+  GLU
+  GL
   )
 
 add_custom_command(TARGET mgs PRE_BUILD
