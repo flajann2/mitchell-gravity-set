@@ -19,7 +19,17 @@ namespace mgs::render {
 
   void ViewPort::paintGL() {}
 
-  void ViewPort::ressizeEvent(QResizeEvent *event) {}
+  //void ViewPort::ressizeEvent(QResizeEvent *event) {}
 
   void ViewPort::paintEvent(QPaintEvent *event) {}
+
+  void ViewPort::renderNow() {
+  }
+
+  void ViewPort::renderLater() {
+  }
+
+  bool ViewPort::event(QEvent *event) {
+    return true;
+  }
 }  // namespace mgs::render

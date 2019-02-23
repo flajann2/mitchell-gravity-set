@@ -7,6 +7,7 @@
 #include <QGroupBox>
 #include <QLineEdit>
 #include <QOpenGLWindow>
+#include <QOpenGLPaintDevice>
 #include <QtCore/QTimer>
 #include <QtGui/QScreen>
 #include <QtWidgets/QApplication>
@@ -45,7 +46,7 @@ namespace mgs::render {
     virtual void initializeGL();
     virtual void resizeGL(int w, int h);
     virtual void paintGL();
-    void ressizeEvent(QResizeEvent *event) override;
+    //void ressizeEvent(QResizeEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
     bool event(QEvent *event) override;
 
