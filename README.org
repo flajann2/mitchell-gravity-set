@@ -325,3 +325,9 @@
     So the compute module remains "pure", and another module would be for 
     creating the millions of triangles geared to direct visualization.
 
+    I have created a map for the marching tetrahedra to help in codifying
+    how the cube will be disected.
+
+    [[./documentation/20190223_182428.jpg][Marching Tetrahedra Map]]
+    https://www.youtube.com/watch?v=ffnVCEAcOns
+
