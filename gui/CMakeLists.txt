@@ -6,7 +6,8 @@ set (CMAKE_AUTOMOC_RELAXED_MODE ON)
 set (QT_VERSION_REQ "5.10.1")
 set (CMAKE_PREFIX_PATH "/opt/Qt5.10.1/5.10.1/gcc_64/lib/cmake/")
 
-add_executable (mgs main.cpp star_field_gui.cpp star_config.cpp viewport.cpp)
+FILE(GLOB CODE *.cpp)
+add_executable (mgs ${CODE})
 
 set_property(
   TARGET mgs

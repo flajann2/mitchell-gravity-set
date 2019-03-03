@@ -22,8 +22,21 @@ namespace mgs::march {
    * involved in the pipeline shall be derived
    * from this one.
    */
-  class Pipeline {
+  class Pipeline {};
+
+  /**
+   * We create the initial list of polygons here (not
+   * necessarily in the form needed for OpenGL!!!)
+   */
+  template <typename T, typename I, typename P>
+  class MakeTesselation : public Pipeline {
+    Field field;
+
+   public:
+    MakeTesselation(const Field& field_) : field(field_) = default;
+    MakeTesselation(const Field&& field_) : field(std::move(field_)) = default;
+
+    template <typename Shape>
+    Shape operator()() {}
   };
-    
-  
-}
+}  // namespace mgs::march

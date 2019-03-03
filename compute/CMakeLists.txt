@@ -1,5 +1,7 @@
 # Compute
-add_library (mgscompute SHARED compute.cpp)
+
+FILE(GLOB CODE *.cpp)
+add_library (mgscompute SHARED ${CODE})
 
 target_include_directories (mgscompute
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
