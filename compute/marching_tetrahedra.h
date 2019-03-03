@@ -30,11 +30,11 @@ namespace mgs::march {
    */
   template <typename T, typename I, typename P>
   class MakeTesselation : public Pipeline {
-    Field field;
+    Field<T,I,P> field;
 
    public:
-    MakeTesselation(const Field& field_) : field(field_) = default;
-    MakeTesselation(const Field&& field_) : field(std::move(field_)) = default;
+  MakeTesselation(const Field<T,I,P>& field_) : field(field_) {}
+  MakeTesselation(const Field<T,I,P>&& field_) : field(std::move(field_)) {}
 
     template <typename Shape>
     Shape operator()() {}

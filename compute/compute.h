@@ -12,6 +12,8 @@
 #include <cstdint>
 #include <functional>
 #include <initializer_list>
+#include <iostream>
+#include <memory>
 #include <utility>
 #include <vector>
 
@@ -318,7 +320,9 @@ namespace mgs {
         : box({neg_bound, pos_bound}),
           cube_size(cs),
           dimension(dim),
-          parms({grav_constant, delta_time, iteration_limit, escape_r}) { init_field(); }
+          parms({grav_constant, delta_time, iteration_limit, escape_r}) {
+      init_field();
+    }
 
     /**
      */
@@ -327,7 +331,9 @@ namespace mgs {
         : box(box_),
           cube_size(cs),
           dimension(dim),
-          parms({grav_constant, delta_time, iteration_limit, escape_r}) { init_field(); }
+          parms({grav_constant, delta_time, iteration_limit, escape_r}) {
+      init_field();
+    }
 
     // WARN: no boundary checks are done here.
     I& operator[](Index& idx) {
