@@ -21,12 +21,13 @@ namespace mgs {
   const int default_dimension = 3;
   const int untouched = -1;
 
-  //using int_vector = std::vector<std::int32_t>;
-  
-  struct Index {
-    std::vector<std::int32_t> ijk;
+  using indexer = std::int32_t;
+  using idx_vector = std::vector<indexer>;
 
-    Index(std::initializer_list<std::int32_t> list) : ijk(list) {}
+  struct Index {
+    idx_vector ijk;
+
+    Index(std::initializer_list<indexer> list) : ijk(list) {}
     Index(const Index& other) : ijk(other.ijk) {}
     Index(const Index&& other) : ijk(std::move(other.ijk)) {}
 
@@ -338,7 +339,7 @@ namespace mgs {
     }
 
     // WARN: no boundary checks are done here.
-    I& operator[](Index& idx) {
+    I& operator[](const Index& idx) {
       int offset = 0;
       int r = 1;
       for (auto v : idx.ijk) {

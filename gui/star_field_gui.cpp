@@ -174,12 +174,11 @@ namespace mgs {
       }
     }
 
-    QScatterDataItem* pstar = nullptr;
-    if (!m_starArray->empty()) {
-      pstar = &m_starArray->first();
-    }
+    QScatterDataItem* pstar =
+        (!m_starArray->empty()) ? &m_starArray->first() : nullptr;
 
     for (auto star : c_stars) {
+      assert(pstar != nullptr);
       pstar->setPosition(
           QVector3D(star.position[0], star.position[1], star.position[2]));
       ++pstar;
