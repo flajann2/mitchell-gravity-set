@@ -176,7 +176,7 @@ namespace mgs {
 
     QScatterDataItem* pstar = nullptr;
     if (!m_starArray->empty()) {
-      &m_starArray->first();
+      pstar = &m_starArray->first();
     }
 
     for (auto star : c_stars) {
