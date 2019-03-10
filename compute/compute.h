@@ -21,6 +21,8 @@ namespace mgs {
   const int default_dimension = 3;
   const int untouched = -1;
 
+  //using int_vector = std::vector<std::int32_t>;
+  
   struct Index {
     std::vector<std::int32_t> ijk;
 

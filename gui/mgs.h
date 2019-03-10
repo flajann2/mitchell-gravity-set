@@ -43,5 +43,6 @@ namespace mgs
                          T sim_speed = 1.0) :  FieldParms<T,I>(grav_const, dt, iter, escape_r),
                               simulation_speed(sim_speed) {}
   };
+  
   using Overall = FieldParmsSimulation<double, int>;
 }
