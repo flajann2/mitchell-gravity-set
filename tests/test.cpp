@@ -4,6 +4,7 @@
 #include <sstream>
 #include <string>
 #include "gtest/gtest.h"
+
 using ::testing::EmptyTestEventListener;
 using ::testing::InitGoogleTest;
 using ::testing::Test;
@@ -89,14 +90,13 @@ class ComputeTest : public testing::Test {
   }
 };
 
-TEST_F(ComputeTest, allOfIt) {
+TEST(ComputeTest, allOfIt) {
   // InitGoogleTest(&ac, av);
 
   // return RUN_ALL_TESTS();
 }
 
-
-
-
-
-
+int main(int argc, char* argv[]) {
+  ::testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
+}

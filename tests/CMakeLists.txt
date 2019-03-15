@@ -26,8 +26,10 @@ if(CMAKE_VERSION VERSION_LESS 2.8.11)
                         "${gmock_SOURCE_DIR}/include")
 endif()
 
+set(TEST_LIBS ${CMAKE_BINARY_DIR}/lib)
 
 file(GLOB SOURCE_FILES "*.cpp" "*.h")
+file(GLOB TEST_LIBS "*.a")
 
 set(TARGET test_gsc)
 
@@ -49,4 +51,4 @@ include_directories(
   ${CMAKE_SOURCE_DIR}/compute/include
   )
 
-target_link_libraries(mgstest mgscompute)
+target_link_libraries(mgstest mgscompute ${TEST_LIBS})
