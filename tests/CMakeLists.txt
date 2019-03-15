@@ -26,16 +26,21 @@ if(CMAKE_VERSION VERSION_LESS 2.8.11)
                         "${gmock_SOURCE_DIR}/include")
 endif()
 
-set(TEST_LIBS ${CMAKE_BINARY_DIR}/lib)
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package (Threads REQUIRED)
+
+set(TEST_LIBS_DIR ${CMAKE_BINARY_DIR}/lib)
 
 file(GLOB SOURCE_FILES "*.cpp" "*.h")
-file(GLOB TEST_LIBS "*.a")
+file(GLOB TEST_LIBS "${TEST_LIBS_DIR}/*.a")
+
+message(STATUS "*** TEST_LIBS:" ${TEST_LIBS})
 
 set(TARGET test_gsc)
 
 add_test(NAME ${TARGET} COMMAND ${TARGET})
 
-add_executable (mgstest test.cpp)
+add_executable (mgstest ${SOURCE_FILES})
 
 # Always set test suite in debug mode
 set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall")
@@ -51,4 +56,4 @@ include_directories(
   ${CMAKE_SOURCE_DIR}/compute/include
   )
 
-target_link_libraries(mgstest mgscompute ${TEST_LIBS})
+target_link_libraries(mgstest mgscompute ${CMAKE_THREAD_LIBS_INIT} ${TEST_LIBS})
