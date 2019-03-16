@@ -23,8 +23,8 @@ class ComputeTest : public testing::Test {
   Position p{0.01, 5.53, -34.1};
 
   virtual void SetUp() {}
-
   virtual void TearDown() {}
+  virtual void TestBody() {}
 
   void pr_coord(const string& prefix, const Position& c) {
     for (int v : c.vec) cout << prefix << ": " << v << '\n';
@@ -41,9 +41,7 @@ class ComputeTest : public testing::Test {
         for (auto i = 0; i < f.cube_size; ++i) {
           Index idx{i, j, k};
           f[idx] = i * j * k;
-          if (f[idx] != i * j * k) {
-            cout << "*** ERR: " << f[idx] << " != " << (i * j * k) << '\n';
-          }
+          EXPECT_EQ(f[idx], i * j * k);
         }
       }
     }
@@ -63,6 +61,8 @@ class ComputeTest : public testing::Test {
     Position doub = p1 * 2.0;
     Position halved = p1 / 2.0;
 
+    Position paddr{0,0,2};
+    EXPECT_EQ(padded, paddr);
     cout << "results:" << '\n';
     cout << "added: " << padded << '\n';
     cout << "subbed: " << psubbed << '\n';
@@ -70,30 +70,23 @@ class ComputeTest : public testing::Test {
     cout << "p1 / 2: " << halved << '\n';
   }
 
-  void test_marching_tetraherda() {}
-
-  void allOfIt() {
-    ostringstream cstr;
-    cstr << s;
-
-    // commentut << "Hello Test\n" << cstr.str() << '\n';
-
-    pr_coord(" c", c);
-    pr_coord("cc", cc);
-    pr_coord(" p", p);
-
-    test_field();
-    test_math_on_Vector();
-    test_marching_tetraherda();
-
-    cout << "DONE" << '\n';
+  void test_marching_tetraherda() {
   }
 };
 
-TEST(ComputeTest, allOfIt) {
-  // InitGoogleTest(&ac, av);
+TEST(ComputeTest, test_field) {
+  ComputeTest ct;
+  ct.test_field();
+}
 
-  // return RUN_ALL_TESTS();
+TEST(ComputeTest, test_math_on_Vector) {
+  ComputeTest ct;
+  ct.test_math_on_Vector();
+}
+
+TEST(ComputeTest, test_marching_tetraherda) {
+  ComputeTest ct;
+  ct.test_marching_tetraherda();
 }
 
 int main(int argc, char** argv) {

@@ -151,6 +151,15 @@ namespace mgs {
       }
       return result;
     }
+
+    /**
+     * TODO: Note that this may not make sense for floats. We'll
+     * TODO: have to add an epsillon here eventually... this is
+     * TODO: mostly for testing.
+     */
+    inline bool operator==(const Vector& other) const {
+      return vec == other.vec;
+    }
   };
 
   // Specifically defined types for our model.
