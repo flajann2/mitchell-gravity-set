@@ -55,23 +55,23 @@ class ComputeTest : public testing::Test {
     Position p1{-1, 1, 0};
     Position p2{1, -1, 2};
 
-    cout << "math on Vector: " << p1 << " and " << p2 << '\n';
     Position padded = p1 + p2;
     Position psubbed = p1 - p2;
     Position doub = p1 * 2.0;
     Position halved = p1 / 2.0;
 
-    Position paddr{0,0,2};
+    Position paddr{0, 0, 2};
+    Position psubr{-2, 2, -2};
+    Position doubr{-2, 2, 0};
+    Position halfr{-0.5, 0.5, 0};
+
     EXPECT_EQ(padded, paddr);
-    cout << "results:" << '\n';
-    cout << "added: " << padded << '\n';
-    cout << "subbed: " << psubbed << '\n';
-    cout << "p1 * 2: " << doub << '\n';
-    cout << "p1 / 2: " << halved << '\n';
+    EXPECT_EQ(psubbed, psubr);
+    EXPECT_EQ(doub, doubr);
+    EXPECT_EQ(halved, halfr);
   }
 
-  void test_marching_tetraherda() {
-  }
+  void test_marching_tetraherda() {}
 };
 
 TEST(ComputeTest, test_field) {
