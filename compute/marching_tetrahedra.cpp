@@ -1,7 +1,16 @@
 #include <marching_tetrahedra.h>
 
 namespace mgs::march {
-  void MakeTesselation::tesseltate_cube(const Index& idx){
+  pos_list_t MakeTesselation::tesseltate_cube(const Index& idx){
+    pos_list_t tetra {};
+    for (auto ti : dicer) {
+      for (auto bits : ti) {
+        Index ipos = idx + bits;
+        
+        
+      }
+    }
+    return tetra;
   }
 
 }

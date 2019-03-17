@@ -16,15 +16,23 @@
 namespace mgs::march {
   using namespace mgs;
 
-  using tetra_index = std::array<unsigned char, 4>;
-  using cube_decomposer = std::array<tetra_index, 6>;
+  using tetra_index_t = std::array<index_bits_t, 4>;
+  using cube_decomposer_t = std::array<tetra_index_t, 6>;
+  using pos_list_t = std::vector<Position>;
 
-  static const cube_decomposer dicer{{{0, 1, 3, 7},
-                                      {0, 2, 3, 7},
-                                      {0, 2, 6, 7},
-                                      {0, 4, 6, 7},
-                                      {0, 4, 5, 7},
-                                      {0, 1, 5, 7}}};
+  /**
+   * The cube decomposer describes how to slice a cube into the 6
+   * tetrahedra. The encoding is such that the vertex of the cube
+   * is determined by adding a zero or one to each of the
+   * lower most position's elements. To emphasis this, we represent
+   * the offets by binary.
+   */
+  static const cube_decomposer_t dicer{{{0b000, 0b001, 0b011, 0b111},
+                                        {0b000, 0b010, 0b011, 0b111},
+                                        {0b000, 0b010, 0b110, 0b111},
+                                        {0b000, 0b100, 0b110, 0b111},
+                                        {0b000, 0b100, 0b101, 0b111},
+                                        {0b000, 0b001, 0b101, 0b111}}};
 
   /**
    * Production is done in a pipeline fashion,
@@ -50,7 +58,7 @@ namespace mgs::march {
      * the cube to the upper most point (basically by adding 1
      * to the indices of the lmp).
      */
-    void tesseltate_cube(const Index& lmp);
+    pos_list_t tesseltate_cube(const Index& lmp);
 
     template <typename Shape>
     Shape operator()() {}
