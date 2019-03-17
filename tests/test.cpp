@@ -1,8 +1,10 @@
 #include <compute>
-#include <iostream>
 #include <marching_tetrahedra>
+
+#include <iostream>
 #include <sstream>
 #include <string>
+
 #include "gtest/gtest.h"
 
 using ::testing::EmptyTestEventListener;
@@ -14,6 +16,7 @@ using ::testing::TestPartResult;
 using ::testing::UnitTest;
 using namespace std;
 using namespace mgs;
+using namespace mgs::march;
 
 class ComputeTest : public testing::Test {
  public:
@@ -22,7 +25,16 @@ class ComputeTest : public testing::Test {
   Position cc;
   Position p{0.01, 5.53, -34.1};
 
-  virtual void SetUp() {}
+  Bounds box;
+  StarField field;
+  MakeTesselation tess;
+
+  virtual void SetUp() {
+    box = Bounds {Coordinate{-10, -10, -10}, Coordinate{10, 10, 10}};
+    field = StarField(box, 6, 3);
+    tess = MakeTesselation(field);
+  }
+  
   virtual void TearDown() {}
   virtual void TestBody() {}
 
@@ -51,6 +63,21 @@ class ComputeTest : public testing::Test {
     f.coords2index(c);
   }
 
+  void test_make_tesselation() {
+    cout << "make tesselation[" << tess << "]\n";
+    for (indexer_t i = 0; i < field.cube_size - 1; ++i){
+      for (indexer_t j = 0; j < field.cube_size - 1; ++j){
+        for (indexer_t k = 0; k < field.cube_size - 1; ++k){
+          Index idx {i,j,k};
+          auto t = tess.tesseltate_cube(idx);
+          cout << "tesseract for " << idx << ": " << t << endl;
+        }
+      }
+    }
+  }
+
+  void test_marching_tetraherda() {}
+  
   void test_math_on_Vector() {
     Position p1{-1, 1, 0};
     Position p2{1, -1, 2};
@@ -71,7 +98,6 @@ class ComputeTest : public testing::Test {
     EXPECT_EQ(halved, halfr);
   }
 
-  void test_marching_tetraherda() {}
 };
 
 TEST(ComputeTest, test_field) {
@@ -87,6 +113,11 @@ TEST(ComputeTest, test_math_on_Vector) {
 TEST(ComputeTest, test_marching_tetraherda) {
   ComputeTest ct;
   ct.test_marching_tetraherda();
+}
+
+TEST(ComputeTest, test_make_tesselation) {
+  ComputeTest ct;
+  ct.test_make_tesselation();
 }
 
 TEST(Index, operator_plus) {

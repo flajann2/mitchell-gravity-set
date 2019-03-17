@@ -6,8 +6,7 @@ namespace mgs::march {
     for (auto ti : dicer) {
       for (auto bits : ti) {
         Index ipos = idx + bits;
-        
-        
+        tetra.emplace_back(m_field.index2coordinate(ipos));        
       }
     }
     return tetra;

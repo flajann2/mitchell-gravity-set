@@ -221,6 +221,7 @@ namespace mgs {
   struct Bounds {
     Coordinate nm;  // Negative-most coordinate
     Coordinate pm;  // Positive-most coordinate
+    Bounds() = default;
   };
 
   template <typename T, typename I, typename P>
@@ -349,8 +350,8 @@ namespace mgs {
     std::vector<Iterant> grid;
     std::vector<Star> stars;
     Position center_of_star_mass;
-    Iterant cube_size;
-    Iterant dimension;
+    Indexer cube_size;
+    Indexer dimension;
 
     FieldParms<T, Iterant> parms;
 
@@ -361,6 +362,8 @@ namespace mgs {
     }
 
    public:
+    Field() = default;
+    
     /**
      */
     Field(Coordinate neg_bound, Coordinate pos_bound, Iterant cs = 256,
@@ -375,9 +378,9 @@ namespace mgs {
 
     /**
      */
-    Field(Bounds box_, Iterant cs = 256, Iterant dim = 2,
+    Field(Bounds box_, Indexer cs = 256, Indexer dim = 3,
           Iterant iteration_limit = 1024, T grav_constant = 1.0,
-          T escape_r = 2.0, T delta_time = 0.1)
+          T escape_r = 2.0, T delta_time = 0.5)
         : box(box_),
           cube_size(cs),
           dimension(dim),

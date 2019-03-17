@@ -20,6 +20,15 @@ namespace mgs::march {
   using cube_decomposer_t = std::array<tetra_index_t, 6>;
   using pos_list_t = std::vector<Position>;
 
+  inline std::ostream& operator<<(std::ostream& os, pos_list_t const& pv) {
+    os << "pos_list[" << '\n';
+    for (auto p : pv) {
+      os << "   " << p << '\n';
+    }
+    os << "]\n";
+    return os;
+  }
+  
   /**
    * The cube decomposer describes how to slice a cube into the 6
    * tetrahedra. The encoding is such that the vertex of the cube
@@ -49,7 +58,10 @@ namespace mgs::march {
   class MakeTesselation : public Pipeline {
     StarField m_field;
 
-   public:
+    friend std::ostream& operator<<(std::ostream&, MakeTesselation const&);
+
+  public:
+    MakeTesselation() = default;
     MakeTesselation(const StarField& field) : m_field(field) {}
     MakeTesselation(const StarField&& field) : m_field(std::move(field)) {}
 
@@ -63,4 +75,12 @@ namespace mgs::march {
     template <typename Shape>
     Shape operator()() {}
   };
+  
+  inline std::ostream& operator<<(std::ostream& os, MakeTesselation const& tess) {
+    os << "MakeTesselation [\n";
+    os << tess.m_field << "\n]\n";
+      
+    return os;
+  }
+
 }  // namespace mgs::march
