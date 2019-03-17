@@ -411,7 +411,7 @@ namespace mgs {
       Index idx{};
       auto dif = box.pm - box.nm;
       for (Indexer i = 0; i < static_cast<Indexer>(idx.size()); ++i) {
-        idx[i] = ((c[i] - box.nm[i]) / dif[i]) * cube_size;
+        idx[i] = ((c[i] - box.nm[i]) / dif[i]) * (cube_size - 1);
       }
       return idx;
     }
@@ -424,7 +424,7 @@ namespace mgs {
       Coordinate c{};
       auto dif = box.pm - box.nm;
       for (Indexer i = 0; i < c.size(); ++i) {
-        c[i] = box.nm[i] + (dif[i] * idx[i] / cube_size);
+        c[i] = box.nm[i] + (dif[i] * idx[i] / (cube_size - 1));
       }
       return c;
     }
