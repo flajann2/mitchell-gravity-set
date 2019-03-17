@@ -41,6 +41,10 @@ namespace mgs {
     Index(const Index& other) : ijk(other.ijk) {}
     Index(const Index&& other) : ijk(std::move(other.ijk)) {}
 
+    bool operator==(const Index& other) const {
+      return ijk == other.ijk;
+    }
+    
     Index& operator=(const Index& other) {
       ijk = other.ijk;
       return *this;

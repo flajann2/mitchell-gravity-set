@@ -89,6 +89,17 @@ TEST(ComputeTest, test_marching_tetraherda) {
   ct.test_marching_tetraherda();
 }
 
+TEST(Index, operator_plus) {
+  Index idx{0,1,2};
+  index_bits_t bits{0b101};
+  Index result{1,1,3};
+  EXPECT_EQ(idx+bits, result);
+
+  index_bits_t bits2{0b010};
+  Index result2{0,2,2};
+  EXPECT_EQ(idx+bits2, result2); 
+}
+
 int main(int argc, char** argv) {
   ::testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
