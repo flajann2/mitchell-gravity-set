@@ -23,6 +23,7 @@ namespace mgs {
   const int untouched = -1;
 
   using indexer_t = std::int32_t;
+  using iterant_t = std::int16_t;
   using idx_vector_t = std::vector<indexer_t>;
   using floating_t = double;
 
@@ -49,6 +50,10 @@ namespace mgs {
       ijk = std::move(other.ijk);
       return *this;
     }
+
+    auto& operator[](const indexer_t& i) { return ijk[i]; }
+    auto operator[](const indexer_t& i) const { return ijk[i]; }
+    auto size() const { return ijk.size(); }
   };
 
   /**
@@ -73,11 +78,13 @@ namespace mgs {
 
   // The P here is a phantom parameter to enable strong typing.
   // It is not actually used anywhere directly.
-  template <typename T, typename I, typename P>
+  template <typename T, typename Indexer, typename P>
   struct Vector {
     std::vector<T> vec;
 
-    Vector(I dimension = default_dimension) { vec.resize(dimension, 0.0); }
+    Vector(Indexer dimension = default_dimension) {
+      vec.resize(dimension, 0.0);
+    }
     Vector(std::initializer_list<T> list) : vec(list) {}
 
     Vector(const Vector& other) : vec(other.vec) {}
@@ -88,7 +95,10 @@ namespace mgs {
       return *this;
     }
 
-    inline T& operator[](I index) { return vec[index]; }
+    inline T& operator[](Indexer index) { return vec[index]; }
+    inline T operator[](Indexer index) const { return vec[index]; }
+
+    inline auto size() { return static_cast<Indexer>(vec.size()); }
 
     inline Vector& operator=(Vector&& other) {
       vec = std::move(other.vec);
@@ -135,14 +145,14 @@ namespace mgs {
 
     inline Vector operator+(const Vector& other) const {
       Vector result(vec.size());
-      for (unsigned i = 0; i < vec.size(); ++i) {
+      for (Indexer i = 0; i < static_cast<Indexer>(vec.size()); ++i) {
         result.vec[i] = vec[i] + other.vec[i];
       }
       return result;
     }
 
     inline Vector operator+=(const Vector& other) {
-      for (unsigned i = 0; i < vec.size(); ++i) {
+      for (Indexer i = 0; i < static_cast<Indexer>(vec.size()); ++i) {
         vec[i] += other.vec[i];
       }
       return *this;
@@ -150,7 +160,7 @@ namespace mgs {
 
     inline Vector operator-(const Vector& other) const {
       Vector result(vec.size());
-      for (unsigned i = 0; i < vec.size(); ++i) {
+      for (Indexer i = 0; i < static_cast<Indexer>(vec.size()); ++i) {
         result.vec[i] = vec[i] - other.vec[i];
       }
       return result;
@@ -158,7 +168,7 @@ namespace mgs {
 
     inline Vector operator*(const floating_t scalar) const {
       Vector result(vec.size());
-      for (unsigned i = 0; i < vec.size(); ++i) {
+      for (Indexer i = 0; i < static_cast<Indexer>(vec.size()); ++i) {
         result.vec[i] = vec[i] * scalar;
       }
       return result;
@@ -166,7 +176,7 @@ namespace mgs {
 
     inline Vector operator/(const floating_t scalar) const {
       Vector result(vec.size());
-      for (unsigned i = 0; i < vec.size(); ++i) {
+      for (Indexer i = 0; i < static_cast<Indexer>(vec.size()); ++i) {
         result.vec[i] = vec[i] / scalar;
       }
       return result;
@@ -183,11 +193,14 @@ namespace mgs {
   };
 
   // Specifically defined types for our model.
-  using Coordinate = Vector<floating_t, int, struct CoordinateParm>;
-  using Position = Vector<floating_t, int, struct MathParm>;
-  using Velocity = Vector<floating_t, int, struct MathParm>;
-  using Acceleration = Vector<floating_t, int, struct MathParm>;
-  using Vec = Vector<floating_t, int, struct MathParm>;  // generalized vector
+  // TODO: Tighten up type safety here. Currently everything is defined as
+  // "MathParam".
+  using Coordinate = Vector<floating_t, indexer_t, struct MathParm>;
+  using Position = Vector<floating_t, indexer_t, struct MathParm>;
+  using Velocity = Vector<floating_t, indexer_t, struct MathParm>;
+  using Acceleration = Vector<floating_t, indexer_t, struct MathParm>;
+  using Vec =
+      Vector<floating_t, indexer_t, struct MathParm>;  // generalized vector
 
   /**
    * For some operations, it helps to have Position and Velocity
@@ -202,8 +215,8 @@ namespace mgs {
    * A bounding box for the field
    */
   struct Bounds {
-    Coordinate clo;  // Negative-most coordinate
-    Coordinate cup;  // Positive-most coordinate
+    Coordinate nm;  // Negative-most coordinate
+    Coordinate pm;  // Positive-most coordinate
   };
 
   template <typename T, typename I, typename P>
@@ -250,14 +263,14 @@ namespace mgs {
    * Field Parameters for MGS. These determine the nature
    * of the MGS fractal that is generated.
    */
-  template <typename T, typename I>
+  template <typename T, typename Interant>
   struct FieldParms {
     T gravitational_constant;
     T delta_t;
-    I iter_limit;
+    Interant iter_limit;
     T escape_radius;
     FieldParms() = default;
-    FieldParms(T gc, T dt, I il, T er)
+    FieldParms(T gc, T dt, Interant il, T er)
         : gravitational_constant(gc),
           delta_t(dt),
           iter_limit(il),
@@ -326,7 +339,7 @@ namespace mgs {
    *      used directly anywhere. This is to enable strong
    *      typing.
    */
-  template <typename T, typename Iterant, typename P>
+  template <typename T, typename Iterant, typename Indexer, typename P>
   struct Field {
     Bounds box;
     std::vector<Iterant> grid;
@@ -382,19 +395,31 @@ namespace mgs {
 
     /**
      * Convert a coordinate Io an index.
-     * WARN: No bounds checking is done here.
+     * WARN: No bounds checking is done here. If a coordinate
+     * WARN: is out of bounds, the index will simply be too high
+     * WARN: or too low (negative), which will result in memory corruption.
+     * TODO: implement some means of bounds checking in Index or Field.
      */
     Index coords2index(const Coordinate& c) {
-      // TODO: Implement
-      return Index{};
+      Index idx{};
+      auto dif = box.pm - box.nm;
+      for (Indexer i = 0; i < static_cast<Indexer>(idx.size()); ++i) {
+        idx[i] = ((c[i] - box.nm[i]) / dif[i]) * cube_size;
+      }
+      return idx;
     }
 
     /**
      * Convert an index to coordinate.
      * WARN: no bounds checking is performed.
      */
-    Coordinate index2coordinate(const Index& idx) {
-      Coordinate c;
+    inline Coordinate index2coordinate(const Index& idx) {
+      Coordinate c{};
+      auto dif = box.pm - box.nm;
+      for (Indexer i = 0; i < c.size(); ++i) {
+        c[i] = box.nm[i] + (dif[i] * idx[i] / cube_size);
+      }
+      return c;
     }
 
     void render_with_callback(std::function<void(Index, Position)> cb);
@@ -415,12 +440,12 @@ namespace mgs {
    * TODO: restructured so this can take advantage of SMID?
    */
 
-  using StarField = Field<floating_t, int16_t, struct FieldParm>;
+  using StarField = Field<floating_t, iterant_t, indexer_t, struct FieldParm>;
 
   inline std::ostream& operator<<(std::ostream& os, StarField const& f) {
     os << "StarField[";
-    os << " clo:" << f.box.clo;
-    os << " cup:" << f.box.cup;
+    os << " nm:" << f.box.nm;
+    os << " pm:" << f.box.pm;
     os << " cube_size:" << f.cube_size;
     os << " dimension:" << f.dimension;
     os << " iter_limit:" << f.parms.iter_limit;
