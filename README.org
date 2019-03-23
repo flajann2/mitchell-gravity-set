@@ -27,6 +27,8 @@
     - [[#clang-vs-gcc][clang vs. gcc]]
     - [[#memory-locality][Memory locality]]
     - [[#marching-cubes-and-tetrahedra][Marching cubes and tetrahedra]]
+      - [[#journal][Journal]]
+        - [[#2019-03-23][2019-03-23]]
 
 ** Synopsis
    This library computes the Mitchell Gravity Set. This
@@ -328,7 +330,18 @@
     I have created a map for the marching tetrahedra to help in codifying
     how the cube will be disected.
 
-    [[./documentation/20190223_182428.jpg]]
+    #+ATTR_ORG: :width 512
+    #+ATTR_HTML: :width 512
+    [[./documentation/20190223_183044.jpg]]
 
     https://www.youtube.com/watch?v=ffnVCEAcOns
+
+**** Journal
+***** 2019-03-23 
+      This weekend I want to accomplish the mesh generation from
+      the tetrahedra, using the pipeline approach, of course. Later
+      on, we can consider making this process lazy, and thus
+      saving on the sheer amount of RAM necessary. But for now, it is
+      important to acheive some acutal visualization at all, so that
+      is where my focus shall lie. Optimize later.
 

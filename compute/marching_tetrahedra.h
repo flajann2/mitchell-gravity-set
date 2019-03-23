@@ -93,4 +93,13 @@ namespace mgs::march {
     return os;
   }
 
+  /**
+   * We take the results from MakeTesselation to now make the mesh.
+   */
+  class MakeMesh : public Pipeline {
+    const MakeTesselation& m_tess;
+  public:
+    MakeMesh() = default;
+    MakeMesh(const MakeTesselation& tess) : m_tess(tess) {}
+  };
 }  // namespace mgs::march
