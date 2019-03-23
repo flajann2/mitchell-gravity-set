@@ -330,8 +330,8 @@
     I have created a map for the marching tetrahedra to help in codifying
     how the cube will be disected.
 
-    #+ATTR_ORG: :width 512
-    #+ATTR_HTML: :width 512
+    #+ATTR_ORG: :width "512px"
+    #+ATTR_HTML: :width "512px"
     [[./documentation/20190223_183044.jpg]]
 
     https://www.youtube.com/watch?v=ffnVCEAcOns
