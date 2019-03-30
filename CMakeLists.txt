@@ -1,5 +1,5 @@
 # Main project
-cmake_minimum_required (VERSION 3.10.0)
+cmake_minimum_required (VERSION 3.12.1)
 project (mgs VERSION 0.0.0 DESCRIPTION "Mitchell Gravity Set 4th Generation")
 
 set (CMAKE_CXX_STANDARD 17)
@@ -22,4 +22,19 @@ add_subdirectory (submods)
 if (ENABLE_TESTS)
   enable_testing()
   add_subdirectory(tests)
+endif()
+
+if (ENABLE_DOXYGEN)
+  # apt install graphviz mscgen dia
+  # for full functionality
+  find_package(Doxygen
+    REQUIRED dot
+    OPTIONAL_COMPONENTS mscgen dia)
+
+  set(DOXYGEN_GENERATE_HTML YES)
+  set(DOXYGEN_GENERATE_MAN YES)
+
+  doxygen_add_docs(doxygen
+    ${PROJECT_SOURCE_DIR}
+    WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}/documentation")
 endif()

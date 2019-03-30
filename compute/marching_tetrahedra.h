@@ -14,7 +14,7 @@
  */
 
 namespace mgs::march {
-  using namespace mgs;
+   using namespace mgs;
 
   using tetra_index_t = std::array<index_bits_t, 4>;
   using cube_decomposer_t = std::array<tetra_index_t, 6>;
