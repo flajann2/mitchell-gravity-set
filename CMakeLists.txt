@@ -31,9 +31,6 @@ if (ENABLE_DOXYGEN)
     REQUIRED dot
     OPTIONAL_COMPONENTS mscgen dia)
 
-  set(DOXYGEN_GENERATE_HTML YES)
-  set(DOXYGEN_GENERATE_MAN YES)
-
   doxygen_add_docs(doxygen
     ${PROJECT_SOURCE_DIR}
     WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}/documentation")
