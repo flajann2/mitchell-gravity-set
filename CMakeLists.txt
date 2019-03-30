@@ -25,13 +25,26 @@ if (ENABLE_TESTS)
 endif()
 
 if (ENABLE_DOXYGEN)
+  message("Doxygen is enabled")
   # apt install graphviz mscgen dia
   # for full functionality
-  find_package(Doxygen
-    REQUIRED dot
-    OPTIONAL_COMPONENTS mscgen dia)
+  find_package(Doxygen REQUIRED dot mscgen dia)
 
+  set(doxywork "${CMAKE_CURRENT_SOURCE_DIR}/documentation")
+  set(doxyfile_in ${doxywork}/Doxyfile.in)
+  set(doxyfile ${doxywork}/Doxyfile)
+  set(doxytarget ${doxywork}/doxy)
+
+  file(REMOVE_RECURSE ${doxytarget})
+  
   doxygen_add_docs(doxygen
     ${PROJECT_SOURCE_DIR}
-    WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}/documentation")
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+
+  add_custom_target(doc ALL
+    COMMAND ${DOXYGEN_EXECUTABLE} ${doxyfile}
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    COMMENT "Generating API documentation with Doxygen"
+    VERBATIM)
+  
 endif()
