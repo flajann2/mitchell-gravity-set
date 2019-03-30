@@ -5,6 +5,6 @@
 *.srctrl*
 CMakeFiles
 CMakeCache.txt
-1
+doxy/
 build/
 cmake_install.cmake
