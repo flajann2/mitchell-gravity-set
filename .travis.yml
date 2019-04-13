@@ -23,6 +23,10 @@ addons:
       - doxygen-gui
       - graphviz
 
+# Maybe this fixes problem with the submodules???
+before_install:
+  - git submodule update --init --recursive
+  
 # Build your code e.g. by calling make
 script:
   - mkdir $TRAVIS_BUILD_DIR/build
