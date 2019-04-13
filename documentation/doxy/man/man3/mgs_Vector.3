@@ -1,0 +1,87 @@
+.TH "mgs::Vector< T, Indexer, P >" 3 "Sat Apr 13 2019" "Version 1" "Mitchell Gravity Set, 4th Generation" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+mgs::Vector< T, Indexer, P >
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBVector\fP (Indexer dimension=default_dimension)"
+.br
+.ti -1c
+.RI "\fBVector\fP (std::initializer_list< T > list)"
+.br
+.ti -1c
+.RI "\fBVector\fP (const \fBVector\fP &other)"
+.br
+.ti -1c
+.RI "\fBVector\fP (const \fBVector\fP &&other)"
+.br
+.ti -1c
+.RI "\fBVector\fP & \fBoperator=\fP (const \fBVector\fP &other)"
+.br
+.ti -1c
+.RI "T & \fBoperator[]\fP (Indexer index)"
+.br
+.ti -1c
+.RI "T \fBoperator[]\fP (Indexer index) const"
+.br
+.ti -1c
+.RI "auto \fBsize\fP ()"
+.br
+.ti -1c
+.RI "\fBVector\fP & \fBoperator=\fP (\fBVector\fP &&other)"
+.br
+.ti -1c
+.RI "T \fBnorm\fP () const"
+.br
+.ti -1c
+.RI "T \fBnorm_squared\fP () const"
+.br
+.ti -1c
+.RI "\fBVector\fP \fBunit_vector\fP () const"
+.br
+.ti -1c
+.RI "T \fBdot\fP (const \fBVector\fP &vo) const"
+.br
+.ti -1c
+.RI "\fBVector\fP \fBcross\fP (const \fBVector\fP &vo) const"
+.br
+.ti -1c
+.RI "\fBVector\fP \fBoperator+\fP (const \fBVector\fP &other) const"
+.br
+.ti -1c
+.RI "\fBVector\fP \fBoperator+=\fP (const \fBVector\fP &other)"
+.br
+.ti -1c
+.RI "\fBVector\fP \fBoperator\-\fP (const \fBVector\fP &other) const"
+.br
+.ti -1c
+.RI "\fBVector\fP \fBoperator*\fP (const floating_t scalar) const"
+.br
+.ti -1c
+.RI "\fBVector\fP \fBoperator/\fP (const floating_t scalar) const"
+.br
+.ti -1c
+.RI "bool \fBoperator==\fP (const \fBVector\fP &other) const"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "std::vector< T > \fBvec\fP"
+.br
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T, typename Indexer, typename P> bool \fBmgs::Vector\fP< T, Indexer, P >::operator== (const \fBVector\fP< T, Indexer, P > & other) const\fC [inline]\fP"
+TODO: Note that this may not make sense for floats\&. We'll TODO: have to add an epsillon here eventually\&.\&.\&. this is TODO: mostly for testing\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Mitchell Gravity Set, 4th Generation from the source code\&.

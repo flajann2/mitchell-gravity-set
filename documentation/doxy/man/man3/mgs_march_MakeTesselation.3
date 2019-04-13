@@ -1,0 +1,46 @@
+.TH "mgs::march::MakeTesselation" 3 "Sat Apr 13 2019" "Version 1" "Mitchell Gravity Set, 4th Generation" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+mgs::march::MakeTesselation
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <marching_tetrahedra\&.h>\fP
+.PP
+Inherits \fBmgs::march::Pipeline\fP\&.
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBMakeTesselation\fP (const \fBStarField\fP &field)"
+.br
+.ti -1c
+.RI "\fBMakeTesselation\fP (const \fBStarField\fP &&field)"
+.br
+.ti -1c
+.RI "tetra_list_t \fBtesseltate_cube\fP (const \fBIndex\fP &lmp)"
+.br
+.ti -1c
+.RI "template<typename Shape > Shape \fBoperator()\fP ()"
+.br
+.in -1c
+.SS "Friends"
+
+.in +1c
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &, \fBMakeTesselation\fP const &)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+We create the initial list of polygons here (not necessarily in the form needed for OpenGL!!!) 
+.SH "Member Function Documentation"
+.PP 
+.SS "tetra_list_t mgs::march::MakeTesselation::tesseltate_cube (const \fBIndex\fP & lmp)"
+From the lower most point index, testelate the cube to the upper most point (basically by adding 1 to the indices of the lmp)\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Mitchell Gravity Set, 4th Generation from the source code\&.

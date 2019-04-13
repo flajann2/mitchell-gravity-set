@@ -1,0 +1,86 @@
+\hypertarget{structmgs_1_1Field}{}\section{mgs\+:\+:Field$<$ T, Iterant, Indexer, P $>$ Struct Template Reference}
+\label{structmgs_1_1Field}\index{mgs\+::\+Field$<$ T, Iterant, Indexer, P $>$@{mgs\+::\+Field$<$ T, Iterant, Indexer, P $>$}}
+
+
+Collaboration diagram for mgs\+:\+:Field$<$ T, Iterant, Indexer, P $>$\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structmgs_1_1Field__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structmgs_1_1Field_a1faa4164faa615f55bb649251b3e344d}\label{structmgs_1_1Field_a1faa4164faa615f55bb649251b3e344d}} 
+{\bfseries Field} (\hyperlink{structmgs_1_1Vector}{Coordinate} neg\+\_\+bound, \hyperlink{structmgs_1_1Vector}{Coordinate} pos\+\_\+bound, Iterant cs=256, Iterant dim=2, Iterant iteration\+\_\+limit=1024, T grav\+\_\+constant=1.\+0, T escape\+\_\+r=2.\+0, T delta\+\_\+time=0.\+1)
+\item 
+\mbox{\Hypertarget{structmgs_1_1Field_ac7a2c770a1f9206aa73f949f4b312f80}\label{structmgs_1_1Field_ac7a2c770a1f9206aa73f949f4b312f80}} 
+{\bfseries Field} (\hyperlink{structmgs_1_1Bounds}{Bounds} box\+\_\+, Indexer cs=256, Indexer dim=3, Iterant iteration\+\_\+limit=1024, T grav\+\_\+constant=1.\+0, T escape\+\_\+r=2.\+0, T delta\+\_\+time=0.\+5)
+\item 
+\mbox{\Hypertarget{structmgs_1_1Field_af82babd1c2f9c0e304698849f1a39ff0}\label{structmgs_1_1Field_af82babd1c2f9c0e304698849f1a39ff0}} 
+Iterant \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (const \hyperlink{structmgs_1_1Index}{Index} \&idx)
+\item 
+\hyperlink{structmgs_1_1Index}{Index} \hyperlink{structmgs_1_1Field_ae10cc38826982adfbf9ef8df7b9bf5bd}{coords2index} (const \hyperlink{structmgs_1_1Vector}{Coordinate} \&c)
+\item 
+\hyperlink{structmgs_1_1Vector}{Coordinate} \hyperlink{structmgs_1_1Field_a28972ab1f16b45ca949849de53ecf7e7}{index2coordinate} (const \hyperlink{structmgs_1_1Index}{Index} \&idx)
+\item 
+\mbox{\Hypertarget{structmgs_1_1Field_aa5925b0bbd068b347d69e41cce42ad0e}\label{structmgs_1_1Field_aa5925b0bbd068b347d69e41cce42ad0e}} 
+void {\bfseries render\+\_\+with\+\_\+callback} (std\+::function$<$ void(\hyperlink{structmgs_1_1Index}{Index}, \hyperlink{structmgs_1_1Vector}{Position})$>$ cb)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structmgs_1_1Field_a3bf519b1216e7019388596b18dc849f5}\label{structmgs_1_1Field_a3bf519b1216e7019388596b18dc849f5}} 
+\hyperlink{structmgs_1_1Bounds}{Bounds} {\bfseries box}
+\item 
+\mbox{\Hypertarget{structmgs_1_1Field_a19d761209af98bb8e3442e0c9dd25892}\label{structmgs_1_1Field_a19d761209af98bb8e3442e0c9dd25892}} 
+std\+::vector$<$ Iterant $>$ {\bfseries grid}
+\item 
+\mbox{\Hypertarget{structmgs_1_1Field_a649eeb6b7f87055cbf6b8d6d60cbcee0}\label{structmgs_1_1Field_a649eeb6b7f87055cbf6b8d6d60cbcee0}} 
+std\+::vector$<$ \hyperlink{structmgs_1_1Star}{Star} $>$ {\bfseries stars}
+\item 
+\mbox{\Hypertarget{structmgs_1_1Field_a9a8507137a87e214e33f256cfebc7ce6}\label{structmgs_1_1Field_a9a8507137a87e214e33f256cfebc7ce6}} 
+\hyperlink{structmgs_1_1Vector}{Position} {\bfseries center\+\_\+of\+\_\+star\+\_\+mass}
+\item 
+\mbox{\Hypertarget{structmgs_1_1Field_a43157fc61030c1eeffe39192fe8a25b2}\label{structmgs_1_1Field_a43157fc61030c1eeffe39192fe8a25b2}} 
+Indexer {\bfseries cube\+\_\+size}
+\item 
+\mbox{\Hypertarget{structmgs_1_1Field_a6d56d193bdc368d461f55a58069cacca}\label{structmgs_1_1Field_a6d56d193bdc368d461f55a58069cacca}} 
+Indexer {\bfseries dimension}
+\item 
+\mbox{\Hypertarget{structmgs_1_1Field_a69de199e9544dd7839ffd5d272fd5982}\label{structmgs_1_1Field_a69de199e9544dd7839ffd5d272fd5982}} 
+\hyperlink{structmgs_1_1FieldParms}{Field\+Parms}$<$ T, Iterant $>$ {\bfseries parms}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structmgs_1_1Field_ae10cc38826982adfbf9ef8df7b9bf5bd}\label{structmgs_1_1Field_ae10cc38826982adfbf9ef8df7b9bf5bd}} 
+\index{mgs\+::\+Field@{mgs\+::\+Field}!coords2index@{coords2index}}
+\index{coords2index@{coords2index}!mgs\+::\+Field@{mgs\+::\+Field}}
+\subsubsection{\texorpdfstring{coords2index()}{coords2index()}}
+{\footnotesize\ttfamily template$<$typename T, typename Iterant, typename Indexer, typename P$>$ \\
+\hyperlink{structmgs_1_1Index}{Index} \hyperlink{structmgs_1_1Field}{mgs\+::\+Field}$<$ T, Iterant, Indexer, P $>$\+::coords2index (\begin{DoxyParamCaption}\item[{const \hyperlink{structmgs_1_1Vector}{Coordinate} \&}]{c }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Convert a coordinate Io an index. W\+A\+RN\+: No bounds checking is done here. If a coordinate W\+A\+RN\+: is out of bounds, the index will simply be too high W\+A\+RN\+: or too low (negative), which will result in memory corruption. T\+O\+DO\+: implement some means of bounds checking in \hyperlink{structmgs_1_1Index}{Index} or \hyperlink{structmgs_1_1Field}{Field}. \mbox{\Hypertarget{structmgs_1_1Field_a28972ab1f16b45ca949849de53ecf7e7}\label{structmgs_1_1Field_a28972ab1f16b45ca949849de53ecf7e7}} 
+\index{mgs\+::\+Field@{mgs\+::\+Field}!index2coordinate@{index2coordinate}}
+\index{index2coordinate@{index2coordinate}!mgs\+::\+Field@{mgs\+::\+Field}}
+\subsubsection{\texorpdfstring{index2coordinate()}{index2coordinate()}}
+{\footnotesize\ttfamily template$<$typename T, typename Iterant, typename Indexer, typename P$>$ \\
+\hyperlink{structmgs_1_1Vector}{Coordinate} \hyperlink{structmgs_1_1Field}{mgs\+::\+Field}$<$ T, Iterant, Indexer, P $>$\+::index2coordinate (\begin{DoxyParamCaption}\item[{const \hyperlink{structmgs_1_1Index}{Index} \&}]{idx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Convert an index to coordinate. W\+A\+RN\+: no bounds checking is performed. Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structmgs_1_1Field_a28972ab1f16b45ca949849de53ecf7e7_icgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+compute/compute.\+h\item 
+compute/compute.\+cpp\end{DoxyCompactItemize}

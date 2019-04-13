@@ -1,0 +1,98 @@
+.TH "mgs::StarFieldGUI" 3 "Sat Apr 13 2019" "Version 1" "Mitchell Gravity Set, 4th Generation" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+mgs::StarFieldGUI
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits QObject\&.
+.SS "Public Slots"
+
+.in +1c
+.ti -1c
+.RI "void \fBsl_setFreePointCube\fP (int side)"
+.br
+.ti -1c
+.RI "void \fBsl_toggleSimulation\fP ()"
+.br
+.ti -1c
+.RI "void \fBsl_stepSimulation\fP ()"
+.br
+.ti -1c
+.RI "void \fBsl_toggleCenter\fP ()"
+.br
+.ti -1c
+.RI "void \fBsl_toggleArrows\fP ()"
+.br
+.ti -1c
+.RI "void \fBsl_make_polygon\fP (int stars)"
+.br
+.ti -1c
+.RI "void \fBsl_make_tetrahedron\fP ()"
+.br
+.ti -1c
+.RI "void \fBsl_make_octahedron\fP ()"
+.br
+.ti -1c
+.RI "void \fBsl_make_hexahedron\fP ()"
+.br
+.ti -1c
+.RI "void \fBsl_make_dodecahedron\fP ()"
+.br
+.ti -1c
+.RI "void \fBsl_make_icosahedron\fP ()"
+.br
+.ti -1c
+.RI "void \fBsl_star_selected\fP (int index)"
+.br
+.ti -1c
+.RI "void \fBsl_update_star\fP (int index, const \fBStar\fP &star)"
+.br
+.ti -1c
+.RI "void \fBsl_reset_eularian\fP ()"
+.br
+.ti -1c
+.RI "void \fBsl_update_overall\fP (const \fBOverall\fP &overall)"
+.br
+.ti -1c
+.RI "void \fBsl_reset_arrows\fP ()"
+.br
+.in -1c
+.SS "Signals"
+
+.in +1c
+.ti -1c
+.RI "void \fBsig_select_star\fP (int index, const \fBStar\fP &star)"
+.br
+.ti -1c
+.RI "void \fBsig_set_number_of_stars\fP (int count)"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBStarFieldGUI\fP (Q3DScatter *scatter)"
+.br
+.ti -1c
+.RI "void \fBupdateFieldState\fP (bool reset=false)"
+.br
+.ti -1c
+.RI "void \fBclearField\fP ()"
+.br
+.ti -1c
+.RI "void \fBgenerateField\fP ()"
+.br
+.ti -1c
+.RI "void \fBgenerateFPMInitialStates\fP ()"
+.br
+.ti -1c
+.RI "void \fBeularianFPMAdvance\fP ()"
+.br
+.in -1c
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Mitchell Gravity Set, 4th Generation from the source code\&.

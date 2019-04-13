@@ -1,0 +1,162 @@
+\hypertarget{namespacemgs}{}\section{mgs Namespace Reference}
+\label{namespacemgs}\index{mgs@{mgs}}
+\subsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespacemgs_1_1march}{march}
+\end{DoxyCompactItemize}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structmgs_1_1Bounds}{Bounds}
+\item 
+struct \hyperlink{structmgs_1_1Field}{Field}
+\item 
+struct \hyperlink{structmgs_1_1FieldParms}{Field\+Parms}
+\item 
+struct \hyperlink{structmgs_1_1FieldParmsSimulation}{Field\+Parms\+Simulation}
+\item 
+struct \hyperlink{structmgs_1_1Index}{Index}
+\item 
+struct \hyperlink{structmgs_1_1PosVel}{Pos\+Vel}
+\item 
+struct \hyperlink{structmgs_1_1SCB}{S\+CB}
+\item 
+struct \hyperlink{structmgs_1_1Star}{Star}
+\item 
+class \hyperlink{classmgs_1_1StarConfig}{Star\+Config}
+\item 
+class \hyperlink{classmgs_1_1StarFieldGUI}{Star\+Field\+G\+UI}
+\item 
+struct \hyperlink{structmgs_1_1Vector}{Vector}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{namespacemgs_a373b455db997509a22f67a5df3a194c4}\label{namespacemgs_a373b455db997509a22f67a5df3a194c4}} 
+using {\bfseries indexer\+\_\+t} = std\+::int32\+\_\+t
+\item 
+\mbox{\Hypertarget{namespacemgs_a0810746635a2da1b13b45c8528762689}\label{namespacemgs_a0810746635a2da1b13b45c8528762689}} 
+using {\bfseries iterant\+\_\+t} = std\+::int16\+\_\+t
+\item 
+\mbox{\Hypertarget{namespacemgs_a4db3f28b798eb720761deca45dc72b4c}\label{namespacemgs_a4db3f28b798eb720761deca45dc72b4c}} 
+using {\bfseries idx\+\_\+vector\+\_\+t} = std\+::vector$<$ indexer\+\_\+t $>$
+\item 
+\mbox{\Hypertarget{namespacemgs_a8ccddf46143f7d086313e2130efd2b5a}\label{namespacemgs_a8ccddf46143f7d086313e2130efd2b5a}} 
+using {\bfseries floating\+\_\+t} = double
+\item 
+using \hyperlink{namespacemgs_a40c361242ea98fb1ff1241d06f7d5568}{index\+\_\+bits\+\_\+t} = std\+::bitset$<$ 3 $>$
+\item 
+\mbox{\Hypertarget{namespacemgs_ad5e2a5cbd5a244b6cb7cc35c6b344cf6}\label{namespacemgs_ad5e2a5cbd5a244b6cb7cc35c6b344cf6}} 
+using {\bfseries Coordinate} = \hyperlink{structmgs_1_1Vector}{Vector}$<$ floating\+\_\+t, indexer\+\_\+t, struct Math\+Parm $>$
+\item 
+\mbox{\Hypertarget{namespacemgs_ae28c60c3df5c7b1df9107701d7f11bf2}\label{namespacemgs_ae28c60c3df5c7b1df9107701d7f11bf2}} 
+using {\bfseries Position} = \hyperlink{structmgs_1_1Vector}{Vector}$<$ floating\+\_\+t, indexer\+\_\+t, struct Math\+Parm $>$
+\item 
+\mbox{\Hypertarget{namespacemgs_ab312d7023c77c0ae9d2310c9f9a1f85f}\label{namespacemgs_ab312d7023c77c0ae9d2310c9f9a1f85f}} 
+using {\bfseries Velocity} = \hyperlink{structmgs_1_1Vector}{Vector}$<$ floating\+\_\+t, indexer\+\_\+t, struct Math\+Parm $>$
+\item 
+\mbox{\Hypertarget{namespacemgs_a55fd90faa062c49fe9d0aebddf67b27c}\label{namespacemgs_a55fd90faa062c49fe9d0aebddf67b27c}} 
+using {\bfseries Acceleration} = \hyperlink{structmgs_1_1Vector}{Vector}$<$ floating\+\_\+t, indexer\+\_\+t, struct Math\+Parm $>$
+\item 
+\mbox{\Hypertarget{namespacemgs_a7124759a4ff90a99ae945ee55c3d48b4}\label{namespacemgs_a7124759a4ff90a99ae945ee55c3d48b4}} 
+using {\bfseries Vec} = \hyperlink{structmgs_1_1Vector}{Vector}$<$ floating\+\_\+t, indexer\+\_\+t, struct Math\+Parm $>$
+\item 
+using \hyperlink{namespacemgs_a7908010cda249b8bf1ea06572a4d4984}{Star\+Field} = \hyperlink{structmgs_1_1Field}{Field}$<$ floating\+\_\+t, iterant\+\_\+t, indexer\+\_\+t, struct Field\+Parm $>$
+\item 
+\mbox{\Hypertarget{namespacemgs_a8380a85ccfa5dc1d5e12fbaf619d1d56}\label{namespacemgs_a8380a85ccfa5dc1d5e12fbaf619d1d56}} 
+using {\bfseries Overall} = \hyperlink{structmgs_1_1FieldParmsSimulation}{Field\+Parms\+Simulation}$<$ double, int $>$
+\item 
+\mbox{\Hypertarget{namespacemgs_a153b8282bbe0c4052b4d43f1206f0aff}\label{namespacemgs_a153b8282bbe0c4052b4d43f1206f0aff}} 
+typedef void(Star\+Field\+G\+U\+I\+::$\ast$ {\bfseries Slot\+G\+UI}) ()
+\item 
+\mbox{\Hypertarget{namespacemgs_a4a3e7425a487f54a4f0fcc8e224e6bf5}\label{namespacemgs_a4a3e7425a487f54a4f0fcc8e224e6bf5}} 
+typedef void(Star\+Config\+::$\ast$ {\bfseries Slot\+CF}) ()
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structmgs_1_1Index}{Index} \hyperlink{namespacemgs_aa3d52c646ace701de74ece1b83e81c3d}{operator+} (const \hyperlink{structmgs_1_1Index}{Index} \&source, const \hyperlink{namespacemgs_a40c361242ea98fb1ff1241d06f7d5568}{index\+\_\+bits\+\_\+t} \&bits)
+\item 
+\mbox{\Hypertarget{namespacemgs_a522006625245012a736f3e54bcc762cb}\label{namespacemgs_a522006625245012a736f3e54bcc762cb}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, \hyperlink{structmgs_1_1Index}{Index} const \&idx)
+\item 
+\mbox{\Hypertarget{namespacemgs_aa10eec5254d6d1163efbdcc6a26d8313}\label{namespacemgs_aa10eec5254d6d1163efbdcc6a26d8313}} 
+{\footnotesize template$<$typename T , typename I , typename P $>$ }\\std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, \hyperlink{structmgs_1_1Vector}{Vector}$<$ T, I, P $>$ const \&c)
+\item 
+\mbox{\Hypertarget{namespacemgs_adf73083db7cf46490ad2fa29742ba85d}\label{namespacemgs_adf73083db7cf46490ad2fa29742ba85d}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, \hyperlink{structmgs_1_1Star}{Star} const \&star)
+\item 
+\mbox{\Hypertarget{namespacemgs_a85e81c126aeacd489c95b39ed7a9758f}\label{namespacemgs_a85e81c126aeacd489c95b39ed7a9758f}} 
+{\footnotesize template$<$typename T , typename I $>$ }\\\hyperlink{structmgs_1_1Vector}{Acceleration} {\bfseries compute\+\_\+acceleration} (const \hyperlink{structmgs_1_1Star}{Star} \&star, const \hyperlink{structmgs_1_1Vector}{Position} \&fpm, const T gravitational\+\_\+constant)
+\item 
+\mbox{\Hypertarget{namespacemgs_a9201b5d2cc34cb4ca38c73f203255ab7}\label{namespacemgs_a9201b5d2cc34cb4ca38c73f203255ab7}} 
+{\footnotesize template$<$typename T , typename I $>$ }\\\hyperlink{structmgs_1_1Vector}{Position} {\bfseries compute\+\_\+center\+\_\+of\+\_\+star\+\_\+mass} (const std\+::vector$<$ \hyperlink{structmgs_1_1Star}{Star} $>$ \&stars)
+\item 
+{\footnotesize template$<$typename T , typename I $>$ }\\I \hyperlink{namespacemgs_aa8de51b8fb971ca949d932b8348298d1}{render\+\_\+single\+\_\+cell} (const \hyperlink{structmgs_1_1Vector}{Position} \&initial\+\_\+p, const \hyperlink{structmgs_1_1Vector}{Velocity} \&initial\+\_\+v, const std\+::vector$<$ \hyperlink{structmgs_1_1Star}{Star} $>$ \&stars, const \hyperlink{structmgs_1_1Vector}{Position} \&center\+\_\+of\+\_\+star\+\_\+mass, const \hyperlink{structmgs_1_1FieldParms}{Field\+Parms}$<$ T, I $>$ \&parms, std\+::function$<$ void(const \hyperlink{structmgs_1_1Vector}{Position} \&, const \hyperlink{structmgs_1_1Vector}{Velocity} \&)$>$ cb=nullptr)
+\item 
+\mbox{\Hypertarget{namespacemgs_a4fcd3e4b13b1548fd4c5dcf4d478236d}\label{namespacemgs_a4fcd3e4b13b1548fd4c5dcf4d478236d}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, \hyperlink{namespacemgs_a7908010cda249b8bf1ea06572a4d4984}{Star\+Field} const \&f)
+\item 
+\mbox{\Hypertarget{namespacemgs_a3a1417a093115c75a5809b917490a9c8}\label{namespacemgs_a3a1417a093115c75a5809b917490a9c8}} 
+{\footnotesize template$<$typename I $>$ }\\I {\bfseries ipow} (I base, I exp)
+\item 
+\mbox{\Hypertarget{namespacemgs_a84f7ce8b66ad2e75f30a92d87659201d}\label{namespacemgs_a84f7ce8b66ad2e75f30a92d87659201d}} 
+Q\+Quaternion {\bfseries rotate\+To\+Vector} (const \hyperlink{structmgs_1_1Vector}{Vec} \&from, const \hyperlink{structmgs_1_1Vector}{Vec} \&to)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{namespacemgs_abd2b0e6d7ef99cf2e6fa0552a28bf491}\label{namespacemgs_abd2b0e6d7ef99cf2e6fa0552a28bf491}} 
+const int {\bfseries default\+\_\+dimension} = 3
+\item 
+\mbox{\Hypertarget{namespacemgs_a0127e09449873e5509f1714c6ae0f6a9}\label{namespacemgs_a0127e09449873e5509f1714c6ae0f6a9}} 
+const int {\bfseries untouched} = -\/1
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+M\+GS Iernal classes
+
+The default typenames will be instantiated by the cpp. Later, we can easily add support for other possibilities, but for now, we don\textquotesingle{}t need. 
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{namespacemgs_a40c361242ea98fb1ff1241d06f7d5568}\label{namespacemgs_a40c361242ea98fb1ff1241d06f7d5568}} 
+\index{mgs@{mgs}!index\+\_\+bits\+\_\+t@{index\+\_\+bits\+\_\+t}}
+\index{index\+\_\+bits\+\_\+t@{index\+\_\+bits\+\_\+t}!mgs@{mgs}}
+\subsubsection{\texorpdfstring{index\+\_\+bits\+\_\+t}{index\_bits\_t}}
+{\footnotesize\ttfamily using \hyperlink{namespacemgs_a40c361242ea98fb1ff1241d06f7d5568}{mgs\+::index\+\_\+bits\+\_\+t} = typedef std\+::bitset$<$3$>$}
+
+index\+\_\+bits\+\_\+t will increment the index according to the bits set. This is primarilary for the marching tetrahedra algorithm. \mbox{\Hypertarget{namespacemgs_a7908010cda249b8bf1ea06572a4d4984}\label{namespacemgs_a7908010cda249b8bf1ea06572a4d4984}} 
+\index{mgs@{mgs}!Star\+Field@{Star\+Field}}
+\index{Star\+Field@{Star\+Field}!mgs@{mgs}}
+\subsubsection{\texorpdfstring{Star\+Field}{StarField}}
+{\footnotesize\ttfamily using \hyperlink{namespacemgs_a7908010cda249b8bf1ea06572a4d4984}{mgs\+::\+Star\+Field} = typedef \hyperlink{structmgs_1_1Field}{Field}$<$floating\+\_\+t, iterant\+\_\+t, indexer\+\_\+t, struct Field\+Parm$>$}
+
+Do the Newton with the Floating Point16\+\_\+t Mass and a single \hyperlink{structmgs_1_1Star}{Star}. Note that r\+\_\+squared is computed without squaring the final result, but the sum of the squared components, so we do that first, then take its square root to save on the calculations.
+
+T\+O\+DO\+: Some consideration should be given for T\+O\+DO\+: more optimizations so this can run completely T\+O\+DO\+: in the L1 or L2 cache. Also, how can this be T\+O\+DO\+: restructured so this can take advantage of S\+M\+ID? 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespacemgs_aa3d52c646ace701de74ece1b83e81c3d}\label{namespacemgs_aa3d52c646ace701de74ece1b83e81c3d}} 
+\index{mgs@{mgs}!operator+@{operator+}}
+\index{operator+@{operator+}!mgs@{mgs}}
+\subsubsection{\texorpdfstring{operator+()}{operator+()}}
+{\footnotesize\ttfamily \hyperlink{structmgs_1_1Index}{Index} mgs\+::operator+ (\begin{DoxyParamCaption}\item[{const \hyperlink{structmgs_1_1Index}{Index} \&}]{source,  }\item[{const \hyperlink{namespacemgs_a40c361242ea98fb1ff1241d06f7d5568}{index\+\_\+bits\+\_\+t} \&}]{bits }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+For 3D M\+GS only, primarily for marching tetrahedra. Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=348pt]{namespacemgs_aa3d52c646ace701de74ece1b83e81c3d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacemgs_aa8de51b8fb971ca949d932b8348298d1}\label{namespacemgs_aa8de51b8fb971ca949d932b8348298d1}} 
+\index{mgs@{mgs}!render\+\_\+single\+\_\+cell@{render\+\_\+single\+\_\+cell}}
+\index{render\+\_\+single\+\_\+cell@{render\+\_\+single\+\_\+cell}!mgs@{mgs}}
+\subsubsection{\texorpdfstring{render\+\_\+single\+\_\+cell()}{render\_single\_cell()}}
+{\footnotesize\ttfamily template$<$typename T , typename I $>$ \\
+I mgs\+::render\+\_\+single\+\_\+cell (\begin{DoxyParamCaption}\item[{const \hyperlink{structmgs_1_1Vector}{Position} \&}]{initial\+\_\+p,  }\item[{const \hyperlink{structmgs_1_1Vector}{Velocity} \&}]{initial\+\_\+v,  }\item[{const std\+::vector$<$ \hyperlink{structmgs_1_1Star}{Star} $>$ \&}]{stars,  }\item[{const \hyperlink{structmgs_1_1Vector}{Position} \&}]{center\+\_\+of\+\_\+star\+\_\+mass,  }\item[{const \hyperlink{structmgs_1_1FieldParms}{Field\+Parms}$<$ T, I $>$ \&}]{parms,  }\item[{std\+::function$<$ void(const \hyperlink{structmgs_1_1Vector}{Position} \&, const \hyperlink{structmgs_1_1Vector}{Velocity} \&)$>$}]{cb = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Iterates a single Free Point Mass from initial position and velocity. This has been pulled out of \hyperlink{structmgs_1_1Field}{Field} to be callable independent of having to set up the entire \hyperlink{structmgs_1_1Field}{Field} object when we are not computing the M\+GS. 

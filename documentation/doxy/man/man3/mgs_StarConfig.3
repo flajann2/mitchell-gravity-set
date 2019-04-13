@@ -1,0 +1,53 @@
+.TH "mgs::StarConfig" 3 "Sat Apr 13 2019" "Version 1" "Mitchell Gravity Set, 4th Generation" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+mgs::StarConfig
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits QObject\&.
+.SS "Public Slots"
+
+.in +1c
+.ti -1c
+.RI "void \fBsl_select_star\fP (int index, const \fBStar\fP &star)"
+.br
+.ti -1c
+.RI "void \fBsl_set_number_of_stars\fP (int count)"
+.br
+.ti -1c
+.RI "void \fBsl_star_selected\fP (int index)"
+.br
+.ti -1c
+.RI "void \fBsl_star_config_changed\fP (const QString &_text)"
+.br
+.ti -1c
+.RI "void \fBsl_overall_config_changed\fP (const QString &_text)"
+.br
+.in -1c
+.SS "Signals"
+
+.in +1c
+.ti -1c
+.RI "void \fBsig_update_star\fP (int index, const \fBStar\fP &star)"
+.br
+.ti -1c
+.RI "void \fBsig_select_star\fP (int index)"
+.br
+.ti -1c
+.RI "void \fBsig_update_overall\fP (const \fBOverall\fP &overall)"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBinit\fP ()"
+.br
+.in -1c
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Mitchell Gravity Set, 4th Generation from the source code\&.

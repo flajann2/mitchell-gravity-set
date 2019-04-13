@@ -1,0 +1,65 @@
+.TH "mgs::Field< T, Iterant, Indexer, P >" 3 "Sat Apr 13 2019" "Version 1" "Mitchell Gravity Set, 4th Generation" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+mgs::Field< T, Iterant, Indexer, P >
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBField\fP (\fBCoordinate\fP neg_bound, \fBCoordinate\fP pos_bound, Iterant cs=256, Iterant dim=2, Iterant iteration_limit=1024, T grav_constant=1\&.0, T escape_r=2\&.0, T delta_time=0\&.1)"
+.br
+.ti -1c
+.RI "\fBField\fP (\fBBounds\fP box_, Indexer cs=256, Indexer dim=3, Iterant iteration_limit=1024, T grav_constant=1\&.0, T escape_r=2\&.0, T delta_time=0\&.5)"
+.br
+.ti -1c
+.RI "Iterant & \fBoperator[]\fP (const \fBIndex\fP &idx)"
+.br
+.ti -1c
+.RI "\fBIndex\fP \fBcoords2index\fP (const \fBCoordinate\fP &c)"
+.br
+.ti -1c
+.RI "\fBCoordinate\fP \fBindex2coordinate\fP (const \fBIndex\fP &idx)"
+.br
+.ti -1c
+.RI "void \fBrender_with_callback\fP (std::function< void(\fBIndex\fP, \fBPosition\fP)> cb)"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBBounds\fP \fBbox\fP"
+.br
+.ti -1c
+.RI "std::vector< Iterant > \fBgrid\fP"
+.br
+.ti -1c
+.RI "std::vector< \fBStar\fP > \fBstars\fP"
+.br
+.ti -1c
+.RI "\fBPosition\fP \fBcenter_of_star_mass\fP"
+.br
+.ti -1c
+.RI "Indexer \fBcube_size\fP"
+.br
+.ti -1c
+.RI "Indexer \fBdimension\fP"
+.br
+.ti -1c
+.RI "\fBFieldParms\fP< T, Iterant > \fBparms\fP"
+.br
+.in -1c
+.SH "Member Function Documentation"
+.PP 
+.SS "template<typename T, typename Iterant, typename Indexer, typename P> \fBIndex\fP \fBmgs::Field\fP< T, Iterant, Indexer, P >::coords2index (const \fBCoordinate\fP & c)\fC [inline]\fP"
+Convert a coordinate Io an index\&. WARN: No bounds checking is done here\&. If a coordinate WARN: is out of bounds, the index will simply be too high WARN: or too low (negative), which will result in memory corruption\&. TODO: implement some means of bounds checking in \fBIndex\fP or \fBField\fP\&. 
+.SS "template<typename T, typename Iterant, typename Indexer, typename P> \fBCoordinate\fP \fBmgs::Field\fP< T, Iterant, Indexer, P >::index2coordinate (const \fBIndex\fP & idx)\fC [inline]\fP"
+Convert an index to coordinate\&. WARN: no bounds checking is performed\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Mitchell Gravity Set, 4th Generation from the source code\&.

@@ -1,0 +1,58 @@
+.TH "mgs::march" 3 "Sat Apr 13 2019" "Version 1" "Mitchell Gravity Set, 4th Generation" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+mgs::march
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBMakeMesh\fP"
+.br
+.ti -1c
+.RI "class \fBMakeTesselation\fP"
+.br
+.ti -1c
+.RI "class \fBPipeline\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "using \fBtetra_index_t\fP = std::array< \fBindex_bits_t\fP, 4 >"
+.br
+.ti -1c
+.RI "using \fBcube_decomposer_t\fP = std::array< tetra_index_t, 6 >"
+.br
+.ti -1c
+.RI "using \fBpos_list_t\fP = std::vector< \fBPosition\fP >"
+.br
+.ti -1c
+.RI "using \fBtetra_list_t\fP = std::vector< pos_list_t >"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &os, pos_list_t const &pv)"
+.br
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &os, \fBMakeTesselation\fP const &tess)"
+.br
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &os, tetra_list_t const &tl)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+The Marching Tetrahedra is implemented here\&. We simply wish (for now) to walk the entire field and generate the triangles to render\&.
+.PP
+TODO: later on we will optimise this to TODO: process in a more lazy fashion\&. For now, TODO: we will generate a 'buffer' of polygons TODO: that will eventually be rendered\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Mitchell Gravity Set, 4th Generation from the source code\&.

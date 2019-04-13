@@ -1,0 +1,164 @@
+.TH "mgs" 3 "Sat Apr 13 2019" "Version 1" "Mitchell Gravity Set, 4th Generation" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+mgs
+.SH SYNOPSIS
+.br
+.PP
+.SS "Namespaces"
+
+.in +1c
+.ti -1c
+.RI " \fBmarch\fP"
+.br
+.in -1c
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "struct \fBBounds\fP"
+.br
+.ti -1c
+.RI "struct \fBField\fP"
+.br
+.ti -1c
+.RI "struct \fBFieldParms\fP"
+.br
+.ti -1c
+.RI "struct \fBFieldParmsSimulation\fP"
+.br
+.ti -1c
+.RI "struct \fBIndex\fP"
+.br
+.ti -1c
+.RI "struct \fBPosVel\fP"
+.br
+.ti -1c
+.RI "struct \fBSCB\fP"
+.br
+.ti -1c
+.RI "struct \fBStar\fP"
+.br
+.ti -1c
+.RI "class \fBStarConfig\fP"
+.br
+.ti -1c
+.RI "class \fBStarFieldGUI\fP"
+.br
+.ti -1c
+.RI "struct \fBVector\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "using \fBindexer_t\fP = std::int32_t"
+.br
+.ti -1c
+.RI "using \fBiterant_t\fP = std::int16_t"
+.br
+.ti -1c
+.RI "using \fBidx_vector_t\fP = std::vector< indexer_t >"
+.br
+.ti -1c
+.RI "using \fBfloating_t\fP = double"
+.br
+.ti -1c
+.RI "using \fBindex_bits_t\fP = std::bitset< 3 >"
+.br
+.ti -1c
+.RI "using \fBCoordinate\fP = \fBVector\fP< floating_t, indexer_t, struct MathParm >"
+.br
+.ti -1c
+.RI "using \fBPosition\fP = \fBVector\fP< floating_t, indexer_t, struct MathParm >"
+.br
+.ti -1c
+.RI "using \fBVelocity\fP = \fBVector\fP< floating_t, indexer_t, struct MathParm >"
+.br
+.ti -1c
+.RI "using \fBAcceleration\fP = \fBVector\fP< floating_t, indexer_t, struct MathParm >"
+.br
+.ti -1c
+.RI "using \fBVec\fP = \fBVector\fP< floating_t, indexer_t, struct MathParm >"
+.br
+.ti -1c
+.RI "using \fBStarField\fP = \fBField\fP< floating_t, iterant_t, indexer_t, struct FieldParm >"
+.br
+.ti -1c
+.RI "using \fBOverall\fP = \fBFieldParmsSimulation\fP< double, int >"
+.br
+.ti -1c
+.RI "typedef void(StarFieldGUI::* \fBSlotGUI\fP) ()"
+.br
+.ti -1c
+.RI "typedef void(StarConfig::* \fBSlotCF\fP) ()"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBIndex\fP \fBoperator+\fP (const \fBIndex\fP &source, const \fBindex_bits_t\fP &bits)"
+.br
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &os, \fBIndex\fP const &idx)"
+.br
+.ti -1c
+.RI "template<typename T , typename I , typename P > std::ostream & \fBoperator<<\fP (std::ostream &os, \fBVector\fP< T, I, P > const &c)"
+.br
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &os, \fBStar\fP const &star)"
+.br
+.ti -1c
+.RI "template<typename T , typename I > \fBAcceleration\fP \fBcompute_acceleration\fP (const \fBStar\fP &star, const \fBPosition\fP &fpm, const T gravitational_constant)"
+.br
+.ti -1c
+.RI "template<typename T , typename I > \fBPosition\fP \fBcompute_center_of_star_mass\fP (const std::vector< \fBStar\fP > &stars)"
+.br
+.ti -1c
+.RI "template<typename T , typename I > I \fBrender_single_cell\fP (const \fBPosition\fP &initial_p, const \fBVelocity\fP &initial_v, const std::vector< \fBStar\fP > &stars, const \fBPosition\fP &center_of_star_mass, const \fBFieldParms\fP< T, I > &parms, std::function< void(const \fBPosition\fP &, const \fBVelocity\fP &)> cb=nullptr)"
+.br
+.ti -1c
+.RI "std::ostream & \fBoperator<<\fP (std::ostream &os, \fBStarField\fP const &f)"
+.br
+.ti -1c
+.RI "template<typename I > I \fBipow\fP (I base, I exp)"
+.br
+.ti -1c
+.RI "QQuaternion \fBrotateToVector\fP (const \fBVec\fP &from, const \fBVec\fP &to)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "const int \fBdefault_dimension\fP = 3"
+.br
+.ti -1c
+.RI "const int \fBuntouched\fP = \-1"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+MGS Iernal classes
+.PP
+The default typenames will be instantiated by the cpp\&. Later, we can easily add support for other possibilities, but for now, we don't need\&. 
+.SH "Typedef Documentation"
+.PP 
+.SS "using \fBmgs::index_bits_t\fP = typedef std::bitset<3>"
+index_bits_t will increment the index according to the bits set\&. This is primarilary for the marching tetrahedra algorithm\&. 
+.SS "using \fBmgs::StarField\fP = typedef \fBField\fP<floating_t, iterant_t, indexer_t, struct FieldParm>"
+Do the Newton with the Floating Point16_t Mass and a single \fBStar\fP\&. Note that r_squared is computed without squaring the final result, but the sum of the squared components, so we do that first, then take its square root to save on the calculations\&.
+.PP
+TODO: Some consideration should be given for TODO: more optimizations so this can run completely TODO: in the L1 or L2 cache\&. Also, how can this be TODO: restructured so this can take advantage of SMID? 
+.SH "Function Documentation"
+.PP 
+.SS "\fBIndex\fP mgs::operator+ (const \fBIndex\fP & source, const \fBindex_bits_t\fP & bits)\fC [inline]\fP"
+For 3D MGS only, primarily for marching tetrahedra\&. 
+.SS "template<typename T , typename I > I mgs::render_single_cell (const \fBPosition\fP & initial_p, const \fBVelocity\fP & initial_v, const std::vector< \fBStar\fP > & stars, const \fBPosition\fP & center_of_star_mass, const \fBFieldParms\fP< T, I > & parms, std::function< void(const \fBPosition\fP &, const \fBVelocity\fP &)> cb = \fCnullptr\fP)\fC [inline]\fP"
+Iterates a single Free Point Mass from initial position and velocity\&. This has been pulled out of \fBField\fP to be callable independent of having to set up the entire \fBField\fP object when we are not computing the MGS\&. 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Mitchell Gravity Set, 4th Generation from the source code\&.

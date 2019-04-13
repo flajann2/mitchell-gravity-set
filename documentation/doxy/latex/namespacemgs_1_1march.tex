@@ -1,0 +1,44 @@
+\hypertarget{namespacemgs_1_1march}{}\section{mgs\+:\+:march Namespace Reference}
+\label{namespacemgs_1_1march}\index{mgs\+::march@{mgs\+::march}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classmgs_1_1march_1_1MakeMesh}{Make\+Mesh}
+\item 
+class \hyperlink{classmgs_1_1march_1_1MakeTesselation}{Make\+Tesselation}
+\item 
+class \hyperlink{classmgs_1_1march_1_1Pipeline}{Pipeline}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{namespacemgs_1_1march_a0aad9b3e6e0397451a4c792a25c44ca1}\label{namespacemgs_1_1march_a0aad9b3e6e0397451a4c792a25c44ca1}} 
+using {\bfseries tetra\+\_\+index\+\_\+t} = std\+::array$<$ \hyperlink{namespacemgs_a40c361242ea98fb1ff1241d06f7d5568}{index\+\_\+bits\+\_\+t}, 4 $>$
+\item 
+\mbox{\Hypertarget{namespacemgs_1_1march_a81573635f8974f15f4b71b6050e8b38d}\label{namespacemgs_1_1march_a81573635f8974f15f4b71b6050e8b38d}} 
+using {\bfseries cube\+\_\+decomposer\+\_\+t} = std\+::array$<$ tetra\+\_\+index\+\_\+t, 6 $>$
+\item 
+\mbox{\Hypertarget{namespacemgs_1_1march_af86a2a7e7bcb7196097eda7749bf60e0}\label{namespacemgs_1_1march_af86a2a7e7bcb7196097eda7749bf60e0}} 
+using {\bfseries pos\+\_\+list\+\_\+t} = std\+::vector$<$ \hyperlink{structmgs_1_1Vector}{Position} $>$
+\item 
+\mbox{\Hypertarget{namespacemgs_1_1march_ad66d833e33f4513fb34382103bddf074}\label{namespacemgs_1_1march_ad66d833e33f4513fb34382103bddf074}} 
+using {\bfseries tetra\+\_\+list\+\_\+t} = std\+::vector$<$ pos\+\_\+list\+\_\+t $>$
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{namespacemgs_1_1march_a34eba5cecd2d1b25d6d0f9b78e9ffc1a}\label{namespacemgs_1_1march_a34eba5cecd2d1b25d6d0f9b78e9ffc1a}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, pos\+\_\+list\+\_\+t const \&pv)
+\item 
+\mbox{\Hypertarget{namespacemgs_1_1march_abff648da6f597f80e9d27b67d5e006d6}\label{namespacemgs_1_1march_abff648da6f597f80e9d27b67d5e006d6}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, \hyperlink{classmgs_1_1march_1_1MakeTesselation}{Make\+Tesselation} const \&tess)
+\item 
+\mbox{\Hypertarget{namespacemgs_1_1march_aea64facfbf2654abafd500e598eb66e1}\label{namespacemgs_1_1march_aea64facfbf2654abafd500e598eb66e1}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, tetra\+\_\+list\+\_\+t const \&tl)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The Marching Tetrahedra is implemented here. We simply wish (for now) to walk the entire field and generate the triangles to render.
+
+T\+O\+DO\+: later on we will optimise this to T\+O\+DO\+: process in a more lazy fashion. For now, T\+O\+DO\+: we will generate a \char`\"{}buffer\char`\"{} of polygons T\+O\+DO\+: that will eventually be rendered. 

@@ -1,0 +1,50 @@
+.TH "mgs::Index" 3 "Sat Apr 13 2019" "Version 1" "Mitchell Gravity Set, 4th Generation" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+mgs::Index
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBIndex\fP (std::initializer_list< indexer_t > list)"
+.br
+.ti -1c
+.RI "\fBIndex\fP (const \fBIndex\fP &other)"
+.br
+.ti -1c
+.RI "\fBIndex\fP (const \fBIndex\fP &&other)"
+.br
+.ti -1c
+.RI "bool \fBoperator==\fP (const \fBIndex\fP &other) const"
+.br
+.ti -1c
+.RI "\fBIndex\fP & \fBoperator=\fP (const \fBIndex\fP &other)"
+.br
+.ti -1c
+.RI "\fBIndex\fP & \fBoperator=\fP (\fBIndex\fP &&other)"
+.br
+.ti -1c
+.RI "auto & \fBoperator[]\fP (const indexer_t &i)"
+.br
+.ti -1c
+.RI "auto \fBoperator[]\fP (const indexer_t &i) const"
+.br
+.ti -1c
+.RI "auto \fBsize\fP () const"
+.br
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "idx_vector_t \fBijk\fP"
+.br
+.in -1c
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Mitchell Gravity Set, 4th Generation from the source code\&.

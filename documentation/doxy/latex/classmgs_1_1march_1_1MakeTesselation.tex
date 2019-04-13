@@ -1,0 +1,72 @@
+\hypertarget{classmgs_1_1march_1_1MakeTesselation}{}\section{mgs\+:\+:march\+:\+:Make\+Tesselation Class Reference}
+\label{classmgs_1_1march_1_1MakeTesselation}\index{mgs\+::march\+::\+Make\+Tesselation@{mgs\+::march\+::\+Make\+Tesselation}}
+
+
+{\ttfamily \#include $<$marching\+\_\+tetrahedra.\+h$>$}
+
+
+
+Inheritance diagram for mgs\+:\+:march\+:\+:Make\+Tesselation\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{classmgs_1_1march_1_1MakeTesselation__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for mgs\+:\+:march\+:\+:Make\+Tesselation\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{classmgs_1_1march_1_1MakeTesselation__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmgs_1_1march_1_1MakeTesselation_a20e3550be02146d8560874d3597f1c86}\label{classmgs_1_1march_1_1MakeTesselation_a20e3550be02146d8560874d3597f1c86}} 
+{\bfseries Make\+Tesselation} (const \hyperlink{namespacemgs_a7908010cda249b8bf1ea06572a4d4984}{Star\+Field} \&field)
+\item 
+\mbox{\Hypertarget{classmgs_1_1march_1_1MakeTesselation_a44841d513754e6cee703e6fc006fda14}\label{classmgs_1_1march_1_1MakeTesselation_a44841d513754e6cee703e6fc006fda14}} 
+{\bfseries Make\+Tesselation} (const \hyperlink{namespacemgs_a7908010cda249b8bf1ea06572a4d4984}{Star\+Field} \&\&field)
+\item 
+tetra\+\_\+list\+\_\+t \hyperlink{classmgs_1_1march_1_1MakeTesselation_ace6aa58a0636038e85d187de142e1aa9}{tesseltate\+\_\+cube} (const \hyperlink{structmgs_1_1Index}{Index} \&lmp)
+\item 
+\mbox{\Hypertarget{classmgs_1_1march_1_1MakeTesselation_a30d8d7305f8d8904f77d9a4f27371430}\label{classmgs_1_1march_1_1MakeTesselation_a30d8d7305f8d8904f77d9a4f27371430}} 
+{\footnotesize template$<$typename Shape $>$ }\\Shape {\bfseries operator()} ()
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classmgs_1_1march_1_1MakeTesselation_aa764f607aa3ba2f179283acdf41c5c7c}\label{classmgs_1_1march_1_1MakeTesselation_aa764f607aa3ba2f179283acdf41c5c7c}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&, \hyperlink{classmgs_1_1march_1_1MakeTesselation}{Make\+Tesselation} const \&)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+We create the initial list of polygons here (not necessarily in the form needed for Open\+G\+L!!!) 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classmgs_1_1march_1_1MakeTesselation_ace6aa58a0636038e85d187de142e1aa9}\label{classmgs_1_1march_1_1MakeTesselation_ace6aa58a0636038e85d187de142e1aa9}} 
+\index{mgs\+::march\+::\+Make\+Tesselation@{mgs\+::march\+::\+Make\+Tesselation}!tesseltate\+\_\+cube@{tesseltate\+\_\+cube}}
+\index{tesseltate\+\_\+cube@{tesseltate\+\_\+cube}!mgs\+::march\+::\+Make\+Tesselation@{mgs\+::march\+::\+Make\+Tesselation}}
+\subsubsection{\texorpdfstring{tesseltate\+\_\+cube()}{tesseltate\_cube()}}
+{\footnotesize\ttfamily tetra\+\_\+list\+\_\+t mgs\+::march\+::\+Make\+Tesselation\+::tesseltate\+\_\+cube (\begin{DoxyParamCaption}\item[{const \hyperlink{structmgs_1_1Index}{Index} \&}]{lmp }\end{DoxyParamCaption})}
+
+From the lower most point index, testelate the cube to the upper most point (basically by adding 1 to the indices of the lmp). Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classmgs_1_1march_1_1MakeTesselation_ace6aa58a0636038e85d187de142e1aa9_cgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+compute/marching\+\_\+tetrahedra.\+h\item 
+compute/marching\+\_\+tetrahedra.\+cpp\end{DoxyCompactItemize}

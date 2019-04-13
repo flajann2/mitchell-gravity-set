@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/development/cpp_proj/gravity-set-compute/build/tests/googletest-download/CMakeFiles/googletest"
+		},
+		{
+			"file" : "/development/cpp_proj/gravity-set-compute/build/tests/googletest-download/CMakeFiles/googletest.rule"
+		},
+		{
+			"file" : "/development/cpp_proj/gravity-set-compute/build/tests/googletest-download/CMakeFiles/googletest-complete.rule"
+		},
+		{
+			"file" : "/development/cpp_proj/gravity-set-compute/build/tests/googletest-download/googletest-prefix/src/googletest-stamp/googletest-install.rule"
+		},
+		{
+			"file" : "/development/cpp_proj/gravity-set-compute/build/tests/googletest-download/googletest-prefix/src/googletest-stamp/googletest-mkdir.rule"
+		},
+		{
+			"file" : "/development/cpp_proj/gravity-set-compute/build/tests/googletest-download/googletest-prefix/src/googletest-stamp/googletest-download.rule"
+		},
+		{
+			"file" : "/development/cpp_proj/gravity-set-compute/build/tests/googletest-download/googletest-prefix/src/googletest-stamp/googletest-update.rule"
+		},
+		{
+			"file" : "/development/cpp_proj/gravity-set-compute/build/tests/googletest-download/googletest-prefix/src/googletest-stamp/googletest-patch.rule"
+		},
+		{
+			"file" : "/development/cpp_proj/gravity-set-compute/build/tests/googletest-download/googletest-prefix/src/googletest-stamp/googletest-configure.rule"
+		},
+		{
+			"file" : "/development/cpp_proj/gravity-set-compute/build/tests/googletest-download/googletest-prefix/src/googletest-stamp/googletest-build.rule"
+		},
+		{
+			"file" : "/development/cpp_proj/gravity-set-compute/build/tests/googletest-download/googletest-prefix/src/googletest-stamp/googletest-test.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"googletest"
+		],
+		"name" : "googletest"
+	}
+}

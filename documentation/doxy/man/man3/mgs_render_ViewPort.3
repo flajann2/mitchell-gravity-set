@@ -1,0 +1,65 @@
+.TH "mgs::render::ViewPort" 3 "Sat Apr 13 2019" "Version 1" "Mitchell Gravity Set, 4th Generation" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+mgs::render::ViewPort
+.SH SYNOPSIS
+.br
+.PP
+.PP
+Inherits QOpenGLWindow\&.
+.SS "Public Slots"
+
+.in +1c
+.ti -1c
+.RI "void \fBrenderLater\fP ()"
+.br
+.ti -1c
+.RI "void \fBrenderNow\fP ()"
+.br
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBViewPort\fP (QWidget *parent=nullptr)"
+.br
+.ti -1c
+.RI "void \fBinit\fP (void)"
+.br
+.ti -1c
+.RI "virtual void \fBrender\fP (QPainter *painter)"
+.br
+.ti -1c
+.RI "virtual void \fBrender\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBinitialize\fP ()"
+.br
+.ti -1c
+.RI "void \fBsetAnimating\fP (bool animating)"
+.br
+.in -1c
+.SS "Protected Member Functions"
+
+.in +1c
+.ti -1c
+.RI "virtual void \fBinitializeGL\fP ()"
+.br
+.ti -1c
+.RI "virtual void \fBresizeGL\fP (int w, int h)"
+.br
+.ti -1c
+.RI "virtual void \fBpaintGL\fP ()"
+.br
+.ti -1c
+.RI "void \fBpaintEvent\fP (QPaintEvent *event) override"
+.br
+.ti -1c
+.RI "bool \fBevent\fP (QEvent *event) override"
+.br
+.in -1c
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for Mitchell Gravity Set, 4th Generation from the source code\&.
