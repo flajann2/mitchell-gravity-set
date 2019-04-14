@@ -320,7 +320,8 @@
     performance from leveraging the CPU caches more
     efficiently.
 *** Marching cubes and tetrahedra
-    [[documentation/marching_tetrahedra.png][Marching Tetrahedra]]
+    [[./documentation/marching_tetrahedra.png]]
+    
     Due to the sheer size of the compute results, it does not
     behoove me to keep all those results in memory at one time. I actually might need to anyway,
     but really, they should be computed in a lazy fashion, using marching cubes or marching tetrahedra.
