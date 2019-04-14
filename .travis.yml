@@ -25,7 +25,7 @@ addons:
 
 # Maybe this fixes problem with the submodules???
 before_install:
-  - git submodule update --init --recursive
+  - git submodule update --init --recursive --remote
   
 # Build your code e.g. by calling make
 script:
