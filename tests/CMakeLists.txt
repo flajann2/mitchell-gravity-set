@@ -34,7 +34,7 @@ set(TEST_LIBS_DIR ${CMAKE_BINARY_DIR}/lib)
 file(GLOB SOURCE_FILES "*.cpp" "*.h")
 file(GLOB TEST_LIBS "${TEST_LIBS_DIR}/*.a")
 
-message(STATUS "*** TEST_LIBS:" ${TEST_LIBS})
+message(STATUS "*** TEST_LIBS in ${TEST_LIBS_DIR}:" ${TEST_LIBS})
 
 set(TARGET test_gsc)
 

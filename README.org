@@ -49,7 +49,8 @@
 *** Chaos and Order   
     The planetarium show
     https://www.planetarium.berlin/veranstaltungen/chaos-and-order
-    Uses the Mitchell Gravity Set (2D, softology) as 
+    Uses the Mitchell Gravity Set (2D, softology).
+    
 ** Basic goals
 *** Multi Core support
     We want this to support any number of cores

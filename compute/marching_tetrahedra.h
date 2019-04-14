@@ -18,10 +18,10 @@ namespace mgs::march {
 
   using tetra_index_t = std::array<index_bits_t, 4>;
   using cube_decomposer_t = std::array<tetra_index_t, 6>;
-  using pos_list_t = std::vector<Position>;
-  using tetra_list_t = std::vector<pos_list_t>;
+  using coor_list_t = std::vector<Coordinate>;
+  using tetra_list_t = std::vector<coor_list_t>;
 
-  inline std::ostream& operator<<(std::ostream& os, pos_list_t const& pv) {
+  inline std::ostream& operator<<(std::ostream& os, coor_list_t const& pv) {
     os << "pos_list[" << '\n';
     for (auto p : pv) {
       os << "   " << p << '\n';
