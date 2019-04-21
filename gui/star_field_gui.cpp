@@ -121,8 +121,8 @@ namespace mgs {
 
       // compute the acceleration vector
       for (auto star : c_stars) {
-        a += compute_acceleration<floating_t, int>(star, p,
-                                               overall.gravitational_constant);
+        a += compute_acceleration<floating_t, int>(
+            star, p, overall.gravitational_constant);
       }
 
       // one step of the Eulerian Interation
@@ -322,12 +322,20 @@ namespace mgs {
     // Generate each vertex
     for (auto i : pn) {
       for (auto j : pn) {
-        c_stars.push_back(Star{defaultStarMass, {0, static_cast<floating_t>(i * c * r), static_cast<floating_t>(j * b * r)}});
-        c_stars.push_back(Star{defaultStarMass, {static_cast<floating_t>(i * c * r), static_cast<floating_t>(j * b * r), 0}});
-        c_stars.push_back(Star{defaultStarMass, {static_cast<floating_t>(i * b * r), 0, static_cast<floating_t>(j * c * r)}});
+        c_stars.push_back(Star{defaultStarMass,
+                               {0, static_cast<floating_t>(i * c * r),
+                                static_cast<floating_t>(j * b * r)}});
+        c_stars.push_back(Star{defaultStarMass,
+                               {static_cast<floating_t>(i * c * r),
+                                static_cast<floating_t>(j * b * r), 0}});
+        c_stars.push_back(Star{defaultStarMass,
+                               {static_cast<floating_t>(i * b * r), 0,
+                                static_cast<floating_t>(j * c * r)}});
         for (auto k : pn) {
-          c_stars.push_back(
-                            Star{defaultStarMass, {static_cast<floating_t>(i * a * r), static_cast<floating_t>(j * a * r), static_cast<floating_t>(k * a * r)}});
+          c_stars.push_back(Star{defaultStarMass,
+                                 {static_cast<floating_t>(i * a * r),
+                                  static_cast<floating_t>(j * a * r),
+                                  static_cast<floating_t>(k * a * r)}});
         }
       }
     }
@@ -345,7 +353,8 @@ namespace mgs {
 
     for (auto i : pn) {
       for (auto j : pn) {
-        std::deque<floating_t> cir{static_cast<floating_t>(0, i * r), static_cast<floating_t>(phi * j * r)};
+        std::deque<floating_t> cir{static_cast<floating_t>(0, i * r),
+                                   static_cast<floating_t>(phi * j * r)};
         for (auto _cir = 0; _cir < 3; ++_cir) {
           c_stars.push_back(Star{defaultStarMass, {cir[0], cir[1], cir[2]}});
           cir.push_back(cir.front());

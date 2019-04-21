@@ -27,9 +27,15 @@ namespace mgs::march {
   using mesh_triangle_indices_list_t = std::vector<mesh_triangle_indices_t>;
 
   // Sanity checks for alignment
-  static_assert(sizeof(gpu_coordinate_t{0,0,0})*2 == sizeof(mesh_vertices_t{{0},{0}}), "Mesh triangle vertices are not aligned for this architecture.");
-  static_assert(sizeof(mesh_triangle_indices_t)*2 == sizeof(mesh_triangle_indices_list_t{{1,2,3},{4,5,6}}), "Mesh Triangle indicies are not aligned for this architecture.");
-  
+  static_assert(
+      sizeof(gpu_coordinate_t{0, 0, 0}) * 2 ==
+          sizeof(mesh_vertices_t{{0}, {0}}),
+      "Mesh triangle vertices are not aligned for this architecture.");
+  static_assert(
+      sizeof(mesh_triangle_indices_t) * 2 ==
+          sizeof(mesh_triangle_indices_list_t{{1, 2, 3}, {4, 5, 6}}),
+      "Mesh Triangle indicies are not aligned for this architecture.");
+
   inline std::ostream& operator<<(std::ostream& os, coor_list_t const& pv) {
     os << "pos_list[" << '\n';
     for (auto p : pv) {
@@ -107,7 +113,8 @@ namespace mgs::march {
    */
   class MakeMesh : public Pipeline {
     const MakeTesselation& m_tess;
-  public:
+
+   public:
     MakeMesh() = default;
     MakeMesh(const MakeTesselation& tess) : m_tess(tess) {}
   };

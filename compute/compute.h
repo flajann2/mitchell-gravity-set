@@ -87,7 +87,7 @@ namespace mgs {
     Vector(Indexer dimension = default_dimension) {
       vec.resize(dimension, 0.0);
     }
-    
+
     Vector(std::initializer_list<T> list) : vec(list) {}
 
     Vector(const Vector& other) : vec(other.vec) {}

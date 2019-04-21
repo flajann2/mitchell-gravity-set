@@ -27,6 +27,7 @@
     - [[#clang-vs-gcc][clang vs. gcc]]
     - [[#memory-locality][Memory locality]]
     - [[#marching-cubes-and-tetrahedra][Marching cubes and tetrahedra]]
+    - [[#rendering-pipeline][Rendering Pipeline]]
       - [[#journal][Journal]]
         - [[#2019-03-23][2019-03-23]]
         - [[#2019-04-20][2019-04-20]]
@@ -347,7 +348,10 @@
     make some other aspects easier to deal with.
 
     In the 2-in, 2-out cases for the tetrahedra, I will wind up with the quadrilaterals.
-
+*** Rendering Pipeline
+    #+ATTR_ORG: :width "768px"
+    #+ATTR_HTML: :width "768px"
+    [[./documentation/20190421_190147.jpg]]
 **** Journal
 ***** 2019-03-23 
       This weekend I want to accomplish the mesh generation from
