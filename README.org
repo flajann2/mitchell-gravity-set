@@ -349,9 +349,18 @@
 
     In the 2-in, 2-out cases for the tetrahedra, I will wind up with the quadrilaterals.
 *** Rendering Pipeline
-    #+ATTR_ORG: :width "768px"
-    #+ATTR_HTML: :width "768px"
     [[./documentation/20190421_190147.jpg]]
+    Here we see a rough sketch on how the rendering 
+    pipeline (or data pipeline, or whatever) should work. I
+    choose to use the „<<" notation so that we can have
+    an easy way to add in „modifiers", as may be needed.
+
+    All the compute will take place in the compute library, where
+    the final rendering stages will take place in gui. Also, a
+    „dirty bit" shall be pass back up the pipeline so that we don't
+    wind up redoing the data until there is a change somewhere.
+
+    
 **** Journal
 ***** 2019-03-23 
       This weekend I want to accomplish the mesh generation from

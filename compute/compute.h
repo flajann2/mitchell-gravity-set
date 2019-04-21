@@ -357,10 +357,18 @@ namespace mgs {
 
     FieldParms<T, Iterant> parms;
 
+    // duck typing the dirty functions
+    bool is_dirty() { return dirty; }
+    void clear_dirty() { dirty = false; }
+    void set_dirty() { dirty = true; }
+
    private:
+    bool dirty = true;
+
     inline void init_field() {
       Iterant backfill = untouched;
       grid.resize(std::pow(cube_size, dimension), backfill);
+      set_dirty();
     }
 
    public:

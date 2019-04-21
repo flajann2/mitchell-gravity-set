@@ -64,15 +64,32 @@ namespace mgs::march {
    * and later will be made lazy. All classes
    * involved in the pipeline shall be derived
    * from this one.
+   * \THIS -- current class (CRTP)
+   * \FORE -- THIS << FORE relationship
    */
-  class Pipeline {};
+  template <typename THIS, typename FORE> class Pipeline {
+   protected:
+    FORE* fore = nullptr;
+    bool dirty = true;
+
+   public:
+    bool is_dirty() {
+      return dirty || (fore != nullptr ? fore->is_dirty() : false);
+    }
+    void set_dirty() { dirty = true; }
+    void clear_dirty() {
+      dirty = false;
+      if (fore != nullptr) {
+        fore->clear_dirty();
+      }
+    }
+  };
 
   /**
-   * We create the initial list of polygons here (not
-   * necessarily in the form needed for OpenGL!!!)
+   * We create the list of tetraherea here
    */
-  class MakeTesselation : public Pipeline {
-    StarField m_field;
+  class MakeTesselation : public Pipeline<MakeTesselation, StarField> {
+    StarField m_field; // TODO we modify StarField itself with the Pipeline, this variable is deprecated.
     friend std::ostream& operator<<(std::ostream&, MakeTesselation const&);
 
    public:
@@ -111,7 +128,7 @@ namespace mgs::march {
   /**
    * We take the results from MakeTesselation to now make the mesh.
    */
-  class MakeMesh : public Pipeline {
+  class MakeMesh : public Pipeline<MakeMesh, MakeTesselation> {
     const MakeTesselation& m_tess;
 
    public:
