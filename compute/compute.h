@@ -25,7 +25,7 @@ namespace mgs {
   using indexer_t = std::int32_t;
   using iterant_t = std::int16_t;
   using idx_vector_t = std::vector<indexer_t>;
-  using floating_t = double;
+  using floating_t = float;  // TODO: for now, for graphics
 
   /**
    * index_bits_t will increment the index according
@@ -41,10 +41,8 @@ namespace mgs {
     Index(const Index& other) : ijk(other.ijk) {}
     Index(const Index&& other) : ijk(std::move(other.ijk)) {}
 
-    bool operator==(const Index& other) const {
-      return ijk == other.ijk;
-    }
-    
+    bool operator==(const Index& other) const { return ijk == other.ijk; }
+
     Index& operator=(const Index& other) {
       ijk = other.ijk;
       return *this;
@@ -89,6 +87,7 @@ namespace mgs {
     Vector(Indexer dimension = default_dimension) {
       vec.resize(dimension, 0.0);
     }
+    
     Vector(std::initializer_list<T> list) : vec(list) {}
 
     Vector(const Vector& other) : vec(other.vec) {}
@@ -267,6 +266,8 @@ namespace mgs {
   /**
    * Field Parameters for MGS. These determine the nature
    * of the MGS fractal that is generated.
+   * \param T float or double
+   * \param Internant limit of iteration, normally should be a short int
    */
   template <typename T, typename Interant>
   struct FieldParms {
@@ -283,6 +284,7 @@ namespace mgs {
   };
 
   /**
+   * Position of an object (Star or FPM)
    */
   template <typename T, typename I>
   Position compute_center_of_star_mass(const std::vector<Star>& stars) {
@@ -363,7 +365,7 @@ namespace mgs {
 
    public:
     Field() = default;
-    
+
     /**
      */
     Field(Coordinate neg_bound, Coordinate pos_bound, Iterant cs = 256,

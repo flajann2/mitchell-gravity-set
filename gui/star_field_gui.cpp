@@ -113,7 +113,7 @@ namespace mgs {
   }
 
   void StarFieldGUI::eularianFPMAdvance() {
-    auto center_of_mass = compute_center_of_star_mass<double, int>(c_stars);
+    auto center_of_mass = compute_center_of_star_mass<floating_t, int>(c_stars);
 
     // here we iterate once through all the Free Point Masses
     for (auto& [p, v] : c_fpms) {
@@ -121,7 +121,7 @@ namespace mgs {
 
       // compute the acceleration vector
       for (auto star : c_stars) {
-        a += compute_acceleration<double, int>(star, p,
+        a += compute_acceleration<floating_t, int>(star, p,
                                                overall.gravitational_constant);
       }
 
@@ -254,7 +254,7 @@ namespace mgs {
   void StarFieldGUI::sl_make_tetrahedron() {
     cout << "tetra" << '\n';
     c_stars.clear();
-    auto c = xRange * defaultStarArrangementFactor;
+    floating_t c = xRange * defaultStarArrangementFactor;
 
     c_stars.push_back(Star{defaultStarMass, {-c, -c, -c}});
     c_stars.push_back(Star{defaultStarMass, {c, -c, c}});
@@ -269,7 +269,7 @@ namespace mgs {
   void StarFieldGUI::sl_make_octahedron() {
     cout << "octa" << '\n';
     c_stars.clear();
-    auto c = xRange * defaultStarArrangementFactor;
+    floating_t c = xRange * defaultStarArrangementFactor;
 
     c_stars.push_back(Star{defaultStarMass, {0, -c, 0}});
     c_stars.push_back(Star{defaultStarMass, {0, c, 0}});
@@ -288,7 +288,7 @@ namespace mgs {
   void StarFieldGUI::sl_make_hexahedron() {
     cout << "hexa" << '\n';
     c_stars.clear();
-    auto c = xRange * defaultStarArrangementFactor;
+    floating_t c = xRange * defaultStarArrangementFactor;
 
     c_stars.push_back(Star{defaultStarMass, {-c, -c, -c}});
     c_stars.push_back(Star{defaultStarMass, {c, c, c}});
@@ -311,23 +311,23 @@ namespace mgs {
     c_stars.clear();
 
     auto r = xRange * defaultStarArrangementFactor * 2.0;
-    double phi = (std::sqrt(5.0) - 1.0) / 2.0;  // The golden ratio
+    floating_t phi = (std::sqrt(5.0) - 1.0) / 2.0;  // The golden ratio
 
-    double a = 1.0 / std::sqrt(3.0);
-    double b = a / phi;
-    double c = a * phi;
+    floating_t a = 1.0 / std::sqrt(3.0);
+    floating_t b = a / phi;
+    floating_t c = a * phi;
 
-    const std::vector<double> pn{-1.0, 1.0};
+    const std::vector<floating_t> pn{-1.0, 1.0};
 
     // Generate each vertex
     for (auto i : pn) {
       for (auto j : pn) {
-        c_stars.push_back(Star{defaultStarMass, {0, i * c * r, j * b * r}});
-        c_stars.push_back(Star{defaultStarMass, {i * c * r, j * b * r, 0}});
-        c_stars.push_back(Star{defaultStarMass, {i * b * r, 0, j * c * r}});
+        c_stars.push_back(Star{defaultStarMass, {0, static_cast<floating_t>(i * c * r), static_cast<floating_t>(j * b * r)}});
+        c_stars.push_back(Star{defaultStarMass, {static_cast<floating_t>(i * c * r), static_cast<floating_t>(j * b * r), 0}});
+        c_stars.push_back(Star{defaultStarMass, {static_cast<floating_t>(i * b * r), 0, static_cast<floating_t>(j * c * r)}});
         for (auto k : pn) {
           c_stars.push_back(
-              Star{defaultStarMass, {i * a * r, j * a * r, k * a * r}});
+                            Star{defaultStarMass, {static_cast<floating_t>(i * a * r), static_cast<floating_t>(j * a * r), static_cast<floating_t>(k * a * r)}});
         }
       }
     }
@@ -340,12 +340,12 @@ namespace mgs {
     c_stars.clear();
 
     auto r = xRange * defaultStarArrangementFactor;
-    double phi = (std::sqrt(5.0) - 1.0) / 2.0;  // The golden ratio
-    const std::vector<double> pn{-1.0, 1.0};
+    floating_t phi = (std::sqrt(5.0) - 1.0) / 2.0;  // The golden ratio
+    const std::vector<floating_t> pn{-1.0, 1.0};
 
     for (auto i : pn) {
       for (auto j : pn) {
-        std::deque<double> cir{0, i * r, phi * j * r};
+        std::deque<floating_t> cir{static_cast<floating_t>(0, i * r), static_cast<floating_t>(phi * j * r)};
         for (auto _cir = 0; _cir < 3; ++_cir) {
           c_stars.push_back(Star{defaultStarMass, {cir[0], cir[1], cir[2]}});
           cir.push_back(cir.front());

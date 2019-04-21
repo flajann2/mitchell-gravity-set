@@ -14,13 +14,22 @@
  */
 
 namespace mgs::march {
-   using namespace mgs;
+  using namespace mgs;
 
   using tetra_index_t = std::array<index_bits_t, 4>;
   using cube_decomposer_t = std::array<tetra_index_t, 6>;
   using coor_list_t = std::vector<Coordinate>;
   using tetra_list_t = std::vector<coor_list_t>;
+  using gpu_coordinate_t = std::array<floating_t, 3>;
+  using mesh_vertices_t = std::vector<gpu_coordinate_t>;
+  using indexer_gpu_t = std::int32_t;
+  using mesh_triangle_indices_t = std::array<indexer_gpu_t, 3>;
+  using mesh_triangle_indices_list_t = std::vector<mesh_triangle_indices_t>;
 
+  // Sanity checks for alignment
+  static_assert(sizeof(gpu_coordinate_t{0,0,0})*2 == sizeof(mesh_vertices_t{{0},{0}}), "Mesh triangle vertices are not aligned for this architecture.");
+  static_assert(sizeof(mesh_triangle_indices_t)*2 == sizeof(mesh_triangle_indices_list_t{{1,2,3},{4,5,6}}), "Mesh Triangle indicies are not aligned for this architecture.");
+  
   inline std::ostream& operator<<(std::ostream& os, coor_list_t const& pv) {
     os << "pos_list[" << '\n';
     for (auto p : pv) {

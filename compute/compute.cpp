@@ -13,6 +13,6 @@ namespace mgs {
     
     // so that StarField is instantiated in this library.
     // FIXME: This is a duplication of StarField.
-    template struct Field<double, iterant_t, indexer_t, struct FieldParm>;
+    template struct Field<floating_t, iterant_t, indexer_t, struct FieldParm>;
   }
 }

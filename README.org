@@ -29,6 +29,7 @@
     - [[#marching-cubes-and-tetrahedra][Marching cubes and tetrahedra]]
       - [[#journal][Journal]]
         - [[#2019-03-23][2019-03-23]]
+        - [[#2019-04-20][2019-04-20]]
 
 ** Synopsis
    This library computes the Mitchell Gravity Set. This
@@ -339,6 +340,14 @@
 
     https://www.youtube.com/watch?v=ffnVCEAcOns
 
+    A thought is to consider how do I maintain consistent handedness in the generation
+    of the polygons? Should not be too hard, but it is a bit tricky to get it right. Also,
+    am debating whether I should just do only triangles, or both triangles and quadrilaterals.
+    Even though doing straight triangles will increase memory usage a bit, it'll
+    make some other aspects easier to deal with.
+
+    In the 2-in, 2-out cases for the tetrahedra, I will wind up with the quadrilaterals.
+
 **** Journal
 ***** 2019-03-23 
       This weekend I want to accomplish the mesh generation from
@@ -347,4 +356,26 @@
       saving on the sheer amount of RAM necessary. But for now, it is
       important to acheive some acutal visualization at all, so that
       is where my focus shall lie. Optimize later.
+
+***** 2019-04-20
+      Finally, some time to spend on working on this. I am
+      considering how to optimize memory usage, because I will
+      potentially have a huge list of vertices and the like.
+      While OpenGL expects vertex data to be presented as one
+      large array, I am considering if I can "cheat" and maintian
+      the abstractions I'm creating for these coordinates.
+
+      Also, this most likely will all have to be floats, not doubles.
+      That's not that big of a deal, too much. We can do our high precision
+      calculations using doubles and convert the final stuff to floats.
+
+      Building up the "brain share" for all of this and maintaining it has
+      been a stumbling block for weekend development, as I have to spend
+      too much time each weekend building that back up, and I want to 
+      actually have a [l|w]ife as well. And so, this Osterfreirertag is
+      just the thing.
+
+      Since std::vector gaurantees the elements are held in contiguous memory,
+      I do not have to fuss about with stinky C-like arrays. Yay.
+
 
