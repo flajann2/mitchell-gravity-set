@@ -88,7 +88,7 @@ namespace mgs::march {
     /**
      * General pipeline operator between THIS and FORE. 
      */
-    THIS& operator<<(FORE& fore_){
+    THIS& operator<<=(FORE& fore_){
       fore = &fore_;
       THIS& that = static_cast<THIS&>(*this);
       that.handle(); // static duck typing

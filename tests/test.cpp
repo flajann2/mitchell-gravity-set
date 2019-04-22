@@ -119,9 +119,7 @@ namespace {
   }
 
   TEST_F(ComputeTest, pipeline_verification) {
-    // TODO: we have to paren this because the order of
-    // TODO: execution would otherwise be wrong.
-    mesh << (tess << field);
+    mesh <<= tess <<= field;
   }
   
   TEST(Index, operator_plus) {
