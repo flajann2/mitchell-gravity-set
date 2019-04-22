@@ -7,10 +7,13 @@ namespace mgs::march {
       coor_list_t tetra {};
       for (auto bits : ti) {
         Index ipos = idx + bits;
-        tetra.emplace_back(m_field.index2coordinate(ipos));        
+        tetra.emplace_back(fore->index2coordinate(ipos));        
       }
       tetra_list.emplace_back(tetra);
     }
     return tetra_list;
+  }
+
+  void MakeTesselation::handle(){
   }
 }

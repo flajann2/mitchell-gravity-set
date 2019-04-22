@@ -83,6 +83,13 @@ namespace mgs::march {
         fore->clear_dirty();
       }
     }
+
+    THIS& operator<<(FORE& fore_){
+      fore = &fore_;
+      auto& that = static_cast<THIS>(*this);
+      that.handle(); // static duck typing
+      return that;
+    }
   };
 
   /**
@@ -97,6 +104,8 @@ namespace mgs::march {
     MakeTesselation(const StarField& field) : m_field(field) {}
     MakeTesselation(const StarField&& field) : m_field(std::move(field)) {}
 
+    void handle();
+    
     /**
      * From the lower most point index, testelate
      * the cube to the upper most point (basically by adding 1
@@ -129,10 +138,8 @@ namespace mgs::march {
    * We take the results from MakeTesselation to now make the mesh.
    */
   class MakeMesh : public Pipeline<MakeMesh, MakeTesselation> {
-    const MakeTesselation& m_tess;
 
    public:
-    MakeMesh() = default;
-    MakeMesh(const MakeTesselation& tess) : m_tess(tess) {}
+    MakeMesh() {}
   };
 }  // namespace mgs::march
