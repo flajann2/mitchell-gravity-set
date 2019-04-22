@@ -350,6 +350,7 @@
     In the 2-in, 2-out cases for the tetrahedra, I will wind up with the quadrilaterals.
 *** Rendering Pipeline
     [[./documentation/20190421_190147.jpg]]
+    
     Here we see a rough sketch on how the rendering 
     pipeline (or data pipeline, or whatever) should work. I
     choose to use the „<<" notation so that we can have

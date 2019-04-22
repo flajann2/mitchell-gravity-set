@@ -35,7 +35,7 @@ namespace {
     virtual void SetUp() override {
       box = Bounds{Coordinate{-16, -16, -16}, Coordinate{16, 16, 16}};
       field = StarField(box, 3, 3);
-      tess = MakeTesselation(field);
+      tess = MakeTesselation();
       mesh = MakeMesh();
     }
 
@@ -119,7 +119,9 @@ namespace {
   }
 
   TEST_F(ComputeTest, pipeline_verification) {
-    mesh << tess << field;
+    // TODO: we have to paren this because the order of
+    // TODO: execution would otherwise be wrong.
+    mesh << (tess << field);
   }
   
   TEST(Index, operator_plus) {

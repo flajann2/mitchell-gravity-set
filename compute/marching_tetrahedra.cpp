@@ -14,6 +14,21 @@ namespace mgs::march {
     return tetra_list;
   }
 
+  // fore is StarField.
   void MakeTesselation::handle(){
+    auto& starfield = *fore;
+  }
+
+  // fore is MakeTesselation
+  void MakeMesh::handle(){
+    auto& tess = *fore;
   }
 }
+
+
+
+
+
+
+
+

@@ -64,6 +64,7 @@ namespace mgs::march {
    * and later will be made lazy. All classes
    * involved in the pipeline shall be derived
    * from this one.
+   *
    * \THIS -- current class (CRTP)
    * \FORE -- THIS << FORE relationship
    */
@@ -84,9 +85,12 @@ namespace mgs::march {
       }
     }
 
+    /**
+     * General pipeline operator between THIS and FORE. 
+     */
     THIS& operator<<(FORE& fore_){
       fore = &fore_;
-      auto& that = static_cast<THIS>(*this);
+      THIS& that = static_cast<THIS&>(*this);
       that.handle(); // static duck typing
       return that;
     }
@@ -96,31 +100,36 @@ namespace mgs::march {
    * We create the list of tetraherea here
    */
   class MakeTesselation : public Pipeline<MakeTesselation, StarField> {
-    StarField m_field; // TODO we modify StarField itself with the Pipeline, this variable is deprecated.
     friend std::ostream& operator<<(std::ostream&, MakeTesselation const&);
 
+    tetra_list_t m_tetrahedra;
+    
    public:
     MakeTesselation() = default;
-    MakeTesselation(const StarField& field) : m_field(field) {}
-    MakeTesselation(const StarField&& field) : m_field(std::move(field)) {}
 
+    /** 
+     * handle() generates the list of tetrahedra. Note that
+     * only tetrahedra that intersects with the crossover are
+     * retained; the rest are discarded.
+     */
     void handle();
     
     /**
      * From the lower most point index, testelate
      * the cube to the upper most point (basically by adding 1
      * to the indices of the lmp).
+     *
+     * Note that this function does not automatically add the result
+     * to m_tetrahedra. That must be done by the caller.
      */
     tetra_list_t tesseltate_cube(const Index& lmp);
 
-    template <typename Shape>
-    Shape operator()() {}
   };
 
   inline std::ostream& operator<<(std::ostream& os,
                                   MakeTesselation const& tess) {
     os << "MakeTesselation [\n";
-    os << tess.m_field << "\n]\n";
+    os << tess.fore << "\n]\n";
     return os;
   }
 
@@ -141,5 +150,8 @@ namespace mgs::march {
 
    public:
     MakeMesh() {}
+
+    void handle(); // duck typing
+
   };
 }  // namespace mgs::march
