@@ -31,6 +31,7 @@
       - [[#journal][Journal]]
         - [[#2019-03-23][2019-03-23]]
         - [[#2019-04-20][2019-04-20]]
+        - [[#2019-04-23][2019-04-23]]
 
 ** Synopsis
    This library computes the Mitchell Gravity Set. This
@@ -238,7 +239,8 @@
    and done, I will be writing formal documentation on
    installation and running MGS. I do not promise to 
    keep Personal Notes up-to-date, and will most likely
-   be deleted once this project is complete.
+   be deleted (in the masterbranch, anyway) once this
+   project is complete.
 
 *** Debugging
     To cmake for debugging:
@@ -360,9 +362,33 @@
     the final rendering stages will take place in gui. Also, a
     „dirty bit" shall be pass back up the pipeline so that we don't
     wind up redoing the data until there is a change somewhere.
+    
+    And so, we have chosen to override the <<= operator, because
+    it has right to left associativity. The << operator has
+    the revers -- left to right associativity, and was causing
+    the pipeline to be executed out-of-order (and resulted in
+    compiler errors, which was the intent!!!)
+
+    Since each <<= produces a new type anyway, it is simply
+    different from, say, how cout << ... works.
+
+    We will eventually make this pipeline work in a "lazy" fashion
+    later on down the road, when all else works. We will want to
+    create massively large renderings, which will need to be much
+    leaner on memory consumption. But this is a future optimization
+    and so we won't fuss with it now.
+
+
 
     
 **** Journal
+     These are my personal and "private" journals. Well, not "private"
+     in the way only I can read them, but as I've said with "personal notes" 
+     goes doubly here. This just a blowby day to day of the state of affairs,
+     and I make absolutely no promises about the "usefulness" of the information
+     here. You might find it a bit amusing to trace my thought processes, but
+     take all here with a grain of salt.
+
 ***** 2019-03-23 
       This weekend I want to accomplish the mesh generation from
       the tetrahedra, using the pipeline approach, of course. Later
@@ -392,4 +418,20 @@
       Since std::vector gaurantees the elements are held in contiguous memory,
       I do not have to fuss about with stinky C-like arrays. Yay.
 
+
+***** 2019-04-23
+      We are making heavy use of CRTP and static duck typing. I doubt if
+      I'm the first one doing this. Also, I took some time to retool
+      ECB. Alas, it will not work simulaneously on multiple frames, but
+      I did figure out how to reconfiger the windows. I don't need the
+      annoying history buffer, so it's gone. I can also now alternate between
+      multiple ECB layouts.
+
+      Pipelining scaffolding is in place; now on with writting the actual
+      code to generate the tetrahedra where needed. Some thoughts about how
+      to handle the coordinates so they can be reused. Obviously I only need
+      concerned with this in neighboring cubes, but how to do this right
+      will require a bit of exploration and research. However, this is nothing
+      new, as volumetric rendering has been around for a long time, so there
+      must be some clever algorithms I can snag from somewhere.
 

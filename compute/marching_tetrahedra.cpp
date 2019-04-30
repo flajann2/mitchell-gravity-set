@@ -14,7 +14,10 @@ namespace mgs::march {
     return tetra_list;
   }
 
-  // fore is StarField.
+  /**
+   * Scan through the entire grid and create tesselations
+   * where it makes sense. 
+   */
   void MakeTesselation::handle(){
     auto& starfield = *fore;
   }
@@ -24,11 +27,3 @@ namespace mgs::march {
     auto& tess = *fore;
   }
 }
-
-
-
-
-
-
-
-
