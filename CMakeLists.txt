@@ -15,9 +15,11 @@ set (LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 include_directories("${PROJECT_BINARY_DIR}")
 include_directories("${PROJECT_INCLUDE_DIR}")
 
+add_subdirectory (submods)
+include_directories(${MGS_SUBMOD_INCLUDES})
+
 add_subdirectory (compute)
 add_subdirectory (gui)
-add_subdirectory (submods)
 
 if (ENABLE_TESTS)
   enable_testing()

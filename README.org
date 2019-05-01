@@ -32,6 +32,7 @@
         - [[#2019-03-23][2019-03-23]]
         - [[#2019-04-20][2019-04-20]]
         - [[#2019-04-23][2019-04-23]]
+        - [[#2019-04-30][2019-04-30]]
 
 ** Synopsis
    This library computes the Mitchell Gravity Set. This
@@ -434,4 +435,11 @@
       will require a bit of exploration and research. However, this is nothing
       new, as volumetric rendering has been around for a long time, so there
       must be some clever algorithms I can snag from somewhere.
+
+***** 2019-04-30
+      Created the Merseberg Incantation to make it easy to spread out
+      tasks bound by collections to seperate cores. Meseberg "works"
+      but is not yet ready for CMake integration, so this shall be
+      pulled in as a submodle -- for now -- so we can start using it
+      right away.
 
