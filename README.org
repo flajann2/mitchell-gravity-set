@@ -33,6 +33,7 @@
         - [[#2019-04-20][2019-04-20]]
         - [[#2019-04-23][2019-04-23]]
         - [[#2019-04-30][2019-04-30]]
+        - [[#2019-05-01][2019-05-01]]
 
 ** Synopsis
    This library computes the Mitchell Gravity Set. This
@@ -378,19 +379,16 @@
     create massively large renderings, which will need to be much
     leaner on memory consumption. But this is a future optimization
     and so we won't fuss with it now.
-
-
-
-    
+   
 **** Journal
      These are my personal and "private" journals. Well, not "private"
      in the way only I can read them, but as I've said with "personal notes" 
      goes doubly here. This just a blowby day to day of the state of affairs,
      and I make absolutely no promises about the "usefulness" of the information
      here. You might find it a bit amusing to trace my thought processes, but
-     take all here with a grain of salt.
+     take all here with a grain of salt. YOU WERE WARNED. :)
 
-***** 2019-03-23 
+***** 2019-03-23
       This weekend I want to accomplish the mesh generation from
       the tetrahedra, using the pipeline approach, of course. Later
       on, we can consider making this process lazy, and thus
@@ -442,4 +440,7 @@
       but is not yet ready for CMake integration, so this shall be
       pulled in as a submodle -- for now -- so we can start using it
       right away.
+
+***** 2019-05-01
+      Unexpected holiday. Yay!
 

@@ -3,7 +3,7 @@
 /**
  * MGS Iernal classes
  *
- * The default typenames will be instantiated by
+ * Floathe default typenames will be instantiated by
  * the cpp. Later, we can easily add support for
  * other possibilities, but for now, we don't need.
  */
@@ -80,15 +80,15 @@ namespace mgs {
 
   // The P here is a phantom parameter to enable strong typing.
   // It is not actually used anywhere directly.
-  template <typename T, typename Indexer, typename P>
+  template <typename Float, typename Indexer, typename Phantom>
   struct Vector {
-    std::vector<T> vec;
+    std::vector<Float> vec;
 
     Vector(Indexer dimension = default_dimension) {
       vec.resize(dimension, 0.0);
     }
 
-    Vector(std::initializer_list<T> list) : vec(list) {}
+    Vector(std::initializer_list<Float> list) : vec(list) {}
 
     Vector(const Vector& other) : vec(other.vec) {}
     Vector(const Vector&& other) : vec(std::move(other.vec)) {}
@@ -98,8 +98,8 @@ namespace mgs {
       return *this;
     }
 
-    inline T& operator[](Indexer index) { return vec[index]; }
-    inline T operator[](Indexer index) const { return vec[index]; }
+    inline Float& operator[](Indexer index) { return vec[index]; }
+    inline Float operator[](Indexer index) const { return vec[index]; }
 
     inline auto size() { return static_cast<Indexer>(vec.size()); }
 
@@ -108,16 +108,16 @@ namespace mgs {
       return *this;
     }
 
-    inline T norm() const {
-      T nr = 0.0;
+    inline Float norm() const {
+      Float nr = 0.0;
       for (auto v : vec) {
         nr += v * v;
       }
-      return T(sqrt(nr));
+      return Float(sqrt(nr));
     }
 
-    inline T norm_squared() const {
-      T nr = 0.0;
+    inline Float norm_squared() const {
+      Float nr = 0.0;
       for (auto v : vec) {
         nr += v * v;
       }
@@ -127,10 +127,10 @@ namespace mgs {
     inline Vector unit_vector() const { return *this / this->norm(); }
 
     // Danger: behavior of vectors of unequal lengths is undefined.
-    inline T dot(const Vector& vo) const {
+    inline Float dot(const Vector& vo) const {
       auto a = this->vec.cbegin();
       auto b = vo.vec.cbegin();
-      T sum = 0;
+      Float sum = 0;
       for (; a != this->vec.cend(); ++a, ++b) sum += (*a) * (*b);
       return sum;
     }
@@ -223,8 +223,8 @@ namespace mgs {
     Bounds() = default;
   };
 
-  template <typename T, typename I, typename P>
-  inline std::ostream& operator<<(std::ostream& os, Vector<T, I, P> const& c) {
+  template <typename Float, typename I, typename P>
+  inline std::ostream& operator<<(std::ostream& os, Vector<Float, I, P> const& c) {
     os << "Vector[ ";
     for (auto v : c.vec) {
       os << v << " ";
@@ -251,10 +251,10 @@ namespace mgs {
   /* Computes the acceleration of a single star on
    * the fpm, the Free Point Mass.
    */
-  template <typename T, typename I>
+  template <typename Float, typename I>
   inline Acceleration compute_acceleration(const Star& star,
                                            const Position& fpm,
-                                           const T gravitational_constant) {
+                                           const Float gravitational_constant) {
     auto r_vec = fpm - star.position;
     auto r_squared = r_vec.norm_squared();
     auto r = sqrt(r_squared);
@@ -264,19 +264,19 @@ namespace mgs {
   }
 
   /**
-   * Field Parameters for MGS. These determine the nature
+   * Field Parameters for MGS. Floathese determine the nature
    * of the MGS fractal that is generated.
-   * \param T float or double
+   * \param Float float or double
    * \param Internant limit of iteration, normally should be a short int
    */
-  template <typename T, typename Interant>
+  template <typename Float, typename Interant>
   struct FieldParms {
-    T gravitational_constant;
-    T delta_t;
+    Float gravitational_constant;
+    Float delta_t;
     Interant iter_limit;
-    T escape_radius;
+    Float escape_radius;
     FieldParms() = default;
-    FieldParms(T gc, T dt, Interant il, T er)
+    FieldParms(Float gc, Float dt, Interant il, Float er)
         : gravitational_constant(gc),
           delta_t(dt),
           iter_limit(il),
@@ -286,9 +286,9 @@ namespace mgs {
   /**
    * Position of an object (Star or FPM)
    */
-  template <typename T, typename I>
+  template <typename Float, typename I>
   Position compute_center_of_star_mass(const std::vector<Star>& stars) {
-    T total_star_mass = 0.0;
+    Float total_star_mass = 0.0;
     Position center_accum;
 
     for (auto star : stars) {
@@ -300,14 +300,14 @@ namespace mgs {
 
   /**
    * Iterates a single Free Point Mass from initial position and velocity.
-   * This has been pulled out of Field to be callable independent of having
+   * Floathis has been pulled out of Field to be callable independent of having
    * to set up the entire Field object when we are not computing the MGS.
    */
-  template <typename T, typename I>
+  template <typename Float, typename I>
   inline I render_single_cell(
       const Position& initial_p, const Velocity& initial_v,
       const std::vector<Star>& stars, const Position& center_of_star_mass,
-      const FieldParms<T, I>& parms,
+      const FieldParms<Float, I>& parms,
       std::function<void(const Position&, const Velocity&)> cb = nullptr) {
     auto [gravitational_constant, delta_t, iter_limit, escape_radius] = parms;
     auto v = initial_v;
@@ -321,7 +321,7 @@ namespace mgs {
 
       // acceleration due to all the stars
       for (auto star : stars) {
-        a += compute_acceleration<T, I>(star, p, gravitational_constant);
+        a += compute_acceleration<Float, I>(star, p, gravitational_constant);
       }
 
       // Eulerian integration
@@ -337,16 +337,16 @@ namespace mgs {
    * The field is always a cube or square, etc.,
    * same length on all "sides".
    *
-   * @var T is the floating point type to use for
+   * @var Float is the floating point type to use for
    *      floats in the system.
    * @var Iterant is the iterator type, the run of the
    *      iterations for the FPMs to either escape the
    *      system or hit the limit.
-   * @var P  is phantom. It is not
+   * @var Phantom  is phantom. It is not
    *      used directly anywhere. This is to enable strong
    *      typing.
    */
-  template <typename T, typename Iterant, typename Indexer, typename P>
+  template <typename Float, typename Iterant, typename Indexer, typename Phantom>
   struct Field {
     Bounds box;
     std::vector<Iterant> grid;
@@ -355,7 +355,7 @@ namespace mgs {
     Indexer cube_size;
     Indexer dimension;
 
-    FieldParms<T, Iterant> parms;
+    FieldParms<Float, Iterant> parms;
 
     // duck typing the dirty functions
     bool is_dirty() { return dirty; }
@@ -378,7 +378,7 @@ namespace mgs {
      */
     Field(Coordinate neg_bound, Coordinate pos_bound, Iterant cs = 256,
           Iterant dim = 2, Iterant iteration_limit = 1024,
-          T grav_constant = 1.0, T escape_r = 2.0, T delta_time = 0.1)
+          Float grav_constant = 1.0, Float escape_r = 2.0, Float delta_time = 0.1)
         : box({neg_bound, pos_bound}),
           cube_size(cs),
           dimension(dim),
@@ -389,8 +389,8 @@ namespace mgs {
     /**
      */
     Field(Bounds box_, Indexer cs = 256, Indexer dim = 3,
-          Iterant iteration_limit = 1024, T grav_constant = 1.0,
-          T escape_r = 2.0, T delta_time = 0.5)
+          Iterant iteration_limit = 1024, Float grav_constant = 1.0,
+          Float escape_r = 2.0, Float delta_time = 0.5)
         : box(box_),
           cube_size(cs),
           dimension(dim),
@@ -445,7 +445,7 @@ namespace mgs {
   };
 
   /**
-   * Do the Newton with the Floating Point16_t Mass and a single
+   * Do the Newton with the floating Mass and a single
    * Star. Note that r_squared is computed without squaring
    * the final result, but the sum of the squared components, so
    * we do that first, then take its square root to save on the
