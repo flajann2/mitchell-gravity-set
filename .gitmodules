@@ -4,3 +4,6 @@
 [submodule "submods/merseburg-incantation"]
 	path = submods/merseburg-incantation
 	url = https://github.com/flajann2/merseburg-incantation.git
+[submodule "submods/fmt"]
+	path = submods/fmt
+	url = https://github.com/fmtlib/fmt.git

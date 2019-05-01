@@ -6,6 +6,9 @@
 ## Merseburg integration
 #add_subdirectory(merseburg-incantation)
 
+## {fmt}
+add_subdirectory(fmt)
+
 message("*** ${CMAKE_CURRENT_SOURCE_DIR}/merseburg-incantation/include/header")
 
 # We make these includes available to the parent scope

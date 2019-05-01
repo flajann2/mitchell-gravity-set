@@ -3,6 +3,7 @@
 FILE(GLOB CODE *.cpp)
 add_library (mgscompute SHARED ${CODE})
 
+target_link_libraries(mgscompute PRIVATE fmt-header-only)
 target_include_directories (mgscompute
   PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
   )
