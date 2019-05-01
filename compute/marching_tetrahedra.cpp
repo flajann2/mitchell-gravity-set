@@ -1,14 +1,20 @@
 #include <marching_tetrahedra.h>
-#include <format>
+#include <format> // for the future
 #include <merseberg>
+#include <mutex>
 
+using namespace std;
 namespace mgs::march {
-  tetra_list_t MakeTesselation::tesseltate_cube(const Index& idx) {
+  /**
+   * Tesselate cube into 6 tetrahedra.
+   * @param lmc -- lower most corner of cube
+   */
+  tetra_list_t MakeTesselation::tesselate_cube(const Index& lmc) {
     tetra_list_t tetra_list{};
     for (auto ti : dicer) {
       coor_list_t tetra{};
       for (auto bits : ti) {
-        Index ipos = idx + bits;
+        Index ipos = lmc + bits;
         tetra.emplace_back(fore->index2coordinate(ipos));
       }
       tetra_list.emplace_back(tetra);
@@ -33,16 +39,20 @@ namespace mgs::march {
 
     auto imp = merseberg::incantation(vi);
     auto worker = [&](auto begin, auto end) {
+      tetra_list_t tetra {};
       for (auto pi = begin; pi != end; ++pi) {
         auto& i = *pi;
         for (auto j = 0; j < starfield.cube_size - 1; ++j) {
           for (auto k = 0; k < starfield.cube_size - 1; ++k) {
             Index lmc{i, j, k};              // lower-most corner of cube.
-            Index umc{i + 1, j + 1, k + 1};  // upper-mode corner of cube.
+            tetra += tesselate_cube(lmc);            
           }
         }
       }
-      return 0;  // TODO: return something better than this!!!
+      
+      std::scoped_lock(p_mutex);
+      m_tetrahedra += tetra;
+      return 0;
     };
     imp.invoke(worker);
     imp.join();

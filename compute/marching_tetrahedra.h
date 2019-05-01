@@ -1,6 +1,7 @@
 #pragma once
 
 #include "compute.h"
+#include <mutex>
 
 /**
  * The Marching Tetrahedra is implemented here.
@@ -68,10 +69,12 @@ namespace mgs::march {
    * \THIS -- current class (CRTP)
    * \FORE -- THIS << FORE relationship
    */
-  template <typename THIS, typename FORE> class Pipeline {
+  template <typename THIS, typename FORE>
+  class Pipeline {
    protected:
     FORE* fore = nullptr;
     bool dirty = true;
+    std::mutex p_mutex;
 
    public:
     bool is_dirty() {
@@ -86,12 +89,12 @@ namespace mgs::march {
     }
 
     /**
-     * General pipeline operator between THIS and FORE. 
+     * General pipeline operator between THIS and FORE.
      */
-    THIS& operator<<=(FORE& fore_){
+    THIS& operator<<=(FORE& fore_) {
       fore = &fore_;
       THIS& that = static_cast<THIS&>(*this);
-      that.handle(); // static duck typing
+      that.handle();  // static duck typing
       return that;
     }
   };
@@ -103,17 +106,17 @@ namespace mgs::march {
     friend std::ostream& operator<<(std::ostream&, MakeTesselation const&);
 
     tetra_list_t m_tetrahedra;
-    
-   public:
-    MakeTesselation() = default;
 
-    /** 
+   public:
+    MakeTesselation() {};
+
+    /**
      * handle() generates the list of tetrahedra. Note that
      * only tetrahedra that intersects with the crossover are
      * retained; the rest are discarded.
      */
     void handle();
-    
+
     /**
      * From the lower most point index, testelate
      * the cube to the upper most point (basically by adding 1
@@ -122,8 +125,7 @@ namespace mgs::march {
      * Note that this function does not automatically add the result
      * to m_tetrahedra. That must be done by the caller.
      */
-    tetra_list_t tesseltate_cube(const Index& lmp);
-
+    tetra_list_t tesselate_cube(const Index& lmp);
   };
 
   inline std::ostream& operator<<(std::ostream& os,
@@ -147,11 +149,19 @@ namespace mgs::march {
    * We take the results from MakeTesselation to now make the mesh.
    */
   class MakeMesh : public Pipeline<MakeMesh, MakeTesselation> {
-
    public:
     MakeMesh() {}
 
-    void handle(); // duck typing
-
+    void handle();  // duck typing
   };
 }  // namespace mgs::march
+
+namespace std {
+  template <class T, class Alloc>
+  void operator+=(std::vector<T, Alloc>& lhs,
+                  const std::vector<T, Alloc>& rhs) {
+    for (auto ele : rhs) {
+      lhs.emplace_back(ele);
+    }
+  }
+}

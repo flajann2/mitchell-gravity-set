@@ -35,8 +35,6 @@ namespace {
     virtual void SetUp() override {
       box = Bounds{Coordinate{-16, -16, -16}, Coordinate{16, 16, 16}};
       field = StarField(box, 3, 3);
-      tess = MakeTesselation();
-      mesh = MakeMesh();
     }
 
     virtual void TearDown() override {}
@@ -98,8 +96,6 @@ namespace {
     EXPECT_EQ(halved, halfr);
   }
 
-  TEST_F(ComputeTest, test_marching_tetraherda) {}
-
   TEST_F(ComputeTest, test_make_tesselation) {
     cout << "make tesselation[" << tess << "]\n";
     for (indexer_t i = 0; i < field.cube_size - 1; ++i) {
@@ -108,7 +104,7 @@ namespace {
           Index idx{i, j, k};
           index_bits_t bits{0b111};
           Index pos_idx = idx + bits;
-          auto what_is = tess.tesseltate_cube(idx);
+          auto what_is = tess.tesselate_cube(idx);
           // auto what_ought_to_be = test_i2c(idx);
           // EXPECT_EQ(what_is, what_ought_to_be);
           cout << "tesseract for " << idx << "-" << pos_idx << ": " << what_is
