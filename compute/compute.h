@@ -78,8 +78,8 @@ namespace mgs {
     return os;
   }
 
-  // The P here is a phantom parameter to enable strong typing.
-  // It is not actually used anywhere directly.
+  /// The Phantom here is a phantom parameter to enable strong typing.
+  /// It is not actually used anywhere directly.
   template <typename Float, typename Indexer, typename Phantom>
   struct Vector {
     std::vector<Float> vec;
