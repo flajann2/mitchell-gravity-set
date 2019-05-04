@@ -224,7 +224,8 @@ namespace mgs {
   };
 
   template <typename Float, typename I, typename P>
-  inline std::ostream& operator<<(std::ostream& os, Vector<Float, I, P> const& c) {
+  inline std::ostream& operator<<(std::ostream& os,
+                                  Vector<Float, I, P> const& c) {
     os << "Vector[ ";
     for (auto v : c.vec) {
       os << v << " ";
@@ -346,7 +347,8 @@ namespace mgs {
    *      used directly anywhere. This is to enable strong
    *      typing.
    */
-  template <typename Float, typename Iterant, typename Indexer, typename Phantom>
+  template <typename Float, typename Iterant, typename Indexer,
+            typename Phantom>
   struct Field {
     Bounds box;
     std::vector<Iterant> grid;
@@ -378,7 +380,8 @@ namespace mgs {
      */
     Field(Coordinate neg_bound, Coordinate pos_bound, Iterant cs = 256,
           Iterant dim = 2, Iterant iteration_limit = 1024,
-          Float grav_constant = 1.0, Float escape_r = 2.0, Float delta_time = 0.1)
+          Float grav_constant = 1.0, Float escape_r = 2.0,
+          Float delta_time = 0.1)
         : box({neg_bound, pos_bound}),
           cube_size(cs),
           dimension(dim),

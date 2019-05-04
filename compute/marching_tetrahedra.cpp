@@ -15,7 +15,7 @@ namespace mgs::march {
       coor_list_t tetra{};
       for (auto bits : ti) {
         Index ipos = lmc + bits;
-        tetra.emplace_back(fore->index2coordinate(ipos));
+        tetra.emplace_back(std::move(fore->index2coordinate(ipos)));
       }
       tetra_list.emplace_back(tetra);
     }
