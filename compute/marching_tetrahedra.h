@@ -161,7 +161,7 @@ namespace std {
   void operator+=(std::vector<T, Alloc>& lhs,
                   const std::vector<T, Alloc>& rhs) {
     for (auto ele : rhs) {
-      lhs.emplace_back(ele);
+      lhs.push_back(ele);
     }
   }
 }

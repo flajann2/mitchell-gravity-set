@@ -10,14 +10,14 @@ namespace mgs::march {
    * @param lmc -- lower most corner of cube
    */
   tetra_list_t MakeTesselation::tesselate_cube(const Index& lmc) {
-    tetra_list_t tetra_list{};
+    tetra_list_t tetra_list;
     for (auto ti : dicer) {
       coor_list_t tetra{};
       for (auto bits : ti) {
         Index ipos = lmc + bits;
-        tetra.emplace_back(std::move(fore->index2coordinate(ipos)));
+        tetra.push_back(fore->index2coordinate(ipos));
       }
-      tetra_list.emplace_back(tetra);
+      tetra_list.push_back(tetra);
     }
     return tetra_list;
   }

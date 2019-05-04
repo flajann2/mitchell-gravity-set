@@ -27,13 +27,12 @@ namespace {
     Position cc;
     Position p{0.01, 5.53, -34.1};
 
-    Bounds box;
-    StarField field;
+    Bounds box{Coordinate{-16, -16, -16}, Coordinate{16, 16, 16}};
+    StarField field{};
     MakeTesselation tess;
     MakeMesh mesh;
 
     virtual void SetUp() override {
-      box = Bounds{Coordinate{-16, -16, -16}, Coordinate{16, 16, 16}};
       field = StarField(box, 3, 3);
     }
 
@@ -95,7 +94,7 @@ namespace {
     EXPECT_EQ(doub, doubr);
     EXPECT_EQ(halved, halfr);
   }
-
+  
   TEST_F(ComputeTest, test_make_tesselation) {
     cout << "make tesselation[" << tess << "]\n";
     for (indexer_t i = 0; i < field.cube_size - 1; ++i) {
@@ -112,11 +111,12 @@ namespace {
         }
       }
     }
-  }
+  } 
 
+  /*
   TEST_F(ComputeTest, pipeline_verification) {
     mesh <<= tess <<= field;
-  }
+  } //*/
   
   TEST(Index, operator_plus) {
     Index idx{0, 1, 2};

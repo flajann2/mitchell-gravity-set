@@ -1,4 +1,4 @@
-# file: smulti.gdb
+# file: smult.gdb
 # loading: source smult.gdb
 # use: nmult 100
 # use: smult 100
