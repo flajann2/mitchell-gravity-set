@@ -29,11 +29,12 @@ namespace {
 
     Bounds box{Coordinate{-16, -16, -16}, Coordinate{16, 16, 16}};
     StarField field{};
-    MakeTesselation tess;
-    MakeMesh mesh;
+    MakeTesselation tess{};
+    MakeMesh mesh{};
 
     virtual void SetUp() override {
       field = StarField(box, 3, 3);
+      mesh <<= tess <<= field;
     }
 
     virtual void TearDown() override {}
@@ -44,15 +45,27 @@ namespace {
       cout << '\n';
     }
 
-    /**
     Coordinate test_i2c(const Index& idx) {
       Coordinate c{};
       auto dif = box.pm - box.nm;
       for (indexer_t i = 0; i < c.size(); ++i) {
-        c[i] = box.nm[i] + (dif[i] * idx[i] / (cube_size - 1));
+        c[i] = box.nm[i] + (dif[i] * idx[i] / (field.cube_size - 1));
       }
       return c;
-      } //*/
+    }
+
+    tetra_list_t test_tesselate_cube(const Index& lmc) {
+      tetra_list_t tetra_list{};
+      for (auto ti : dicer) {
+        coor_list_t tetra;
+        for (auto bits : ti) {
+          Index ipos = lmc + bits;
+          tetra.push_back(test_i2c(ipos));
+        }
+        tetra_list.push_back(tetra);
+      }
+      return tetra_list;
+    }
   };
 
   TEST_F(ComputeTest, test_field) {
@@ -94,7 +107,7 @@ namespace {
     EXPECT_EQ(doub, doubr);
     EXPECT_EQ(halved, halfr);
   }
-  
+
   TEST_F(ComputeTest, test_make_tesselation) {
     cout << "make tesselation[" << tess << "]\n";
     for (indexer_t i = 0; i < field.cube_size - 1; ++i) {
@@ -104,20 +117,20 @@ namespace {
           index_bits_t bits{0b111};
           Index pos_idx = idx + bits;
           auto what_is = tess.tesselate_cube(idx);
-          // auto what_ought_to_be = test_i2c(idx);
-          // EXPECT_EQ(what_is, what_ought_to_be);
+          auto what_ought_to_be = test_tesselate_cube(idx);
+          EXPECT_EQ(what_is, what_ought_to_be);
           cout << "tesseract for " << idx << "-" << pos_idx << ": " << what_is
                << endl;
         }
       }
     }
-  } 
+  }
 
   /*
   TEST_F(ComputeTest, pipeline_verification) {
     mesh <<= tess <<= field;
   } //*/
-  
+
   TEST(Index, operator_plus) {
     Index idx{0, 1, 2};
     index_bits_t bits{0b101};

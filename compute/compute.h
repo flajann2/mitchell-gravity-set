@@ -8,6 +8,7 @@
  * other possibilities, but for now, we don't need.
  */
 
+#include <array>
 #include <bitset>
 #include <cmath>
 #include <cstdint>
@@ -32,7 +33,7 @@ namespace mgs {
    * to the bits set. This is primarilary for the
    * marching tetrahedra algorithm.
    */
-  using index_bits_t = std::bitset<3>;
+  using index_bits_t = std::bitset<default_dimension>;
 
   struct Index {
     idx_vector_t ijk;
@@ -40,6 +41,7 @@ namespace mgs {
     Index(std::initializer_list<indexer_t> list) : ijk(list) {}
     Index(const Index& other) : ijk(other.ijk) {}
     Index(const Index&& other) : ijk(std::move(other.ijk)) {}
+    Index() { ijk.resize(default_dimension); }
 
     bool operator==(const Index& other) const { return ijk == other.ijk; }
 
@@ -421,7 +423,7 @@ namespace mgs {
      * TODO: implement some means of bounds checking in Index or Field.
      */
     Index coords2index(const Coordinate& c) {
-      Index idx{};
+      Index idx;
       auto dif = box.pm - box.nm;
       for (Indexer i = 0; i < static_cast<Indexer>(idx.size()); ++i) {
         idx[i] = ((c[i] - box.nm[i]) / dif[i]) * (cube_size - 1);
