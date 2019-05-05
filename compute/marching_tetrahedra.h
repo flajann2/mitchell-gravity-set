@@ -17,6 +17,10 @@
 namespace mgs::march {
   using namespace mgs;
 
+  /// A zero here means to let Merseberg decide how many
+  /// workers to create.
+  constexpr std::size_t imp_workers = 1; // TODO: fix currency problem
+
   using tetra_index_t = std::array<index_bits_t, 4>;
   using cube_decomposer_t = std::array<tetra_index_t, 6>;
   using coor_list_t = std::vector<Coordinate>;
@@ -125,7 +129,7 @@ namespace mgs::march {
      * Note that this function does not automatically add the result
      * to m_tetrahedra. That must be done by the caller.
      */
-    tetra_list_t tesselate_cube(const Index& lmp);
+    tetra_list_t tesselate_cube(const Index& lmp) const;
   };
 
   inline std::ostream& operator<<(std::ostream& os,
