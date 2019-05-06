@@ -19,7 +19,7 @@ namespace mgs::march {
 
   /// A zero here means to let Merseberg decide how many
   /// workers to create.
-  constexpr std::size_t imp_workers = 1; // TODO: fix currency problem
+  constexpr std::size_t imp_workers = 0; // FIXME: fix currency problem
 
   using tetra_index_t = std::array<index_bits_t, 4>;
   using cube_decomposer_t = std::array<tetra_index_t, 6>;

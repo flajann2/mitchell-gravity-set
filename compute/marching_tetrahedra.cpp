@@ -54,7 +54,7 @@ namespace mgs::march {
         }
       }
 
-      std::scoped_lock(p_mutex);
+      std::scoped_lock lock(p_mutex);
       m_tetrahedra += tetra;
       return 0;
     };
@@ -64,3 +64,4 @@ namespace mgs::march {
   // fore is MakeTesselation
   void MakeMesh::handle() { auto& tess = *fore; }
 }  // namespace mgs::march
+

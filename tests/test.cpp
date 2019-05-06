@@ -119,8 +119,7 @@ namespace {
           auto what_is = tess.tesselate_cube(idx);
           auto what_ought_to_be = test_tesselate_cube(idx);
           EXPECT_EQ(what_is, what_ought_to_be);
-          cout << "tesseract for " << idx << "-" << pos_idx << ": " << what_is
-               << endl;
+          // cout << "tesseract for " << idx << "-" << pos_idx << ": " << what_is << endl;
         }
       }
     }
