@@ -28,12 +28,13 @@
     - [[#memory-locality][Memory locality]]
     - [[#marching-cubes-and-tetrahedra][Marching cubes and tetrahedra]]
     - [[#rendering-pipeline][Rendering Pipeline]]
-      - [[#journal][Journal]]
-        - [[#2019-03-23][2019-03-23]]
-        - [[#2019-04-20][2019-04-20]]
-        - [[#2019-04-23][2019-04-23]]
-        - [[#2019-04-30][2019-04-30]]
-        - [[#2019-05-01][2019-05-01]]
+    - [[#journal][Journal]]
+      - [[#2019-03-23][2019-03-23]]
+      - [[#2019-04-20][2019-04-20]]
+      - [[#2019-04-23][2019-04-23]]
+      - [[#2019-04-30][2019-04-30]]
+      - [[#2019-05-01][2019-05-01]]
+      - [[#2019-05-11][2019-05-11]]
 
 ** Synopsis
    This library computes the Mitchell Gravity Set. This
@@ -380,67 +381,79 @@
     leaner on memory consumption. But this is a future optimization
     and so we won't fuss with it now.
    
-**** Journal
-     These are my personal and "private" journals. Well, not "private"
-     in the way only I can read them, but as I've said with "personal notes" 
-     goes doubly here. This just a blowby day to day of the state of affairs,
-     and I make absolutely no promises about the "usefulness" of the information
-     here. You might find it a bit amusing to trace my thought processes, but
-     take all here with a grain of salt. YOU WERE WARNED. :)
+*** Journal
+    These are my personal and "private" journals. Well, not "private"
+    in the way only I can read them, but as I've said with "personal notes" 
+    goes doubly here. This just a blowby day to day of the state of affairs,
+    and I make absolutely no promises about the "usefulness" of the information
+    here. You might find it a bit amusing to trace my thought processes, but
+    take all here with a grain of salt. YOU WERE WARNED. :)
 
-***** 2019-03-23
-      This weekend I want to accomplish the mesh generation from
-      the tetrahedra, using the pipeline approach, of course. Later
-      on, we can consider making this process lazy, and thus
-      saving on the sheer amount of RAM necessary. But for now, it is
-      important to acheive some acutal visualization at all, so that
-      is where my focus shall lie. Optimize later.
+**** 2019-03-23
+     This weekend I want to accomplish the mesh generation from
+     the tetrahedra, using the pipeline approach, of course. Later
+     on, we can consider making this process lazy, and thus
+     saving on the sheer amount of RAM necessary. But for now, it is
+     important to acheive some acutal visualization at all, so that
+     is where my focus shall lie. Optimize later.
 
-***** 2019-04-20
-      Finally, some time to spend on working on this. I am
-      considering how to optimize memory usage, because I will
-      potentially have a huge list of vertices and the like.
-      While OpenGL expects vertex data to be presented as one
-      large array, I am considering if I can "cheat" and maintian
-      the abstractions I'm creating for these coordinates.
+**** 2019-04-20
+     Finally, some time to spend on working on this. I am
+     considering how to optimize memory usage, because I will
+     potentially have a huge list of vertices and the like.
+     While OpenGL expects vertex data to be presented as one
+     large array, I am considering if I can "cheat" and maintian
+     the abstractions I'm creating for these coordinates.
 
-      Also, this most likely will all have to be floats, not doubles.
-      That's not that big of a deal, too much. We can do our high precision
-      calculations using doubles and convert the final stuff to floats.
+     Also, this most likely will all have to be floats, not doubles.
+     That's not that big of a deal, too much. We can do our high precision
+     calculations using doubles and convert the final stuff to floats.
 
-      Building up the "brain share" for all of this and maintaining it has
-      been a stumbling block for weekend development, as I have to spend
-      too much time each weekend building that back up, and I want to 
-      actually have a [l|w]ife as well. And so, this Osterfreirertag is
-      just the thing.
+     Building up the "brain share" for all of this and maintaining it has
+     been a stumbling block for weekend development, as I have to spend
+     too much time each weekend building that back up, and I want to 
+     actually have a [l|w]ife as well. And so, this Osterfreirertag is
+     just the thing.
 
-      Since std::vector gaurantees the elements are held in contiguous memory,
-      I do not have to fuss about with stinky C-like arrays. Yay.
+     Since std::vector gaurantees the elements are held in contiguous memory,
+     I do not have to fuss about with stinky C-like arrays. Yay.
 
+**** 2019-04-23
+     We are making heavy use of CRTP and static duck typing. I doubt if
+     I'm the first one doing this. Also, I took some time to retool
+     ECB. Alas, it will not work simulaneously on multiple frames, but
+     I did figure out how to reconfiger the windows. I don't need the
+     annoying history buffer, so it's gone. I can also now alternate between
+     multiple ECB layouts.
 
-***** 2019-04-23
-      We are making heavy use of CRTP and static duck typing. I doubt if
-      I'm the first one doing this. Also, I took some time to retool
-      ECB. Alas, it will not work simulaneously on multiple frames, but
-      I did figure out how to reconfiger the windows. I don't need the
-      annoying history buffer, so it's gone. I can also now alternate between
-      multiple ECB layouts.
+     Pipelining scaffolding is in place; now on with writting the actual
+     code to generate the tetrahedra where needed. Some thoughts about how
+     to handle the coordinates so they can be reused. Obviously I only need
+     concerned with this in neighboring cubes, but how to do this right
+     will require a bit of exploration and research. However, this is nothing
+     new, as volumetric rendering has been around for a long time, so there
+     must be some clever algorithms I can snag from somewhere.
 
-      Pipelining scaffolding is in place; now on with writting the actual
-      code to generate the tetrahedra where needed. Some thoughts about how
-      to handle the coordinates so they can be reused. Obviously I only need
-      concerned with this in neighboring cubes, but how to do this right
-      will require a bit of exploration and research. However, this is nothing
-      new, as volumetric rendering has been around for a long time, so there
-      must be some clever algorithms I can snag from somewhere.
+**** 2019-04-30
+     Created the Merseberg Incantation to make it easy to spread out
+     tasks bound by collections to seperate cores. Meseberg "works"
+     but is not yet ready for CMake integration, so this shall be
+     pulled in as a submodle -- for now -- so we can start using it
+     right away.
 
-***** 2019-04-30
-      Created the Merseberg Incantation to make it easy to spread out
-      tasks bound by collections to seperate cores. Meseberg "works"
-      but is not yet ready for CMake integration, so this shall be
-      pulled in as a submodle -- for now -- so we can start using it
-      right away.
+**** 2019-05-01
+     Unexpected holiday. Yay!
 
-***** 2019-05-01
-      Unexpected holiday. Yay!
-
+**** 2019-05-11
+     Let's see where we go today...
+     Last time, I had a dilly of a time tracking down what was a 
+     very simple and annoying bug, due to the (over)
+     expressivess that C++ has grown. Basically, 
+     I forgot to add in a variable name, resulting in the
+     contruction of the object as a floating rvalue. Being
+     that this one particular object was a guard, the
+     multiple threads simply kept crashing. Adding in a singular name
+     fixed that problem.
+     
+     Well, that was then, and this is now. Let's see how
+     far we can get with the pipelining this weekend.

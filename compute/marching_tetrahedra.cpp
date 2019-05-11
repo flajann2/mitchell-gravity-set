@@ -1,9 +1,9 @@
 #include <marching_tetrahedra.h>
+#include <chrono>  // TODO: remove this
 #include <format>  // for the future
 #include <merseberg>
 #include <mutex>
-#include <chrono> // TODO: remove this
-#include <thread> // TODO: remove this if we don't need it.
+#include <thread>  // TODO: remove this if we don't need it.
 
 using namespace std;
 namespace mgs::march {
@@ -36,7 +36,7 @@ namespace mgs::march {
     using namespace std::chrono_literals;
     auto& starfield = *fore;
     idx_vector_t vi{};
-    
+
     for (indexer_t i = 0; i < starfield.cube_size - 1; ++i) {
       vi.push_back(i);
     }
@@ -64,4 +64,3 @@ namespace mgs::march {
   // fore is MakeTesselation
   void MakeMesh::handle() { auto& tess = *fore; }
 }  // namespace mgs::march
-
