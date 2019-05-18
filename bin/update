@@ -5,4 +5,5 @@ source manifest.sh
 for dir in "${!manifest[@]}"; do
     repo="${manifest[$dir]}"
     echo "*** updating $dir <== $repo"
+    git subtree pull -P $dir $repo master --squash
 done
