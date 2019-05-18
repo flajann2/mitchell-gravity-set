@@ -1,0 +1,87 @@
+* Merseburg Incantation                                            :TOC_5_gh:
+  - [[#introduction-and-overview][Introduction and Overview]]
+    - [[#we-support-c17-and-beyond][We support C++17 and beyond]]
+    - [[#why-merseburg-incantation][Why "Merseburg Incantation"?]]
+  - [[#example][Example]]
+
+** Introduction and Overview
+   The Merseburg Incantation (German: Die Merseburger
+   Zauberspruch, and hereafter referred to as 'MZ') is
+   a simple way to divide the processing of a
+   (presumably large) collection across multiple
+   threads. Ideally, you want to divide the work among
+   a thread count equalling 1x to 2x the number of
+   cores on the machine it's running on.
+
+   An effort is made here to make the use MZ as painless
+   and easy as possible, using reasonsable defaults. MZ will
+   query std::thread::hardware_concurrency to get the number
+   of threads possible, and if this returns a '0', will default to 4.
+
+*** We support C++17 and beyond
+    We shall be primarily relying on C++17 and its new features, and
+    as a result, this is not gauranteed to work for C++14 and earlier.
+    I will accept pull requests to support earlier compilers on a seperate
+    branch, however.
+
+    Also, this is written to be a header include, so it should work "everywhere".
+    however, I am only verifying this under Linux. I will not put anything
+    that is platform specific in this code if I can at all avoid doing so.
+
+*** Why "Merseburg Incantation"?
+    I usually wind up consulting Greek Mythology when I want to find a snazzy name
+    for a project. But since I am fascinated by Germany and its long and rich history,
+    I decided to look for something in German Mythology instead. 
+
+    Not much survives from 9th century Germany, alas. If you are interested, please
+    see:
+
+    https://en.wikipedia.org/wiki/Merseburg_charms
+
+    and
+
+    https://althochdeutsch.fandom.com/de/wiki/Merseburger_Zauberspr%C3%BCche
+** Example
+   This is taken from the unit test in this project.
+   #+name: example 1
+   #+begin_src c++
+#include <atomic>
+#include <merseberg>
+#include "gtest/gtest.h"
+
+namespace {
+  TEST(merseberg_incantation, basic_test) {
+    auto container = std::vector<int>{};
+    for (int i = 0; i < 1137; ++i) {
+      container.push_back(i);
+    }
+
+    auto sigma = [](auto begin, auto end) {
+      int sum = 0;
+      for (auto pi = begin; pi != end; ++pi) {
+        sum += *pi;
+      }
+      return static_cast<int>(sum);
+    };
+
+    auto single = sigma(container.begin(), container.end());
+    auto imp = merseberg::incantation(container);
+    imp.invoke(sigma);
+    imp.join();
+    auto concurrent = imp([](auto res) {
+      int s = 0;
+      for (auto a : res) {
+        s += a;
+      }
+      return s;
+    });
+    EXPECT_EQ(single, concurrent);    
+  }
+}  // namespace
+
+int main(int argc, char **argv) {
+  ::testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
+}
+   #+end_src
+

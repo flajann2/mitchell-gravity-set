@@ -1,0 +1,10 @@
+*.a
+*.o
+*.so
+*.so.*
+*.srctrl*
+CMakeFiles
+CMakeCache.txt
+doxy/
+build/
+cmake_install.cmake
