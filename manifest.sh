@@ -2,6 +2,8 @@
 # Subtree manifest, to be sourced into other
 # scripts where needed.
 
+branch=master
+
 declare -A manifest=(
     [submods/merseburg-incantation]=https://github.com/flajann2/merseburg-incantation.git
 )
