@@ -16,11 +16,11 @@ extern crate rand;
 use conrod;
 use std;
 
-#[cfg(feature="glium")] use conrod::backend::glium::glium;
+#[cfg(feature = "glium")]
+use conrod::backend::glium::glium;
 
 pub const WIN_W: u32 = 800;
 pub const WIN_H: u32 = 520;
-
 
 /// A demonstration of some application state we want to control with a conrod GUI.
 pub struct MGSApp {
@@ -30,9 +30,7 @@ pub struct MGSApp {
     rust_logo: conrod::image::Id,
 }
 
-
 impl MGSApp {
-
     /// Constructor for the `MGSApp`.
     pub fn new(rust_logo: conrod::image::Id) -> Self {
         MGSApp {
@@ -42,9 +40,7 @@ impl MGSApp {
             rust_logo: rust_logo,
         }
     }
-
 }
-
 
 /// A set of reasonable stylistic defaults that works for the `gui` below.
 pub fn theme() -> conrod::Theme {
@@ -68,7 +64,6 @@ pub fn theme() -> conrod::Theme {
         double_click_threshold: std::time::Duration::from_millis(500),
     }
 }
-
 
 // Generate a unique `WidgetId` for each widget.
 widget_ids! {
@@ -129,7 +124,6 @@ widget_ids! {
     }
 }
 
-
 /// Instantiate a GUI demonstrating every widget available in conrod.
 pub fn gui(ui: &mut conrod::UiCell, ids: &Ids, app: &mut MGSApp) {
     use conrod::{widget, Colorable, Labelable, Positionable, Sizeable, Widget};
@@ -148,8 +142,10 @@ pub fn gui(ui: &mut conrod::UiCell, ids: &Ids, app: &mut MGSApp) {
     // By default, its size is the size of the window. We'll use this as a background for the
     // following widgets, as well as a scrollable container for the children widgets.
     const TITLE: &'static str = "Mitchell Gravity Set^3";
-    widget::Canvas::new().pad(MARGIN).scroll_kids_vertically().set(ids.canvas, ui);
-
+    widget::Canvas::new()
+        .pad(MARGIN)
+        .scroll_kids_vertically()
+        .set(ids.canvas, ui);
 
     ////////////////
     ///// TEXT /////
@@ -157,7 +153,10 @@ pub fn gui(ui: &mut conrod::UiCell, ids: &Ids, app: &mut MGSApp) {
 
     // We'll demonstrate the `Text` primitive widget by using it to draw a title and an
     // introduction to the example.
-    widget::Text::new(TITLE).font_size(TITLE_SIZE).mid_top_of(ids.canvas).set(ids.title, ui);
+    widget::Text::new(TITLE)
+        .font_size(TITLE_SIZE)
+        .mid_top_of(ids.canvas)
+        .set(ids.title, ui);
 
     ///////////////////
     ///// MGS GUI /////
@@ -195,7 +194,6 @@ pub fn gui(ui: &mut conrod::UiCell, ids: &Ids, app: &mut MGSApp) {
     ///// Lines and Shapes /////
     ////////////////////////////
 
-
     widget::Text::new("Lines and Shapes")
         .down(DOWN)
         .align_middle_x_of(ids.canvas)
@@ -230,36 +228,53 @@ pub fn gui(ui: &mut conrod::UiCell, ids: &Ids, app: &mut MGSApp) {
 
     let start = [-40.0, -40.0];
     let end = [40.0, 40.0];
-    widget::Line::centred(start, end).mid_left_of(ids.shapes_left_col).set(ids.line, ui);
+    widget::Line::centred(start, end)
+        .mid_left_of(ids.shapes_left_col)
+        .set(ids.line, ui);
 
     let left = [-40.0, -40.0];
     let top = [0.0, 40.0];
     let right = [40.0, -40.0];
     let points = once(left).chain(once(top)).chain(once(right));
-    widget::PointPath::centred(points).right(SHAPE_GAP).set(ids.point_path, ui);
+    widget::PointPath::centred(points)
+        .right(SHAPE_GAP)
+        .set(ids.point_path, ui);
 
-    widget::Rectangle::fill([80.0, 80.0]).right(SHAPE_GAP).set(ids.rectangle_fill, ui);
+    widget::Rectangle::fill([80.0, 80.0])
+        .right(SHAPE_GAP)
+        .set(ids.rectangle_fill, ui);
 
-    widget::Rectangle::outline([80.0, 80.0]).right(SHAPE_GAP).set(ids.rectangle_outline, ui);
+    widget::Rectangle::outline([80.0, 80.0])
+        .right(SHAPE_GAP)
+        .set(ids.rectangle_outline, ui);
 
     let bl = [-40.0, -40.0];
     let tl = [-20.0, 40.0];
     let tr = [20.0, 40.0];
     let br = [40.0, -40.0];
     let points = once(bl).chain(once(tl)).chain(once(tr)).chain(once(br));
-    widget::Polygon::centred_fill(points).mid_left_of(ids.shapes_right_col).set(ids.trapezoid, ui);
+    widget::Polygon::centred_fill(points)
+        .mid_left_of(ids.shapes_right_col)
+        .set(ids.trapezoid, ui);
 
-    widget::Oval::fill([40.0, 80.0]).right(SHAPE_GAP + 20.0).align_middle_y().set(ids.oval_fill, ui);
+    widget::Oval::fill([40.0, 80.0])
+        .right(SHAPE_GAP + 20.0)
+        .align_middle_y()
+        .set(ids.oval_fill, ui);
 
-    widget::Oval::outline([80.0, 40.0]).right(SHAPE_GAP + 20.0).align_middle_y().set(ids.oval_outline, ui);
+    widget::Oval::outline([80.0, 40.0])
+        .right(SHAPE_GAP + 20.0)
+        .align_middle_y()
+        .set(ids.oval_outline, ui);
 
-    widget::Circle::fill(40.0).right(SHAPE_GAP).align_middle_y().set(ids.circle, ui);
-
+    widget::Circle::fill(40.0)
+        .right(SHAPE_GAP)
+        .align_middle_y()
+        .set(ids.circle, ui);
 
     /////////////////
     ///// Image /////
     /////////////////
-
 
     widget::Text::new("Image")
         .down_from(ids.shapes_canvas, MARGIN)
@@ -274,11 +289,9 @@ pub fn gui(ui: &mut conrod::UiCell, ids: &Ids, app: &mut MGSApp) {
         .align_middle_x_of(ids.canvas)
         .set(ids.rust_logo, ui);
 
-
     /////////////////////////////////
     ///// Button, XYPad, Toggle /////
     /////////////////////////////////
-
 
     widget::Text::new("Button, XYPad and Toggle")
         .down_from(ids.rust_logo, 60.0)
@@ -306,8 +319,7 @@ pub fn gui(ui: &mut conrod::UiCell, ids: &Ids, app: &mut MGSApp) {
         app.ball_xy = [x, y];
     }
 
-    for (x, y) in widget::XYPad::new(app.ball_xy[0], min_x, max_x,
-                                     app.ball_xy[1], min_y, max_y)
+    for (x, y) in widget::XYPad::new(app.ball_xy[0], min_x, max_x, app.ball_xy[1], min_y, max_y)
         .label("BALL XY")
         .wh_of(ids.button)
         .align_middle_y_of(ids.button)
@@ -322,12 +334,20 @@ pub fn gui(ui: &mut conrod::UiCell, ids: &Ids, app: &mut MGSApp) {
     let label = if is_white { "WHITE" } else { "BLACK" };
     for is_white in widget::Toggle::new(is_white)
         .label(label)
-        .label_color(if is_white { conrod::color::WHITE } else { conrod::color::LIGHT_CHARCOAL })
+        .label_color(if is_white {
+            conrod::color::WHITE
+        } else {
+            conrod::color::LIGHT_CHARCOAL
+        })
         .mid_right_with_margin_on(ids.canvas, MARGIN)
         .align_middle_y_of(ids.button)
         .set(ids.toggle, ui)
     {
-        app.ball_color = if is_white { conrod::color::WHITE } else { conrod::color::BLACK };
+        app.ball_color = if is_white {
+            conrod::color::WHITE
+        } else {
+            conrod::color::BLACK
+        };
     }
 
     let ball_x = app.ball_xy[0];
@@ -337,11 +357,9 @@ pub fn gui(ui: &mut conrod::UiCell, ids: &Ids, app: &mut MGSApp) {
         .x_y_relative_to(ids.xy_pad, ball_x, ball_y)
         .set(ids.ball, ui);
 
-
     //////////////////////////////////
     ///// NumberDialer, PlotPath /////
     //////////////////////////////////
-
 
     widget::Text::new("NumberDialer and PlotPath")
         .down_from(ids.xy_pad, max_y - min_y + side * 0.5 + MARGIN)
@@ -375,16 +393,14 @@ pub fn gui(ui: &mut conrod::UiCell, ids: &Ids, app: &mut MGSApp) {
         .align_middle_x_of(ids.canvas)
         .set(ids.plot_path, ui);
 
-
     /////////////////////
     ///// Scrollbar /////
     /////////////////////
 
-
-    widget::Scrollbar::y_axis(ids.canvas).auto_hide(true).set(ids.canvas_scrollbar, ui);
-
+    widget::Scrollbar::y_axis(ids.canvas)
+        .auto_hide(true)
+        .set(ids.canvas_scrollbar, ui);
 }
-
 
 /// In most of the examples the `glutin` crate is used for providing the window context and
 /// events while the `glium` crate is used for displaying `conrod::render::Primitives` to the
@@ -392,15 +408,14 @@ pub fn gui(ui: &mut conrod::UiCell, ids: &Ids, app: &mut MGSApp) {
 ///
 /// This `Iterator`-like type simplifies some of the boilerplate involved in setting up a
 /// glutin+glium event loop that works efficiently with conrod.
-#[cfg(feature="glium")]
+#[cfg(feature = "glium")]
 pub struct EventLoop {
     ui_needs_update: bool,
     last_update: std::time::Instant,
 }
 
-#[cfg(feature="glium")]
+#[cfg(feature = "glium")]
 impl EventLoop {
-
     pub fn new() -> Self {
         EventLoop {
             last_update: std::time::Instant::now(),
@@ -442,5 +457,4 @@ impl EventLoop {
     pub fn needs_update(&mut self) {
         self.ui_needs_update = true;
     }
-
 }
