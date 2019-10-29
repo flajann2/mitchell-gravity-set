@@ -26,7 +26,7 @@ if (ENABLE_TESTS)
   add_subdirectory(tests)
 endif()
 
-if (ENABLE_DOXYGEN)
+if (ENABLE_DOCS)
   message("Doxygen is enabled")
   # apt install graphviz mscgen dia
   # for full functionality
