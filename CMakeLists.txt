@@ -2,7 +2,7 @@
 cmake_minimum_required (VERSION 3.12.1)
 project (mgs VERSION 0.0.0 DESCRIPTION "Mitchell Gravity Set 4th Generation")
 
-set (CMAKE_CXX_STANDARD 17)
+set (CMAKE_CXX_STANDARD 20)
 set (CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set (PROJECT_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
