@@ -1,9 +1,12 @@
 # Main project
-cmake_minimum_required (VERSION 3.12.1)
+cmake_minimum_required (VERSION 3.17.1)
 project (mgs VERSION 0.0.0 DESCRIPTION "Mitchell Gravity Set 4th Generation")
 
 set (CMAKE_CXX_STANDARD 20)
 set (CMAKE_INCLUDE_CURRENT_DIR ON)
+
+set(CMAKE_C_COMPILER /usr/bin/clang)
+set(CMAKE_CXX_COMPILER /usr/bin/clang++)
 
 set (PROJECT_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
 set (PROJECT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)

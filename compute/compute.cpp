@@ -1,4 +1,4 @@
-#include <compute.h>
+import compute;
 
 using namespace std;
 
