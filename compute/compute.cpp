@@ -1,4 +1,4 @@
-import compute;
+import std;
 
 using namespace std;
 

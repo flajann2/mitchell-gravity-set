@@ -7,6 +7,7 @@ set (CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(CMAKE_C_COMPILER /usr/bin/clang)
 set(CMAKE_CXX_COMPILER /usr/bin/clang++)
+set(CMAKE_CXX_FLAGS "-fmodules --precompile")
 
 set (PROJECT_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
 set (PROJECT_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
